@@ -122,7 +122,7 @@ export default function AboutPage() {
       <section className="py-20 bg-green-950 text-white">
         <div className="container mx-auto px-6">
           {/* Centered heading */}
-          <h2 className="text-4xl md:text-5xl font-serif font-normal mb-10 text-center max-w-3xl mx-auto leading-tight">
+          <h2 className="text-2xl md:text-3xl font-serif font-normal mb-10 text-center max-w-3xl mx-auto leading-tight">
             Our Commitment to Sustainability
           </h2>
 
@@ -155,7 +155,7 @@ export default function AboutPage() {
             <div className="lg:col-span-5">
               <div className="flex gap-4">
                 {/* First image - slightly wider */}
-                <div className="relative h-64 w-[58%] rounded-lg overflow-hidden">
+                <div className="relative h-[350px] w-[58%] rounded-lg overflow-hidden">
                   <Image
                     src="/placeholder.svg?height=300&width=500&text=Community+Sustainability+Initiatives"
                     alt="Community sustainability initiatives and local partnerships"
@@ -166,7 +166,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* Second image - slightly narrower */}
-                <div className="relative h-64 w-[42%] rounded-lg overflow-hidden">
+                <div className="relative h-[350px] w-[42%] rounded-lg overflow-hidden">
                   <Image
                     src="/placeholder.svg?height=250&width=400&text=Environmental+Conservation+Efforts"
                     alt="Environmental conservation and eco-friendly practices"
@@ -193,7 +193,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-black/40" />
         </div>
         <div className="relative text-center text-white z-10 px-4">
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-normal mb-8 leading-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-normal mb-8 leading-tight">
             Go Beyond the Ordinary.
           </h2>
           <p className="text-lg md:text-xl text-white/90 mb-8 font-sans max-w-2xl mx-auto leading-relaxed">

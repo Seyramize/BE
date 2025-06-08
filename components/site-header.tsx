@@ -16,6 +16,19 @@ export function SiteHeader() {
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const pathname = usePathname()
 
+  // Disable background scrolling when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
@@ -91,12 +104,12 @@ export function SiteHeader() {
       } ${isScrolled ? "py-3" : "py-6"}`}
     >
       <div className="container mx-auto px-6 flex justify-center">
-        {/* Logo positioned on the left, outside the navbar */}
+        {/* Logo positioned on the left */}
         <div className="absolute left-6 md:left-12">
           <Logo />
         </div>
 
-        {/* Centered Navigation - Hidden on mobile */}
+        {/* Desktop Navigation */}
         <nav
           className={`hidden md:inline-flex bg-gray-500 rounded-full px-8 py-3 shadow-lg items-center justify-center transition-all duration-300 ${
             isScrolled ? "bg-gray-500/95 backdrop-blur-md" : "bg-gray-500"
@@ -138,11 +151,12 @@ export function SiteHeader() {
           </div>
         </nav>
 
-        {/* Mobile menu button - positioned on the right */}
+        {/* Mobile menu button */}
         <Button 
           variant="ghost" 
-          className="md:hidden text-white p-2 absolute right-6 hover:bg-white/10"
+          className="md:hidden text-white p-2 absolute right-6 hover:bg-gray-400"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
         >
           {isMobileMenuOpen ? (
             <X className="h-6 w-6" />
@@ -151,60 +165,74 @@ export function SiteHeader() {
           )}
         </Button>
 
-        {/* Mobile menu overlay */}
-        {isMobileMenuOpen && (
-          <>
-            {/* Full page backdrop blur */}
-            <div 
-              className="md:hidden fixed inset-0 z-40 backdrop-blur-lg bg-black/50 transition-all duration-300"
+        {/* Mobile menu overlay with slide-in animation */}
+        <div className={`fixed inset-0 z-50 md:hidden ${isMobileMenuOpen ? '' : 'pointer-events-none'}`}>
+          {/* Backdrop blur and overlay */}
+          <div 
+            className={`absolute inset-0 backdrop-blur-md bg-black/50 transition-opacity duration-300 ${
+              isMobileMenuOpen ? 'opacity-100' : 'opacity-0'
+            }`}
+            aria-hidden="true"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          
+          {/* Slide-in menu container */}
+          <div
+            className={`fixed top-0 right-0 h-full w-4/5 max-w-sm bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
+              isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+            }`}
+          >
+            {/* Close button */}
+            <Button
+              variant="ghost"
               onClick={() => setIsMobileMenuOpen(false)}
-            />
-            
-            {/* Menu content */}
-            <div className="md:hidden fixed inset-x-0 top-[72px] z-50">
-              <div className="container mx-auto px-6 py-12">
-                <nav className="flex flex-col items-center space-y-8">
-                  <Link
-                    href="/"
-                    className={`text-white text-2xl hover:text-gray-200 transition-colors font-serif ${
-                      pathname === "/" ? "font-medium" : ""
-                    } relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-white after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Home
-                  </Link>
-                  <Link
-                    href="/experiences"
-                    className={`text-white text-2xl hover:text-gray-200 transition-colors font-serif ${
-                      pathname === "/experiences" ? "font-medium" : ""
-                    } relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-white after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Experiences
-                  </Link>
-                  <Link
-                    href="/about"
-                    className={`text-white text-2xl hover:text-gray-200 transition-colors font-serif ${
-                      pathname === "/about" ? "font-medium" : ""
-                    } relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-white after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    About Us
-                  </Link>
-                  <Link
-                    href="/journal"
-                    className={`text-white text-2xl hover:text-gray-200 transition-colors font-serif ${
-                      pathname === "/journal" ? "font-medium" : ""
-                    } relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-white after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    The Journal
-                  </Link>
-                </nav>
-              </div>
-            </div>
-          </>
-        )}
+              aria-label="Close menu"
+              className="absolute right-4 top-4 p-2 rounded-md text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500"
+            >
+              <X className="h-6 w-6" />
+            </Button>
+
+            {/* Menu links */}
+            <nav className="mt-16 px-2 space-y-4">
+              <Link
+                href="/"
+                className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 ${
+                  pathname === "/" ? "bg-gray-50" : ""
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link
+                href="/experiences"
+                className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 ${
+                  pathname === "/experiences" ? "bg-gray-50" : ""
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Experiences
+              </Link>
+              <Link
+                href="/about"
+                className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 ${
+                  pathname === "/about" ? "bg-gray-50" : ""
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                About Us
+              </Link>
+              <Link
+                href="/journal"
+                className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 ${
+                  pathname === "/journal" ? "bg-gray-50" : ""
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                The Journal
+              </Link>
+            </nav>
+          </div>
+        </div>
       </div>
     </header>
   )

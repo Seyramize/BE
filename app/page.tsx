@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
+import { TravelPlannerModal } from "@/components/travel-planner-modal-clean"
 
 export default function Home() {
   return (
@@ -19,15 +20,16 @@ export default function Home() {
           <Image
             src="/placeholder.svg?height=1080&width=1920&text=Mountain+Lake+with+Kayak"
             alt="Scenic mountain lake with kayak"
-            fill
-            className="object-cover"
+            width={1920}
+            height={1080}
+            className="object-cover w-full h-full"
             priority
           />
           <div className="absolute inset-0 bg-black/20" />
         </div>
         <div className="relative container mx-auto px-6 md:px-16 lg:px-32 xl:px-40 h-full flex flex-col justify-center">
-          <div className="max-w-2xl pt-24 pb-16">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-normal text-white leading-tight mb-10">
+          <div className="max-w-2xl pt-48 pb-16">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-normal text-white leading-tight mb-10">
               Go Beyond
               <br />
               the Ordinary
@@ -40,12 +42,15 @@ export default function Home() {
               <Button className="text-base px-8 py-3 rounded-full bg-orange-600 hover:bg-orange-700 text-white font-sans border-0">
                 Explore Experiences 👣
               </Button>
-              <Button
-                variant="outline"
-                className="text-base px-8 py-3 rounded-full bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 font-sans"
-              >
-                View Experiences
-              </Button>
+
+              <TravelPlannerModal>
+                <Button
+                  variant="outline"
+                  className="text-base px-8 py-3 rounded-full bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 font-sans"
+                >
+                  Speak to a Travel Planner
+                </Button>
+              </TravelPlannerModal>
             </div>
           </div>
         </div>
@@ -56,7 +61,7 @@ export default function Home() {
         <div className="container mx-auto px-6 md:px-16 lg:px-32 xl:px-40">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl md:text-5xl font-serif font-normal mb-6 leading-tight">
+              <h2 className="text-3xl md:text-4xl font-serif font-normal mb-6 leading-tight">
                 Curated
                 <br />
                 Experiences
@@ -106,7 +111,7 @@ export default function Home() {
       {/* Featured Experiences Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-6 md:px-16 lg:px-32 xl:px-40">
-          <h2 className="text-4xl md:text-5xl font-serif font-normal mb-12">Featured experiences</h2>
+          <h2 className="text-3xl md:text-4xl font-serif font-normal mb-12">Featured experiences</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="relative rounded-lg overflow-hidden group">
               <div className="relative h-[610px]">
@@ -192,7 +197,7 @@ export default function Home() {
       {/* FAQ Section */}
       <section className="py-20 bg-gray-900 text-white">
         <div className="container mx-auto px-6 md:px-16 lg:px-32 xl:px-40">
-          <h2 className="text-4xl md:text-5xl font-serif font-normal mb-12">Frequently Asked Questions</h2>
+          <h2 className="text-3xl md:text-4xl font-serif font-normal mb-12">Frequently Asked Questions</h2>
           <p className="text-white/80 max-w-3xl mb-12 font-sans leading-relaxed">
             Find answers to common questions about our experiences and booking process. If you don't see your question
             here, please reach out to us directly.
@@ -291,7 +296,7 @@ export default function Home() {
 
             {/* Right side with title and photo */}
             <div className="md:order-1">
-              <h2 className="text-4xl md:text-5xl font-serif font-normal mb-6">Enquire</h2>
+              <h2 className="text-3xl md:text-4xl font-serif font-normal mb-6">Enquire</h2>
               <p className="text-gray-700 mb-6 font-sans leading-relaxed">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis molestie dui lorem, at molestie dui
                 accumsan in. Donec tempus, lorem eget venenatis molestie, nulla ipsum consectetur lorem, vel tempor
