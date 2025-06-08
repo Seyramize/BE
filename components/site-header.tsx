@@ -99,11 +99,11 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ease-in-out ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ease-in-out before:absolute before:inset-0 before:bg-gradient-to-b before:from-black/10 before:to-transparent before:backdrop-blur-md ${
         isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
-      } ${isScrolled ? "py-3" : "py-6"}`}
+      } ${isScrolled ? "py-3 before:opacity-100" : "py-6 before:opacity-70"}`}
     >
-      <div className="container mx-auto px-6 flex justify-center">
+      <div className="container mx-auto px-6 flex justify-center relative">
         {/* Logo positioned on the left */}
         <div className="absolute left-6 md:left-12">
           <Logo />
@@ -111,8 +111,8 @@ export function SiteHeader() {
 
         {/* Desktop Navigation */}
         <nav
-          className={`hidden md:inline-flex bg-gray-500 rounded-full px-8 py-3 shadow-lg items-center justify-center transition-all duration-300 ${
-            isScrolled ? "bg-gray-500/95 backdrop-blur-md" : "bg-gray-500"
+          className={`hidden md:inline-flex bg-white/10 rounded-full px-8 py-3 shadow-lg items-center justify-center transition-all duration-300 backdrop-blur-md ${
+            isScrolled ? "bg-white/15" : "bg-white/5"
           }`}
         >
           <div className="flex items-center space-x-10">
