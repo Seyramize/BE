@@ -214,13 +214,13 @@ export default function ExperiencesPage() {
 						isHovered ? "opacity-100 scale-110" : "opacity-0 scale-95 pointer-events-none"
 					}`}
 					style={{
-						width: "min(110%, calc(100vw - 2rem))",
+						width: "min(150%, calc(100vw - 1rem))",
 						height: "150%",
 						transform: isHovered 
 							? "translate(-50%, -20%) scale(1)" 
 							: "translate(-50%, -20%) scale(0.95)",
 						transformOrigin: "center center",
-						maxWidth: "min(calc(100vw - 2rem), 600px)",
+						maxWidth: "min(calc(100vw - 1rem), 850px)",
 						left: "50%",
 						position: "absolute",
 						margin: "0 auto"
@@ -236,7 +236,7 @@ export default function ExperiencesPage() {
 						<div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
 
 						{/* Content Container */}
-						<div className="absolute inset-0 flex flex-col justify-end px-8 py-6 sm:p-8">
+						<div className="absolute inset-0 flex flex-col justify-end p-8">
 							
 								{/* Badges Section */}
 								<div className="flex justify-between items-center w-full mb-4">

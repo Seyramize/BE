@@ -99,9 +99,9 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ease-in-out before:absolute before:inset-0 before:bg-gradient-to-b before:from-black/10 before:to-transparent before:backdrop-blur-md ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ease-in-out ${
         isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
-      } ${isScrolled ? "py-3 before:opacity-100" : "py-6 before:opacity-70"}`}
+      } ${isScrolled ? "py-3" : "py-6"}`}
     >
       <div className="container mx-auto px-6 flex justify-center relative">
         {/* Logo positioned on the left */}
@@ -111,42 +111,62 @@ export function SiteHeader() {
 
         {/* Desktop Navigation */}
         <nav
-          className={`hidden md:inline-flex bg-white/10 rounded-full px-8 py-3 shadow-lg items-center justify-center transition-all duration-300 backdrop-blur-md ${
+          className={`hidden md:inline-flex bg-white/10 rounded-full px-8 py-3 shadow-lg items-center justify-center transition-all duration-300 backdrop-blur-md before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-white/15 before:to-transparent before:backdrop-blur-md ${
             isScrolled ? "bg-white/15" : "bg-white/5"
           }`}
         >
           <div className="flex items-center space-x-10">
             <Link
               href="/"
-              className={`text-white text-sm hover:text-gray-200 transition-colors font-sans ${
-                pathname === "/" ? "font-medium" : ""
+              className={`relative text-white text-sm transition-all duration-300 font-sans group px-3 py-1.5 ${
+                pathname === "/" 
+                  ? "font-medium bg-white/10 rounded-full backdrop-blur-sm shadow-[0_0_15px_0_rgba(255,255,255,0.1)]" 
+                  : "hover:text-amber-100"
               }`}
             >
-              Home
+              <span className="relative z-10">{`Home`}</span>
+              <span className={`absolute inset-0 bg-gradient-to-r from-amber-200/20 to-amber-100/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm ${
+                pathname === "/" ? "opacity-100" : ""
+              }`} />
             </Link>
             <Link
               href="/experiences"
-              className={`text-white text-sm hover:text-gray-200 transition-colors font-sans ${
-                pathname === "/experiences" ? "font-medium" : ""
+              className={`relative text-white text-sm transition-all duration-300 font-sans group px-3 py-1.5 ${
+                pathname === "/experiences" 
+                  ? "font-medium bg-white/10 rounded-full backdrop-blur-sm shadow-[0_0_15px_0_rgba(255,255,255,0.1)]" 
+                  : "hover:text-amber-100"
               }`}
             >
-              Experiences
+              <span className="relative z-10">{`Experiences`}</span>
+              <span className={`absolute inset-0 bg-gradient-to-r from-amber-200/20 to-amber-100/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm ${
+                pathname === "/experiences" ? "opacity-100" : ""
+              }`} />
             </Link>
             <Link
               href="/about"
-              className={`text-white text-sm hover:text-gray-200 transition-colors font-sans ${
-                pathname === "/about" ? "font-medium" : ""
+              className={`relative text-white text-sm transition-all duration-300 font-sans group px-3 py-1.5 ${
+                pathname === "/about" 
+                  ? "font-medium bg-white/10 rounded-full backdrop-blur-sm shadow-[0_0_15px_0_rgba(255,255,255,0.1)]" 
+                  : "hover:text-amber-100"
               }`}
             >
-              About Us
+              <span className="relative z-10">{`About Us`}</span>
+              <span className={`absolute inset-0 bg-gradient-to-r from-amber-200/20 to-amber-100/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm ${
+                pathname === "/about" ? "opacity-100" : ""
+              }`} />
             </Link>
             <Link
               href="/journal"
-              className={`text-white text-sm hover:text-gray-200 transition-colors font-sans ${
-                pathname === "/journal" ? "font-medium" : ""
+              className={`relative text-white text-sm transition-all duration-300 font-sans group px-3 py-1.5 ${
+                pathname === "/journal" 
+                  ? "font-medium bg-white/10 rounded-full backdrop-blur-sm shadow-[0_0_15px_0_rgba(255,255,255,0.1)]" 
+                  : "hover:text-amber-100"
               }`}
             >
-              The Journal
+              <span className="relative z-10">{`The Journal`}</span>
+              <span className={`absolute inset-0 bg-gradient-to-r from-amber-200/20 to-amber-100/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm ${
+                pathname === "/journal" ? "opacity-100" : ""
+              }`} />
             </Link>
           </div>
         </nav>
