@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 
 // CMS-ready data structure for future integration
