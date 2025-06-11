@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
+import Link from "next/link"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -34,20 +35,20 @@ export default function Home() {
               <br />
               the Ordinary
             </h1>
-            <p className="text-lg text-white/90 mb-14 max-w-lg font-sans leading-relaxed">
+            <p className="text-lg text-white/90 mb-14 max-w-lg font-serif leading-relaxed">
               Discover bespoke experiences that redefine the way you travel. Whether you seek serenity, thrill, or
               unforgettable encounters, your next journey begins here.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-16">
-              <Button className="text-base px-8 py-3 rounded-full bg-orange-600 hover:bg-orange-700 text-white font-sans border-0">
-                Explore Experiences 👣
-              </Button>
+              <Link href="/experiences">
+                <Button className="text-base px-8 py-3 rounded-full bg-[#C4674E] hover:bg-[#C4674E] text-white font-serif border-0">
+                  Explore Experiences 👣
+                </Button>
+              </Link>
 
               <TravelPlannerModal>
                 <Button
-                  variant="outline"
-                  className="text-base px-8 py-3 rounded-full bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 font-sans"
-                >
+                  className="bg-white/20 hover:bg-white/30 text-black font-serif px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
                   Speak to a Travel Planner
                 </Button>
               </TravelPlannerModal>
@@ -93,15 +94,17 @@ export default function Home() {
                   fill
                   className="object-cover rounded-lg"
                 />
-                <Button
-                  variant="ghost"
-                  className="absolute bottom-4 right-4 bg-white rounded-full p-3 shadow-lg hover:bg-gray-50 transition-colors"
-                >
-                  <div className="flex items-center space-x-2">
-                    <span className="font-medium text-sm font-sans text-gray-900">Browse Experiences</span>
-                    <ArrowRight className="h-4 w-4 text-gray-900" />
-                  </div>
-                </Button>
+                <Link href="/experiences">
+                  <Button
+                    variant="ghost"
+                    className="absolute bottom-4 right-4 bg-white rounded-full p-3 shadow-lg hover:bg-gray-50 transition-colors"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <span className="font-medium text-sm font-sans text-gray-900">Browse Experiences</span>
+                      <ArrowRight className="h-4 w-4 text-gray-900" />
+                    </div>
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -131,9 +134,7 @@ export default function Home() {
                   accumsan in. Donec tempus, lorem eget venenatis molestie, nulla ipsum consectetur lorem.
                 </p>
                 <Button
-                  variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-gray-900 font-sans rounded-full px-6"
-                >
+                  className="bg-white/20 hover:bg-white/30 text-white font-serif px-12 py-3 rounded-full backdrop-blur-sm border border-white/30 w-full">
                   Book Experience
                 </Button>
               </div>
@@ -156,10 +157,8 @@ export default function Home() {
                     Discover the world's most exclusive art collections with private viewings and expert commentary.
                   </p>
                   <Button
-                    variant="outline"
                     size="sm"
-                    className="border-white text-white hover:bg-white hover:text-gray-900 font-sans rounded-full px-4"
-                  >
+                    className="bg-white/20 hover:bg-white/30 text-white font-serif px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
                     More Experience
                   </Button>
                 </div>
@@ -181,10 +180,9 @@ export default function Home() {
                     Discover the world's most exclusive art collections with private viewings and expert commentary.
                   </p>
                   <Button
-                    variant="outline"
                     size="sm"
-                    className="border-white text-white hover:bg-white hover:text-gray-900 font-sans rounded-full px-4"
-                  >
+                    className="bg-white/20 hover:bg-white/30 text-white font-serif px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
+                  
                     More Experience
                   </Button>
                 </div>
@@ -203,7 +201,7 @@ export default function Home() {
             here, please reach out to us directly.
           </p>
 
-          <div className="max-w-3xl">
+          <div className="max-w-full">
             <Accordion type="single" collapsible className="space-y-4">
               <AccordionItem value="item-1" className="border border-gray-700 rounded-lg overflow-hidden">
                 <AccordionTrigger className="px-6 py-4 hover:bg-gray-800/50 font-sans text-left">
@@ -265,8 +263,8 @@ export default function Home() {
       <section className="py-20 bg-amber-50">
         <div className="container mx-auto px-6 md:px-16 lg:px-32 xl:px-40">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {/* Left side with title and photo */}
-            <div className="md:order-2">
+            {/* Form section */}
+            <div className="order-2 md:order-2">
               <div className="md:pt-[200px]">
                 <form className="space-y-4">
                   <div>
@@ -294,15 +292,15 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right side with title and photo */}
-            <div className="md:order-1">
+            {/* Title and photo section */}
+            <div className="order-1 md:order-1">
               <h2 className="text-3xl md:text-4xl font-serif font-normal mb-6">Enquire</h2>
               <p className="text-gray-700 mb-6 font-sans leading-relaxed">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis molestie dui lorem, at molestie dui
                 accumsan in. Donec tempus, lorem eget venenatis molestie, nulla ipsum consectetur lorem, vel tempor
                 lorem ipsum vel lorem.
               </p>
-              <div className="relative h-96 md:h-[500px] rounded-lg overflow-hidden">
+              <div className="relative h-[250px] md:h-[500px] rounded-lg overflow-hidden">
                 <Image
                   src="/placeholder.svg?height=500&width=800&text=Wooden+Boat+Lake"
                   alt="Wooden boat on a crystal clear lake"

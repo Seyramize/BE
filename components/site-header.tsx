@@ -111,7 +111,7 @@ export function SiteHeader() {
 
         {/* Desktop Navigation */}
         <nav
-          className={`hidden md:inline-flex bg-white/10 rounded-full px-8 py-3 shadow-lg items-center justify-center transition-all duration-300 backdrop-blur-md before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-white/15 before:to-transparent before:backdrop-blur-md ${
+          className={`hidden md:inline-flex bg-white/10 rounded-lg px-8 py-3 shadow-lg items-center justify-center transition-all duration-300 backdrop-blur-md before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-b before:from-white/15 before:to-transparent before:backdrop-blur-md ${
             isScrolled ? "bg-white/15" : "bg-white/5"
           }`}
         >
@@ -120,52 +120,52 @@ export function SiteHeader() {
               href="/"
               className={`relative text-white text-sm transition-all duration-300 font-sans group px-3 py-1.5 ${
                 pathname === "/" 
-                  ? "font-medium bg-white/10 rounded-full backdrop-blur-sm shadow-[0_0_15px_0_rgba(255,255,255,0.1)]" 
+                  ? "font-medium" 
                   : "hover:text-amber-100"
               }`}
             >
               <span className="relative z-10">{`Home`}</span>
-              <span className={`absolute inset-0 bg-gradient-to-r from-amber-200/20 to-amber-100/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm ${
-                pathname === "/" ? "opacity-100" : ""
+              <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform origin-left transition-all duration-300 ${
+                pathname === "/" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
               }`} />
             </Link>
             <Link
               href="/experiences"
               className={`relative text-white text-sm transition-all duration-300 font-sans group px-3 py-1.5 ${
                 pathname === "/experiences" 
-                  ? "font-medium bg-white/10 rounded-full backdrop-blur-sm shadow-[0_0_15px_0_rgba(255,255,255,0.1)]" 
+                  ? "font-medium" 
                   : "hover:text-amber-100"
               }`}
             >
               <span className="relative z-10">{`Experiences`}</span>
-              <span className={`absolute inset-0 bg-gradient-to-r from-amber-200/20 to-amber-100/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm ${
-                pathname === "/experiences" ? "opacity-100" : ""
+              <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform origin-left transition-all duration-300 ${
+                pathname === "/experiences" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
               }`} />
             </Link>
             <Link
               href="/about"
               className={`relative text-white text-sm transition-all duration-300 font-sans group px-3 py-1.5 ${
                 pathname === "/about" 
-                  ? "font-medium bg-white/10 rounded-full backdrop-blur-sm shadow-[0_0_15px_0_rgba(255,255,255,0.1)]" 
+                  ? "font-medium" 
                   : "hover:text-amber-100"
               }`}
             >
               <span className="relative z-10">{`About Us`}</span>
-              <span className={`absolute inset-0 bg-gradient-to-r from-amber-200/20 to-amber-100/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm ${
-                pathname === "/about" ? "opacity-100" : ""
+              <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform origin-left transition-all duration-300 ${
+                pathname === "/about" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
               }`} />
             </Link>
             <Link
               href="/journal"
               className={`relative text-white text-sm transition-all duration-300 font-sans group px-3 py-1.5 ${
                 pathname === "/journal" 
-                  ? "font-medium bg-white/10 rounded-full backdrop-blur-sm shadow-[0_0_15px_0_rgba(255,255,255,0.1)]" 
+                  ? "font-medium" 
                   : "hover:text-amber-100"
               }`}
             >
               <span className="relative z-10">{`The Journal`}</span>
-              <span className={`absolute inset-0 bg-gradient-to-r from-amber-200/20 to-amber-100/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm ${
-                pathname === "/journal" ? "opacity-100" : ""
+              <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform origin-left transition-all duration-300 ${
+                pathname === "/journal" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
               }`} />
             </Link>
           </div>

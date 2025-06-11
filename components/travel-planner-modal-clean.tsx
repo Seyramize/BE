@@ -116,7 +116,7 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
         {/* Close Button */}
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 z-10 text-white hover:text-gray-200 transition-colors rounded-full p-2"
+          className="absolute top-4 right-4 z-10 text-black hover:text-gray-200 transition-colors rounded-full p-2"
           type="button"
           aria-label="Close travel planner modal"
         >
