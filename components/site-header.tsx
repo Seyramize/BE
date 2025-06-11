@@ -194,7 +194,7 @@ export function SiteHeader() {
           
           {/* Slide-in menu container */}
           <div
-            className={`fixed top-0 right-0 h-[50dvh] w-4/5 max-w-sm bg-gradient-to-br from-amber-50/90 via-white/95 to-amber-100/80 backdrop-blur-2xl shadow-[0_0_50px_5px_rgba(251,191,36,0.15)] transform transition-all duration-700 ease-out origin-right rounded-l-2xl border border-amber-200/40 ${
+            className={`fixed top-0 right-0 h-[100dvh] w-4/5 max-w-sm bg-gradient-to-br from-amber-50/90 via-white/95 to-amber-100/80 backdrop-blur-2xl shadow-[0_0_50px_5px_rgba(251,191,36,0.15)] transform transition-all duration-700 ease-out origin-right rounded-l-2xl border border-amber-200/40 ${
               isMobileMenuOpen 
                 ? 'translate-x-0 opacity-100 scale-100 rotate-0 shadow-[0_0_45px_5px_rgba(251,191,36,0.1)]' 
                 : 'translate-x-[103%] opacity-0 scale-95 rotate-2 shadow-[0_0_45px_5px_rgba(251,191,36,0)]'
