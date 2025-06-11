@@ -185,7 +185,7 @@ export default function AboutPage() {
       <section className="relative py-32">
         <div className="absolute inset-0">
           <Image
-            src="/placeholder.svg?height=800&width=1920&text=Desert+ATV+Adventure"
+            src="/images/quad-bikes.jpg"
             alt="Desert ATV adventure"
             fill
             className="object-cover"
