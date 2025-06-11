@@ -269,10 +269,8 @@ export default function BookExperiencePage() {
                       {experience.description}
                     </p>
                     <Button
-                      variant="outline"
                       size="sm"
-                      className="border-white text-white hover:bg-white hover:text-slate-900 font-sans rounded-full px-4"
-                    >
+                      className="bg-white/20 hover:bg-white/30 text-white font-serif px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
                       Book Experience
                     </Button>
                   </div>
