@@ -150,21 +150,33 @@ const filterOptions = ["Ghana", "Cape Town", "Nigeria", "Namibia"]
 export default function ExperiencesPage() {
 	const [hoveredCard, setHoveredCard] = useState<number | null>(null)
 
-	const ExperienceCard = ({ experience, index }: { experience: (typeof experiences)[0]; index: number }) => {
+	const ExperienceCard = ({ 
+		experience, 
+		index,
+		columns = 4 
+	}: { 
+		experience: (typeof experiences)[0]
+		index: number
+		columns?: number 
+	}) => {
 		const isHovered = hoveredCard === experience.id
 		const { defaultContent, expandedContent, tags } = experience
+		
+		// Calculate if card should slide from left or right based on column position
+		// For tablet view (2 columns), odd indices slide from right, even from left
+		const isLeftSlide = index % 2 === 0
 
 		return (
 			<div
-				className="relative transition-all duration-300 ease-in-out"
+				className="relative h-96"
 				onMouseEnter={() => setHoveredCard(experience.id)}
 				onMouseLeave={() => setHoveredCard(null)}
 				style={{ zIndex: isHovered ? 50 : 1 }}
 			>
 				{/* Default Card State */}
 				<div
-					className={`rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 h-96 ${
-						isHovered ? "opacity-0 pointer-events-none" : "opacity-100"
+					className={`rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 h-full ${
+						isHovered ? "opacity-0" : "opacity-100"
 					}`}
 				>
 					<div className="relative h-full">
@@ -210,20 +222,19 @@ export default function ExperiencesPage() {
 
 				{/* Expanded Card State */}
 				<div
-					className={`absolute top-0 rounded-xl overflow-hidden shadow-2xl transition-all duration-300 ease-in-out ${
-						isHovered ? "opacity-100 scale-110" : "opacity-0 scale-95 pointer-events-none"
+					className={`absolute top-0 rounded-xl overflow-hidden shadow-2xl transition-transform duration-350 ease-out pointer-events-none ${
+						isHovered ? "opacity-100" : "opacity-0"
 					}`}
 					style={{
-						width: "min(150%, calc(100vw - 1rem))",
-						height: "150%",
-						transform: isHovered 
-							? "translate(-50%, -20%) scale(1)" 
-							: "translate(-50%, -20%) scale(0.95)",
-						transformOrigin: "center center",
-						maxWidth: "min(calc(100vw - 1rem), 850px)",
-						left: "50%",
-						position: "absolute",
-						margin: "0 auto"
+						width: "215%",
+						height: "100%",
+						transform: `
+							${isHovered ? 'scale(1)' : 'scale(0.95)'}
+							translateX(${isHovered ? 0 : isLeftSlide ? '-100%' : '0'}%)
+						`,
+						transformOrigin: isLeftSlide ? 'left center' : 'right center',
+						left: isLeftSlide ? '0' : 'auto',
+						right: isLeftSlide ? 'auto' : '0'
 					}}
 				>
 					<div className="relative h-full">
@@ -234,38 +245,37 @@ export default function ExperiencesPage() {
 							className="object-cover"
 						/>
 						<div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
-
+						
 						{/* Content Container */}
-						<div className="absolute inset-0 flex flex-col justify-end p-8">
-							
-								{/* Badges Section */}
-								<div className="flex justify-between items-center w-full mb-4">
-									<div className="bg-orange-500/90 backdrop-blur-sm text-white px-3 py-1.5 rounded-full font-sans text-xs font-medium shadow-lg">
-										Travel Planner's Choice
-									</div>
-									<div className="bg-black/40 backdrop-blur-sm text-white px-2.5 py-1 rounded-full font-sans text-[11px] border border-white/20">
-										2 PAX (Minimum)
-									</div>
+						<div className="absolute inset-0 flex flex-col justify-end p-6">
+							{/* Badges Section */}
+							<div className="flex items-center gap-3 w-full mb-1">
+								<div className="bg-white backdrop-blur-sm text-black px-2 py-1 rounded-full font-sans text-[10px] font-medium shadow-lg">
+									Travel Planner's Choice
 								</div>
+								<div className="bg-black/40 backdrop-blur-sm text-white px-2 py-1 rounded-full font-sans text-[10px] border border-white/20">
+									2 PAX (Minimum)
+								</div>
+							</div>
 
-								{/* Content Section */}
-								<div className="text-center">
-									<h2 className="text-xl sm:text-2xl font-sans font-medium text-white mb-3 sm:mb-4 text-justify">
+							{/* Content Section */}
+							<div className="flex flex-col">
+								<div className="w-full">
+									<h2 className="text-2xl sm:text-3xl font-sans font-medium text-white mb-2 text-justify w-full">
 										{expandedContent.title}
 									</h2>
-									
-									<p className="text-white/90 text-xs sm:text-sm font-sans leading-relaxed mb-6 text-justify">
+									<p className="text-white/90 text-xs sm:text-sm font-sans leading-relaxed mb-4 text-justify">
 										{expandedContent.fullDescription}
 									</p>
-
-									{/* CTA Button */}
-									<Button className="w-80 bg-transparent hover:bg-white/90 text-white/90 hover:text-gray-900 font-sans py-2 sm:py-2.5 px-5 sm:px-6 rounded-full transition-all text-xs sm:text-sm font-medium shadow-lg hover:shadow-xl border border-white/20">
+								</div>
+								<div className="flex justify-center w-full">
+									<Button className="bg-white/20 hover:bg-white/30 text-white font-serif px-12 py-3 rounded-full backdrop-blur-sm border border-white/30 w-full pointer-events-auto">
 										<Link href={`/book-experience/${experience.id}`}>
 											Book Experience
 										</Link>
 									</Button>
 								</div>
-							
+							</div>
 						</div>
 					</div>
 				</div>
@@ -352,7 +362,12 @@ export default function ExperiencesPage() {
 					{/* Grid with extra spacing to accommodate expanded cards */}
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
 						{experiences.slice(0, 8).map((experience, index) => (
-							<ExperienceCard key={experience.id} experience={experience} index={index} />
+							<ExperienceCard 
+								key={experience.id} 
+								experience={experience} 
+								index={index}
+								columns={4} // Adjust based on screen size if needed
+							/>
 						))}
 					</div>
 
