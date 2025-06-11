@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { BookingFormModal } from "@/components/booking-form-modal"
+import { GalleryModal } from "@/components/gallery-modal"
 
 // This would typically come from a CMS or database
 const experienceData = {
@@ -77,6 +78,7 @@ const relatedExperiences = [
 
 export default function BookExperiencePage() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false)
+  const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false)
 
   const openBookingModal = () => {
     console.log("Opening booking modal")
@@ -227,6 +229,7 @@ export default function BookExperiencePage() {
                   <Button
                     variant="outline"
                     className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm border-white/50 text-slate-700 hover:bg-white font-sans px-4 py-2 rounded-full"
+                    onClick={() => setIsGalleryModalOpen(true)}
                   >
                     <Eye className="w-4 h-4 mr-2" />
                     View Gallery
@@ -283,6 +286,13 @@ export default function BookExperiencePage() {
 
       {/* Booking Modal */}
       <BookingFormModal isOpen={isBookingModalOpen} onClose={closeBookingModal} experience={experienceData} />
+
+      {/* Gallery Modal */}
+      <GalleryModal
+        isOpen={isGalleryModalOpen}
+        onClose={() => setIsGalleryModalOpen(false)}
+        images={experienceData.galleryImages}
+      />
 
       <SiteFooter />
     </div>
