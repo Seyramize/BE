@@ -391,7 +391,7 @@ export default function ExperiencesPage() {
 									</p>
 									<div className="w-full sm:max-w-md">
 										<Link href="/customize-experience">
-											<Button className="w-full sm:w-auto bg-orange-600 hover:bg-orange-700 text-white font-sans px-6 sm:px-8 py-2.5 sm:py-3 rounded-full transition-colors text-sm sm:text-base">
+											<Button className="w-full sm:w-auto bg-[#B55A30] hover:bg-[#B55A30] text-white font-sans px-6 sm:px-8 py-2.5 sm:py-3 rounded-md transition-colors text-sm sm:text-base">
 												Customize my experience
 											</Button>
 										</Link>

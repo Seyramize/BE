@@ -201,8 +201,8 @@ export default function AboutPage() {
             <br />
             Book your next story today with Beyond Experiences and discover a world waiting to meet you.
           </p>
-          <Button className="bg-white/20 hover:bg-white/30 text-white font-sans px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
-            Explore Experiences →
+          <Button className="bg-white hover:bg-white text-black font-serif px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
+            Explore Experiences
           </Button>
         </div>
       </section>
