@@ -281,14 +281,15 @@ export default function ExperiencesPage() {
 			<section className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[875px] w-full flex items-center justify-center">
 				<div className="absolute inset-0">
 					<Image
-						src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Experiences%20Catalog.png-qJpKqA0NH4KBAKO143TKoHYVhbysiy.jpeg"
+						src="/images/elephants.jpg"
 						alt="Safari experience with elephants"
 						width={1920}
 						height={875}
 						className="object-cover w-full h-full"
 						priority
 					/>
-					<div className="absolute inset-0 bg-black/30" />
+					<div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/30 to-black/30" />
+					<div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent backdrop-blur-[2px]" style={{ height: '30%', bottom: 0, top: 'auto', backdropFilter: 'blur(2px) brightness(1.05)' }} />
 				</div>
 				<div className="relative text-center text-white z-10 px-4 max-w-[90%] mx-auto">
 					<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-serif font-normal mb-2 sm:mb-4 leading-tight">
@@ -302,49 +303,48 @@ export default function ExperiencesPage() {
 
 			{/* Filter Section */}
 			<section className="py-4 sm:py-6 md:py-8 bg-white">
-				<div className="container mx-auto px-4 sm:px-6">
-					<div className="flex flex-col gap-4">
-						{/* Search Bar - Moved to top for mobile */}
-						<div className="relative w-full">
-							<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-							<Input
-								placeholder="Search experiences"
-								className="pl-10 rounded-full border-gray-300 font-sans w-full"
-							/>
-						</div>
+  <div className="container mx-auto px-4 sm:px-6">
+    <div className="flex justify-between items-center gap-8">
+      {/* Filter Buttons - Left side */}
+      {/* <div className="flex-1 overflow-x-auto">
+        <div className="flex gap-2">
+          {filterOptions.map((filter) => (
+            <Button
+              key={filter}
+              variant="outline"
+              className="rounded-full px-4 py-2 border-gray-300 text-gray-700 hover:bg-gray-100 font-sans whitespace-nowrap text-sm"
+            >
+              {filter}
+            </Button>
+          ))}
+        </div>
+      </div> */}
 
-						{/* Filter Buttons - Scrollable on mobile */}
-						<div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
-							<div className="flex gap-2 min-w-max sm:flex-wrap">
-								{filterOptions.map((filter) => (
-									<Button
-										key={filter}
-										variant="outline"
-										className="rounded-full px-4 sm:px-6 py-2 border-gray-300 text-gray-700 hover:bg-gray-100 font-sans whitespace-nowrap text-sm"
-									>
-										{filter}
-									</Button>
-								))}
-							</div>
-						</div>
+      {/* Search and Action Buttons - Right side */}
+      {/* <div className="flex items-center gap-4 shrink-0">
+        <div className="relative w-64">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+          <Input
+            placeholder="Search experiences"
+            className="pl-10 rounded-full border-gray-300 font-sans w-full"
+          />
+        </div>
 
-						{/* Action Buttons */}
-						<div className="flex flex-wrap items-center gap-2 sm:gap-3">
-							<Button className="flex-1 sm:flex-none bg-gray-900 text-white rounded-full px-4 sm:px-6 py-2 font-sans hover:bg-gray-800 text-sm">
-								<Filter className="w-4 h-4 mr-2" />
-								<span className="whitespace-nowrap">Filter Experiences</span>
-							</Button>
-							<Button
-								variant="outline"
-								className="flex-1 sm:flex-none rounded-full px-4 sm:px-6 py-2 border-gray-300 text-gray-700 hover:bg-gray-100 font-sans text-sm"
-							>
-								<SlidersHorizontal className="w-4 h-4 mr-2" />
-								Sort
-							</Button>
-						</div>
-					</div>
-				</div>
-			</section>
+        <Button className="bg-gray-900 text-white rounded-full px-4 py-2 font-sans hover:bg-gray-800 text-sm">
+          <Filter className="w-4 h-4 mr-2" />
+          <span className="whitespace-nowrap">Filter</span>
+        </Button>
+        <Button
+          variant="outline"
+          className="rounded-full px-4 py-2 border-gray-300 text-gray-700 hover:bg-gray-100 font-sans text-sm"
+        >
+          <SlidersHorizontal className="w-4 h-4 mr-2" />
+          Sort
+        </Button>
+      </div> */}
+    </div>
+  </div>
+</section>
 
 			{/* Experiences Grid with expanded spacing for hover effects */}
 			<section className="py-8 sm:py-12 md:py-16 bg-gray-50">
