@@ -224,9 +224,8 @@ export default function ExperiencesPage() {
 				<div
 					className={`absolute top-0 rounded-xl overflow-hidden shadow-2xl transition-transform duration-350 ease-out pointer-events-none ${
 						isHovered ? "opacity-100" : "opacity-0"
-					}`}
+					} sm:w-[215%] w-full`}
 					style={{
-						width: "215%",
 						height: "100%",
 						transform: `
 							${isHovered ? 'scale(1)' : 'scale(0.95)'}
@@ -247,13 +246,13 @@ export default function ExperiencesPage() {
 						<div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
 						
 						{/* Content Container */}
-						<div className="absolute inset-0 flex flex-col justify-end p-6">
+						<div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6 md:p-8">
 							{/* Badges Section */}
-							<div className="flex items-center gap-3 w-full mb-1">
-								<div className="bg-white backdrop-blur-sm text-black px-2 py-1 rounded-full font-sans text-[10px] font-medium shadow-lg">
+							<div className="flex items-center gap-2 sm:gap-3 w-full mb-1">
+								<div className="bg-white backdrop-blur-sm text-black px-2 py-1 rounded-full font-sans text-[8px] sm:text-[10px] font-medium shadow-lg">
 									Travel Planner's Choice
 								</div>
-								<div className="bg-black/40 backdrop-blur-sm text-white px-2 py-1 rounded-full font-sans text-[10px] border border-white/20">
+								<div className="bg-black/40 backdrop-blur-sm text-white px-2 py-1 rounded-full font-sans text-[8px] sm:text-[10px] border border-white/20">
 									2 PAX (Minimum)
 								</div>
 							</div>
@@ -261,7 +260,7 @@ export default function ExperiencesPage() {
 							{/* Content Section */}
 							<div className="flex flex-col">
 								<div className="w-full">
-									<h2 className="text-2xl sm:text-3xl font-sans font-medium text-white mb-2 text-justify w-full">
+									<h2 className="text-xl sm:text-2xl md:text-3xl font-sans font-medium text-white mb-2 text-justify w-full">
 										{expandedContent.title}
 									</h2>
 									<p className="text-white/90 text-xs sm:text-sm font-sans leading-relaxed mb-4 text-justify">
@@ -269,7 +268,7 @@ export default function ExperiencesPage() {
 									</p>
 								</div>
 								<div className="flex justify-center w-full">
-									<Button className="bg-white/20 hover:bg-white/30 text-white font-serif px-12 py-3 rounded-full backdrop-blur-sm border border-white/30 w-full pointer-events-auto">
+									<Button className="bg-white/20 hover:bg-white/30 text-white font-serif px-6 sm:px-12 py-2 sm:py-3 rounded-full backdrop-blur-sm border border-white/30 w-full pointer-events-auto text-sm sm:text-base">
 										<Link href={`/book-experience/${experience.id}`}>
 											Book Experience
 										</Link>
