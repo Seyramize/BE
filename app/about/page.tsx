@@ -13,7 +13,7 @@ export default function AboutPage() {
       <section className="relative min-h-screen flex items-center justify-center">
         <div className="absolute inset-0">
           <Image
-            src="/placeholder.svg?height=1080&width=1920&text=Cloudy+Sky+Mountains"
+            src="/images/mountains.jpg"
             alt="Cloudy sky over mountains"
             fill
             className="object-cover"
@@ -21,36 +21,37 @@ export default function AboutPage() {
           />
           <div className="absolute inset-0 bg-white/20" />
         </div>
-        <div className="relative text-center text-slate-800 z-10 px-4 max-w-2xl">
-          <div className="flex justify-center mb-4">
-            <div className="w-8 h-8">
-              <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" />
-              </svg>
+        <div className="relative text-center text-slate-800 z-10 px-4 w-full">
+          {/* Content container with max-width */}
+          <div className="max-w-2xl mx-auto mt-16 md:mt-24 lg:mt-32">
+            <div className="flex justify-center mb-4">
+              <div className="w-8 h-8">
+                <img
+                  src="/images/AboutLayerIcon.png"
+                  alt="Beyond Experiences Logo"
+                  className="w-full h-full object-contain filter brightness-0"
+                />
+              </div>
             </div>
+            <p className="text-sm uppercase tracking-wider font-sans mb-6">ABOUT US</p>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-normal mb-8 leading-tight">
+              Born from a
+              <br />
+              love of discovery
+            </h1>
+            <p className="text-lg text-slate-700 mb-8 font-sans leading-relaxed max-w-lg mx-auto">
+              At Beyond Experiences, we believe your next great adventure should be just a click away. We offer a curated
+              catalog of premium, ready-made journeys—designed for travelers who crave authentic moments without the heavy
+              lift of planning.
+            </p>
+            <Button className="text-base px-8 py-3 rounded-full bg-[#B55A30] hover:bg-[#B55A30] text-white font-serif border-0 mb-16">
+              Discover More
+            </Button>
           </div>
-          <p className="text-sm uppercase tracking-wider font-sans mb-6">ABOUT US</p>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-normal mb-8 leading-tight">
-            Born from a
-            <br />
-            love of discovery
-          </h1>
-          <p className="text-lg text-slate-700 mb-8 font-sans leading-relaxed max-w-lg mx-auto">
-            At Beyond Experiences, we believe your next great adventure should be just a click away. We offer a curated
-            catalog of premium, ready-made journeys—designed for travelers who crave authentic moments without the heavy
-            lift of planning.
-          </p>
-          <Button className="bg-orange-500 hover:bg-orange-600 text-white font-sans px-8 py-3 rounded-full">
-            Discover More
-          </Button>
-        </div>
-      </section>
 
-      {/* Video Section */}
-      <section className="py-20 bg-gray-100">
-        <div className="container mx-auto px-6">
-          <div className="relative rounded-lg overflow-hidden shadow-2xl max-w-4xl mx-auto">
-            <div className="relative h-96 md:h-[500px]">
+          {/* Video Section - Now outside the max-width container */}
+          <div className="relative rounded-lg overflow-hidden shadow-2xl w-full mx-auto mb-32 px-4 md:px-8 lg:px-16">
+            <div className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] w-full flex items-center justify-center">
               <Image
                 src="/placeholder.svg?height=500&width=800&text=Silhouettes+Against+Twilight+Sky"
                 alt="People silhouettes against twilight sky"
@@ -60,7 +61,6 @@ export default function AboutPage() {
               <div className="absolute inset-0 bg-slate-900/60" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">
-                  <p className="text-white/70 text-lg font-sans mb-4">going beyond</p>
                   <Button
                     variant="ghost"
                     className="bg-white/20 hover:bg-white/30 text-white rounded-full p-4 backdrop-blur-sm"
@@ -119,7 +119,7 @@ export default function AboutPage() {
       </section>
 
       {/* Sustainability Section */}
-      <section className="py-20 bg-green-950 text-white">
+      <section className="py-20 bg-[#556B2F] text-white">
         <div className="container mx-auto px-6">
           {/* Centered heading */}
           <h2 className="text-2xl md:text-3xl font-serif font-normal mb-10 text-center max-w-3xl mx-auto leading-tight">
@@ -193,7 +193,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-black/40" />
         </div>
         <div className="relative text-center text-white z-10 px-4">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-normal mb-8 leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-normal mb-8 leading-tight">
             Go Beyond the Ordinary.
           </h2>
           <p className="text-lg md:text-xl text-white/90 mb-8 font-sans max-w-2xl mx-auto leading-relaxed">

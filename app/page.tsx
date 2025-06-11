@@ -41,7 +41,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-16">
               <Link href="/experiences">
-                <Button className="text-base px-8 py-3 rounded-full bg-[#C4674E] hover:bg-[#C4674E] text-white font-serif border-0">
+                <Button className="text-base px-8 py-3 rounded-full bg-[#B55A30] hover:bg-[#B55A30] text-white font-serif border-0">
                   Explore Experiences 👣
                 </Button>
               </Link>
