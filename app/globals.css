@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'HelveticaNowDisplay';
+  src: url('/fonts/helvetica-now-display/HelveticaNowDisplay-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HelveticaNowDisplay';
+  src: url('/fonts/helvetica-now-display/HelveticaNowDisplay-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ArgentCF';
+  src: url('/fonts/argent-cf/Argent-CF-Demi-Bold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ArgentCF';
+  src: url('/fonts/argent-cf/Argent-CF-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -71,7 +103,8 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground;
+    font-family: 'HelveticaNowDisplay', sans-serif;
   }
   h1,
   h2,
@@ -79,15 +112,16 @@
   h4,
   h5,
   h6 {
-    @apply font-serif;
+    font-family: 'ArgentCF', serif;
+    font-weight: 600;
   }
 }
 
 @layer utilities {
   .font-serif {
-    font-family: var(--font-playfair), serif;
+    font-family: 'ArgentCF', serif;
   }
   .font-sans {
-    font-family: var(--font-inter), sans-serif;
+    font-family: 'HelveticaNowDisplay', sans-serif;
   }
 }

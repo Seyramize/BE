@@ -44,6 +44,7 @@ export default function CustomizeExperiencePage() {
     additionalNotes: "",
   })
   const [hasHistory, setHasHistory] = useState(false)
+  const [scrollPosition, setScrollPosition] = useState(0)
 
   // Check if there's browser history available
   useEffect(() => {
@@ -61,6 +62,19 @@ export default function CustomizeExperiencePage() {
     }
 
     checkHistory()
+  }, [])
+
+  // Add scroll position tracking
+  useEffect(() => {
+    const handleScroll = () => {
+      const position = window.scrollY
+      setScrollPosition(position)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [])
 
   const handleInputChange = (field: keyof FormData, value: string | boolean) => {
@@ -128,9 +142,10 @@ export default function CustomizeExperiencePage() {
           <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-white/8 rounded-full blur-3xl transform translate-y-1/2"></div>
         </div>
 
-        {/* Close button with multiple fallback options */}
-        <div className="absolute top-6 right-6 z-10">
-          {/* Primary close button */}
+        {/* Close button with scroll-based positioning */}
+        <div 
+          className="fixed top-6 right-6 z-50"
+        >
           <button
             onClick={handleClose}
             className="text-white/70 hover:text-white transition-colors flex items-center gap-2 bg-black/20 hover:bg-black/30 px-3 py-2 rounded-full backdrop-blur-sm"
@@ -140,15 +155,6 @@ export default function CustomizeExperiencePage() {
             <span className="text-sm font-sans">Close</span>
             <X className="w-4 h-4" />
           </button>
-
-          {/* Fallback link button (hidden but available for screen readers) */}
-          <Link
-            href="/experiences"
-            className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 text-white bg-black/50 px-3 py-2 rounded"
-            aria-label="Return to experiences page"
-          >
-            Return to Experiences
-          </Link>
         </div>
 
         {/* Hero content */}
@@ -406,28 +412,6 @@ export default function CustomizeExperiencePage() {
               </p>
             </div>
 
-            {/* Additional Close Options */}
-            <div className="pt-4 border-t border-slate-200">
-              <div className="flex justify-center gap-4">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={handleClose}
-                  className="border-slate-300 text-slate-700 hover:bg-slate-50 font-sans px-6 py-2"
-                >
-                  Cancel and Return
-                </Button>
-                <Link href="/experiences">
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    className="text-slate-600 hover:text-slate-800 font-sans px-6 py-2"
-                  >
-                    Browse Experiences
-                  </Button>
-                </Link>
-              </div>
-            </div>
           </form>
         </div>
       </section>

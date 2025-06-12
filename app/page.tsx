@@ -300,7 +300,7 @@ export default function Home() {
                 accumsan in. Donec tempus, lorem eget venenatis molestie, nulla ipsum consectetur lorem, vel tempor
                 lorem ipsum vel lorem.
               </p>
-              <div className="relative h-[250px] md:h-[500px] rounded-lg overflow-hidden">
+              <div className="relative h-[200px] md:h-[250px] lg:h-[400px] rounded-lg overflow-hidden">
                 <Image
                   src="/placeholder.svg?height=500&width=800&text=Wooden+Boat+Lake"
                   alt="Wooden boat on a crystal clear lake"

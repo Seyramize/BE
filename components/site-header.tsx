@@ -111,14 +111,14 @@ export function SiteHeader() {
 
         {/* Desktop Navigation */}
         <nav
-          className={`hidden md:inline-flex bg-white/10 rounded-lg px-4 md:px-2 lg:px-4 py-2 md:py-1 lg:py-2 shadow-lg items-center justify-center transition-all duration-300 backdrop-blur-md before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-b before:from-white/15 before:to-transparent before:backdrop-blur-md ${
+          className={`hidden md:inline-flex bg-white/10 rounded-lg px-12 md:px-8 lg:px-12 py-2 md:py-1 lg:py-2 shadow-lg items-center justify-center transition-all duration-300 backdrop-blur-md before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-b before:from-white/15 before:to-transparent before:backdrop-blur-md ${
             isScrolled ? "bg-white/15" : "bg-white/5"
           }`}
         >
-          <div className="flex items-center space-x-6 md:space-x-2 lg:space-x-6">
+          <div className="flex items-center space-x-8 md:space-x-4 lg:space-x-8">
             <Link
               href="/"
-              className={`relative text-white text-sm transition-all duration-300 font-sans group px-3 md:px-2 lg:px-3 py-1.5 md:py-1 lg:py-1.5 ${
+              className={`relative text-white text-sm transition-all duration-300 font-helvetica group px-3 md:px-2 lg:px-3 py-1.5 md:py-1 lg:py-1.5 ${
                 pathname === "/" 
                   ? "font-medium" 
                   : "hover:text-amber-100"
@@ -131,7 +131,7 @@ export function SiteHeader() {
             </Link>
             <Link
               href="/experiences"
-              className={`relative text-white text-sm transition-all duration-300 font-sans group px-3 py-1.5 ${
+              className={`relative text-white text-sm transition-all duration-300 font-helvetica group px-3 py-1.5 ${
                 pathname === "/experiences" 
                   ? "font-medium" 
                   : "hover:text-amber-100"
@@ -144,7 +144,7 @@ export function SiteHeader() {
             </Link>
             <Link
               href="/about"
-              className={`relative text-white text-sm transition-all duration-300 font-sans group px-3 py-1.5 ${
+              className={`relative text-white text-sm transition-all duration-300 font-helvetica group px-3 py-1.5 ${
                 pathname === "/about" 
                   ? "font-medium" 
                   : "hover:text-amber-100"
@@ -157,7 +157,7 @@ export function SiteHeader() {
             </Link>
             <Link
               href="/journal"
-              className={`relative text-white text-sm transition-all duration-300 font-sans group px-3 py-1.5 ${
+              className={`relative text-white text-sm transition-all duration-300 font-helvetica group px-3 py-1.5 ${
                 pathname === "/journal" 
                   ? "font-medium" 
                   : "hover:text-amber-100"
