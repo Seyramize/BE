@@ -11,6 +11,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { CountrySelector } from "@/components/country-selector"
 
 interface FormData {
   fullName: string
@@ -45,6 +46,7 @@ export default function CustomizeExperiencePage() {
   })
   const [hasHistory, setHasHistory] = useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
+  const [errors, setErrors] = useState({ travelDates: "" })
 
   // Check if there's browser history available
   useEffect(() => {
@@ -225,23 +227,14 @@ export default function CustomizeExperiencePage() {
                     Phone number
                   </label>
                   <div className="flex gap-2">
-                    <Select
+                    <CountrySelector
                       value={formData.countryCode}
-                      onValueChange={(value) => handleInputChange("countryCode", value)}
-                    >
-                      <SelectTrigger className="w-20 bg-white border-slate-200 h-12">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="GH">GH</SelectItem>
-                        <SelectItem value="US">US</SelectItem>
-                        <SelectItem value="UK">UK</SelectItem>
-                      </SelectContent>
-                    </Select>
+                      onChange={(value) => handleInputChange("countryCode", value)}
+                    />
                     <Input
                       id="phoneNumber"
                       type="tel"
-                      placeholder="+1 (123) 000-000"
+                      placeholder="Enter phone number"
                       value={formData.phoneNumber}
                       onChange={(e) => handleInputChange("phoneNumber", e.target.value)}
                       className="flex-1 bg-white border-slate-200 text-slate-800 placeholder:text-slate-400 h-12"
@@ -335,31 +328,24 @@ export default function CustomizeExperiencePage() {
 
               {/* Preferred Travel Dates */}
               <div>
-                <label htmlFor="travelDates" className="block text-slate-800 font-sans text-sm font-medium mb-3">
+                <label
+                  htmlFor="travelDates"
+                  className="block text-slate-800 font-sans text-sm font-medium mb-2"
+                >
                   Preferred Travel Dates
                 </label>
                 <div className="relative">
                   <Input
                     id="travelDates"
-                    type="text"
-                    placeholder="Dates"
+                    type="date"
                     value={formData.travelDates}
                     onChange={(e) => handleInputChange("travelDates", e.target.value)}
-                    className="w-full bg-white border-slate-200 text-slate-800 placeholder:text-slate-400 h-12 pr-10"
+                    className={`w-75 bg-white border-slate-200 text-slate-800 h-12 ${
+                      errors.travelDates ? "border-red-500" : ""
+                    }`}
                   />
-                  <Calendar className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
                 </div>
-                <div className="flex items-center mt-3">
-                  <Checkbox
-                    id="flexible"
-                    checked={formData.isFlexible}
-                    onCheckedChange={(checked) => handleInputChange("isFlexible", checked as boolean)}
-                    className="border-slate-400"
-                  />
-                  <label htmlFor="flexible" className="ml-2 text-sm font-sans text-slate-800">
-                    Flexible
-                  </label>
-                </div>
+                {errors.travelDates && <p className="text-red-500 text-xs mt-1">{errors.travelDates}</p>}
               </div>
             </div>
 
@@ -379,7 +365,7 @@ export default function CustomizeExperiencePage() {
             </div>
 
             {/* Additional Notes */}
-            <div>
+            <div className="border-b-2 border-black pb-8">
               <h3 className="text-2xl font-serif font-normal text-slate-800 mb-2">Additional Notes</h3>
               <p className="text-slate-600 font-sans mb-8">
                 Every detail matters. Is there anything else we should know to make this unforgettable?

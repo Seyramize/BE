@@ -111,7 +111,7 @@ export function SiteHeader() {
 
         {/* Desktop Navigation */}
         <nav
-          className={`hidden md:inline-flex bg-[#0b1b28]/[0.375] rounded-lg px-14 md:px-8 lg:px-12 py-1 md:py-1 lg:py-1 items-center justify-center transition-all duration-300 backdrop-blur-md shadow-[0_2px_25px_0_rgba(0,0,0,1)] ${
+          className={`hidden md:inline-flex bg-[#0b1b28]/[0.375] rounded-lg px-14 md:px-8 lg:px-12 py-1 md:py-1 lg:py-1 items-center justify-center transition-all duration-300 backdrop-blur-md ${
             isScrolled ? "bg-[#0b1b28]/[0.4]" : "bg-[#0b1b28]/[0.35]"
           }`}
         >

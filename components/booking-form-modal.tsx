@@ -461,6 +461,7 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
                             <div>Price: ${discountedPrice.toFixed(2)}/person</div>
                           </div>
                         </div>
+                        <div className="border-b border-black mb-4"></div>
 
                         {errors.guests && <p className="text-red-500 text-xs mb-4">{errors.guests}</p>}
                       </div>
@@ -484,7 +485,7 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
                             type="button"
                             variant="outline"
                             size="sm"
-                            className="border-slate-900 text-slate-900 hover:bg-slate-50 font-sans px-4 py-2 text-sm whitespace-nowrap"
+                            className="bg-slate-900 text-white hover:bg-slate-800 font-sans px-6 py-2 text-sm whitespace-nowrap min-w-[200px]"
                           >
                             Speak to a Travel Planner
                           </Button>
