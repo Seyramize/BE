@@ -119,9 +119,7 @@ export function SiteHeader() {
             <Link
               href="/"
               className={`relative text-white text-sm transition-all duration-300 font-helvetica group px-3 md:px-2 lg:px-3 py-1.5 md:py-1 lg:py-1.5 ${
-                pathname === "/" 
-                  ? "font-medium text-blue-900" 
-                  : "hover:text-blue-900"
+                pathname === "/" ? "font-medium text-blue-950" : "hover:text-blue-900"
               }`}
             >
               <span className="relative z-10">{`Home`}</span>
@@ -129,9 +127,7 @@ export function SiteHeader() {
             <Link
               href="/experiences"
               className={`relative text-white text-sm transition-all duration-300 font-helvetica group px-3 py-1.5 ${
-                pathname === "/experiences" 
-                  ? "font-medium text-blue-900" 
-                  : "hover:text-blue-900"
+                pathname === "/experiences" ? "font-medium text-blue-950" : "hover:text-blue-900"
               }`}
             >
               <span className="relative z-10">{`Experiences`}</span>
@@ -139,9 +135,7 @@ export function SiteHeader() {
             <Link
               href="/about"
               className={`relative text-white text-sm transition-all duration-300 font-helvetica group px-3 py-1.5 ${
-                pathname === "/about" 
-                  ? "font-medium text-blue-900" 
-                  : "hover:text-blue-900"
+                pathname === "/about" ? "font-medium text-blue-950" : "hover:text-blue-900"
               }`}
             >
               <span className="relative z-10">{`About Us`}</span>
@@ -149,9 +143,7 @@ export function SiteHeader() {
             <Link
               href="/journal"
               className={`relative text-white text-sm transition-all duration-300 font-helvetica group px-3 py-1.5 ${
-                pathname === "/journal" 
-                  ? "font-medium text-blue-900" 
-                  : "hover:text-blue-900"
+                pathname === "/journal" ? "font-medium text-blue-950" : "hover:text-blue-900"
               }`}
             >
               <span className="relative z-10">{`The Journal`}</span>
@@ -202,8 +194,8 @@ export function SiteHeader() {
             <nav className="mt-16 px-2 space-y-4">
               <Link
                 href="/"
-                className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-amber-50 ${
-                  pathname === "/" ? "bg-amber-50 text-amber-600" : ""
+                className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50 ${
+                  pathname === "/" ? "bg-blue-50 text-blue-950" : ""
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -211,8 +203,8 @@ export function SiteHeader() {
               </Link>
               <Link
                 href="/experiences"
-                className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-amber-50 ${
-                  pathname === "/experiences" ? "bg-amber-50 text-amber-600" : ""
+                className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50 ${
+                  pathname === "/experiences" ? "bg-blue-50 text-blue-950" : ""
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -220,8 +212,8 @@ export function SiteHeader() {
               </Link>
               <Link
                 href="/about"
-                className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-amber-50 ${
-                  pathname === "/about" ? "bg-amber-50 text-amber-600" : ""
+                className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50 ${
+                  pathname === "/about" ? "bg-blue-50 text-blue-950" : ""
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -229,8 +221,8 @@ export function SiteHeader() {
               </Link>
               <Link
                 href="/journal"
-                className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-amber-50 ${
-                  pathname === "/journal" ? "bg-amber-50 text-amber-600" : ""
+                className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50 ${
+                  pathname === "/journal" ? "bg-blue-50 text-blue-950" : ""
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
