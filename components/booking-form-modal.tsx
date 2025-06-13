@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { X, Calendar, Users, MapPin, Phone, Mail, User } from "lucide-react"
+import { X, Calendar, Users, MapPin, Phone, Mail, User, Settings, UserRound } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { CountrySelector } from "@/components/country-selector"
@@ -239,7 +239,7 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
             />
             <div className="absolute inset-0 bg-black/20" />
             <div className="absolute inset-0 flex items-center justify-center p-8">
-              <div className="text-center text-white">
+              <div className="text-left text-white">
                 <p className="text-sm font-sans uppercase tracking-wider mb-4 opacity-90">YOU'RE BOOKING THE</p>
                 <h2 className="text-3xl xl:text-4xl font-serif font-normal leading-tight" id="booking-modal-title">
                   {experience.title}
@@ -379,14 +379,14 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
                   {/* Your Preferences Section */}
                   <div>
                     <div className="flex items-center gap-2 mb-4">
-                      <Calendar className="w-5 h-5 text-slate-600" />
+                      <Settings className="w-5 h-5 text-slate-600" />
                       <h4 className="text-lg sm:text-xl font-serif font-normal text-slate-800">Your Preferences</h4>
                     </div>
                     <p className="text-slate-600 font-sans text-sm mb-4 lg:mb-6">Tailor the finer details</p>
 
                     <div className="space-y-4 lg:space-y-6">
                       {/* Date Selection */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         <div>
                           <label
                             htmlFor="preferredDate"
@@ -399,7 +399,7 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
                             type="date"
                             value={formData.preferredDate}
                             onChange={(e) => handleInputChange("preferredDate", e.target.value)}
-                            className={`w-full bg-white border-slate-200 text-slate-800 h-11 ${
+                            className={`w-50 bg-white border-slate-200 text-slate-800 h-11 ${
                               errors.preferredDate ? "border-red-500" : ""
                             }`}
                           />
@@ -418,7 +418,7 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
                             type="date"
                             value={formData.alternateDate}
                             onChange={(e) => handleInputChange("alternateDate", e.target.value)}
-                            className="w-full bg-white border-slate-200 text-slate-800 h-11"
+                            className="w-50 bg-white border-slate-200 text-slate-800 h-11"
                           />
                         </div>
                       </div>
@@ -432,35 +432,34 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
                               Number of guests
                             </label>
                           </div>
-                          <div className="text-left sm:text-right">
-                            <div className="text-slate-800 font-sans text-sm">Total Cost</div>
-                            <div className="text-xl sm:text-2xl font-serif text-slate-800">${totalCost}</div>
-                            <div className="text-xs text-slate-600">
-                              {selectedGuestCount} guest{selectedGuestCount !== 1 ? "s" : ""}
-                            </div>
+                        </div>
+
+                        <div className="flex gap-8">
+                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4 flex-1">
+                            {guestOptions.map((guest) => (
+                              <div key={guest.label} className="flex items-center space-x-2">
+                                <input
+                                  type="radio"
+                                  id={guest.label}
+                                  name="guests"
+                                  checked={formData.guests.includes(guest.label)}
+                                  onChange={() => handleGuestSelection(guest.label)}
+                                  className="w-4 h-4 text-slate-900 border-black focus:ring-black"
+                                />
+                                <label htmlFor={guest.label} className="text-sm font-sans text-slate-800">
+                                  {guest.label}
+                                </label>
+                              </div>
+                            ))}
                           </div>
-                        </div>
 
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
-                          {guestOptions.map((guest) => (
-                            <div key={guest.label} className="flex items-center space-x-2">
-                              <input
-                                type="radio"
-                                id={guest.label}
-                                name="guests"
-                                checked={formData.guests.includes(guest.label)}
-                                onChange={() => handleGuestSelection(guest.label)}
-                                className="w-4 h-4 text-slate-900 border-slate-400 focus:ring-slate-900"
-                              />
-                              <label htmlFor={guest.label} className="text-sm font-sans text-slate-800">
-                                {guest.label}
-                              </label>
+                          <div className="flex flex-col gap-1 text-xs text-slate-600 mb-4">
+                            <div className="text-right">
+                              <div className="text-slate-800 font-sans text-sm">Total Cost</div>
+                              <div className="text-2xl sm:text-3xl font-serif text-slate-800">${totalCost}</div>
                             </div>
-                          ))}
-                        </div>
-
-                        <div className="flex flex-col gap-1 text-xs text-slate-600 mb-4">
-                          <div>Price: ${discountedPrice.toFixed(2)} per person</div>
+                            <div>Price: ${discountedPrice.toFixed(2)}/person</div>
+                          </div>
                         </div>
 
                         {errors.guests && <p className="text-red-500 text-xs mb-4">{errors.guests}</p>}

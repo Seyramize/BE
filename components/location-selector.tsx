@@ -1,10 +1,8 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { countries } from "@/lib/country-data"
+import { CountrySelector } from "@/components/country-selector"
 
 interface LocationSelectorProps {
   selectedCountry: string
@@ -24,20 +22,14 @@ export function LocationSelector({
   return (
     <div className="flex gap-2">
       {/* Country Selection */}
-      <Select value={selectedCountry} onValueChange={onCountryChange}>
-        <SelectTrigger className="w-40 bg-white border-slate-200 h-11">
-          <SelectValue placeholder="Select country" />
-        </SelectTrigger>
-        <SelectContent>
-          {countries.map((country) => (
-            <SelectItem key={country.code} value={country.code}>
-              <div className="flex items-center">
-                <span>{country.name}</span>
-              </div>
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      <CountrySelector
+        value={selectedCountry}
+        onChange={onCountryChange}
+        className="w-40"
+        hideDialCode={true}
+        showCountryName={true}
+        hideFlag={true}
+      />
 
       {/* Location Input */}
       <div className="relative flex-1">

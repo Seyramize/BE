@@ -50,7 +50,7 @@ export default function AboutPage() {
           </div>
 
           {/* Video Section - Now outside the max-width container */}
-          <div className="relative rounded-lg overflow-hidden shadow-2xl w-full mx-auto mb-32 px-4 md:px-8 lg:px-16">
+          <div className="relative rounded-lg overflow-hidden w-full mx-auto mb-32 px-4 md:px-8 lg:px-16 max-w-7xl">
             <div className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] w-full flex items-center justify-center">
               <Image
                 src="/placeholder.svg?height=500&width=800&text=Silhouettes+Against+Twilight+Sky"

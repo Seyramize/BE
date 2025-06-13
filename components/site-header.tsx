@@ -105,68 +105,56 @@ export function SiteHeader() {
     >
       <div className="container mx-auto px-4 md:px-2 lg:px-4 flex justify-center relative">
         {/* Logo positioned on the left */}
-        <div className="absolute left-4 md:left-3 lg:left-4">
+        <div className="absolute left-4 md:left-3 lg:left-4 scale-50 md:scale-65 lg:scale-75">
           <Logo />
         </div>
 
         {/* Desktop Navigation */}
         <nav
-          className={`hidden md:inline-flex bg-white/10 rounded-lg px-12 md:px-8 lg:px-12 py-2 md:py-1 lg:py-2 shadow-lg items-center justify-center transition-all duration-300 backdrop-blur-md before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-b before:from-white/15 before:to-transparent before:backdrop-blur-md ${
-            isScrolled ? "bg-white/15" : "bg-white/5"
+          className={`hidden md:inline-flex bg-[#0b1b28]/[0.375] rounded-lg px-14 md:px-8 lg:px-12 py-1 md:py-1 lg:py-1 items-center justify-center transition-all duration-300 backdrop-blur-md shadow-[0_2px_25px_0_rgba(0,0,0,1)] ${
+            isScrolled ? "bg-[#0b1b28]/[0.4]" : "bg-[#0b1b28]/[0.35]"
           }`}
         >
-          <div className="flex items-center space-x-8 md:space-x-4 lg:space-x-8">
+          <div className="flex items-center space-x-12 md:space-x-6 lg:space-x-12">
             <Link
               href="/"
               className={`relative text-white text-sm transition-all duration-300 font-helvetica group px-3 md:px-2 lg:px-3 py-1.5 md:py-1 lg:py-1.5 ${
                 pathname === "/" 
-                  ? "font-medium" 
-                  : "hover:text-amber-100"
+                  ? "font-medium text-blue-900" 
+                  : "hover:text-blue-900"
               }`}
             >
               <span className="relative z-10">{`Home`}</span>
-              <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform origin-left transition-all duration-300 ${
-                pathname === "/" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-              }`} />
             </Link>
             <Link
               href="/experiences"
               className={`relative text-white text-sm transition-all duration-300 font-helvetica group px-3 py-1.5 ${
                 pathname === "/experiences" 
-                  ? "font-medium" 
-                  : "hover:text-amber-100"
+                  ? "font-medium text-blue-900" 
+                  : "hover:text-blue-900"
               }`}
             >
               <span className="relative z-10">{`Experiences`}</span>
-              <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform origin-left transition-all duration-300 ${
-                pathname === "/experiences" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-              }`} />
             </Link>
             <Link
               href="/about"
               className={`relative text-white text-sm transition-all duration-300 font-helvetica group px-3 py-1.5 ${
                 pathname === "/about" 
-                  ? "font-medium" 
-                  : "hover:text-amber-100"
+                  ? "font-medium text-blue-900" 
+                  : "hover:text-blue-900"
               }`}
             >
               <span className="relative z-10">{`About Us`}</span>
-              <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform origin-left transition-all duration-300 ${
-                pathname === "/about" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-              }`} />
             </Link>
             <Link
               href="/journal"
               className={`relative text-white text-sm transition-all duration-300 font-helvetica group px-3 py-1.5 ${
                 pathname === "/journal" 
-                  ? "font-medium" 
-                  : "hover:text-amber-100"
+                  ? "font-medium text-blue-900" 
+                  : "hover:text-blue-900"
               }`}
             >
               <span className="relative z-10">{`The Journal`}</span>
-              <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform origin-left transition-all duration-300 ${
-                pathname === "/journal" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-              }`} />
             </Link>
           </div>
         </nav>

@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { ArrowLeft, X, CreditCard, Lock, Shield } from "lucide-react"
+import { ArrowLeft, X, CreditCard, Lock, Shield, UserRound, BookUser, ShieldPlus, ShieldCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -178,7 +178,7 @@ export function PaymentConfirmationModal({
             />
             <div className="absolute inset-0 bg-black/30" />
             <div className="absolute inset-0 flex items-center justify-center p-4 lg:p-8">
-              <div className="text-center text-white">
+              <div className="text-left text-white">
                 <p className="text-xs sm:text-sm font-sans uppercase tracking-wider mb-2 lg:mb-4 opacity-90">
                   YOU'RE BOOKING THE
                 </p>
@@ -293,17 +293,20 @@ export function PaymentConfirmationModal({
                       <label htmlFor="nameOnCard" className="block text-slate-800 font-sans text-sm font-medium mb-2">
                         Name on card
                       </label>
-                      <Input
-                        id="nameOnCard"
-                        type="text"
-                        placeholder="Match the name exactly"
-                        value={formData.nameOnCard}
-                        onChange={(e) => handleInputChange("nameOnCard", e.target.value)}
-                        disabled={isProcessing}
-                        className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 ${
-                          errors.nameOnCard ? "border-red-500" : ""
-                        }`}
-                      />
+                      <div className="relative">
+                        <UserRound className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                        <Input
+                          id="nameOnCard"
+                          type="text"
+                          placeholder="Match the name exactly"
+                          value={formData.nameOnCard}
+                          onChange={(e) => handleInputChange("nameOnCard", e.target.value)}
+                          disabled={isProcessing}
+                          className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 pl-9 ${
+                            errors.nameOnCard ? "border-red-500" : ""
+                          }`}
+                        />
+                      </div>
                       {errors.nameOnCard && <p className="text-red-500 text-xs mt-1">{errors.nameOnCard}</p>}
                     </div>
 
@@ -312,17 +315,20 @@ export function PaymentConfirmationModal({
                       <label htmlFor="cardNumber" className="block text-slate-800 font-sans text-sm font-medium mb-2">
                         Card number
                       </label>
-                      <Input
-                        id="cardNumber"
-                        type="text"
-                        placeholder="1234 5678 9012 3456"
-                        value={formData.cardNumber}
-                        onChange={(e) => handleInputChange("cardNumber", e.target.value)}
-                        disabled={isProcessing}
-                        className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 ${
-                          errors.cardNumber ? "border-red-500" : ""
-                        }`}
-                      />
+                      <div className="relative">
+                        <BookUser className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                        <Input
+                          id="cardNumber"
+                          type="text"
+                          placeholder="1234 5678 9012 3456"
+                          value={formData.cardNumber}
+                          onChange={(e) => handleInputChange("cardNumber", e.target.value)}
+                          disabled={isProcessing}
+                          className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 pl-9 ${
+                            errors.cardNumber ? "border-red-500" : ""
+                          }`}
+                        />
+                      </div>
                       {errors.cardNumber && <p className="text-red-500 text-xs mt-1">{errors.cardNumber}</p>}
                     </div>
 
@@ -332,17 +338,20 @@ export function PaymentConfirmationModal({
                         <label htmlFor="expiryDate" className="block text-slate-800 font-sans text-sm font-medium mb-2">
                           Expiry date
                         </label>
-                        <Input
-                          id="expiryDate"
-                          type="text"
-                          placeholder="MM/YY"
-                          value={formData.expiryDate}
-                          onChange={(e) => handleInputChange("expiryDate", e.target.value)}
-                          disabled={isProcessing}
-                          className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 ${
-                            errors.expiryDate ? "border-red-500" : ""
-                          }`}
-                        />
+                        <div className="relative">
+                          <ShieldPlus className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                          <Input
+                            id="expiryDate"
+                            type="text"
+                            placeholder="MM/YY"
+                            value={formData.expiryDate}
+                            onChange={(e) => handleInputChange("expiryDate", e.target.value)}
+                            disabled={isProcessing}
+                            className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 pl-9 ${
+                              errors.expiryDate ? "border-red-500" : ""
+                            }`}
+                          />
+                        </div>
                         {errors.expiryDate && <p className="text-red-500 text-xs mt-1">{errors.expiryDate}</p>}
                       </div>
                       <div>

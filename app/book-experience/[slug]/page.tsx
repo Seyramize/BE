@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Check, Eye } from "lucide-react"
+import { Check, Eye, Diamond } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
@@ -134,23 +134,23 @@ export default function BookExperiencePage() {
             <div className="lg:col-span-2 space-y-8 md:space-y-12">
               {/* Overview */}
               <div>
-                <h2 className="text-xl sm:text-2xl font-serif font-normal mb-4 md:mb-6 uppercase tracking-wider text-slate-800">
+                <h2 className="text-lg sm:text-xl font-sans font-bold mb-4 md:mb-6 uppercase tracking-wider text-slate-800">
                   Overview
                 </h2>
-                <p className="text-slate-700 font-sans leading-relaxed text-base sm:text-lg">
+                <p className="text-slate-700 font-serif font-bold leading-relaxed text-base sm:text-xl">
                   {experienceData.overview}
                 </p>
               </div>
 
               {/* Highlights */}
               <div>
-                <h2 className="text-xl sm:text-2xl font-serif font-normal mb-4 md:mb-6 uppercase tracking-wider text-slate-800">
+                <h2 className="text-lg sm:text-xl font-sans font-bold mb-4 md:mb-6 uppercase tracking-wider text-slate-800 border-b border-black pb-2">
                   Highlights
                 </h2>
                 <div className="space-y-4">
                   {experienceData.highlights.map((highlight, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-slate-400 rounded-full mt-2.5 flex-shrink-0"></div>
+                    <div key={index} className="flex items-start gap-3 border-b border-black pb-4">
+                      <Diamond className="w-4 h-4 text-slate-600 mt-1 flex-shrink-0" />
                       <p className="text-slate-700 font-sans leading-relaxed text-base sm:text-lg">
                         {highlight}
                       </p>
@@ -163,18 +163,20 @@ export default function BookExperiencePage() {
               <div className="border-t border-gray-200 pt-8 md:pt-12">
                 <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6">
                   <div>
-                    <h3 className="text-sm font-sans uppercase tracking-wider text-slate-600 mb-2">
+                    <h3 className="text-lg font-sans uppercase tracking-wider text-slate-600 mb-3">
                       Starting Price
                     </h3>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-3xl sm:text-4xl font-serif font-normal text-slate-800">
-                        ${experienceData.startingPrice}
-                      </span>
-                      <span className="text-sm text-slate-600 font-sans">.00</span>
+                    <div className="flex justify-between items-center gap-16 mt-2">
+                      <div className="relative">
+                        <span className="mt-2 text-4xl sm:text-5xl font-serif font-normal text-slate-800">
+                          ${experienceData.startingPrice}
+                        </span>
+                        <span className="absolute -top-1 right-[-2rem] text-xl text-slate-600 font-serif">.00</span>
+                      </div>
+                      <p className="text-xl text-slate-600 font-sans text-bold">
+                        Minimum of {experienceData.minimumGuests} people
+                      </p>
                     </div>
-                    <p className="text-sm text-slate-600 font-sans mt-1">
-                      Minimum of {experienceData.minimumGuests} people
-                    </p>
                   </div>
 
                   <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-3">
@@ -198,12 +200,12 @@ export default function BookExperiencePage() {
 
               {/* What's Included */}
               <div>
-                <h2 className="text-xl sm:text-2xl font-serif font-normal mb-4 md:mb-6 uppercase tracking-wider text-slate-800">
+                <h2 className="text-md sm:text-lg font-sans font-bold mb-4 md:mb-6 uppercase tracking-wider text-slate-800">
                   What's Included
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {experienceData.included.map((item, index) => (
-                    <div key={index} className="flex items-center gap-3">
+                    <div key={index} className={`flex items-center gap-3 border-b border-black pb-3 ${index < 2 ? 'border-t border-black pt-3' : ''}`}>
                       <Check className="w-4 h-4 text-slate-600 flex-shrink-0" />
                       <span className="text-slate-700 font-sans text-sm sm:text-base">
                         {item}
@@ -243,7 +245,7 @@ export default function BookExperiencePage() {
 
       {/* More Ghanaian Adventures */}
       <section className="py-8 sm:py-12 md:py-16 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6">
+        <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
           <div className="flex items-center gap-3 mb-8 md:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-normal text-slate-800">
               More Ghanaian adventures

@@ -29,13 +29,13 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/20" />
         </div>
         <div className="relative container mx-auto px-6 md:px-16 lg:px-32 xl:px-40 h-full flex flex-col justify-center">
-          <div className="max-w-2xl pt-48 pb-16">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-normal text-white leading-tight mb-10">
+          <div className="max-w-2xl pt-48 md:pt-64 lg:pt-80 pb-16">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-normal text-white leading-tight mb-6">
               Go Beyond
               <br />
               the Ordinary
             </h1>
-            <p className="text-lg text-white/90 mb-14 max-w-lg font-serif leading-relaxed">
+            <p className="text-lg text-white/90 mb-4 max-w-lg font-serif leading-relaxed">
               Discover bespoke experiences that redefine the way you travel. Whether you seek serenity, thrill, or
               unforgettable encounters, your next journey begins here.
             </p>
@@ -87,25 +87,20 @@ export default function Home() {
                   className="object-cover rounded-lg"
                 />
               </div>
-              <div className="relative h-80 md:mt-12">
+              <Link href="/experiences" className="relative h-80 md:mt-12 block group">
                 <Image
                   src="/placeholder.svg?height=320&width=240&text=Hot+Air+Balloon"
                   alt="Hot air balloon over landscape"
                   fill
-                  className="object-cover rounded-lg"
+                  className="object-cover rounded-lg transition-transform group-hover:scale-[1.02]"
                 />
-                <Link href="/experiences">
-                  <Button
-                    variant="ghost"
-                    className="absolute bottom-4 right-4 bg-white rounded-full p-3 shadow-lg hover:bg-gray-50 transition-colors"
-                  >
-                    <div className="flex items-center space-x-2">
-                      <span className="font-medium text-sm font-sans text-gray-900">Browse Experiences</span>
-                      <ArrowRight className="h-4 w-4 text-gray-900" />
-                    </div>
-                  </Button>
-                </Link>
-              </div>
+                <div className="absolute bottom-4 right-4 px-1 py-3">
+                  <div className="flex items-center space-x-2">
+                    <span className="font-body text-base md:text-lg sm:text-sm font-sans text-gray-900">Browse <br/> Experiences</span>
+                    <ArrowRight className="h-4 w-4 text-gray-900" />
+                  </div>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -265,7 +260,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Form section */}
             <div className="order-2 md:order-2">
-              <div className="md:pt-[200px]">
+              <div className="md:pt-[165px]">
                 <form className="space-y-4">
                   <div>
                     <Input type="text" placeholder="First Name" className="bg-white border-gray-200 font-sans w-full" />
@@ -285,7 +280,7 @@ export default function Home() {
                       className="bg-white border-gray-200 min-h-[120px] font-sans w-full"
                     />
                   </div>
-                  <Button className="w-full bg-gray-900 hover:bg-gray-800 text-white font-sans rounded-full py-3">
+                  <Button className="w-full bg-gray-900 hover:bg-gray-800 text-white font-body rounded-full py-3">
                     Enquire
                   </Button>
                 </form>
@@ -294,13 +289,13 @@ export default function Home() {
 
             {/* Title and photo section */}
             <div className="order-1 md:order-1">
-              <h2 className="text-3xl md:text-4xl font-serif font-normal mb-6">Enquire</h2>
+              <h2 className="text-3xl md:text-4xl font-title font-normal mb-6">Enquire</h2>
               <p className="text-gray-700 mb-6 font-sans leading-relaxed">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis molestie dui lorem, at molestie dui
                 accumsan in. Donec tempus, lorem eget venenatis molestie, nulla ipsum consectetur lorem, vel tempor
                 lorem ipsum vel lorem.
               </p>
-              <div className="relative h-[200px] md:h-[250px] lg:h-[400px] rounded-lg overflow-hidden">
+              <div className="relative h-[200px] md:h-[300px] lg:h-[400px] rounded-lg overflow-hidden">
                 <Image
                   src="/placeholder.svg?height=500&width=800&text=Wooden+Boat+Lake"
                   alt="Wooden boat on a crystal clear lake"

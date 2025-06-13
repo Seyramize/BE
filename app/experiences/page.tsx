@@ -34,7 +34,7 @@ const experiences = [
 			title: "Discover Cape Coast",
 			shortDescription: "Journey through Ghana's historic Cape Coast and ancient castles.",
 			image: "/placeholder.svg?height=400&width=300&text=Cape+Coast+Discovery",
-      location: "Central Region, Ghana"
+			location: "Central Region, Ghana"
 		},
 		expandedContent: {
 			title: "Discover Cape Coast",
@@ -68,7 +68,7 @@ const experiences = [
 			shortDescription:
 				"Explore pristine beaches, rainforest canopy walks, and fishing communities.",
 			image: "/placeholder.svg?height=400&width=300&text=Western+Ghana+Tour",
-      location: "Western Region, Ghana",
+			location: "Western Region, Ghana",
 		},
 		expandedContent: {
 			title: "Western Tour",
@@ -101,7 +101,7 @@ const experiences = [
 			title: "Akosombo Adventure",
 			shortDescription: "Experience Lake Volta with boat cruises and dam visits.",
 			image: "/placeholder.svg?height=400&width=300&text=Akosombo+Lake+Adventure",
-      location: "Volta Region, Ghana",
+			location: "Volta Region, Ghana",
 		},
 		expandedContent: {
 			title: "Akosombo Adventure",
@@ -117,7 +117,7 @@ const experiences = [
 			title: "Kente & Culture",
 			shortDescription: "Learn ancient Kente weaving art in traditional villages.",
 			image: "/placeholder.svg?height=400&width=300&text=Kente+Weaving+Culture",
-      location: "Ashanti Region, Ghana",
+			location: "Ashanti Region, Ghana",
 		},
 		expandedContent: {
 			title: "Kente & Culture",
@@ -149,19 +149,20 @@ const filterOptions = ["Ghana", "Cape Town", "Nigeria", "Namibia"]
 
 export default function ExperiencesPage() {
 	const [hoveredCard, setHoveredCard] = useState<number | null>(null)
+	const [isSearchFocused, setIsSearchFocused] = useState(false)
 
-	const ExperienceCard = ({ 
-		experience, 
+	const ExperienceCard = ({
+		experience,
 		index,
-		columns = 4 
-	}: { 
+		columns = 4
+	}: {
 		experience: (typeof experiences)[0]
 		index: number
-		columns?: number 
+		columns?: number
 	}) => {
 		const isHovered = hoveredCard === experience.id
 		const { defaultContent, expandedContent, tags } = experience
-		
+
 		// Calculate if card should slide from left or right based on column position
 		// For tablet view (2 columns), odd indices slide from right, even from left
 		const isLeftSlide = index % 2 === 0
@@ -175,9 +176,12 @@ export default function ExperiencesPage() {
 			>
 				{/* Default Card State */}
 				<div
-					className={`rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 h-full ${
-						isHovered ? "opacity-0" : "opacity-100"
-					}`}
+					className={`rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-2500 ease-out h-full ${isHovered ? "opacity-0" : "opacity-100"}`}
+					style={{
+						transition: 'opacity 1200ms ease-out, transform 2500ms ease-out',
+						transform: isHovered ? 'scale(0.95) rotate(-1deg)' : 'scale(1) rotate(0deg)',
+						transformOrigin: 'center'
+					}}
 				>
 					<div className="relative h-full">
 						<Image
@@ -189,17 +193,36 @@ export default function ExperiencesPage() {
 						<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
 						{/* Tags at the top */}
-						<div className="absolute top-4 left-4 flex flex-wrap gap-8">
+						<div className="absolute top-4 left-4 right-4 flex flex-wrap justify-between">
 							{tags.map((tag, index) => (
 								<div
 									key={index}
 									className={`backdrop-blur-sm text-white text-[10px] px-3 py-1 rounded-full font-sans border border-white/20 ${
-										tag === "Travel Planner's Choice" 
-											? "bg-gray-600/95"
+										tag === "Travel Planner's Choice"
+											? "bg-blue-950"
 											: "bg-black/40"
-									}`}
+									} ${tag === "2 PAX" ? "ml-auto" : ""}`}
 								>
-									{tag}
+									{tag === "2 PAX" ? (
+										<div className="flex items-center gap-1">
+											<svg 
+												xmlns="http://www.w3.org/2000/svg" 
+												viewBox="0 0 24 24" 
+												fill="none" 
+												stroke="currentColor" 
+												strokeWidth="2" 
+												strokeLinecap="round" 
+												strokeLinejoin="round" 
+												className="w-3 h-3"
+											>
+												<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+												<circle cx="12" cy="7" r="4" />
+											</svg>
+											<span>2</span>
+										</div>
+									) : (
+										tag
+									)}
 								</div>
 							))}
 						</div>
@@ -222,18 +245,19 @@ export default function ExperiencesPage() {
 
 				{/* Expanded Card State */}
 				<div
-					className={`absolute top-0 rounded-xl overflow-hidden shadow-2xl transition-transform duration-350 ease-out pointer-events-none ${
-						isHovered ? "opacity-100" : "opacity-0"
-					} sm:w-[215%] w-full`}
+					className={`absolute top-0 rounded-xl overflow-hidden shadow-2xl transition-all duration-2500 ease-out pointer-events-none ${isHovered ? "opacity-100" : "opacity-0"} sm:w-[215%] w-full`}
 					style={{
 						height: "100%",
 						transform: `
-							${isHovered ? 'scale(1)' : 'scale(0.95)'}
+							${isHovered ? 'scale(1) rotate(0deg)' : 'scale(0.95) rotate(1deg)'}
 							translateX(${isHovered ? 0 : isLeftSlide ? '-100%' : '0'}%)
 						`,
 						transformOrigin: isLeftSlide ? 'left center' : 'right center',
 						left: isLeftSlide ? '0' : 'auto',
-						right: isLeftSlide ? 'auto' : '0'
+						right: isLeftSlide ? 'auto' : '0',
+						transition: 'transform 2500ms cubic-bezier(0.4, 0, 0.2, 1), opacity 1200ms ease-out',
+						transitionDelay: isHovered ? '200ms' : '400ms',
+						willChange: 'transform, opacity'
 					}}
 				>
 					<div className="relative h-full">
@@ -244,12 +268,12 @@ export default function ExperiencesPage() {
 							className="object-cover"
 						/>
 						<div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
-						
+
 						{/* Content Container */}
 						<div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6 md:p-8">
 							{/* Badges Section */}
 							<div className="flex items-center gap-2 sm:gap-3 w-full mb-1">
-								<div className="bg-white backdrop-blur-sm text-black px-2 py-1 rounded-full font-sans text-[8px] sm:text-[10px] font-medium shadow-lg">
+								<div className="bg-blue-950 backdrop-blur-sm text-white px-2 py-1 rounded-full font-sans text-[8px] sm:text-[10px] font-medium shadow-lg">
 									Travel Planner's Choice
 								</div>
 								<div className="bg-black/40 backdrop-blur-sm text-white px-2 py-1 rounded-full font-sans text-[8px] sm:text-[10px] border border-white/20">
@@ -286,7 +310,7 @@ export default function ExperiencesPage() {
 		<div className="flex flex-col min-h-screen">
 			<SiteHeader />
 
-			{/* Hero Section - Responsive Height */}
+			{/* Hero Section */}
 			<section className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[875px] w-full flex items-center justify-center">
 				<div className="absolute inset-0">
 					<Image
@@ -297,9 +321,22 @@ export default function ExperiencesPage() {
 						className="object-cover w-full h-full"
 						priority
 					/>
+					{/* Dark overlay for overall contrast */}
 					<div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/30 to-black/30" />
-					<div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent backdrop-blur-[2px]" style={{ height: '30%', bottom: 0, top: 'auto', backdropFilter: 'blur(2px) brightness(1.05)' }} />
+
+					{/* White fog at bottom - extended height */}
+					<div
+						className="absolute w-full"
+						style={{
+							bottom: 0,
+							height: '35%',
+							background: 'linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0.6) 50%, transparent)',
+							backdropFilter: 'blur(16px)',
+							WebkitBackdropFilter: 'blur(16px)',
+						}}
+					/>
 				</div>
+
 				<div className="relative text-center text-white z-10 px-4 max-w-[90%] mx-auto">
 					<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-serif font-normal mb-2 sm:mb-4 leading-tight">
 						Experiences
@@ -311,49 +348,72 @@ export default function ExperiencesPage() {
 			</section>
 
 			{/* Filter Section */}
-			<section className="py-4 sm:py-6 md:py-8 bg-white">
-  <div className="container mx-auto px-4 sm:px-6">
-    <div className="flex justify-between items-center gap-8">
-      {/* Filter Buttons - Left side */}
-      {/* <div className="flex-1 overflow-x-auto">
-        <div className="flex gap-2">
-          {filterOptions.map((filter) => (
-            <Button
-              key={filter}
-              variant="outline"
-              className="rounded-full px-4 py-2 border-gray-300 text-gray-700 hover:bg-gray-100 font-sans whitespace-nowrap text-sm"
-            >
-              {filter}
-            </Button>
-          ))}
-        </div>
-      </div> */}
+			<section className="relative z-10 pt-0 sm:pt-1 md:pt-2 pb-4 sm:pb-6 md:pb-8 -mt-8 sm:-mt-12 md:-mt-16">
+				{/* Glass effect overlay */}
+				<div 
+					className="absolute inset-0 h-1/2"
+					style={{
+						background: 'rgba(255, 255, 255, 0.02)',
+						backdropFilter: 'blur(8px)',
+						WebkitBackdropFilter: 'blur(8px)',
+						borderBottom: '1px solid rgba(255, 255, 255, 0.02)',
+					}}
+				/>
+				
+				{/* Blur overlay at the top */}
+				<div 
+					className="absolute inset-x-0 top-0 h-8 sm:h-12 md:h-16"
+					style={{
+						background: 'linear-gradient(to bottom, rgba(255,255,255,0.03), transparent)',
+						backdropFilter: 'blur(4px)',
+						WebkitBackdropFilter: 'blur(4px)',
+					}}
+				/>
+				
+				{/* Filter Content */}
+				<div className="relative container mx-auto px-4 sm:px-6 z-30">
+					<div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-8">
+      
+						{/* Filter Buttons - Left side */}
+						<div className="w-full sm:flex-1 overflow-x-auto">
+							<div className="flex gap-2 pb-2 sm:pb-0">
+								{filterOptions.map((filter) => (
+									<Button
+										key={filter}
+										variant="outline"
+										className="rounded-full px-2 sm:px-3 py-1 sm:py-1.5 border-gray-300 text-gray-700 hover:bg-gray-100 font-sans whitespace-nowrap text-[10px] sm:text-xs"
+									>
+										{filter}
+									</Button>
+								))}
+							</div>
+						</div>
 
-      {/* Search and Action Buttons - Right side */}
-      {/* <div className="flex items-center gap-4 shrink-0">
-        <div className="relative w-64">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-          <Input
-            placeholder="Search experiences"
-            className="pl-10 rounded-full border-gray-300 font-sans w-full"
-          />
-        </div>
-
-        <Button className="bg-gray-900 text-white rounded-full px-4 py-2 font-sans hover:bg-gray-800 text-sm">
-          <Filter className="w-4 h-4 mr-2" />
-          <span className="whitespace-nowrap">Filter</span>
-        </Button>
-        <Button
-          variant="outline"
-          className="rounded-full px-4 py-2 border-gray-300 text-gray-700 hover:bg-gray-100 font-sans text-sm"
-        >
-          <SlidersHorizontal className="w-4 h-4 mr-2" />
-          Sort
-        </Button>
-      </div> */}
-    </div>
-  </div>
-</section>
+						{/* Search and Action Buttons - Right side */}
+						<div className={`flex items-center gap-4 shrink-0 transition-all duration-300 ${isSearchFocused ? 'w-full' : ''}`}>
+							<Button className={`bg-gray-900 text-white rounded-full px-3 sm:px-4 py-1.5 sm:py-2 font-sans hover:bg-gray-800 text-xs sm:text-sm transition-all duration-300 ${isSearchFocused ? 'hidden' : ''}`}>
+								<Filter className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+								<span className="whitespace-nowrap">Filter</span>
+							</Button>
+							<Button
+								className={`rounded-full px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-900 text-white hover:bg-gray-900 font-sans text-xs sm:text-sm transition-all duration-300 ${isSearchFocused ? 'hidden' : ''}`}
+							>
+								<SlidersHorizontal className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+								Sort
+							</Button>
+							<div className={`relative transition-all duration-300 ${isSearchFocused ? 'w-full' : 'w-40 sm:w-52 md:w-48 lg:w-56'}`}>
+								<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-2 h-4" />
+								<Input
+									placeholder="Search experiences"
+									className="pl-10 rounded-full border-gray-300 font-sans w-full text-xs sm:text-sm"
+									onFocus={() => setIsSearchFocused(true)}
+									onBlur={() => setIsSearchFocused(false)}
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
 
 			{/* Experiences Grid with expanded spacing for hover effects */}
 			<section className="py-8 sm:py-12 md:py-16 bg-gray-50">
@@ -361,9 +421,9 @@ export default function ExperiencesPage() {
 					{/* Grid with extra spacing to accommodate expanded cards */}
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
 						{experiences.slice(0, 8).map((experience, index) => (
-							<ExperienceCard 
-								key={experience.id} 
-								experience={experience} 
+							<ExperienceCard
+								key={experience.id}
+								experience={experience}
 								index={index}
 								columns={4} // Adjust based on screen size if needed
 							/>
@@ -381,7 +441,7 @@ export default function ExperiencesPage() {
 									className="object-cover"
 								/>
 								<div className="absolute inset-0 bg-black/40" />
-								<div className="absolute inset-0 p-4 sm:p-6 md:p-8 flex flex-col justify-center max-w-full sm:max-w-2xl">
+								<div className="absolute inset-0 p-4 sm:p-6 md:p-8 pl-8 sm:pl-12 md:pl-20 flex flex-col justify-center max-w-full sm:max-w-2xl">
 									<h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-normal text-white mb-2 sm:mb-4">
 										Bespoke Experiences
 									</h2>
@@ -400,6 +460,8 @@ export default function ExperiencesPage() {
 							</div>
 						</div>
 					</div>
+
+
 				</div>
 			</section>
 

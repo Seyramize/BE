@@ -66,8 +66,8 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
           <div className="relative w-full lg:w-2/5 h-48 lg:h-full">
             <Image src="/placeholder.svg?height=400&width=600" alt="Booking confirmed" fill className="object-cover" />
             <div className="absolute inset-0 bg-black/20" />
-            <div className="absolute inset-0 flex items-center justify-center p-4 lg:p-8">
-              <div className="text-center text-white">
+            <div className="absolute inset-0 flex items-center justify-left p-4 lg:p-8">
+              <div className="text-left text-white">
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-serif font-normal leading-tight">
                   Booking
                   <br />
@@ -100,7 +100,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                 </div>
 
                 {/* Header */}
-                <div className="text-center mb-8">
+                <div className="text-left mb-8">
                   <h3 className="text-2xl lg:text-3xl font-serif font-normal text-slate-800 mb-4">
                     Experience Summary
                   </h3>
@@ -214,7 +214,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                 </div>
 
                 {/* Action Buttons */}
-                <div className="space-y-3">
+                {/* <div className="space-y-3">
                   <Button
                     onClick={onClose}
                     className="w-full bg-slate-900 hover:bg-slate-800 text-white font-sans py-3 h-12"
@@ -228,7 +228,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                   >
                     Browse More Experiences
                   </Button>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

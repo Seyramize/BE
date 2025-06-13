@@ -8,9 +8,12 @@ interface CountrySelectorProps {
   value: string
   onChange: (value: string) => void
   className?: string
+  hideDialCode?: boolean
+  showCountryName?: boolean
+  hideFlag?: boolean
 }
 
-export function CountrySelector({ value, onChange, className = "" }: CountrySelectorProps) {
+export function CountrySelector({ value, onChange, className = "", hideDialCode = false, showCountryName = false, hideFlag = false }: CountrySelectorProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -84,10 +87,16 @@ export function CountrySelector({ value, onChange, className = "" }: CountrySele
         aria-expanded={isOpen}
       >
         <div className="flex items-center">
-          <span className="mr-2 text-lg" aria-hidden="true">
-            {getFlagEmoji(selectedCountry?.code || "US")}
-          </span>
-          <span className="mr-1">{selectedCountry?.dialCode}</span>
+          {!hideFlag && (
+            <span className="mr-2 text-lg" aria-hidden="true">
+              {getFlagEmoji(selectedCountry?.code || "US")}
+            </span>
+          )}
+          {showCountryName ? (
+            <span className="flex-1 truncate">{selectedCountry?.name}</span>
+          ) : (
+            !hideDialCode && <span className="mr-1">{selectedCountry?.dialCode}</span>
+          )}
         </div>
         <ChevronDown className="w-4 h-4 text-slate-400" />
       </button>

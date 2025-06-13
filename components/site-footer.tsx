@@ -11,7 +11,7 @@ export function SiteFooter() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Logo */}
           <div className="md:col-span-2">
-            <div className="relative w-32 h-12">
+            <div className="relative w-24 h-8">
               <Image
                 src="/images/footer-logo.png"
                 alt="Beyond Experiences"
@@ -20,7 +20,7 @@ export function SiteFooter() {
                 priority
               />
             </div>
-          </div>
+          </div> 
 
           {/* Explore Column */}
           <div className="md:col-span-2">
