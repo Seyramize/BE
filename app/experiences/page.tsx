@@ -329,7 +329,7 @@ export default function ExperiencesPage() {
 						className="absolute w-full"
 						style={{
 							bottom: 0,
-							height: '35%',
+							height: '15%',
 							background: 'linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0.6) 50%, transparent)',
 							backdropFilter: 'blur(16px)',
 							WebkitBackdropFilter: 'blur(16px)',
@@ -362,7 +362,7 @@ export default function ExperiencesPage() {
 				
 				{/* Blur overlay at the top */}
 				<div 
-					className="absolute inset-x-0 top-0 h-8 sm:h-12 md:h-16"
+					className="absolute inset-x-0 top-0 h-12 sm:h-16 md:h-20"
 					style={{
 						background: 'linear-gradient(to bottom, rgba(255,255,255,0.03), transparent)',
 						backdropFilter: 'blur(4px)',
