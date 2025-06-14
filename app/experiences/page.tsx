@@ -292,7 +292,7 @@ export default function ExperiencesPage() {
 									</p>
 								</div>
 								<div className="flex justify-center w-full">
-									<Button className="bg-white/20 hover:bg-white/30 text-white font-serif px-6 sm:px-12 py-2 sm:py-3 rounded-full backdrop-blur-sm border border-white/30 w-full pointer-events-auto text-sm sm:text-base">
+									<Button className="bg-white/20 hover:bg-white/30 text-white font-sans px-6 sm:px-12 py-2 sm:py-3 rounded-full backdrop-blur-sm border border-white/30 w-full pointer-events-auto text-sm sm:text-base">
 										<Link href={`/book-experience/${experience.id}`}>
 											Book Experience
 										</Link>
@@ -410,7 +410,7 @@ export default function ExperiencesPage() {
 								/>
 								<div className="absolute inset-0 bg-black/40" />
 								<div className="absolute inset-0 p-4 sm:p-6 md:p-8 pl-8 sm:pl-12 md:pl-20 flex flex-col justify-center max-w-full sm:max-w-2xl">
-									<h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-normal text-white mb-2 sm:mb-4">
+									<h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-normal text-white mb-2 sm:mb-4">
 										Bespoke Experiences
 									</h2>
 									<p className="text-white/90 mb-4 sm:mb-6 font-sans leading-relaxed text-sm sm:text-base">
@@ -419,7 +419,7 @@ export default function ExperiencesPage() {
 									</p>
 									<div className="w-full sm:max-w-md">
 										<Link href="/customize-experience">
-											<Button className="w-full sm:w-auto bg-[#B55A30] hover:bg-[#B55A30] text-white font-sans px-6 sm:px-8 py-2.5 sm:py-3 rounded-md transition-colors text-sm sm:text-base">
+											<Button className="w-full sm:w-auto bg-white hover:bg-white text-black font-sans px-6 sm:px-8 py-2.5 sm:py-3 rounded-md transition-colors text-sm sm:text-base">
 												Customize my experience
 											</Button>
 										</Link>

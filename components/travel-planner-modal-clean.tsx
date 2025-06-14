@@ -137,7 +137,7 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
 
               <div className="absolute inset-0 flex flex-col justify-center">
                 <div className="px-6 sm:px-8 md:px-12">
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-white mb-2 leading-tight">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-sans font-normal text-white mb-2 leading-tight">
                     Talk to a<br />
                     travel planner
                   </h2>
@@ -257,7 +257,7 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="text-xl sm:text-2xl font-serif text-slate-800 mb-3 sm:mb-4">Call Scheduled!</h3>
+            <h3 className="text-xl sm:text-2xl font-sans text-slate-800 mb-3 sm:mb-4">Call Scheduled!</h3>
             <p className="text-sm sm:text-base text-slate-600 font-sans mb-4 sm:mb-6 max-w-md">
               Thank you for scheduling a call with our travel planners. We'll be in touch within 24 hours to confirm
               your appointment and begin crafting your perfect experience.

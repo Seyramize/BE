@@ -220,7 +220,7 @@ export function PaymentConfirmationModal({
               <div className="max-w-md mx-auto">
                 {/* Header */}
                 <div className="text-center mb-6 lg:mb-8">
-                  <h3 className="text-2xl lg:text-3xl font-serif font-normal text-slate-800 mb-2">Almost there</h3>
+                  <h3 className="text-2xl lg:text-3xl font-sans font-normal text-slate-800 mb-2">Almost there</h3>
                   <div className="flex items-center justify-center gap-2 text-slate-600 text-sm mb-1">
                     <Shield className="w-4 h-4" />
                     <span>All payments are protected and encrypted.</span>
@@ -228,7 +228,7 @@ export function PaymentConfirmationModal({
                   <p className="text-slate-600 font-sans text-sm">Your journey is just a step away.</p>
                 </div>                {/* Booking Summary */}
                 <div className="bg-white rounded-lg p-4 mb-6 border border-stone-200">
-                  <h4 className="font-serif text-lg text-slate-800 mb-3">Booking Summary</h4>
+                  <h4 className="font-sans text-lg text-slate-800 mb-3">Booking Summary</h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span className="text-slate-600">Experience:</span>
@@ -264,7 +264,7 @@ export function PaymentConfirmationModal({
                 {/* Payment Form */}
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <h4 className="text-lg font-serif font-normal text-slate-800 mb-4">Payment details</h4>
+                    <h4 className="text-lg font-sans font-normal text-slate-800 mb-4">Payment details</h4>
                     <p className="text-slate-600 font-sans text-sm mb-6">
                       Please provide the information of the primary guest
                     </p>

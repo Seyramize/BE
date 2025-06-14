@@ -176,7 +176,7 @@ export default function CustomizeExperiencePage() {
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="mb-12">
-            <h2 className="text-4xl md:text-5xl font-serif font-normal text-slate-800 mb-4">Crafted just for you</h2>
+            <h2 className="text-4xl md:text-5xl font-sans font-normal text-slate-800 mb-4">Crafted just for you</h2>
             <p className="text-slate-600 font-sans text-lg">
               Share your vision. We'll transform it into an unforgettable journey.
             </p>
@@ -185,7 +185,7 @@ export default function CustomizeExperiencePage() {
           <form onSubmit={handleSubmit} className="space-y-12">
             {/* Contact Details */}
             <div>
-              <h3 className="text-2xl font-serif font-normal text-slate-800 mb-2">Contact Details</h3>
+              <h3 className="text-2xl font-sans font-normal text-slate-800 mb-2">Contact Details</h3>
               <p className="text-slate-600 font-sans mb-8">
                 Your information allows us to begin crafting your tailored experience.
               </p>
@@ -266,7 +266,7 @@ export default function CustomizeExperiencePage() {
 
             {/* Experience Vision */}
             <div>
-              <h3 className="text-2xl font-serif font-normal text-slate-800 mb-2">Experience Vision</h3>
+              <h3 className="text-2xl font-sans font-normal text-slate-800 mb-2">Experience Vision</h3>
               <p className="text-slate-600 font-sans mb-8">
                 Let's dream together. Tell us what kind of journey you're hoping to create.
               </p>
@@ -351,7 +351,7 @@ export default function CustomizeExperiencePage() {
 
             {/* Group Size Details */}
             <div>
-              <label htmlFor="groupSizeDetails" className="block text-slate-800 font-sansetica text-sm font-medium mb-3">
+              <label htmlFor="groupSizeDetails" className="block text-slate-800 font-sans text-sm font-medium mb-3">
                 Group Size
               </label>
               <Input
@@ -366,7 +366,7 @@ export default function CustomizeExperiencePage() {
 
             {/* Additional Notes */}
             <div className="border-b-2 border-black pb-8">
-              <h3 className="text-2xl font-serif font-normal text-slate-800 mb-2">Additional Notes</h3>
+              <h3 className="text-2xl font-sans font-normal text-slate-800 mb-2">Additional Notes</h3>
               <p className="text-slate-600 font-sans mb-8">
                 Every detail matters. Is there anything else we should know to make this unforgettable?
               </p>

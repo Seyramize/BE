@@ -101,7 +101,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
 
                 {/* Header */}
                 <div className="text-left mb-8">
-                  <h3 className="text-2xl lg:text-3xl font-serif font-normal text-slate-800 mb-4">
+                  <h3 className="text-2xl lg:text-3xl font-sans font-normal text-slate-800 mb-4">
                     Experience Summary
                   </h3>
                 </div>
@@ -114,7 +114,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                       <MapPin className="w-4 h-4 text-slate-600" />
                       <span className="text-sm font-medium text-slate-600 uppercase tracking-wider">EXPERIENCE</span>
                     </div>
-                    <p className="text-lg font-serif text-slate-800">{bookingDetails.experienceName}</p>
+                    <p className="text-lg font-sans text-slate-800">{bookingDetails.experienceName}</p>
                   </div>
 
                   {/* Guests */}
@@ -123,7 +123,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                       <Users className="w-4 h-4 text-slate-600" />
                       <span className="text-sm font-medium text-slate-600 uppercase tracking-wider">GUESTS</span>
                     </div>
-                    <p className="text-lg font-serif text-slate-800">
+                    <p className="text-lg font-sans text-slate-800">
                       {bookingDetails.guests} Person{bookingDetails.guests !== 1 ? "s" : ""}
                     </p>
                   </div>
@@ -134,7 +134,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                       <Calendar className="w-4 h-4 text-slate-600" />
                       <span className="text-sm font-medium text-slate-600 uppercase tracking-wider">DATE</span>
                     </div>
-                    <p className="text-lg font-serif text-slate-800">
+                    <p className="text-lg font-sans text-slate-800">
                       {new Date(bookingDetails.date).toLocaleDateString("en-US", {
                         weekday: "long",
                         day: "numeric",
@@ -147,7 +147,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                   {/* What's Included */}
                   {bookingDetails.includedItems && bookingDetails.includedItems.length > 0 && (
                     <div>
-                      <span className="text-sm font-medium text-slate-600 uppercase tracking-wider mb-3 block">
+                      <span className="text-sm font-sans font-medium text-slate-600 uppercase tracking-wider mb-3 block">
                         WHAT'S INCLUDED?
                       </span>
                       <ul className="space-y-2">
