@@ -30,7 +30,7 @@ export default function Home() {
         </div>
         <div className="relative container mx-auto px-6 md:px-16 lg:px-32 xl:px-40 h-full flex flex-col justify-center">
           <div className="max-w-2xl pt-48 md:pt-64 lg:pt-80 pb-16">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-normal text-white leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-argent font-normal text-white leading-tight mb-6">
               Go Beyond
               <br />
               the Ordinary
@@ -41,14 +41,14 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-16">
               <Link href="/experiences">
-                <Button className="text-base px-8 py-3 rounded-full bg-[#B55A30] hover:bg-[#B55A30] text-white font-sans border-0">
+                <Button className="text-normal px-8 py-3 rounded-full bg-[#B55A30] hover:bg-[#B55A30] text-white font-sans border-0">
                   Explore Experiences 👣
                 </Button>
               </Link>
 
               <TravelPlannerModal>
                 <Button
-                  className="bg-white/20 hover:bg-white/30 text-base text-black font-sans px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
+                  className="bg-white/20 hover:bg-white/30 text-normal text-black font-sans px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
                   Speak to a Travel Planner
                 </Button>
               </TravelPlannerModal>
@@ -62,7 +62,7 @@ export default function Home() {
         <div className="container mx-auto px-6 md:px-16 lg:px-32 xl:px-40">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-serif font-normal mb-6 leading-tight">
+              <h2 className="text-3xl md:text-4xl font-argent font-normal mb-6 leading-tight">
                 Curated
                 <br />
                 Experiences
@@ -109,7 +109,7 @@ export default function Home() {
       {/* Featured Experiences Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-6 md:px-16 lg:px-32 xl:px-40">
-          <h2 className="text-3xl md:text-4xl font-serif font-normal mb-12">Featured experiences</h2>
+          <h2 className="text-3xl md:text-4xl font-argent font-normal mb-12">Featured experiences</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="relative rounded-lg overflow-hidden group">
               <div className="relative h-[610px]">
@@ -122,7 +122,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <span className="text-white/80 uppercase text-sm tracking-wider font-sans">Eastern Africa</span>
+                <span className="text-white/80 uppercase text-sm tracking-wider font-sans">Eastern Safari</span>
                 <h3 className="text-3xl font-serif font-normal text-white mt-2 mb-3">Running with Zebras</h3>
                 <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis molestie dui lorem, at molestie dui
@@ -147,7 +147,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-xl font-serif font-normal text-white mb-2">The Collectors Tour</h3>
+                  <h3 className="text-2xl font-serif font-normal text-white mb-2">The Collectors Tour</h3>
                   <p className="text-white/90 mb-3 text-sm font-sans leading-relaxed">
                     Discover the world's most exclusive art collections with private viewings and expert commentary.
                   </p>
@@ -170,7 +170,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-xl font-serif font-normal text-white mb-2">The Collectors Tour</h3>
+                  <h3 className="text-2xl font-serif font-normal text-white mb-2">The Collectors Tour</h3>
                   <p className="text-white/90 mb-3 text-sm font-sans leading-relaxed">
                     Discover the world's most exclusive art collections with private viewings and expert commentary.
                   </p>
@@ -190,8 +190,8 @@ export default function Home() {
       {/* FAQ Section */}
       <section className="py-20 bg-gray-900 text-white">
         <div className="container mx-auto px-6 md:px-16 lg:px-32 xl:px-40">
-          <h2 className="text-3xl md:text-4xl font-serif font-normal mb-12">Frequently Asked Questions</h2>
-          <p className="text-white/80 max-w-3xl mb-12 font-sans leading-relaxed">
+          <h2 className="text-3xl md:text-4xl font-argent font-normal mb-4">Frequently Asked Questions</h2>
+          <p className="text-white/80 max-w-3xl mb-8 font-sans leading-relaxed">
             Find answers to common questions about our experiences and booking process. If you don't see your question
             here, please reach out to us directly.
           </p>
