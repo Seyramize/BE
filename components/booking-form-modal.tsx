@@ -225,8 +225,8 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
             >
               <X className="w-5 h-5" />
             </button>
-            <p className="text-xs font-helvetica uppercase tracking-wider mb-2 opacity-90">YOU'RE BOOKING THE</p>
-            <h2 className="text-xl font-argentt font-normal">{experience.title}</h2>
+            <p className="text-xs font-sans uppercase tracking-wider mb-2 opacity-90">YOU'RE BOOKING THE</p>
+            <h2 className="text-xl font-serif font-normal">{experience.title}</h2>
           </div>
 
           {/* Left Side - Experience Image (Hidden on mobile) */}
@@ -240,8 +240,8 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
             <div className="absolute inset-0 bg-black/20" />
             <div className="absolute inset-0 flex items-center justify-center p-8">
               <div className="text-left text-white">
-                <p className="text-sm font-helvetica uppercase tracking-wider mb-4 opacity-90">YOU'RE BOOKING THE</p>
-                <h2 className="text-3xl xl:text-4xl font-argenttt font-normal leading-tight" id="booking-modal-title">
+                <p className="text-sm font-sans uppercase tracking-wider mb-4 opacity-90">YOU'RE BOOKING THE</p>
+                <h2 className="text-3xl xl:text-4xl font-serif font-normal leading-tight" id="booking-modal-title">
                   {experience.title}
                 </h2>
               </div>
@@ -257,18 +257,18 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
               type="button"
               aria-label="Close booking form"
             >
-              <span className="text-sm font-helvetica">Close</span>
+              <span className="text-sm font-sans">Close</span>
               <X className="w-4 h-4" />
             </button>
 
             {/* Fixed Header */}
             <div className="flex-shrink-0 p-4 sm:p-6 lg:p-8 pb-4 pt-4 lg:pt-16 border-b border-slate-200">
-              <h3 className="text-2xl sm:text-3xl font-argentttttttt font-normal text-slate-800 mb-3">
+              <h3 className="text-2xl sm:text-3xl font-serif font-normal text-slate-800 mb-3">
                 Confirm
                 <br />
                 your booking
               </h3>
-              <p className="text-slate-600 font-helvetica text-sm leading-relaxed">
+              <p className="text-slate-600 font-sans text-sm leading-relaxed">
                 Complete your reservation and prepare
                 <br className="hidden sm:block" />
                 for a seamless, indulgent experience.
@@ -283,16 +283,16 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
                   <div>
                     <div className="flex items-center gap-2 mb-4">
                       <User className="w-5 h-5 text-slate-600" />
-                      <h4 className="text-lg sm:text-xl font-argenttttttttttttttttttt font-normal text-slate-800">Your Details</h4>
+                      <h4 className="text-lg sm:text-xl font-serif font-normal text-slate-800">Your Details</h4>
                     </div>
-                    <p className="text-slate-600 font-helvetica text-sm mb-4 lg:mb-6">
+                    <p className="text-slate-600 font-sans text-sm mb-4 lg:mb-6">
                       Please provide the information of the primary guest
                     </p>
 
                     <div className="space-y-4 lg:space-y-6">
                       {/* Full Name */}
                       <div>
-                        <label htmlFor="fullName" className="block text-slate-800 font-helvetica text-sm font-medium mb-2">
+                        <label htmlFor="fullName" className="block text-slate-800 font-sans text-sm font-medium mb-2">
                           Full name
                         </label>
                         <Input
@@ -310,7 +310,7 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
 
                       {/* Email Address */}
                       <div>
-                        <label htmlFor="email" className="block text-slate-800 font-helvetica text-sm font-medium mb-2">
+                        <label htmlFor="email" className="block text-slate-800 font-sans text-sm font-medium mb-2">
                           <Mail className="w-4 h-4 inline mr-1" />
                           Email address
                         </label>
@@ -331,7 +331,7 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
                       <div>
                         <label
                           htmlFor="phoneNumber"
-                          className="block text-slate-800 font-helvetica text-sm font-medium mb-2"
+                          className="block text-slate-800 font-sans text-sm font-medium mb-2"
                         >
                           <Phone className="w-4 h-4 inline mr-1" />
                           Phone number
@@ -357,7 +357,7 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
 
                       {/* Location */}
                       <div>
-                        <label htmlFor="location" className="block text-slate-800 font-helvetica text-sm font-medium mb-2">
+                        <label htmlFor="location" className="block text-slate-800 font-sans text-sm font-medium mb-2">
                           <MapPin className="w-4 h-4 inline mr-1" />
                           Location
                         </label>
@@ -380,9 +380,9 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
                   <div>
                     <div className="flex items-center gap-2 mb-4">
                       <Settings className="w-5 h-5 text-slate-600" />
-                      <h4 className="text-lg sm:text-xl font-argenttttttttttttttt font-normal text-slate-800">Your Preferences</h4>
+                      <h4 className="text-lg sm:text-xl font-serif font-normal text-slate-800">Your Preferences</h4>
                     </div>
-                    <p className="text-slate-600 font-helvetica text-sm mb-4 lg:mb-6">Tailor the finer details</p>
+                    <p className="text-slate-600 font-sans text-sm mb-4 lg:mb-6">Tailor the finer details</p>
 
                     <div className="space-y-4 lg:space-y-6">
                       {/* Date Selection */}
@@ -390,7 +390,7 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
                         <div>
                           <label
                             htmlFor="preferredDate"
-                            className="block text-slate-800 font-helvetica text-sm font-medium mb-2"
+                            className="block text-slate-800 font-sans text-sm font-medium mb-2"
                           >
                             Preferred date
                           </label>
@@ -409,7 +409,7 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
                         <div>
                           <label
                             htmlFor="alternateDate"
-                            className="block text-slate-800 font-helvetica text-sm font-medium mb-2"
+                            className="block text-slate-800 font-sans text-sm font-medium mb-2"
                           >
                             Alternate Date
                           </label>
@@ -428,7 +428,7 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-2">
                           <div className="flex items-center gap-2">
                             <Users className="w-5 h-5 text-slate-600" />
-                            <label className="block text-slate-800 font-helvetica text-sm font-medium">
+                            <label className="block text-slate-800 font-sans text-sm font-medium">
                               Number of guests
                             </label>
                           </div>
@@ -446,7 +446,7 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
                                   onChange={() => handleGuestSelection(guest.label)}
                                   className="w-4 h-4 text-slate-900 border-black focus:ring-black"
                                 />
-                                <label htmlFor={guest.label} className="text-sm font-helvetica text-slate-800">
+                                <label htmlFor={guest.label} className="text-sm font-sans text-slate-800">
                                   {guest.label}
                                 </label>
                               </div>
@@ -455,8 +455,8 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
 
                           <div className="flex flex-col gap-1 text-xs text-slate-600 mb-4">
                             <div className="text-right">
-                              <div className="text-slate-800 font-helvetica text-sm">Total Cost</div>
-                              <div className="text-2xl sm:text-3xl font-argenttt text-slate-800">${totalCost}</div>
+                              <div className="text-slate-800 font-sans text-sm">Total Cost</div>
+                              <div className="text-2xl sm:text-3xl font-serif text-slate-800">${totalCost}</div>
                             </div>
                             <div>Price: ${discountedPrice.toFixed(2)}/person</div>
                           </div>
@@ -485,7 +485,7 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
                             type="button"
                             variant="outline"
                             size="sm"
-                            className="bg-slate-900 text-white hover:bg-slate-800 font-helvetica px-6 py-2 text-sm whitespace-nowrap min-w-[200px]"
+                            className="bg-slate-900 text-white hover:bg-slate-800 font-sans px-6 py-2 text-sm whitespace-nowrap min-w-[200px]"
                           >
                             Speak to a Travel Planner
                           </Button>
@@ -493,7 +493,7 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
                       </div>
                     <Button
                       type="submit"
-                      className="w-full bg-slate-900 hover:bg-slate-800 text-white font-helvetica py-3 h-12 text-sm sm:text-base"
+                      className="w-full bg-slate-900 hover:bg-slate-800 text-white font-sans py-3 h-12 text-sm sm:text-base"
                     >
                       Confirm Booking - ${totalCost}
                     </Button>

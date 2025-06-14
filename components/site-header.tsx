@@ -118,7 +118,7 @@ export function SiteHeader() {
           <div className="flex items-center space-x-12 md:space-x-6 lg:space-x-12">
             <Link
               href="/"
-              className={`relative text-sm transition-all duration-300 font-helvetica group px-3 md:px-2 lg:px-3 py-1.5 md:py-1 lg:py-1.5 ${
+              className={`relative text-sm transition-all duration-300 font-sans group px-3 md:px-2 lg:px-3 py-1.5 md:py-1 lg:py-1.5 ${
                 pathname === "/" ? "text-blue-950 font-medium" : "text-white hover:text-blue-900"
               }`}
             >
@@ -126,7 +126,7 @@ export function SiteHeader() {
             </Link>
             <Link
               href="/experiences"
-              className={`relative text-sm transition-all duration-300 font-helvetica group px-3 py-1.5 ${
+              className={`relative text-sm transition-all duration-300 font-sans group px-3 py-1.5 ${
                 pathname === "/experiences" ? "text-blue-950 font-medium" : "text-white hover:text-blue-900"
               }`}
             >
@@ -134,7 +134,7 @@ export function SiteHeader() {
             </Link>
             <Link
               href="/about"
-              className={`relative text-sm transition-all duration-300 font-helvetica group px-3 py-1.5 ${
+              className={`relative text-sm transition-all duration-300 font-sans group px-3 py-1.5 ${
                 pathname === "/about" ? "text-blue-950 font-medium" : "text-white hover:text-blue-900"
               }`}
             >
@@ -142,7 +142,7 @@ export function SiteHeader() {
             </Link>
             <Link
               href="/journal"
-              className={`relative text-sm transition-all duration-300 font-helvetica group px-3 py-1.5 ${
+              className={`relative text-sm transition-all duration-300 font-sans group px-3 py-1.5 ${
                 pathname === "/journal" ? "text-blue-950 font-medium" : "text-white hover:text-blue-900"
               }`}
             >

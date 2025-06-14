@@ -197,7 +197,7 @@ export default function ExperiencesPage() {
 							{tags.map((tag, index) => (
 								<div
 									key={index}
-									className={`backdrop-blur-sm text-white text-[10px] px-3 py-1 rounded-full font-helvetica border border-white/20 ${
+									className={`backdrop-blur-sm text-white text-[10px] px-3 py-1 rounded-full font-sans border border-white/20 ${
 										tag === "Travel Planner's Choice"
 											? "bg-blue-950"
 											: "bg-black/40"
@@ -228,14 +228,14 @@ export default function ExperiencesPage() {
 						</div>
 
 						<div className="absolute bottom-0 left-0 right-0 p-6">
-							<h3 className="text-xl font-helvetica font-medium text-white mb-2">
+							<h3 className="text-xl font-sans font-medium text-white mb-2">
 								{defaultContent.title}
 							</h3>
-							<p className="text-white/90 text-sm mb-3 font-helvetica leading-relaxed">
+							<p className="text-white/90 text-sm mb-3 font-sans leading-relaxed">
 								{defaultContent.shortDescription}
 							</p>
 							<div className="h-[2px] w-[45%] bg-white/90 mb-3" />
-							<div className="flex items-center text-white/80 text-xs font-helvetica">
+							<div className="flex items-center text-white/80 text-xs font-sans">
 								<MapPin className="w-3 h-3 mr-1" />
 								{defaultContent.location}
 							</div>
@@ -273,10 +273,10 @@ export default function ExperiencesPage() {
 						<div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6 md:p-8">
 							{/* Badges Section */}
 							<div className="flex items-center gap-2 sm:gap-3 w-full mb-1">
-								<div className="bg-blue-950 backdrop-blur-sm text-white px-2 py-1 rounded-full font-helvetica text-[8px] sm:text-[10px] font-medium shadow-lg">
+								<div className="bg-blue-950 backdrop-blur-sm text-white px-2 py-1 rounded-full font-sans text-[8px] sm:text-[10px] font-medium shadow-lg">
 									Travel Planner's Choice
 								</div>
-								<div className="bg-black/40 backdrop-blur-sm text-white px-2 py-1 rounded-full font-helvetica text-[8px] sm:text-[10px] border border-white/20">
+								<div className="bg-black/40 backdrop-blur-sm text-white px-2 py-1 rounded-full font-sans text-[8px] sm:text-[10px] border border-white/20">
 									2 PAX (Minimum)
 								</div>
 							</div>
@@ -284,15 +284,15 @@ export default function ExperiencesPage() {
 							{/* Content Section */}
 							<div className="flex flex-col">
 								<div className="w-full">
-									<h2 className="text-xl sm:text-2xl md:text-3xl font-helvetica font-medium text-white mb-2 text-justify w-full">
+									<h2 className="text-xl sm:text-2xl md:text-3xl font-sans font-medium text-white mb-2 text-justify w-full">
 										{expandedContent.title}
 									</h2>
-									<p className="text-white/90 text-xs sm:text-sm font-helvetica leading-relaxed mb-4 text-justify">
+									<p className="text-white/90 text-xs sm:text-sm font-sans leading-relaxed mb-4 text-justify">
 										{expandedContent.fullDescription}
 									</p>
 								</div>
 								<div className="flex justify-center w-full">
-									<Button className="bg-white/20 hover:bg-white/30 text-white font-argentt px-6 sm:px-12 py-2 sm:py-3 rounded-full backdrop-blur-sm border border-white/30 w-full pointer-events-auto text-sm sm:text-base">
+									<Button className="bg-white/20 hover:bg-white/30 text-white font-serif px-6 sm:px-12 py-2 sm:py-3 rounded-full backdrop-blur-sm border border-white/30 w-full pointer-events-auto text-sm sm:text-base">
 										<Link href={`/book-experience/${experience.id}`}>
 											Book Experience
 										</Link>
@@ -325,10 +325,10 @@ export default function ExperiencesPage() {
 				</div>
 
 				<div className="relative text-center text-white z-10 px-4 max-w-[90%] mx-auto">
-					<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-argenttttt font-normal mb-2 sm:mb-4 leading-tight">
+					<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-serif font-normal mb-2 sm:mb-4 leading-tight">
 						Experiences
 					</h1>
-					<p className="text-base sm:text-lg md:text-xl lg:text-2xl font-helvetica">
+					<p className="text-base sm:text-lg md:text-xl lg:text-2xl font-sans">
 						Curated by Beyond
 					</p>
 				</div>
@@ -349,7 +349,7 @@ export default function ExperiencesPage() {
 									<Button
 										key={filter}
 										variant="outline"
-										className="rounded-full px-2 sm:px-3 py-1 sm:py-1.5 border-gray-300 text-gray-700 hover:bg-gray-100 font-helvetica whitespace-nowrap text-[10px] sm:text-xs"
+										className="rounded-full px-2 sm:px-3 py-1 sm:py-1.5 border-gray-300 text-gray-700 hover:bg-gray-100 font-sans whitespace-nowrap text-[10px] sm:text-xs"
 									>
 										{filter}
 									</Button>
@@ -359,12 +359,12 @@ export default function ExperiencesPage() {
 
 						{/* Search and Action Buttons - Right side */}
 						<div className={`flex items-center gap-4 shrink-0 transition-all duration-300 ${isSearchFocused ? 'w-full' : ''}`}>
-							<Button className={`bg-gray-900 text-white rounded-full px-3 sm:px-4 py-1.5 sm:py-2 font-helvetica hover:bg-gray-800 text-xs sm:text-sm transition-all duration-300 ${isSearchFocused ? 'hidden' : ''}`}>
+							<Button className={`bg-gray-900 text-white rounded-full px-3 sm:px-4 py-1.5 sm:py-2 font-sans hover:bg-gray-800 text-xs sm:text-sm transition-all duration-300 ${isSearchFocused ? 'hidden' : ''}`}>
 								<Filter className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
 								<span className="whitespace-nowrap">Filter</span>
 							</Button>
 							<Button
-								className={`rounded-full px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-900 text-white hover:bg-gray-900 font-helvetica text-xs sm:text-sm transition-all duration-300 ${isSearchFocused ? 'hidden' : ''}`}
+								className={`rounded-full px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-900 text-white hover:bg-gray-900 font-sans text-xs sm:text-sm transition-all duration-300 ${isSearchFocused ? 'hidden' : ''}`}
 							>
 								<SlidersHorizontal className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
 								Sort
@@ -373,7 +373,7 @@ export default function ExperiencesPage() {
 								<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-2 h-4" />
 								<Input
 									placeholder="Search experiences"
-									className="pl-10 rounded-full border-gray-300 font-helvetica w-full text-xs sm:text-sm"
+									className="pl-10 rounded-full border-gray-300 font-sans w-full text-xs sm:text-sm"
 									onFocus={() => setIsSearchFocused(true)}
 									onBlur={() => setIsSearchFocused(false)}
 								/>
@@ -410,16 +410,16 @@ export default function ExperiencesPage() {
 								/>
 								<div className="absolute inset-0 bg-black/40" />
 								<div className="absolute inset-0 p-4 sm:p-6 md:p-8 pl-8 sm:pl-12 md:pl-20 flex flex-col justify-center max-w-full sm:max-w-2xl">
-									<h2 className="text-2xl sm:text-3xl md:text-4xl font-argentttttt font-normal text-white mb-2 sm:mb-4">
+									<h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-normal text-white mb-2 sm:mb-4">
 										Bespoke Experiences
 									</h2>
-									<p className="text-white/90 mb-4 sm:mb-6 font-helvetica leading-relaxed text-sm sm:text-base">
+									<p className="text-white/90 mb-4 sm:mb-6 font-sans leading-relaxed text-sm sm:text-base">
 										A curated selection of exclusive experiences designed to exceed your expectations. Tell us
 										what you're looking for and we'll create something extraordinary just for you.
 									</p>
 									<div className="w-full sm:max-w-md">
 										<Link href="/customize-experience">
-											<Button className="w-full sm:w-auto bg-[#B55A30] hover:bg-[#B55A30] text-white font-helvetica px-6 sm:px-8 py-2.5 sm:py-3 rounded-md transition-colors text-sm sm:text-base">
+											<Button className="w-full sm:w-auto bg-[#B55A30] hover:bg-[#B55A30] text-white font-sans px-6 sm:px-8 py-2.5 sm:py-3 rounded-md transition-colors text-sm sm:text-base">
 												Customize my experience
 											</Button>
 										</Link>

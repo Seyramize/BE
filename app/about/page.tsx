@@ -33,18 +33,18 @@ export default function AboutPage() {
                 />
               </div>
             </div>
-            <p className="text-sm uppercase tracking-wider font-helvetica mb-6">ABOUT US</p>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-argent font-normal mb-8 leading-tight">
+            <p className="text-sm uppercase tracking-wider font-sans mb-6">ABOUT US</p>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-normal mb-8 leading-tight">
               Born from a
               <br />
               love of discovery
             </h1>
-            <p className="text-lg text-slate-700 mb-8 font-helvetica leading-relaxed max-w-lg mx-auto">
+            <p className="text-lg text-slate-700 mb-8 font-sans leading-relaxed max-w-lg mx-auto">
               At Beyond Experiences, we believe your next great adventure should be just a click away. We offer a curated
               catalog of premium, ready-made journeys—designed for travelers who crave authentic moments without the heavy
               lift of planning.
             </p>
-            <Button className="text-base px-8 py-3 rounded-full bg-[#B55A30] hover:bg-[#B55A30] text-white font-argent border-0 mb-16">
+            <Button className="text-base px-8 py-3 rounded-full bg-[#B55A30] hover:bg-[#B55A30] text-white font-serif border-0 mb-16">
               Discover More
             </Button>
           </div>
@@ -84,35 +84,35 @@ export default function AboutPage() {
       {/* What We Offer Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl md:text-5xl font-argent font-normal text-center mb-16">What we offer</h2>
+          <h2 className="text-4xl md:text-5xl font-serif font-normal text-center mb-16">What we offer</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             <div className="text-center">
               <div className="flex justify-center mb-4">
                 <Calendar className="w-8 h-8 text-slate-700" />
               </div>
-              <h3 className="text-lg font-helvetica font-semibold mb-2">HANDPICKED ITINERARIES</h3>
-              <p className="text-sm text-slate-600 font-helvetica">Curated by seasoned local experts</p>
+              <h3 className="text-lg font-sans font-semibold mb-2">HANDPICKED ITINERARIES</h3>
+              <p className="text-sm text-slate-600 font-sans">Curated by seasoned local experts</p>
             </div>
             <div className="text-center">
               <div className="flex justify-center mb-4">
                 <Clock className="w-8 h-8 text-slate-700" />
               </div>
-              <h3 className="text-lg font-helvetica font-semibold mb-2">INSTANT ACCESS</h3>
-              <p className="text-sm text-slate-600 font-helvetica">Book in minutes, travel within the week</p>
+              <h3 className="text-lg font-sans font-semibold mb-2">INSTANT ACCESS</h3>
+              <p className="text-sm text-slate-600 font-sans">Book in minutes, travel within the week</p>
             </div>
             <div className="text-center">
               <div className="flex justify-center mb-4">
                 <Users className="w-8 h-8 text-slate-700" />
               </div>
-              <h3 className="text-lg font-helvetica font-semibold mb-2">AUTHENTIC IMMERSION</h3>
-              <p className="text-sm text-slate-600 font-helvetica">Real ideas into cultures, people, and landscapes</p>
+              <h3 className="text-lg font-sans font-semibold mb-2">AUTHENTIC IMMERSION</h3>
+              <p className="text-sm text-slate-600 font-sans">Real ideas into cultures, people, and landscapes</p>
             </div>
             <div className="text-center">
               <div className="flex justify-center mb-4">
                 <Sparkles className="w-8 h-8 text-slate-700" />
               </div>
-              <h3 className="text-lg font-helvetica font-semibold mb-2">ACCESSIBLE LUXURY</h3>
-              <p className="text-sm text-slate-600 font-helvetica">Premium experiences without the boutique price tag</p>
+              <h3 className="text-lg font-sans font-semibold mb-2">ACCESSIBLE LUXURY</h3>
+              <p className="text-sm text-slate-600 font-sans">Premium experiences without the boutique price tag</p>
             </div>
           </div>
         </div>
@@ -122,14 +122,14 @@ export default function AboutPage() {
       <section className="py-20 bg-[#556B2F] text-white">
         <div className="container mx-auto px-6">
           {/* Centered heading */}
-          <h2 className="text-2xl md:text-3xl font-argent font-normal mb-10 text-center max-w-3xl mx-auto leading-tight">
+          <h2 className="text-2xl md:text-3xl font-serif font-normal mb-10 text-center max-w-3xl mx-auto leading-tight">
             Our Commitment to Sustainability
           </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start max-w-6xl mx-auto">
             {/* Text content - spans 7 columns on large screens */}
             <div className="lg:col-span-7">
-              <div className="space-y-4 text-white/90 font-helvetica leading-relaxed">
+              <div className="space-y-4 text-white/90 font-sans leading-relaxed">
                 <p>
                   At Beyond Experiences, we believe that travel should be an enriching force for both travelers and the
                   destinations they visit. That's why we're committed to protecting the communities, cultures, and
@@ -193,15 +193,15 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-black/40" />
         </div>
         <div className="relative text-center text-white z-10 px-4">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-argent font-normal mb-8 leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-normal mb-8 leading-tight">
             Go Beyond the Ordinary.
           </h2>
-          <p className="text-lg md:text-xl text-white/90 mb-8 font-helvetica max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-white/90 mb-8 font-sans max-w-2xl mx-auto leading-relaxed">
             Adventure is calling—and it's closer than you think.
             <br />
             Book your next story today with Beyond Experiences and discover a world waiting to meet you.
           </p>
-          <Button className="bg-white hover:bg-white text-black font-argent px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
+          <Button className="bg-white hover:bg-white text-black font-serif px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
             Explore Experiences
           </Button>
         </div>

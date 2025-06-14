@@ -228,12 +228,6 @@ body {
 }
 
 
-/* 1) All headings (h1–h6) use Argent CF */
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Argent CF", serif;
-}
-
-/* 2) All buttons use Helvetica Now Display */
 button {
   font-family: "Helvetica Now Display", sans-serif;
 }

@@ -179,10 +179,10 @@ export function PaymentConfirmationModal({
             <div className="absolute inset-0 bg-black/30" />
             <div className="absolute inset-0 flex items-center justify-center p-4 lg:p-8">
               <div className="text-left text-white">
-                <p className="text-xs sm:text-sm font-helvetica uppercase tracking-wider mb-2 lg:mb-4 opacity-90">
+                <p className="text-xs sm:text-sm font-sans uppercase tracking-wider mb-2 lg:mb-4 opacity-90">
                   YOU'RE BOOKING THE
                 </p>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-argent font-normal leading-tight">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif font-normal leading-tight">
                   {bookingDetails.experienceName}
                 </h2>
               </div>
@@ -200,7 +200,7 @@ export function PaymentConfirmationModal({
                 type="button"
               >
                 <ArrowLeft className="w-4 h-4" />
-                <span className="text-sm font-helvetica">Go Back</span>
+                <span className="text-sm font-sans">Go Back</span>
               </button>
 
               <button
@@ -210,7 +210,7 @@ export function PaymentConfirmationModal({
                 type="button"
                 aria-label="Close payment form"
               >
-                <span className="text-sm font-helvetica">Close</span>
+                <span className="text-sm font-sans">Close</span>
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -220,15 +220,15 @@ export function PaymentConfirmationModal({
               <div className="max-w-md mx-auto">
                 {/* Header */}
                 <div className="text-center mb-6 lg:mb-8">
-                  <h3 className="text-2xl lg:text-3xl font-argent font-normal text-slate-800 mb-2">Almost there</h3>
+                  <h3 className="text-2xl lg:text-3xl font-serif font-normal text-slate-800 mb-2">Almost there</h3>
                   <div className="flex items-center justify-center gap-2 text-slate-600 text-sm mb-1">
                     <Shield className="w-4 h-4" />
                     <span>All payments are protected and encrypted.</span>
                   </div>
-                  <p className="text-slate-600 font-helvetica text-sm">Your journey is just a step away.</p>
+                  <p className="text-slate-600 font-sans text-sm">Your journey is just a step away.</p>
                 </div>                {/* Booking Summary */}
                 <div className="bg-white rounded-lg p-4 mb-6 border border-stone-200">
-                  <h4 className="font-argent text-lg text-slate-800 mb-3">Booking Summary</h4>
+                  <h4 className="font-serif text-lg text-slate-800 mb-3">Booking Summary</h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span className="text-slate-600">Experience:</span>
@@ -253,7 +253,7 @@ export function PaymentConfirmationModal({
                       <span className="text-slate-800">{new Date(bookingDetails.date).toLocaleDateString()}</span>
                     </div>
                     <div className="border-t border-stone-200 pt-2 mt-3">
-                      <div className="flex justify-between font-argent text-lg">
+                      <div className="flex justify-between font-serif text-lg">
                         <span className="text-slate-800">Total:</span>
                         <span className="text-slate-800 font-semibold">${bookingDetails.totalAmount}</span>
                       </div>
@@ -264,14 +264,14 @@ export function PaymentConfirmationModal({
                 {/* Payment Form */}
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <h4 className="text-lg font-argent font-normal text-slate-800 mb-4">Payment details</h4>
-                    <p className="text-slate-600 font-helvetica text-sm mb-6">
+                    <h4 className="text-lg font-serif font-normal text-slate-800 mb-4">Payment details</h4>
+                    <p className="text-slate-600 font-sans text-sm mb-6">
                       Please provide the information of the primary guest
                     </p>
 
                     {/* Payment Method */}
                     <div className="mb-6">
-                      <label className="block text-slate-800 font-helvetica text-sm font-medium mb-3">Payment method</label>
+                      <label className="block text-slate-800 font-sans text-sm font-medium mb-3">Payment method</label>
                       <Select
                         value={formData.paymentMethod}
                         onValueChange={(value) => handleInputChange("paymentMethod", value)}
@@ -290,7 +290,7 @@ export function PaymentConfirmationModal({
 
                     {/* Name on Card */}
                     <div className="mb-6">
-                      <label htmlFor="nameOnCard" className="block text-slate-800 font-helvetica text-sm font-medium mb-2">
+                      <label htmlFor="nameOnCard" className="block text-slate-800 font-sans text-sm font-medium mb-2">
                         Name on card
                       </label>
                       <div className="relative">
@@ -312,7 +312,7 @@ export function PaymentConfirmationModal({
 
                     {/* Card Number */}
                     <div className="mb-6">
-                      <label htmlFor="cardNumber" className="block text-slate-800 font-helvetica text-sm font-medium mb-2">
+                      <label htmlFor="cardNumber" className="block text-slate-800 font-sans text-sm font-medium mb-2">
                         Card number
                       </label>
                       <div className="relative">
@@ -335,7 +335,7 @@ export function PaymentConfirmationModal({
                     {/* Expiry and CVV */}
                     <div className="grid grid-cols-2 gap-4 mb-6">
                       <div>
-                        <label htmlFor="expiryDate" className="block text-slate-800 font-helvetica text-sm font-medium mb-2">
+                        <label htmlFor="expiryDate" className="block text-slate-800 font-sans text-sm font-medium mb-2">
                           Expiry date
                         </label>
                         <div className="relative">
@@ -355,7 +355,7 @@ export function PaymentConfirmationModal({
                         {errors.expiryDate && <p className="text-red-500 text-xs mt-1">{errors.expiryDate}</p>}
                       </div>
                       <div>
-                        <label htmlFor="cvv" className="block text-slate-800 font-helvetica text-sm font-medium mb-2">
+                        <label htmlFor="cvv" className="block text-slate-800 font-sans text-sm font-medium mb-2">
                           CVV
                         </label>
                         <Input
@@ -384,7 +384,7 @@ export function PaymentConfirmationModal({
                   <Button
                     type="submit"
                     disabled={isProcessing}
-                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-helvetica py-3 h-12 text-base disabled:opacity-50"
+                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-sans py-3 h-12 text-base disabled:opacity-50"
                   >
                     {isProcessing ? (
                       <div className="flex items-center gap-2">

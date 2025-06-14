@@ -137,11 +137,11 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
 
               <div className="absolute inset-0 flex flex-col justify-center">
                 <div className="px-6 sm:px-8 md:px-12">
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-argent font-normal text-white mb-2 leading-tight">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-white mb-2 leading-tight">
                     Talk to a<br />
                     travel planner
                   </h2>
-                  <p className="text-white/90 font-helvetica text-sm sm:text-base leading-relaxed max-w-md">
+                  <p className="text-white/90 font-sans text-sm sm:text-base leading-relaxed max-w-md">
                     Schedule a complimentary call with our travel planners to begin crafting your bespoke experience.
                   </p>
                 </div>
@@ -153,7 +153,7 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
               <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                   <div>
-                    <label className="block text-slate-800 font-helvetica text-sm font-medium mb-2">Full name</label>
+                    <label className="block text-slate-800 font-sans text-sm font-medium mb-2">Full name</label>
                     <Input
                       type="text"
                       placeholder="First and last names"
@@ -165,7 +165,7 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
                   </div>
 
                   <div>
-                    <label className="block text-slate-800 font-helvetica text-sm font-medium mb-2">Email address</label>
+                    <label className="block text-slate-800 font-sans text-sm font-medium mb-2">Email address</label>
                     <Input
                       type="email"
                       placeholder="Email address"
@@ -179,7 +179,7 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-slate-800 font-helvetica text-sm font-medium mb-2">Phone number</label>
+                    <label className="block text-slate-800 font-sans text-sm font-medium mb-2">Phone number</label>
                     <div className="flex gap-2">
                       <CountrySelector
                         value={formData.countryCode}
@@ -198,7 +198,7 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
                   </div>
 
                   <div>
-                    <label className="block text-slate-800 font-helvetica text-sm font-medium mb-2">Date</label>
+                    <label className="block text-slate-800 font-sans text-sm font-medium mb-2">Date</label>
                     <div className="space-y-2">
                       <div className="relative">
                         <Input
@@ -218,7 +218,7 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
                           {formData.isFlexible && <Check className="w-3 h-3 text-white" />}
                         </div>
                         <label
-                          className="text-sm font-helvetica text-slate-800 cursor-pointer"
+                          className="text-sm font-sans text-slate-800 cursor-pointer"
                           onClick={() => handleInputChange("isFlexible", !formData.isFlexible)}
                         >
                           I'm flexible
@@ -229,7 +229,7 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
                 </div>
 
                 <div>
-                  <label className="block text-slate-800 font-helvetica text-sm font-medium mb-2">How can we help?</label>
+                  <label className="block text-slate-800 font-sans text-sm font-medium mb-2">How can we help?</label>
                   <Textarea
                     placeholder="Tell us about your ideal getaway, special occasions, or questions"
                     value={formData.helpMessage}
@@ -242,7 +242,7 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
                 <div>
                   <Button
                     type="submit"
-                    className="w-full bg-[#0f1923] hover:bg-[#1a2836] text-white font-helvetica py-4 text-base h-14 rounded-md transition-colors"
+                    className="w-full bg-[#0f1923] hover:bg-[#1a2836] text-white font-sans py-4 text-base h-14 rounded-md transition-colors"
                   >
                     Schedule my call
                   </Button>
@@ -257,8 +257,8 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="text-xl sm:text-2xl font-argent text-slate-800 mb-3 sm:mb-4">Call Scheduled!</h3>
-            <p className="text-sm sm:text-base text-slate-600 font-helvetica mb-4 sm:mb-6 max-w-md">
+            <h3 className="text-xl sm:text-2xl font-serif text-slate-800 mb-3 sm:mb-4">Call Scheduled!</h3>
+            <p className="text-sm sm:text-base text-slate-600 font-sans mb-4 sm:mb-6 max-w-md">
               Thank you for scheduling a call with our travel planners. We'll be in touch within 24 hours to confirm
               your appointment and begin crafting your perfect experience.
             </p>
