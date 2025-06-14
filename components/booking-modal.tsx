@@ -160,8 +160,8 @@ export function BookingModal({ experience, children }: BookingModalProps) {
               <div className="absolute inset-0 bg-black/20" />
               <div className="absolute inset-0 flex items-center justify-center p-8">
                 <div className="text-center text-white">
-                  <p className="text-sm font-sans uppercase tracking-wider mb-4 opacity-90">YOU'RE BOOKING THE</p>
-                  <h2 className="text-4xl md:text-5xl font-serif font-normal leading-tight">
+                  <p className="text-sm font-helvetica uppercase tracking-wider mb-4 opacity-90">YOU'RE BOOKING THE</p>
+                  <h2 className="text-4xl md:text-5xl font-argent font-normal leading-tight">
                     Eastern Safari
                     <br />
                     Experience
@@ -178,7 +178,7 @@ export function BookingModal({ experience, children }: BookingModalProps) {
                 className="absolute top-6 right-6 text-slate-600 hover:text-slate-800 transition-colors z-10 flex items-center gap-2"
                 type="button"
               >
-                <span className="text-sm font-sans">Close</span>
+                <span className="text-sm font-helvetica">Close</span>
                 <X className="w-4 h-4" />
               </button>
 
@@ -186,12 +186,12 @@ export function BookingModal({ experience, children }: BookingModalProps) {
                 <div className="p-8 pt-16 h-full overflow-y-auto">
                   {/* Header */}
                   <div className="mb-8">
-                    <h3 className="text-3xl font-serif font-normal text-slate-800 mb-3">
+                    <h3 className="text-3xl font-argent font-normal text-slate-800 mb-3">
                       Confirm
                       <br />
                       your booking
                     </h3>
-                    <p className="text-slate-600 font-sans text-sm leading-relaxed">
+                    <p className="text-slate-600 font-helvetica text-sm leading-relaxed">
                       Complete your reservation and prepare
                       <br />
                       for a seamless, indulgent experience.
@@ -202,15 +202,15 @@ export function BookingModal({ experience, children }: BookingModalProps) {
                   <form onSubmit={handleSubmit} className="space-y-8">
                     {/* Your Details Section */}
                     <div>
-                      <h4 className="text-xl font-serif font-normal text-slate-800 mb-2">Your Details</h4>
-                      <p className="text-slate-600 font-sans text-sm mb-6">
+                      <h4 className="text-xl font-argent font-normal text-slate-800 mb-2">Your Details</h4>
+                      <p className="text-slate-600 font-helvetica text-sm mb-6">
                         Please provide the information of the primary guest
                       </p>
 
                       <div className="space-y-6">
                         {/* Full Name */}
                         <div>
-                          <label className="block text-slate-800 font-sans text-sm font-medium mb-2">Full name</label>
+                          <label className="block text-slate-800 font-helvetica text-sm font-medium mb-2">Full name</label>
                           <Input
                             type="text"
                             placeholder="First and last names"
@@ -225,7 +225,7 @@ export function BookingModal({ experience, children }: BookingModalProps) {
 
                         {/* Email Address */}
                         <div>
-                          <label className="block text-slate-800 font-sans text-sm font-medium mb-2">
+                          <label className="block text-slate-800 font-helvetica text-sm font-medium mb-2">
                             Email address
                           </label>
                           <Input
@@ -242,7 +242,7 @@ export function BookingModal({ experience, children }: BookingModalProps) {
 
                         {/* Phone Number */}
                         <div>
-                          <label className="block text-slate-800 font-sans text-sm font-medium mb-2">
+                          <label className="block text-slate-800 font-helvetica text-sm font-medium mb-2">
                             Phone number
                           </label>
                           <div className="flex gap-2">
@@ -274,7 +274,7 @@ export function BookingModal({ experience, children }: BookingModalProps) {
 
                         {/* Location */}
                         <div>
-                          <label className="block text-slate-800 font-sans text-sm font-medium mb-2">Location</label>
+                          <label className="block text-slate-800 font-helvetica text-sm font-medium mb-2">Location</label>
                           <div className="flex gap-2">
                             <Select
                               value={formData.locationCountry}
@@ -306,14 +306,14 @@ export function BookingModal({ experience, children }: BookingModalProps) {
 
                     {/* Your Preferences Section */}
                     <div>
-                      <h4 className="text-xl font-serif font-normal text-slate-800 mb-2">Your Preferences</h4>
-                      <p className="text-slate-600 font-sans text-sm mb-6">Tailor the finer details</p>
+                      <h4 className="text-xl font-argent font-normal text-slate-800 mb-2">Your Preferences</h4>
+                      <p className="text-slate-600 font-helveticaetica text-sm mb-6">Tailor the finer details</p>
 
                       <div className="space-y-6">
                         {/* Date Selection */}
                         <div className="grid grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-slate-800 font-sans text-sm font-medium mb-2">
+                            <label className="block text-slate-800 font-helvetica text-sm font-medium mb-2">
                               Preferred date
                             </label>
                             <div className="relative">
@@ -333,7 +333,7 @@ export function BookingModal({ experience, children }: BookingModalProps) {
                           </div>
 
                           <div>
-                            <label className="block text-slate-800 font-sans text-sm font-medium mb-2">
+                            <label className="block text-slate-800 font-helvetica text-sm font-medium mb-2">
                               Alternate Date
                             </label>
                             <div className="relative">
@@ -351,12 +351,12 @@ export function BookingModal({ experience, children }: BookingModalProps) {
                         {/* Number of Guests */}
                         <div>
                           <div className="flex justify-between items-center mb-4">
-                            <label className="block text-slate-800 font-sans text-sm font-medium">
+                            <label className="block text-slate-800 font-helvetica text-sm font-medium">
                               Number of guests
                             </label>
                             <div className="text-right">
-                              <div className="text-slate-800 font-sans text-sm">Cost</div>
-                              <div className="text-2xl font-serif text-slate-800">${totalCost}</div>
+                              <div className="text-slate-800 font-helvetica text-sm">Cost</div>
+                              <div className="text-2xl font-argent text-slate-800">${totalCost}</div>
                               <div className="text-xs text-slate-600">per person</div>
                             </div>
                           </div>
@@ -370,7 +370,7 @@ export function BookingModal({ experience, children }: BookingModalProps) {
                                   onCheckedChange={(checked) => handleGuestSelection(guest, checked as boolean)}
                                   className="border-slate-400"
                                 />
-                                <label htmlFor={guest} className="text-sm font-sans text-slate-800">
+                                <label htmlFor={guest} className="text-sm font-helvetica text-slate-800">
                                   {guest}
                                 </label>
                               </div>
@@ -399,13 +399,13 @@ export function BookingModal({ experience, children }: BookingModalProps) {
                       <Button
                         type="button"
                         variant="outline"
-                        className="w-full border-slate-900 text-slate-900 hover:bg-slate-50 font-sans py-3 text-sm"
+                        className="w-full border-slate-900 text-slate-900 hover:bg-slate-50 font-helvetica py-3 text-sm"
                       >
                         Speak to a Travel Planner
                       </Button>
                       <Button
                         type="submit"
-                        className="w-full bg-slate-900 hover:bg-slate-800 text-white font-sans py-3 text-sm"
+                        className="w-full bg-slate-900 hover:bg-slate-800 text-white font-helvetica py-3 text-sm"
                       >
                         Confirm Booking
                       </Button>
@@ -420,14 +420,14 @@ export function BookingModal({ experience, children }: BookingModalProps) {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-serif text-slate-800 mb-4">Booking Confirmed!</h3>
-                  <p className="text-slate-600 font-sans mb-6 max-w-md">
+                  <h3 className="text-2xl font-argent text-slate-800 mb-4">Booking Confirmed!</h3>
+                  <p className="text-slate-600 font-helvetica mb-6 max-w-md">
                     Thank you for your booking. You will receive a confirmation email shortly with all the details for
                     your Eastern Safari Experience.
                   </p>
                   <Button
                     onClick={handleClose}
-                    className="bg-slate-900 hover:bg-slate-800 text-white font-sans px-8 py-3"
+                    className="bg-slate-900 hover:bg-slate-800 text-white font-helvetica px-8 py-3"
                   >
                     Close
                   </Button>

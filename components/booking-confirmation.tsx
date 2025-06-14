@@ -68,7 +68,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
             <div className="absolute inset-0 bg-black/20" />
             <div className="absolute inset-0 flex items-center justify-left p-4 lg:p-8">
               <div className="text-left text-white">
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-serif font-normal leading-tight">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-argent font-normal leading-tight">
                   Booking
                   <br />
                   Confirmed
@@ -101,7 +101,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
 
                 {/* Header */}
                 <div className="text-left mb-8">
-                  <h3 className="text-2xl lg:text-3xl font-serif font-normal text-slate-800 mb-4">
+                  <h3 className="text-2xl lg:text-3xl font-argentt font-normal text-slate-800 mb-4">
                     Experience Summary
                   </h3>
                 </div>
@@ -114,7 +114,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                       <MapPin className="w-4 h-4 text-slate-600" />
                       <span className="text-sm font-medium text-slate-600 uppercase tracking-wider">EXPERIENCE</span>
                     </div>
-                    <p className="text-lg font-serif text-slate-800">{bookingDetails.experienceName}</p>
+                    <p className="text-lg font-argentt text-slate-800">{bookingDetails.experienceName}</p>
                   </div>
 
                   {/* Guests */}
@@ -123,7 +123,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                       <Users className="w-4 h-4 text-slate-600" />
                       <span className="text-sm font-medium text-slate-600 uppercase tracking-wider">GUESTS</span>
                     </div>
-                    <p className="text-lg font-serif text-slate-800">
+                    <p className="text-lg font-argentt text-slate-800">
                       {bookingDetails.guests} Person{bookingDetails.guests !== 1 ? "s" : ""}
                     </p>
                   </div>
@@ -134,7 +134,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                       <Calendar className="w-4 h-4 text-slate-600" />
                       <span className="text-sm font-medium text-slate-600 uppercase tracking-wider">DATE</span>
                     </div>
-                    <p className="text-lg font-serif text-slate-800">
+                    <p className="text-lg font-argent text-slate-800">
                       {new Date(bookingDetails.date).toLocaleDateString("en-US", {
                         weekday: "long",
                         day: "numeric",
@@ -183,7 +183,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                     variant="outline"
                     size="sm"
                     disabled={!emailSent}
-                    className="border-slate-900 text-slate-900 hover:bg-slate-50 font-sans"
+                    className="border-slate-900 text-slate-900 hover:bg-slate-50 font-helvetica"
                   >
                     {emailSent ? (
                       <>
@@ -217,14 +217,14 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                 {/* <div className="space-y-3">
                   <Button
                     onClick={onClose}
-                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-sans py-3 h-12"
+                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-helvetica py-3 h-12"
                   >
                     View My Bookings
                   </Button>
                   <Button
                     onClick={onClose}
                     variant="outline"
-                    className="w-full border-slate-900 text-slate-900 hover:bg-slate-50 font-sans py-3 h-12"
+                    className="w-full border-slate-900 text-slate-900 hover:bg-slate-50 font-helvetica py-3 h-12"
                   >
                     Browse More Experiences
                   </Button>

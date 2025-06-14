@@ -154,7 +154,7 @@ export default function CustomizeExperiencePage() {
             type="button"
             aria-label="Close customize experience page"
           >
-            <span className="text-sm font-sans">Close</span>
+            <span className="text-sm font-helvetica">Close</span>
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -162,7 +162,7 @@ export default function CustomizeExperiencePage() {
         {/* Hero content */}
         <div className="relative z-10 flex items-center justify-center h-full px-6">
           <div className="text-center">
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-serif font-normal text-stone-100 leading-tight">
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-argentt font-normal text-stone-100 leading-tight">
               Tailor your
               <br />
               experience
@@ -176,8 +176,8 @@ export default function CustomizeExperiencePage() {
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="mb-12">
-            <h2 className="text-4xl md:text-5xl font-serif font-normal text-slate-800 mb-4">Crafted just for you</h2>
-            <p className="text-slate-600 font-sans text-lg">
+            <h2 className="text-4xl md:text-5xl font-argentt font-normal text-slate-800 mb-4">Crafted just for you</h2>
+            <p className="text-slate-600 font-helvetica text-lg">
               Share your vision. We'll transform it into an unforgettable journey.
             </p>
           </div>
@@ -185,15 +185,15 @@ export default function CustomizeExperiencePage() {
           <form onSubmit={handleSubmit} className="space-y-12">
             {/* Contact Details */}
             <div>
-              <h3 className="text-2xl font-serif font-normal text-slate-800 mb-2">Contact Details</h3>
-              <p className="text-slate-600 font-sans mb-8">
+              <h3 className="text-2xl font-argentt font-normal text-slate-800 mb-2">Contact Details</h3>
+              <p className="text-slate-600 font-helvetica mb-8">
                 Your information allows us to begin crafting your tailored experience.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Full Name */}
                 <div>
-                  <label htmlFor="fullName" className="block text-slate-800 font-sans text-sm font-medium mb-3">
+                  <label htmlFor="fullName" className="block text-slate-800 font-helvetica text-sm font-medium mb-3">
                     Full name
                   </label>
                   <Input
@@ -208,7 +208,7 @@ export default function CustomizeExperiencePage() {
 
                 {/* Email Address */}
                 <div>
-                  <label htmlFor="email" className="block text-slate-800 font-sans text-sm font-medium mb-3">
+                  <label htmlFor="email" className="block text-slate-800 font-helvetica text-sm font-medium mb-3">
                     Email address
                   </label>
                   <Input
@@ -223,7 +223,7 @@ export default function CustomizeExperiencePage() {
 
                 {/* Phone Number */}
                 <div>
-                  <label htmlFor="phoneNumber" className="block text-slate-800 font-sans text-sm font-medium mb-3">
+                  <label htmlFor="phoneNumber" className="block text-slate-800 font-helvetica text-sm font-medium mb-3">
                     Phone number
                   </label>
                   <div className="flex gap-2">
@@ -244,7 +244,7 @@ export default function CustomizeExperiencePage() {
 
                 {/* Preferred Contact Method */}
                 <div>
-                  <label htmlFor="preferredContact" className="block text-slate-800 font-sans text-sm font-medium mb-3">
+                  <label htmlFor="preferredContact" className="block text-slate-800 font-helvetica text-sm font-medium mb-3">
                     Preferred methods of contact
                   </label>
                   <Select
@@ -266,13 +266,13 @@ export default function CustomizeExperiencePage() {
 
             {/* Experience Vision */}
             <div>
-              <h3 className="text-2xl font-serif font-normal text-slate-800 mb-2">Experience Vision</h3>
-              <p className="text-slate-600 font-sans mb-8">
+              <h3 className="text-2xl font-argentt font-normal text-slate-800 mb-2">Experience Vision</h3>
+              <p className="text-slate-600 font-helvetica mb-8">
                 Let's dream together. Tell us what kind of journey you're hoping to create.
               </p>
 
               <div>
-                <label htmlFor="experienceVision" className="block text-slate-800 font-sans text-sm font-medium mb-3">
+                <label htmlFor="experienceVision" className="block text-slate-800 font-helvetica text-sm font-medium mb-3">
                   What type of experience are you dreaming of?
                 </label>
                 <Textarea
@@ -291,7 +291,7 @@ export default function CustomizeExperiencePage() {
               <div>
                 <label
                   htmlFor="preferredDestination"
-                  className="block text-slate-800 font-sans text-sm font-medium mb-3"
+                  className="block text-slate-800 font-helvetica text-sm font-medium mb-3"
                 >
                   Preferred Destination (Optional)
                 </label>
@@ -313,7 +313,7 @@ export default function CustomizeExperiencePage() {
 
               {/* Group Size */}
               <div>
-                <label htmlFor="groupSize" className="block text-slate-800 font-sans text-sm font-medium mb-3">
+                <label htmlFor="groupSize" className="block text-slate-800 font-helvetica text-sm font-medium mb-3">
                   Group Size
                 </label>
                 <Input
@@ -330,7 +330,7 @@ export default function CustomizeExperiencePage() {
               <div>
                 <label
                   htmlFor="travelDates"
-                  className="block text-slate-800 font-sans text-sm font-medium mb-2"
+                  className="block text-slate-800 font-helvetica text-sm font-medium mb-2"
                 >
                   Preferred Travel Dates
                 </label>
@@ -351,7 +351,7 @@ export default function CustomizeExperiencePage() {
 
             {/* Group Size Details */}
             <div>
-              <label htmlFor="groupSizeDetails" className="block text-slate-800 font-sans text-sm font-medium mb-3">
+              <label htmlFor="groupSizeDetails" className="block text-slate-800 font-helveticaetica text-sm font-medium mb-3">
                 Group Size
               </label>
               <Input
@@ -366,13 +366,13 @@ export default function CustomizeExperiencePage() {
 
             {/* Additional Notes */}
             <div className="border-b-2 border-black pb-8">
-              <h3 className="text-2xl font-serif font-normal text-slate-800 mb-2">Additional Notes</h3>
-              <p className="text-slate-600 font-sans mb-8">
+              <h3 className="text-2xl font-argentt font-normal text-slate-800 mb-2">Additional Notes</h3>
+              <p className="text-slate-600 font-helvetica mb-8">
                 Every detail matters. Is there anything else we should know to make this unforgettable?
               </p>
 
               <div>
-                <label htmlFor="additionalNotes" className="block text-slate-800 font-sans text-sm font-medium mb-3">
+                <label htmlFor="additionalNotes" className="block text-slate-800 font-helvetica text-sm font-medium mb-3">
                   Tell us more
                 </label>
                 <Textarea
@@ -389,11 +389,11 @@ export default function CustomizeExperiencePage() {
             <div className="pt-8">
               <Button
                 type="submit"
-                className="w-full bg-slate-900 hover:bg-slate-800 text-white font-sans py-4 text-base h-14"
+                className="w-full bg-slate-900 hover:bg-slate-800 text-white font-helvetica py-4 text-base h-14"
               >
                 Tailor your experience
               </Button>
-              <p className="text-center text-slate-600 font-sans text-sm mt-4">
+              <p className="text-center text-slate-600 font-helvetica text-sm mt-4">
                 Our travel planners will be in touch within 24 hours to begin curating your bespoke journey.
               </p>
             </div>

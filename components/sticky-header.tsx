@@ -39,13 +39,13 @@ export function StickyHeader() {
             }`}
           >
             <div className="flex items-center space-x-6">
-              <Link href="/" className="text-white text-sm hover:text-gray-200 transition-colors font-sans">
+              <Link href="/" className="text-white text-sm hover:text-gray-200 transition-colors font-helvetica">
                 Home
               </Link>
-              <Link href="/experiences" className="text-white text-sm hover:text-gray-200 transition-colors font-sans">
+              <Link href="/experiences" className="text-white text-sm hover:text-gray-200 transition-colors font-helvetica">
                 Experiences
               </Link>
-              <Link href="/about" className="text-white text-sm hover:text-gray-200 transition-colors font-sans">
+              <Link href="/about" className="text-white text-sm hover:text-gray-200 transition-colors font-helvetica">
                 About Us
               </Link>
             </div>

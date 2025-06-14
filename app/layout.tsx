@@ -1,27 +1,26 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
-import { Playfair_Display, Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import Script from "next/script"
+import localFont from 'next/font/local'
 
-// Serif font for headings
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
+// Argent font for headings
+const argent = localFont({
+  src: '../public/fonts/argent-cf/Argent-CF-.otf',
+  variable: '--font-argent',
 })
 
-// Sans-serif font for body text
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
+// Helvetica font for body text
+const helvetica = localFont({
+  src: '../public/fonts/helvetica-now-display/HelveticaNowDisplay-Regular.ttf',
+  variable: '--font-helvetica',
 })
 
 export const metadata: Metadata = {
   title: "Beyond Experiences - Extraordinary Travel Adventures",
   description:
     "Discover bespoke experiences that redefine the way you travel. Whether you seek serenity, thrill, or unforgettable encounters, your next journey begins here.",
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -31,7 +30,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${playfair.variable} ${inter.variable}`}>
+      <body className={`${argent.variable} ${helvetica.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           {children}
         </ThemeProvider>

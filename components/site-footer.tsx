@@ -24,13 +24,13 @@ export function SiteFooter() {
 
           {/* Explore Column */}
           <div className="md:col-span-2">
-            <h3 className="text-sm font-sans font-semibold uppercase tracking-wider mb-2">EXPLORE</h3>
-            <p className="text-xs text-gray-400 mb-4 font-sans">Discover our curated journeys</p>
+            <h3 className="text-sm font-helvetica font-semibold uppercase tracking-wider mb-2">EXPLORE</h3>
+            <p className="text-xs text-gray-400 mb-4 font-helvetica">Discover our curated journeys</p>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/experiences"
-                  className="text-white hover:text-gray-300 transition-colors font-sans text-sm"
+                  className="text-white hover:text-gray-300 transition-colors font-helvetica text-sm"
                 >
                   Experiences
                 </Link>
@@ -38,18 +38,18 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/city-guides"
-                  className="text-white hover:text-gray-300 transition-colors font-sans text-sm"
+                  className="text-white hover:text-gray-300 transition-colors font-helvetica text-sm"
                 >
                   City Guides
                 </Link>
               </li>
               <li>
-                <Link href="/bespoke" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">
+                <Link href="/bespoke" className="text-white hover:text-gray-300 transition-colors font-helveticaetica text-sm">
                   Bespoke Travel
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">
+                <Link href="/about" className="text-white hover:text-gray-300 transition-colors font-helvetica text-sm">
                   About Us
                 </Link>
               </li>
@@ -58,26 +58,26 @@ export function SiteFooter() {
 
           {/* Support Column */}
           <div className="md:col-span-2">
-            <h3 className="text-sm font-sans font-semibold uppercase tracking-wider mb-2">SUPPORT</h3>
-            <p className="text-xs text-gray-400 mb-4 font-sans">Here when you need us</p>
+            <h3 className="text-sm font-helvetica font-semibold uppercase tracking-wider mb-2">SUPPORT</h3>
+            <p className="text-xs text-gray-400 mb-4 font-helvetica">Here when you need us</p>
             <ul className="space-y-2">
               <li>
-                <Link href="/contact" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">
+                <Link href="/contact" className="text-white hover:text-gray-300 transition-colors font-helvetica text-sm">
                   Contact Us
                 </Link>
               </li>
               <li>
-                <Link href="/faqs" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">
+                <Link href="/faqs" className="text-white hover:text-gray-300 transition-colors font-helvetica text-sm">
                   FAQs
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">
+                <Link href="/terms" className="text-white hover:text-gray-300 transition-colors font-helvetica text-sm">
                   Terms & Conditions
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">
+                <Link href="/privacy" className="text-white hover:text-gray-300 transition-colors font-helvetica text-sm">
                   Privacy Policy
                 </Link>
               </li>
@@ -86,26 +86,26 @@ export function SiteFooter() {
 
           {/* Connect Column */}
           <div className="md:col-span-2">
-            <h3 className="text-sm font-sans font-semibold uppercase tracking-wider mb-2">CONNECT</h3>
-            <p className="text-xs text-gray-400 mb-4 font-sans">Stay in touch</p>
+            <h3 className="text-sm font-helvetica font-semibold uppercase tracking-wider mb-2">CONNECT</h3>
+            <p className="text-xs text-gray-400 mb-4 font-helvetica">Stay in touch</p>
             <ul className="space-y-2">
               <li>
-                <Link href="/contact" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">
+                <Link href="/contact" className="text-white hover:text-gray-300 transition-colors font-helvetica text-sm">
                   Contact Us
                 </Link>
               </li>
               <li>
-                <Link href="/faqs" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">
+                <Link href="/faqs" className="text-white hover:text-gray-300 transition-colors font-helvetica text-sm">
                   FAQs
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">
+                <Link href="/terms" className="text-white hover:text-gray-300 transition-colors font-helvetica text-sm">
                   Terms & Conditions
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">
+                <Link href="/privacy" className="text-white hover:text-gray-300 transition-colors font-helvetica text-sm">
                   Privacy Policy
                 </Link>
               </li>
@@ -114,8 +114,8 @@ export function SiteFooter() {
 
           {/* Newsletter Section */}
           <div className="md:col-span-4">
-            <h3 className="text-2xl font-serif font-normal mb-4">Stay in the Loop</h3>
-            <p className="text-sm text-gray-300 mb-6 font-sans leading-relaxed">
+            <h3 className="text-2xl font-argent font-normal mb-4">Stay in the Loop</h3>
+            <p className="text-sm text-gray-300 mb-6 font-helvetica leading-relaxed">
               Get curated travel inspiration, special offers, and behind-the-scenes access.
             </p>
 
@@ -123,20 +123,20 @@ export function SiteFooter() {
               <Input
                 type="email"
                 placeholder="Email address"
-                className="bg-white border-0 text-slate-800 font-sans placeholder:text-gray-500"
+                className="bg-white border-0 text-slate-800 font-helvetica placeholder:text-gray-500"
               />
-              <Button className="w-full bg-amber-100 text-slate-800 hover:bg-amber-200 font-sans font-medium py-3 rounded-md">
+              <Button className="w-full bg-amber-100 text-slate-800 hover:bg-amber-200 font-helvetica font-medium py-3 rounded-md">
                 STAY IN THE LOOP
               </Button>
             </div>
 
-            <p className="text-xs text-gray-400 mt-4 mb-6 font-sans">
+            <p className="text-xs text-gray-400 mt-4 mb-6 font-helvetica">
               We may share select info with trusted partners to elevate your experience.
             </p>
 
             {/* Social Media */}
             <div>
-              <p className="text-sm font-sans font-semibold uppercase tracking-wider mb-3">CONNECT</p>
+              <p className="text-sm font-helvetica font-semibold uppercase tracking-wider mb-3">CONNECT</p>
               <div className="flex space-x-4">
                 <Link href="#" className="text-white hover:text-gray-300 transition-colors">
                   <MessageCircle size={20} />
