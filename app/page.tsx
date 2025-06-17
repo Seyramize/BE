@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { TravelPlannerModal } from "@/components/travel-planner-modal-clean"
+import { experiences } from "@/lib/experiences-data"
 
 export default function Home() {
   return (
@@ -111,77 +112,60 @@ export default function Home() {
         <div className="container mx-auto px-6 md:px-16 lg:px-32 xl:px-40">
           <h2 className="text-3xl md:text-4xl font-argent font-normal mb-12">Featured experiences</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* First featured experience - Large card */}
             <div className="relative rounded-lg overflow-hidden group">
               <div className="relative h-[610px]">
                 <Image
-                  src="/placeholder.svg?height=610&width=600&text=Running+with+Zebras"
-                  alt="Running with Zebras"
+                  src={experiences[0].defaultContent.image}
+                  alt={experiences[0].defaultContent.title}
                   fill
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <span className="text-white/80 uppercase text-sm tracking-wider font-sans">Eastern Safari</span>
-                <h3 className="text-3xl font-serif font-normal text-white mt-2 mb-3">Running with Zebras</h3>
+                <span className="text-white/80 uppercase text-sm tracking-wider font-sans">{experiences[0].defaultContent.location}</span>
+                <h3 className="text-3xl font-serif font-normal text-white mt-2 mb-3">{experiences[0].defaultContent.title}</h3>
                 <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis molestie dui lorem, at molestie dui
-                  accumsan in. Donec tempus, lorem eget venenatis molestie, nulla ipsum consectetur lorem.
+                  {experiences[0].defaultContent.shortDescription}
                 </p>
-                <Button
-                  className="bg-white/20 hover:bg-white/30 text-white font-sans px-12 py-3 rounded-full backdrop-blur-sm border border-white/30 w-full">
-                  Book Experience
-                </Button>
+                <Link href={`/book-experience/${experiences[0].id}`}>
+                  <Button
+                    className="bg-white/20 hover:bg-white/30 text-white font-sans px-12 py-3 rounded-full backdrop-blur-sm border border-white/30 w-full">
+                    Book Experience
+                  </Button>
+                </Link>
               </div>
             </div>
 
+            {/* Second and third featured experiences - Smaller cards */}
             <div className="grid grid-cols-1 gap-8">
-              <div className="relative rounded-lg overflow-hidden group">
-                <div className="relative h-72">
-                  <Image
-                    src="/placeholder.svg?height=288&width=400&text=Collectors+Tour"
-                    alt="The Collectors Tour"
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+              {experiences.slice(1, 3).map((experience) => (
+                <div key={experience.id} className="relative rounded-lg overflow-hidden group">
+                  <div className="relative h-72">
+                    <Image
+                      src={experience.defaultContent.image}
+                      alt={experience.defaultContent.title}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <h3 className="text-2xl font-serif font-normal text-white mb-2">{experience.defaultContent.title}</h3>
+                    <p className="text-white/90 mb-3 text-sm font-sans leading-relaxed">
+                      {experience.defaultContent.shortDescription}
+                    </p>
+                    <Link href={`/book-experience/${experience.id}`}>
+                      <Button
+                        size="sm"
+                        className="bg-white/20 hover:bg-white/30 text-white font-sans px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
+                        Book Experience
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-2xl font-serif font-normal text-white mb-2">The Collectors Tour</h3>
-                  <p className="text-white/90 mb-3 text-sm font-sans leading-relaxed">
-                    Discover the world's most exclusive art collections with private viewings and expert commentary.
-                  </p>
-                  <Button
-                    size="sm"
-                    className="bg-white/20 hover:bg-white/30 text-white font-sans px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
-                    More Experience
-                  </Button>
-                </div>
-              </div>
-
-              <div className="relative rounded-lg overflow-hidden group">
-                <div className="relative h-72">
-                  <Image
-                    src="/placeholder.svg?height=288&width=400&text=Collectors+Tour"
-                    alt="The Collectors Tour"
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-2xl font-serif font-normal text-white mb-2">The Collectors Tour</h3>
-                  <p className="text-white/90 mb-3 text-sm font-sans leading-relaxed">
-                    Discover the world's most exclusive art collections with private viewings and expert commentary.
-                  </p>
-                  <Button
-                    size="sm"
-                    className="bg-white/20 hover:bg-white/30 text-white font-sans px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
-                  
-                    More Experience
-                  </Button>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
