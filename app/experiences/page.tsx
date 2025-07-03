@@ -196,10 +196,14 @@ export default function ExperiencesPage() {
 						className="object-cover w-full h-full"
 						priority
 					/>
-					
+					{/* Dark overlay for text contrast */}
+					<div className="absolute inset-0 bg-black/40" />
+					{/* White gradient overlay at the bottom */}
+					<div className="absolute inset-0 pointer-events-none z-10">
+						<div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-white via-white/80 to-transparent" />
+					</div>
 				</div>
-
-				<div className="relative text-center text-white z-10 px-4 max-w-[90%] mx-auto">
+				<div className="relative text-center text-white z-20 px-4 max-w-[90%] mx-auto">
 					<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-serif font-normal mb-2 sm:mb-4 leading-tight">
 						Experiences
 					</h1>
