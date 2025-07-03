@@ -95,10 +95,14 @@ export default function Home() {
                   fill
                   className="object-cover rounded-lg transition-transform group-hover:scale-[1.02]"
                 />
-                <div className="absolute bottom-4 left-10 md:left-4 lg:left-10 px-1 py-3">
+                {/* Gradient background for text/icon */}
+                <div className="absolute bottom-0 left-0 right-0 h-20 md:h-24 rounded-b-lg bg-gradient-to-t from-black/80 to-transparent z-0" />
+                <div className="absolute bottom-4 left-10 md:left-4 lg:left-10 px-1 py-3 z-10">
                   <div className="flex items-center space-x-2">
-                    <span className="font-body text-left text-base sm:text-lg md:text-lg lg:text-2xl font-sans text-gray-900">Browse <br className="leading-none" /> <span className="block -mt-1 sm:-mt-2">Experiences</span></span>
-                    <CircleArrowRight className="h-6 w-6 sm:h-8 sm:w-8 md:h-8 md:w-8 text-gray-900" />
+                    <span className="font-body text-left text-2xl sm:text-lg md:text-lg lg:text-2xl font-sans text-gray-900">
+                      Browse <br className="leading-none" /> <span className="block -mt-1 sm:-mt-2">Experiences</span>
+                    </span>
+                    <CircleArrowRight className="h-10 w-10 sm:h-8 sm:w-8 md:h-8 md:w-8 text-gray-900" />
                   </div>
                 </div>
               </Link>

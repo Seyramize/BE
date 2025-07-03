@@ -15,6 +15,7 @@ const filterOptions = ["Ghana", "Cape Town", "Nigeria", "Namibia"]
 export default function ExperiencesPage() {
 	const [hoveredCard, setHoveredCard] = useState<number | null>(null)
 	const [isSearchFocused, setIsSearchFocused] = useState(false)
+	const [showMobileFilters, setShowMobileFilters] = useState(false)
 
 	const ExperienceCard = ({
 		experience,
@@ -35,18 +36,17 @@ export default function ExperiencesPage() {
 		return (
 			<div
 				className="relative h-96"
-				onMouseEnter={() => setHoveredCard(experience.id)}
-				onMouseLeave={() => setHoveredCard(null)}
+				onMouseEnter={() => {
+					if (typeof window !== "undefined" && window.innerWidth >= 640) setHoveredCard(experience.id)
+				}}
+				onMouseLeave={() => {
+					if (typeof window !== "undefined" && window.innerWidth >= 640) setHoveredCard(null)
+				}}
 				style={{ zIndex: isHovered ? 50 : 1 }}
 			>
 				{/* Default Card State */}
 				<div
-					className={`rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-2500 ease-out h-full`}
-					style={{
-						transition: 'opacity 1200ms ease-out, transform 2500ms ease-out',
-						transform: isHovered ? 'scale(0.98) rotate(-1deg)' : 'scale(1) rotate(0deg)',
-						transformOrigin: 'center'
-					}}
+					className="rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow h-full"
 				>
 					<div className="relative h-full">
 						<Image
@@ -104,16 +104,31 @@ export default function ExperiencesPage() {
 								<MapPin className="w-3 h-3 mr-1" />
 								{defaultContent.location}
 							</div>
-							{/* Book Experience Button on hover */}
-							{isHovered && (
-								<div className="mt-4 flex justify-center">
+							{/* Book Experience Button: always on mobile, on hover for desktop */}
+							<div className="mt-4 flex justify-center">
+								<Link href={`/book-experience/${experience.id}`}>
+									<Button
+										className={`
+											bg-transparent border border-white text-white font-sans px-12 py-2 rounded-full transition-colors text-sm min-w-[180px] hover:bg-white/10
+											block sm:hidden
+										`}
+									>
+										Book Experience
+									</Button>
+								</Link>
+								{isHovered && (
 									<Link href={`/book-experience/${experience.id}`}>
-										<Button className="bg-transparent border border-white text-white font-sans px-12 py-2 rounded-full transition-colors text-sm min-w-[180px] hover:bg-white/10">
+										<Button
+											className={`
+												bg-transparent border border-white text-white font-sans px-12 py-2 rounded-full transition-colors text-sm min-w-[180px] hover:bg-white/10
+												hidden sm:block
+											`}
+										>
 											Book Experience
 										</Button>
 									</Link>
-								</div>
-							)}
+								)}
+							</div>
 						</div>
 					</div>
 				</div>
@@ -214,16 +229,52 @@ export default function ExperiencesPage() {
 			</section>
 
 			{/* Filter Section */}
-			<section className="relative z-10 pt-0 sm:pt-1 md:pt-2 pb-4 sm:pb-6 md:pb-8 -mt-8 sm:-mt-12 md:-mt-16">
-				
-				
+			<section className="relative z-10 pt-0 sm:pt-1 md:pt-2 pb-2 sm:pb-3 md:pb-4 -mt-8 sm:-mt-12 md:-mt-16">
 				{/* Filter Content */}
 				<div className="relative container mx-auto px-4 sm:px-6 z-30">
 					<div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-8">
       
 						{/* Filter Buttons - Left side */}
 						<div className="w-full sm:flex-1 overflow-x-auto">
-							<div className="flex gap-2 pb-2 sm:pb-0">
+							{/* Mobile: Filter, Sort, Search in one row */}
+							<div className="flex items-center gap-2 sm:hidden mb-2 w-full mt-4">
+								<Button
+									type="button"
+									className="bg-gray-900 text-white rounded-full px-2 py-1 font-sans hover:bg-gray-800 text-[11px] transition-all duration-300 h-8 min-w-0"
+									onClick={() => setShowMobileFilters((prev) => !prev)}
+									aria-expanded={showMobileFilters}
+									aria-controls="mobile-country-filters"
+								>
+									<Filter className="w-3 h-3 mr-1" />
+									<span className="whitespace-nowrap">Filter</span>
+								</Button>
+								<Button
+									type="button"
+									className="bg-gray-900 text-white rounded-full px-2 py-1 font-sans hover:bg-gray-800 text-[11px] transition-all duration-300 h-8 min-w-0"
+									// Add your sort logic here
+								>
+									<SlidersHorizontal className="w-3 h-3 mr-1" />
+									<span className="whitespace-nowrap">Sort</span>
+								</Button>
+								<div className="relative flex-1">
+									<Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 w-3 h-3" />
+									<Input
+										placeholder="Search"
+										className="pl-8 pr-2 py-1 rounded-full border-gray-300 font-sans w-full text-[11px] h-8"
+										onFocus={() => setIsSearchFocused(true)}
+										onBlur={() => setIsSearchFocused(false)}
+									/>
+								</div>
+							</div>
+							{/* Country filters: visible on sm+ or if toggled on mobile */}
+							<div
+								id="mobile-country-filters"
+								className={`
+									flex gap-2 pb-2 sm:pb-0
+									${showMobileFilters ? '' : 'hidden'}
+									sm:flex
+								`}
+							>
 								{filterOptions.map((filter) => (
 									<Button
 										key={filter}
@@ -237,13 +288,14 @@ export default function ExperiencesPage() {
 						</div>
 
 						{/* Search and Action Buttons - Right side */}
-						<div className={`flex items-center gap-4 shrink-0 transition-all duration-300 ${isSearchFocused ? 'w-full' : ''}`}>
-							<Button className={`bg-gray-900 text-white rounded-full px-3 sm:px-4 py-1.5 sm:py-2 font-sans hover:bg-gray-800 text-xs sm:text-sm transition-all duration-300 ${isSearchFocused ? 'hidden' : ''}`}>
+						<div className={`hidden sm:flex items-center gap-4 shrink-0 transition-all duration-300 ${isSearchFocused ? 'w-full' : ''}`}>
+							{/* Hide Filter/Sort on mobile, show on sm+ */}
+							<Button className={`bg-gray-900 text-white rounded-full px-3 sm:px-4 py-1.5 sm:py-2 font-sans hover:bg-gray-800 text-xs sm:text-sm transition-all duration-300`}>
 								<Filter className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
 								<span className="whitespace-nowrap">Filter</span>
 							</Button>
 							<Button
-								className={`rounded-full px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-900 text-white hover:bg-gray-900 font-sans text-xs sm:text-sm transition-all duration-300 ${isSearchFocused ? 'hidden' : ''}`}
+								className={`rounded-full px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-900 text-white hover:bg-gray-900 font-sans text-xs sm:text-sm transition-all duration-300`}
 							>
 								<SlidersHorizontal className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
 								Sort
@@ -263,7 +315,8 @@ export default function ExperiencesPage() {
 			</section>
 
 			{/* Experiences Grid with expanded spacing for hover effects */}
-			<section className="py-8 sm:py-12 md:py-16 bg-gray-50">
+			<section className="relative py-8 sm:py-12 md:py-16 bg-transparent">
+				<div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-white via-white to-transparent pointer-events-none z-10" />
 				<div className="container mx-auto px-4 sm:px-6">
 					{/* Grid with extra spacing to accommodate expanded cards */}
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
