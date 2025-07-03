@@ -20,7 +20,7 @@ export default function Home() {
       <section className="relative min-h-screen">
         <div className="absolute inset-0">
           <Image
-            src="/placeholder.svg?height=1080&width=1920&text=Mountain+Lake+with+Kayak"
+            src="/images/home/hero.jpg?height=1080&width=1920&text=Mountain+Lake+with+Kayak"
             alt="Scenic mountain lake with kayak"
             width={1920}
             height={1080}
@@ -82,7 +82,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
               <div className="relative h-80 md:h-96 md:w-[120%] md:-ml-[10%]">
                 <Image
-                  src="/placeholder.svg?height=320&width=240&text=Tropical+Resort"
+                  src="/images/home/curatedexp2.jpg?height=320&width=240&text=Tropical+Resort"
                   alt="Tropical beach resort"
                   fill
                   className="object-cover rounded-lg"
@@ -90,7 +90,7 @@ export default function Home() {
               </div>
               <Link href="/experiences" className="relative h-80 md:h-96 md:w-[120%] md:mt-12 block group">
                 <Image
-                  src="/placeholder.svg?height=320&width=240&text=Hot+Air+Balloon"
+                  src="/images/home/curatedexp1.jpg?height=320&width=240&text=Hot+Air+Balloon"
                   alt="Hot air balloon over landscape"
                   fill
                   className="object-cover rounded-lg transition-transform group-hover:scale-[1.02]"
@@ -279,12 +279,12 @@ export default function Home() {
                 accumsan in. Donec tempus, lorem eget venenatis molestie, nulla ipsum consectetur lorem, vel tempor
                 lorem ipsum vel lorem.
               </p>
-              <div className="relative h-[200px] md:h-[300px] lg:h-[400px] rounded-lg overflow-hidden">
+              <div className="relative h-[400px] md:h-[300px] lg:h-[400px] rounded-lg overflow-hidden">
                 <Image
-                  src="/placeholder.svg?height=500&width=800&text=Wooden+Boat+Lake"
+                  src="/images/home/enquiry.jpg?height=500&width=800&text=Wooden+Boat+Lake"
                   alt="Wooden boat on a crystal clear lake"
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                 />
               </div>
             </div>

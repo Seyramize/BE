@@ -38,7 +38,7 @@ export type Experience = {
       defaultContent: {
         title: "The Shai Hills Experience",
         shortDescription: "Experience the perfect blend of nature, culture, and adventure at Shai Hills.",
-        image: "/placeholder.svg?height=400&width=300&text=Shai+Hills+Adventure",
+        image: "/images/home/shaihills.jpg?height=400&width=300&text=Shai+Hills+Adventure",
         location: "Eastern Region, Ghana"
       },
       expandedContent: {
@@ -84,7 +84,7 @@ export type Experience = {
       defaultContent: {
         title: "The Cape Coast Experience",
         shortDescription: "Journey through Ghana's historic Cape Coast and ancient castles.",
-        image: "/placeholder.svg?height=400&width=300&text=Cape+Coast+Discovery",
+        image: "/images/home/capecoast.jpg?height=400&width=300&text=Cape+Coast+Discovery",
         location: "Central Region, Ghana"
       },
       expandedContent: {
@@ -130,7 +130,7 @@ export type Experience = {
       defaultContent: {
         title: "Accra in a Day",
         shortDescription: "Discover the vibrant capital with markets, museums, and cultural sites.",
-        image: "/placeholder.svg?height=400&width=300&text=Accra+City+Tour",
+        image: "/images/home/accra.jpeg?height=400&width=300&text=Accra+City+Tour",
         location: "Greater Accra, Ghana",
       },
       expandedContent: {

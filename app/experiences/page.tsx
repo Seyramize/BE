@@ -41,10 +41,10 @@ export default function ExperiencesPage() {
 			>
 				{/* Default Card State */}
 				<div
-					className={`rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-2500 ease-out h-full ${isHovered ? "opacity-0" : "opacity-100"}`}
+					className={`rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-2500 ease-out h-full`}
 					style={{
 						transition: 'opacity 1200ms ease-out, transform 2500ms ease-out',
-						transform: isHovered ? 'scale(0.95) rotate(-1deg)' : 'scale(1) rotate(0deg)',
+						transform: isHovered ? 'scale(0.98) rotate(-1deg)' : 'scale(1) rotate(0deg)',
 						transformOrigin: 'center'
 					}}
 				>
@@ -104,12 +104,22 @@ export default function ExperiencesPage() {
 								<MapPin className="w-3 h-3 mr-1" />
 								{defaultContent.location}
 							</div>
+							{/* Book Experience Button on hover */}
+							{isHovered && (
+								<div className="mt-4 flex justify-center">
+									<Link href={`/book-experience/${experience.id}`}>
+										<Button className="bg-transparent border border-white text-white font-sans px-12 py-2 rounded-full transition-colors text-sm min-w-[180px] hover:bg-white/10">
+											Book Experience
+										</Button>
+									</Link>
+								</div>
+							)}
 						</div>
 					</div>
 				</div>
 
 				{/* Expanded Card State */}
-				<div
+				{/* <div
 					className={`absolute top-0 rounded-xl overflow-hidden shadow-2xl transition-all duration-2500 ease-out pointer-events-none ${isHovered ? "opacity-100" : "opacity-0"} sm:w-[215%] w-full`}
 					style={{
 						height: "100%",
@@ -135,19 +145,19 @@ export default function ExperiencesPage() {
 						<div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
 
 						{/* Content Container */}
-						<div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6 md:p-8">
+						{/* <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6 md:p-8"> */}
 							{/* Badges Section */}
-							<div className="flex items-center gap-2 sm:gap-3 w-full mb-1">
+							{/* <div className="flex items-center gap-2 sm:gap-3 w-full mb-1">
 								<div className="bg-blue-950 backdrop-blur-sm text-white px-2 py-1 rounded-full font-sans text-[8px] sm:text-[10px] font-medium shadow-lg">
 									Travel Planner's Choice
 								</div>
 								<div className="bg-black/40 backdrop-blur-sm text-white px-2 py-1 rounded-full font-sans text-[8px] sm:text-[10px] border border-white/20">
 									2 PAX (Minimum)
 								</div>
-							</div>
+							</div> */}
 
 							{/* Content Section */}
-							<div className="flex flex-col">
+							{/* <div className="flex flex-col">
 								<div className="w-full">
 									<h2 className="text-xl sm:text-2xl md:text-3xl font-sans font-medium text-white mb-2 text-justify w-full">
 										{expandedContent.title}
@@ -163,10 +173,10 @@ export default function ExperiencesPage() {
 										</Link>
 									</Button>
 								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+							</div> */}
+						{/* </div> */}
+					{/* </div>
+				</div> */}
 			</div>
 		)
 	}
