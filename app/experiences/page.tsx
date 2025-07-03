@@ -260,7 +260,7 @@ export default function ExperiencesPage() {
 									<Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 w-3 h-3" />
 									<Input
 										placeholder="Search"
-										className="pl-8 pr-2 py-1 rounded-full border-gray-300 font-sans w-full text-[11px] h-8"
+										className="pl-8 pr-2 py-1 rounded-full border-gray-300 font-sans w-full text-base sm:text-[11px] h-8"
 										onFocus={() => setIsSearchFocused(true)}
 										onBlur={() => setIsSearchFocused(false)}
 									/>
@@ -316,7 +316,7 @@ export default function ExperiencesPage() {
 
 			{/* Experiences Grid with expanded spacing for hover effects */}
 			<section className="relative py-8 sm:py-12 md:py-16 bg-transparent">
-				<div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-white via-white to-transparent pointer-events-none z-10" />
+				<div className="absolute top-0 left-0 w-full h-14 bg-gradient-to-b from-white via-white to-transparent pointer-events-none z-10" />
 				<div className="container mx-auto px-4 sm:px-6">
 					{/* Grid with extra spacing to accommodate expanded cards */}
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
