@@ -46,7 +46,7 @@ export default function CustomizeExperiencePage() {
   })
   const [hasHistory, setHasHistory] = useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
-  const [errors, setErrors] = useState({ travelDates: "" })
+  const [errors, setErrors] = useState<{ [key: string]: string }>({})
 
   // Check if there's browser history available
   useEffect(() => {
@@ -88,6 +88,24 @@ export default function CustomizeExperiencePage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+
+    // Validation for required fields
+    const newErrors: { [key: string]: string } = {}
+    if (!formData.fullName.trim()) newErrors.fullName = "Full name is required"
+    if (!formData.email.trim()) newErrors.email = "Email is required"
+    if (!formData.phoneNumber.trim()) newErrors.phoneNumber = "Phone number is required"
+    if (!formData.preferredContact.trim()) newErrors.preferredContact = "Preferred contact method is required"
+    if (!formData.experienceVision.trim()) newErrors.experienceVision = "Experience vision is required"
+    if (!formData.groupSize.trim()) newErrors.groupSize = "Group size is required"
+    if (!formData.travelDates.trim()) newErrors.travelDates = "Preferred travel dates are required"
+
+    setErrors(newErrors)
+
+    if (Object.keys(newErrors).length > 0) {
+      // There are errors, do not submit
+      return
+    }
+
     console.log("Custom experience form submitted:", formData)
     // Handle form submission logic here
 
@@ -204,6 +222,7 @@ export default function CustomizeExperiencePage() {
                     onChange={(e) => handleInputChange("fullName", e.target.value)}
                     className="w-full bg-white border-slate-200 text-slate-800 placeholder:text-slate-400 h-12"
                   />
+                  {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>}
                 </div>
 
                 {/* Email Address */}
@@ -219,6 +238,7 @@ export default function CustomizeExperiencePage() {
                     onChange={(e) => handleInputChange("email", e.target.value)}
                     className="w-full bg-white border-slate-200 text-slate-800 placeholder:text-slate-400 h-12"
                   />
+                  {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
                 </div>
 
                 {/* Phone Number */}
@@ -240,6 +260,7 @@ export default function CustomizeExperiencePage() {
                       className="flex-1 bg-white border-slate-200 text-slate-800 placeholder:text-slate-400 h-12"
                     />
                   </div>
+                  {errors.phoneNumber && <p className="text-red-500 text-xs mt-1">{errors.phoneNumber}</p>}
                 </div>
 
                 {/* Preferred Contact Method */}
@@ -260,6 +281,7 @@ export default function CustomizeExperiencePage() {
                       <SelectItem value="WhatsApp">WhatsApp</SelectItem>
                     </SelectContent>
                   </Select>
+                  {errors.preferredContact && <p className="text-red-500 text-xs mt-1">{errors.preferredContact}</p>}
                 </div>
               </div>
             </div>
@@ -282,6 +304,7 @@ export default function CustomizeExperiencePage() {
                   onChange={(e) => handleInputChange("experienceVision", e.target.value)}
                   className="w-full bg-white border-slate-200 text-slate-800 placeholder:text-slate-400 min-h-[120px] resize-none"
                 />
+                {errors.experienceVision && <p className="text-red-500 text-xs mt-1">{errors.experienceVision}</p>}
               </div>
             </div>
 
@@ -324,6 +347,7 @@ export default function CustomizeExperiencePage() {
                   onChange={(e) => handleInputChange("groupSize", e.target.value)}
                   className="w-full bg-white border-slate-200 text-slate-800 placeholder:text-slate-400 h-12"
                 />
+                {errors.groupSize && <p className="text-red-500 text-xs mt-1">{errors.groupSize}</p>}
               </div>
 
               {/* Preferred Travel Dates */}
@@ -332,7 +356,7 @@ export default function CustomizeExperiencePage() {
                   htmlFor="travelDates"
                   className="block text-slate-800 font-sans text-sm font-medium mb-2"
                 >
-                  Preferred Travel Dates
+                  Preferred Travel Dates <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
                   <Input
