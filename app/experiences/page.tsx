@@ -335,10 +335,10 @@ export default function ExperiencesPage() {
 						<div className="relative rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow h-64 sm:h-72 md:h-80">
 							<div className="relative h-full">
 								<Image
-									src="/placeholder.svg?height=320&width=1200&text=Tropical+Beach+Paradise"
+									src="/images/experiences/lastcard.jpg?height=320&width=1200&text=Tropical+Beach+Paradise"
 									alt="Bespoke tropical experience"
 									fill
-									className="object-cover"
+									className="object-cover object-fill"
 								/>
 								<div className="absolute inset-0 bg-black/40" />
 								<div className="absolute inset-0 p-4 sm:p-6 md:p-8 pl-8 sm:pl-12 md:pl-20 flex flex-col justify-center max-w-full sm:max-w-2xl">

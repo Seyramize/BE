@@ -313,39 +313,63 @@ export default function BookExperiencePage() {
       <SiteHeader />
 
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] md:min-h-screen flex items-center justify-center">
+      <section className="relative min-h-[70vh] md:min-h-[95vh] flex items-start justify-center pt-28 md:pt-40 pb-24">
         <div className="absolute inset-0">
           <Image
             src={bookingContent.heroImage}
             alt={bookingContent.title}
             fill
             className="object-cover"
+            style={{ filter: "blur(0.25px)" }} 
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
+          {/* Glassmorphism gradient */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: "linear-gradient(to bottom, rgba(255,255,255,0) 90%, #fff 100%)"
+            }}
+          />
         </div>
-        <div className="relative text-center text-white z-10 px-4 max-w-4xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-sans font-normal mb-4 md:mb-6 leading-tight">
+        <div className="relative w-full max-w-5xl mx-auto px-4 text-center z-10">
+          <h1 className="font-serif font-normal text-white mb-2 drop-shadow-md text-[clamp(2rem,6vw,4rem)]"
+           style={{
+            textShadow: `
+              0 4px 24px rgba(0,0,0,0.55), 
+              0 2px 8px rgba(0,0,0,0.45), 
+              0 1px 0 #fff
+            `
+          }}>
             {bookingContent.title}
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 md:mb-8 max-w-3xl mx-auto font-sans leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 md:mb-8 max-w-3xl mx-auto font-sans leading-relaxed"
+           style={{
+            textShadow: `
+              0 4px 24px rgba(0,0,0,0.55), 
+              0 2px 8px rgba(0,0,0,0.45), 
+              0 1px 0 #fff
+            `
+          }}>
             {bookingContent.subtitle}
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-8 text-white/90 font-sans text-sm uppercase tracking-wider">
+          <div className="inline-flex items-center justify-center gap-3 sm:gap-2 px-2 sm:px-8 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-sm text-[clamp(0.55rem,2vw,0.95rem)] uppercase tracking-widest font-sans text-white whitespace-nowrap"
+           style={{
+            textShadow: "0 2px 8px rgba(0,0,0,0.10), 0 1px 0 #fff"
+          }}>
             <span>{bookingContent.duration}</span>
-            <span className="hidden sm:inline">•</span>
+            <span>•</span>
             <span>{bookingContent.destinations}</span>
-            <span className="hidden sm:inline">•</span>
+            <span>•</span>
             <span>{bookingContent.maxGuests}</span>
           </div>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="py-8 sm:py-12 md:py-16 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
+      {/* Main Content (starts immediately after the faded hero image) */}
+      <section className="relative z-10 bg-white pt-0 pb-12">
+        <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-            {/* Left Column - Overview and Highlights */}
+            {/* Overview and Highlights */}
             <div className="lg:col-span-2 space-y-8 md:space-y-12">
               {/* Overview */}
               <div>

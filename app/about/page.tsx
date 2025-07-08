@@ -53,10 +53,10 @@ export default function AboutPage() {
           <div className="relative rounded-lg overflow-hidden w-full mx-auto mb-32 px-4 md:px-8 lg:px-16 max-w-7xl">
             <div className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] w-full flex items-center justify-center">
               <Image
-                src="/placeholder.svg?height=500&width=800&text=Silhouettes+Against+Twilight+Sky"
+                src="/images/about-us/aboutusvideo.jpg?height=500&width=800&text=Silhouettes+Against+Twilight+Sky"
                 alt="People silhouettes against twilight sky"
                 fill
-                className="object-cover"
+                className="object-contain object-fill"
               />
               <div className="absolute inset-0 bg-slate-900/60" />
               <div className="absolute inset-0 flex items-center justify-center">
@@ -165,7 +165,7 @@ export default function AboutPage() {
                 {/* First image - slightly wider */}
                 <div className="relative h-[350px] w-[58%] rounded-lg overflow-hidden">
                   <Image
-                    src="/placeholder.svg?height=300&width=500&text=Community+Sustainability+Initiatives"
+                    src="/images/about-us/sustainability1.jpg?height=300&width=500&text=Community+Sustainability+Initiatives"
                     alt="Community sustainability initiatives and local partnerships"
                     fill
                     className="object-cover"
@@ -176,7 +176,7 @@ export default function AboutPage() {
                 {/* Second image - slightly narrower */}
                 <div className="relative h-[350px] w-[42%] rounded-lg overflow-hidden">
                   <Image
-                    src="/placeholder.svg?height=250&width=400&text=Environmental+Conservation+Efforts"
+                    src="/images/about-us/sustainability2.jpg?height=250&width=400&text=Environmental+Conservation+Efforts"
                     alt="Environmental conservation and eco-friendly practices"
                     fill
                     className="object-cover"
