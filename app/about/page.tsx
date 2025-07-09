@@ -56,7 +56,7 @@ export default function AboutPage() {
                 src="/images/about-us/aboutusvideo.jpg?height=500&width=800&text=Silhouettes+Against+Twilight+Sky"
                 alt="People silhouettes against twilight sky"
                 fill
-                className="object-contain object-fill"
+                className="object-cover [object-position:50%_30%]"
               />
               <div className="absolute inset-0 bg-slate-900/60" />
               <div className="absolute inset-0 flex items-center justify-center">

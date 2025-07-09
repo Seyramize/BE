@@ -338,7 +338,7 @@ export default function ExperiencesPage() {
 									src="/images/experiences/lastcard.jpg?height=320&width=1200&text=Tropical+Beach+Paradise"
 									alt="Bespoke tropical experience"
 									fill
-									className="object-cover object-fill"
+									className="object-cover [object-position:50%_20%]"
 								/>
 								<div className="absolute inset-0 bg-black/40" />
 								<div className="absolute inset-0 p-4 sm:p-6 md:p-8 pl-8 sm:pl-12 md:pl-20 flex flex-col justify-center max-w-full sm:max-w-2xl">
