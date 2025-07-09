@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { X, Check, Mail, Calendar, Users, MapPin, ExternalLink } from "lucide-react"
+import { X, Check, Mail, Calendar, Users, MapPin, ExternalLink, Clipboard } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface BookingConfirmationProps {
@@ -10,13 +10,46 @@ interface BookingConfirmationProps {
   onClose: () => void
   bookingDetails: {
     experienceName: string
-    date: string
+    preferredDate: string
+    alternateDate: string
     guests: number
     email: string
     bookingId: string
     transactionId?: string
     includedItems?: string[]
   }
+}
+
+function shortenId(id: string, length = 8) {
+  if (!id) return "";
+  if (id.length <= length) return id;
+  const half = Math.floor(length / 2);
+  return `${id.slice(0, half)}...${id.slice(-half)}`;
+}
+
+function CopyButton({ value }: { value: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(value);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1200);
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="ml-2 p-1 rounded hover:bg-slate-200 transition-colors"
+      title="Copy to clipboard"
+      type="button"
+    >
+      {copied ? (
+        <Check className="w-4 h-4 text-green-600" />
+      ) : (
+        <Clipboard className="w-4 h-4 text-slate-600" />
+      )}
+    </button>
+  );
 }
 
 export function BookingConfirmation({ isOpen, onClose, bookingDetails }: BookingConfirmationProps) {
@@ -128,14 +161,29 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                     </p>
                   </div>
 
-                  {/* Date */}
+                  {/* Preferred Date */}
                   <div>
                     <div className="flex items-center gap-2 mb-2">
                       <Calendar className="w-4 h-4 text-slate-600" />
-                      <span className="text-sm font-medium text-slate-600 uppercase tracking-wider">DATE</span>
+                      <span className="text-sm font-medium text-slate-600 uppercase tracking-wider">PREFERRED DATE</span>
                     </div>
                     <p className="text-lg font-sans text-slate-800">
-                      {new Date(bookingDetails.date).toLocaleDateString("en-US", {
+                      {new Date(bookingDetails.preferredDate).toLocaleDateString("en-US", {
+                        weekday: "long",
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
+                    </p>
+                  </div>
+                  {/* Alternate Date */}
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <Calendar className="w-4 h-4 text-slate-600" />
+                      <span className="text-sm font-medium text-slate-600 uppercase tracking-wider">ALTERNATE DATE</span>
+                    </div>
+                    <p className="text-lg font-sans text-slate-800">
+                      {new Date(bookingDetails.alternateDate).toLocaleDateString("en-US", {
                         weekday: "long",
                         day: "numeric",
                         month: "long",
@@ -200,14 +248,20 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                 {/* Booking Reference */}
                 <div className="bg-white rounded-lg p-4 mb-8 border border-stone-200">
                   <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
+                    <div className="flex justify-between items-center">
                       <span className="text-slate-600">Booking ID:</span>
-                      <span className="text-slate-800 font-mono">{bookingDetails.bookingId}</span>
+                      <span className="text-slate-800 font-mono flex items-center">
+                        {shortenId(bookingDetails.bookingId)}
+                        <CopyButton value={bookingDetails.bookingId} />
+                      </span>
                     </div>
                     {bookingDetails.transactionId && (
-                      <div className="flex justify-between">
+                      <div className="flex justify-between items-center">
                         <span className="text-slate-600">Transaction ID:</span>
-                        <span className="text-slate-800 font-mono">{bookingDetails.transactionId}</span>
+                        <span className="text-slate-800 font-mono flex items-center">
+                          {shortenId(bookingDetails.transactionId)}
+                          <CopyButton value={bookingDetails.transactionId} />
+                        </span>
                       </div>
                     )}
                   </div>

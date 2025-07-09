@@ -10,18 +10,23 @@ import { CountrySelector } from "@/components/country-selector"
 import { LocationSelector } from "@/components/location-selector"
 import { BookingPaymentFlow } from "@/components/booking-payment-flow"
 import { TravelPlannerModal } from "@/components/travel-planner-modal-clean"
+import { BookingConfirmation } from "@/components/booking-confirmation"
 
 interface ExperienceData {
   title: string
   startingPrice: number
   minimumGuests: number
   heroImage: string
+  id: string
+  slug: string // <-- Add this line
 }
 
 interface BookingFormModalProps {
   isOpen: boolean
   onClose: () => void
   experience: ExperienceData
+  showConfirmation?: boolean
+  bookingDetails?: any
 }
 
 interface FormData {
@@ -37,7 +42,7 @@ interface FormData {
   customGuestCount: number
 }
 
-export function BookingFormModal({ isOpen, onClose, experience }: BookingFormModalProps) {
+export function BookingFormModal({ isOpen, onClose, experience, showConfirmation = false, bookingDetails }: BookingFormModalProps) {
   const [showPaymentFlow, setShowPaymentFlow] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [formData, setFormData] = useState<FormData>({
@@ -133,6 +138,7 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
     if (!formData.phoneNumber.trim()) newErrors.phoneNumber = "Phone number is required"
     if (!formData.location.trim()) newErrors.location = "Location is required"
     if (!formData.preferredDate) newErrors.preferredDate = "Preferred date is required"
+    if (!formData.alternateDate) newErrors.alternateDate = "Alternate date is required"
     if (formData.guests.length === 0 && formData.customGuestCount === 0) {
       newErrors.guests = "Please select number of guests"
     }
@@ -181,7 +187,8 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
           experienceName: experience.title,
           experienceImage: experience.heroImage,
           guests: selectedGuestCount,
-          date: formData.preferredDate,
+          preferredDate: formData.preferredDate,
+          alternateDate: formData.alternateDate,
           totalAmount: totalCost,
           email: formData.email,
           fullName: formData.fullName,
@@ -191,7 +198,20 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
             "Curated lunch and dinner",
             "Restorative waterfall massage",
           ],
+          experienceId: experience.id,
+          experienceSlug: experience.slug, // <-- Add this line
         }}
+      />
+    )
+  }
+
+  if (showConfirmation && bookingDetails) {
+    // Show confirmation modal directly after payment
+    return (
+      <BookingConfirmation
+        isOpen={isOpen}
+        onClose={onClose}
+        bookingDetails={bookingDetails}
       />
     )
   }
@@ -418,8 +438,9 @@ export function BookingFormModal({ isOpen, onClose, experience }: BookingFormMod
                             type="date"
                             value={formData.alternateDate}
                             onChange={(e) => handleInputChange("alternateDate", e.target.value)}
-                            className="w-50 bg-white border-slate-200 text-slate-800 h-11"
+                            className={`w-50 bg-white border-slate-200 text-slate-800 h-11${errors.alternateDate ? " border-red-500" : ""}`}
                           />
+                          {errors.alternateDate && <p className="text-red-500 text-xs mt-1">{errors.alternateDate}</p>}
                         </div>
                       </div>
 

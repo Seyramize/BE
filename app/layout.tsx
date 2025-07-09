@@ -4,6 +4,7 @@ import type { Metadata } from "next"
 import { ThemeProvider } from "@/components/theme-provider"
 import Script from "next/script"
 import localFont from 'next/font/local'
+import { Toaster } from "@/components/ui/toaster"
 
 // Argent font for headings
 const argent = localFont({
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body className={`${argent.variable} ${helvetica.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
       {/* Script to clean up any unwanted attributes that might cause hydration issues */}

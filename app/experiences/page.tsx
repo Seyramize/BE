@@ -106,7 +106,7 @@ export default function ExperiencesPage() {
 							</div>
 							{/* Book Experience Button: always on mobile, on hover for desktop */}
 							<div className="mt-4 flex justify-center">
-								<Link href={`/book-experience/${experience.id}`}>
+								<Link href={`/book-experience/${experience.slug}`}>
 									<Button
 										className={`
 											bg-transparent border border-white text-white font-sans px-12 py-2 rounded-full transition-colors text-sm min-w-[180px] hover:bg-white/10
@@ -117,7 +117,7 @@ export default function ExperiencesPage() {
 									</Button>
 								</Link>
 								{isHovered && (
-									<Link href={`/book-experience/${experience.id}`}>
+									<Link href={`/book-experience/${experience.slug}`}>
 										<Button
 											className={`
 												bg-transparent border border-white text-white font-sans px-12 py-2 rounded-full transition-colors text-sm min-w-[180px] hover:bg-white/10

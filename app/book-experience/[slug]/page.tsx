@@ -11,6 +11,8 @@ import { GalleryModal } from "@/components/gallery-modal"
 import { experiences, type Experience } from "@/lib/experiences-data"
 import { Check, Eye, Sparkle, Hammer, PocketKnife, User, BedDouble, Car, Salad, Users, Drum, VenetianMask, Sailboat, Wifi, Utensils, Gift, GlassWater, Bus,  } from "lucide-react"
 import { useState } from "react"
+import { useSearchParams } from "next/navigation"
+import { useEffect } from "react"
 
 const includedIcons: Record<string, any> = {
   "Private transportation including fuel": Car,
@@ -279,16 +281,39 @@ function getRelatedExperiences(currentExperience: Experience, allExperiences: Ex
 
 export default function BookExperiencePage() {
   const { slug } = useParams()
+  const searchParams = useSearchParams()
+  const sessionId = searchParams.get('session_id')
   console.log('URL slug:', slug)
   
   // Import experiences from the data file
-  const experience = experiences.find(exp => exp.id === parseInt(slug as string))
+  const experience = experiences.find(
+    exp => exp.id === parseInt(slug as string) || exp.slug === slug
+  )
   console.log('Available experiences:', experiences.map(e => ({ id: e.id, title: e.defaultContent.title })))
   console.log('Looking for ID:', parseInt(slug as string))
   console.log('Found experience:', experience)
 
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false)
   const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false)
+  const [showConfirmation, setShowConfirmation] = useState(false)
+  const [bookingDetails, setBookingDetails] = useState<any>(null)
+
+  useEffect(() => {
+    if (sessionId) {
+      // Fetch booking/payment details from backend using sessionId
+      fetch(`/api/booking-details?session_id=${sessionId}`)
+        .then(res => res.json())
+        .then(data => {
+          setBookingDetails(data)
+          setIsBookingModalOpen(true)
+          setShowConfirmation(true)
+        })
+        .catch(() => {
+          setIsBookingModalOpen(true)
+          setShowConfirmation(false)
+        })
+    }
+  }, [sessionId])
 
   if (!experience) {
     return (
@@ -514,7 +539,7 @@ export default function BookExperiencePage() {
                     <p className="text-white/90 text-sm font-sans leading-relaxed mb-3 line-clamp-2">
                       {experience.defaultContent.shortDescription}
                     </p>
-                    <Link href={`/book-experience/${experience.id}`}>
+                    <Link href={`/book-experience/${experience.slug}`}>
                       <Button
                         size="sm"
                         className="bg-white/20 hover:bg-white/30 text-white font-sans px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
@@ -534,11 +559,15 @@ export default function BookExperiencePage() {
         isOpen={isBookingModalOpen}
         onClose={() => setIsBookingModalOpen(false)}
         experience={{
+          id: experience.id.toString(),
           title: bookingContent.title,
           startingPrice: bookingContent.startingPrice,
           minimumGuests: bookingContent.minimumGuests,
-          heroImage: bookingContent.heroImage
+          heroImage: bookingContent.heroImage,
+          slug: experience.slug, // <-- Add this line
         }}
+        showConfirmation={showConfirmation}
+        bookingDetails={bookingDetails}
       />
 
       {/* Gallery Modal */}

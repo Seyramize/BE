@@ -254,12 +254,12 @@ export type Experience = {
         maxGuests: "8 GUESTS (MAX)",
         heroImage: "/images/experiences/chocolate+spa/cover.jpg?height=800&width=1200&text=Chocolate+Spa",
         galleryImages: [
-          "/images/experiences/chocolate+spa/Gallery/79514495_2575528292542900_3359421924559028224_n.jpg?height=400&width=300&text=Chocolate+Workshop",
-          "/images/experiences/chocolate+spa/Gallery/3ed73bda8e15-75399742_4K.jpg?height=400&width=300&text=Chocolate+Workshop",
-          "/images/experiences/chocolate+spa/Gallery/ousu 404 (1).jpg?height=400&width=300&text=Chocolate+Workshop",
-          "/images/experiences/chocolate+spa/Gallery/ousu 411 (1).jpg?height=400&width=300&text=Chocolate+Workshop",
-          "/images/experiences/chocolate+spa/Gallery/ousu 435.jpg?height=400&width=300&text=Chocolate+Workshop",
-          "/images/experiences/chocolate+spa/Gallery/This Valentine’s Day, escape into luxury with our exclusive couples’ spa experiences at Resense .jpg?height=400&width=300&text=Chocolate+Workshop",
+          "/images/experiences/chocolate+spa/Gallery/1.jpg?height=400&width=300&text=Chocolate+Workshop",
+          "/images/experiences/chocolate+spa/Gallery/2.jpg?height=400&width=300&text=Chocolate+Workshop",
+          "/images/experiences/chocolate+spa/Gallery/3.jpg?height=400&width=300&text=Chocolate+Workshop",
+          "/images/experiences/chocolate+spa/Gallery/4.jpg?height=400&width=300&text=Chocolate+Workshop",
+          "/images/experiences/chocolate+spa/Gallery/5.jpg?height=400&width=300&text=Chocolate+Workshop",
+          "/images/experiences/chocolate+spa/Gallery/6.jpg?height=400&width=300&text=Chocolate+Workshop",
         ],
         overview: "Discover the rich world of Ghanaian cocoa in a hands-on chocolate-making workshop. Craft your own delicious treats with guidance from expert chocolatiers. Then, slip into serenity with a soothing massage at the luxurious Resense Spa. This experience blends indulgence and relaxation, perfect for food lovers and wellness seekers alike.",
         highlights: [

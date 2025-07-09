@@ -11,11 +11,14 @@ interface BookingPaymentFlowProps {
     experienceName: string
     experienceImage?: string
     guests: number
-    date: string
+    preferredDate: string
+    alternateDate: string
     totalAmount: number
     email: string
     fullName: string
     includedItems?: string[]
+    experienceId: string
+    experienceSlug: string
   }
 }
 
@@ -58,9 +61,12 @@ export function BookingPaymentFlow({ isOpen, onClose, bookingDetails }: BookingP
             experienceImage: bookingDetails.experienceImage,
             totalAmount: bookingDetails.totalAmount,
             guests: bookingDetails.guests,
-            date: bookingDetails.date,
+            preferredDate: bookingDetails.preferredDate,
+            alternateDate: bookingDetails.alternateDate,
             email: bookingDetails.email,
             fullName: bookingDetails.fullName,
+            experienceId: bookingDetails.experienceId,
+            experienceSlug: bookingDetails.experienceSlug,
           }}
         />
       )}
@@ -71,7 +77,8 @@ export function BookingPaymentFlow({ isOpen, onClose, bookingDetails }: BookingP
           onClose={handleClose}
           bookingDetails={{
             experienceName: bookingDetails.experienceName,
-            date: bookingDetails.date,
+            preferredDate: bookingDetails.preferredDate,
+            alternateDate: bookingDetails.alternateDate,
             guests: bookingDetails.guests,
             email: bookingDetails.email,
             bookingId: paymentData.bookingId || `BK${Date.now()}`,

@@ -8,6 +8,7 @@ import { ArrowLeft, X, CreditCard, Lock, Shield, UserRound, BookUser, ShieldPlus
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { loadStripe } from "@stripe/stripe-js"
 
 interface PaymentConfirmationModalProps {
   isOpen: boolean
@@ -19,9 +20,12 @@ interface PaymentConfirmationModalProps {
     experienceImage?: string
     totalAmount: number
     guests: number
-    date: string
+    preferredDate: string
+    alternateDate: string
     email: string
     fullName: string
+    experienceId: string
+    experienceSlug: string // Added experienceSlug to the interface
   }
 }
 
@@ -31,6 +35,8 @@ interface PaymentFormData {
   expiryDate: string
   cvv: string
   paymentMethod: string
+  mobileMoneyPhone?: string
+  mobileMoneyProvider?: string
 }
 
 export function PaymentConfirmationModal({
@@ -48,6 +54,8 @@ export function PaymentConfirmationModal({
     expiryDate: "",
     cvv: "",
     paymentMethod: "credit-debit-card",
+    mobileMoneyPhone: "",
+    mobileMoneyProvider: "",
   })
 
   // Close modal with ESC key
@@ -109,11 +117,16 @@ export function PaymentConfirmationModal({
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {}
 
-    if (!formData.nameOnCard.trim()) newErrors.nameOnCard = "Name on card is required"
-    if (!formData.cardNumber.replace(/\s/g, "")) newErrors.cardNumber = "Card number is required"
-    if (formData.cardNumber.replace(/\s/g, "").length < 13) newErrors.cardNumber = "Invalid card number"
-    if (!formData.expiryDate) newErrors.expiryDate = "Expiry date is required"
-    if (!formData.cvv) newErrors.cvv = "CVV is required"
+    if (formData.paymentMethod === "credit-debit-card") {
+      if (!formData.nameOnCard.trim()) newErrors.nameOnCard = "Name on card is required"
+      if (!formData.cardNumber.replace(/\s/g, "")) newErrors.cardNumber = "Card number is required"
+      if (formData.cardNumber.replace(/\s/g, "").length < 13) newErrors.cardNumber = "Invalid card number"
+      if (!formData.expiryDate) newErrors.expiryDate = "Expiry date is required"
+      if (!formData.cvv) newErrors.cvv = "CVV is required"
+    } else if (formData.paymentMethod === "mobile-money") {
+      if (!formData.mobileMoneyPhone || !/^\d{9,15}$/.test(formData.mobileMoneyPhone)) newErrors.mobileMoneyPhone = "Valid phone number is required"
+      if (!formData.mobileMoneyProvider) newErrors.mobileMoneyProvider = "Provider is required"
+    }
 
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -123,26 +136,35 @@ export function PaymentConfirmationModal({
     e.preventDefault()
 
     if (!validateForm()) return
-
     setIsProcessing(true)
 
     try {
-      // Simulate payment processing
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-
-      // Simulate successful payment
-      const paymentData = {
-        transactionId: `TXN${Date.now()}`,
-        bookingId: `BK${Date.now()}`,
-        amount: bookingDetails.totalAmount,
-        paymentMethod: "Credit Card",
-        status: "success",
-        timestamp: new Date().toISOString(),
+      // Stripe Checkout for both card and mobile money
+      const res = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: bookingDetails.totalAmount,
+          email: bookingDetails.email,
+          experienceName: bookingDetails.experienceName,
+          phone: formData.mobileMoneyPhone,
+          mobileMoneyProvider: formData.mobileMoneyProvider,
+          guests: bookingDetails.guests,
+          preferredDate: bookingDetails.preferredDate,
+          alternateDate: bookingDetails.alternateDate,
+          fullName: bookingDetails.fullName,
+          experienceId: bookingDetails.experienceId,
+          experienceSlug: bookingDetails.experienceSlug, // <-- ADD THIS
+        }),
+      })
+      const data = await res.json()
+      if (data.url) {
+        window.location.href = data.url
+        return
+      } else {
+        setErrors({ general: "Failed to initiate payment." })
       }
-
-      onPaymentSuccess(paymentData)
     } catch (error) {
-      console.error("Payment failed:", error)
       setErrors({ general: "Payment failed. Please try again." })
     } finally {
       setIsProcessing(false)
@@ -249,8 +271,12 @@ export function PaymentConfirmationModal({
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-600">Date:</span>
-                      <span className="text-slate-800">{new Date(bookingDetails.date).toLocaleDateString()}</span>
+                      <span className="text-slate-600">Preferred Date:</span>
+                      <span className="text-slate-800">{new Date(bookingDetails.preferredDate).toLocaleDateString()}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-600">Alternate Date:</span>
+                      <span className="text-slate-800">{new Date(bookingDetails.alternateDate).toLocaleDateString()}</span>
                     </div>
                     <div className="border-t border-stone-200 pt-2 mt-3">
                       <div className="flex justify-between font-serif text-lg">
@@ -274,7 +300,7 @@ export function PaymentConfirmationModal({
                       <label className="block text-slate-800 font-sans text-sm font-medium mb-3">Payment method</label>
                       <Select
                         value={formData.paymentMethod}
-                        onValueChange={(value) => handleInputChange("paymentMethod", value)}
+                        onValueChange={(value: string) => handleInputChange("paymentMethod", value)}
                       >
                         <SelectTrigger className="w-full bg-white border-stone-200 h-12">
                           <div className="flex items-center gap-2">
@@ -284,94 +310,142 @@ export function PaymentConfirmationModal({
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="credit-debit-card">Credit/Debit card</SelectItem>
+                          {/* <SelectItem value="mobile-money">Mobile Money</SelectItem> */}
                         </SelectContent>
                       </Select>
                     </div>
 
-                    {/* Name on Card */}
-                    <div className="mb-6">
-                      <label htmlFor="nameOnCard" className="block text-slate-800 font-sans text-sm font-medium mb-2">
-                        Name on card
-                      </label>
-                      <div className="relative">
-                        <UserRound className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                        <Input
-                          id="nameOnCard"
-                          type="text"
-                          placeholder="Match the name exactly"
-                          value={formData.nameOnCard}
-                          onChange={(e) => handleInputChange("nameOnCard", e.target.value)}
-                          disabled={isProcessing}
-                          className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 pl-9 ${
-                            errors.nameOnCard ? "border-red-500" : ""
-                          }`}
-                        />
-                      </div>
-                      {errors.nameOnCard && <p className="text-red-500 text-xs mt-1">{errors.nameOnCard}</p>}
-                    </div>
+                    {/* Conditionally render payment fields */}
+                    {formData.paymentMethod === "credit-debit-card" && (
+                      <>
+                        {/* Name on Card */}
+                        <div className="mb-6">
+                          <label htmlFor="nameOnCard" className="block text-slate-800 font-sans text-sm font-medium mb-2">
+                            Name on card
+                          </label>
+                          <div className="relative">
+                            <UserRound className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                            <Input
+                              id="nameOnCard"
+                              type="text"
+                              placeholder="Match the name exactly"
+                              value={formData.nameOnCard}
+                              onChange={(e) => handleInputChange("nameOnCard", e.target.value)}
+                              disabled={isProcessing}
+                              className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 pl-9 ${
+                                errors.nameOnCard ? "border-red-500" : ""
+                              }`}
+                            />
+                          </div>
+                          {errors.nameOnCard && <p className="text-red-500 text-xs mt-1">{errors.nameOnCard}</p>}
+                        </div>
 
-                    {/* Card Number */}
-                    <div className="mb-6">
-                      <label htmlFor="cardNumber" className="block text-slate-800 font-sans text-sm font-medium mb-2">
-                        Card number
-                      </label>
-                      <div className="relative">
-                        <BookUser className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                        <Input
-                          id="cardNumber"
-                          type="text"
-                          placeholder="1234 5678 9012 3456"
-                          value={formData.cardNumber}
-                          onChange={(e) => handleInputChange("cardNumber", e.target.value)}
-                          disabled={isProcessing}
-                          className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 pl-9 ${
-                            errors.cardNumber ? "border-red-500" : ""
-                          }`}
-                        />
-                      </div>
-                      {errors.cardNumber && <p className="text-red-500 text-xs mt-1">{errors.cardNumber}</p>}
-                    </div>
+                        {/* Card Number */}
+                        <div className="mb-6">
+                          <label htmlFor="cardNumber" className="block text-slate-800 font-sans text-sm font-medium mb-2">
+                            Card number
+                          </label>
+                          <div className="relative">
+                            <BookUser className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                            <Input
+                              id="cardNumber"
+                              type="text"
+                              placeholder="1234 5678 9012 3456"
+                              value={formData.cardNumber}
+                              onChange={(e) => handleInputChange("cardNumber", e.target.value)}
+                              disabled={isProcessing}
+                              className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 pl-9 ${
+                                errors.cardNumber ? "border-red-500" : ""
+                              }`}
+                            />
+                          </div>
+                          {errors.cardNumber && <p className="text-red-500 text-xs mt-1">{errors.cardNumber}</p>}
+                        </div>
 
-                    {/* Expiry and CVV */}
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                      <div>
-                        <label htmlFor="expiryDate" className="block text-slate-800 font-sans text-sm font-medium mb-2">
-                          Expiry date
-                        </label>
-                        <div className="relative">
-                          <ShieldPlus className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                        {/* Expiry and CVV */}
+                        <div className="grid grid-cols-2 gap-4 mb-6">
+                          <div>
+                            <label htmlFor="expiryDate" className="block text-slate-800 font-sans text-sm font-medium mb-2">
+                              Expiry date
+                            </label>
+                            <div className="relative">
+                              <ShieldPlus className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                              <Input
+                                id="expiryDate"
+                                type="text"
+                                placeholder="MM/YY"
+                                value={formData.expiryDate}
+                                onChange={(e) => handleInputChange("expiryDate", e.target.value)}
+                                disabled={isProcessing}
+                                className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 pl-9 ${
+                                  errors.expiryDate ? "border-red-500" : ""
+                                }`}
+                              />
+                            </div>
+                            {errors.expiryDate && <p className="text-red-500 text-xs mt-1">{errors.expiryDate}</p>}
+                          </div>
+                          <div>
+                            <label htmlFor="cvv" className="block text-slate-800 font-sans text-sm font-medium mb-2">
+                              CVV
+                            </label>
+                            <Input
+                              id="cvv"
+                              type="text"
+                              placeholder="123"
+                              value={formData.cvv}
+                              onChange={(e) => handleInputChange("cvv", e.target.value)}
+                              disabled={isProcessing}
+                              className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 ${
+                                errors.cvv ? "border-red-500" : ""
+                              }`}
+                            />
+                            {errors.cvv && <p className="text-red-500 text-xs mt-1">{errors.cvv}</p>}
+                          </div>
+                        </div>
+                      </>
+                    )}
+                    {/*
+                    {formData.paymentMethod === "mobile-money" && (
+                      <>
+                        <div className="mb-6">
+                          <label htmlFor="mobileMoneyPhone" className="block text-slate-800 font-sans text-sm font-medium mb-2">
+                            Mobile Money Phone Number
+                          </label>
                           <Input
-                            id="expiryDate"
-                            type="text"
-                            placeholder="MM/YY"
-                            value={formData.expiryDate}
-                            onChange={(e) => handleInputChange("expiryDate", e.target.value)}
+                            id="mobileMoneyPhone"
+                            type="tel"
+                            placeholder="e.g. 024XXXXXXX"
+                            value={formData.mobileMoneyPhone}
+                            onChange={(e) => handleInputChange("mobileMoneyPhone", e.target.value)}
                             disabled={isProcessing}
-                            className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 pl-9 ${
-                              errors.expiryDate ? "border-red-500" : ""
+                            className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 ${
+                              errors.mobileMoneyPhone ? "border-red-500" : ""
                             }`}
                           />
+                          {errors.mobileMoneyPhone && <p className="text-red-500 text-xs mt-1">{errors.mobileMoneyPhone}</p>}
                         </div>
-                        {errors.expiryDate && <p className="text-red-500 text-xs mt-1">{errors.expiryDate}</p>}
-                      </div>
-                      <div>
-                        <label htmlFor="cvv" className="block text-slate-800 font-sans text-sm font-medium mb-2">
-                          CVV
-                        </label>
-                        <Input
-                          id="cvv"
-                          type="text"
-                          placeholder="123"
-                          value={formData.cvv}
-                          onChange={(e) => handleInputChange("cvv", e.target.value)}
-                          disabled={isProcessing}
-                          className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 ${
-                            errors.cvv ? "border-red-500" : ""
-                          }`}
-                        />
-                        {errors.cvv && <p className="text-red-500 text-xs mt-1">{errors.cvv}</p>}
-                      </div>
-                    </div>
+                        <div className="mb-6">
+                          <label htmlFor="mobileMoneyProvider" className="block text-slate-800 font-sans text-sm font-medium mb-2">
+                            Mobile Money Provider
+                          </label>
+                          <Select
+                            value={formData.mobileMoneyProvider}
+                            onValueChange={(value: string) => handleInputChange("mobileMoneyProvider", value)}
+                          >
+                            <SelectTrigger className="w-full bg-white border-stone-200 h-12">
+                              <SelectValue placeholder="Select provider" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="mtn">MTN</SelectItem>
+                              <SelectItem value="telecel">Telecel</SelectItem>
+                              <SelectItem value="airtel-tigo">AirtelTigo</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          {errors.mobileMoneyProvider && <p className="text-red-500 text-xs mt-1">{errors.mobileMoneyProvider}</p>}
+                        </div>
+                      </>
+                    )}
+                    */}
 
                     {errors.general && (
                       <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-md">

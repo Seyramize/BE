@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image"
 import { CircleArrowRight } from "lucide-react"
 import Link from "next/link"
@@ -9,8 +10,55 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { TravelPlannerModal } from "@/components/travel-planner-modal-clean"
 import { experiences } from "@/lib/experiences-data"
+import { useState } from "react";
 
 export default function Home() {
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError(""); // Clear previous errors
+
+    // Simple validation
+    if (
+      !form.firstName.trim() ||
+      !form.lastName.trim() ||
+      !form.email.trim() ||
+      !form.phone.trim() ||
+      !form.message.trim()
+    ) {
+      setError("Please fill in all fields.");
+      return;
+    }
+
+    setLoading(true);
+    setSuccess(false);
+    const res = await fetch("/api/enquiry", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+    setLoading(false);
+    if (res.ok) {
+      setSuccess(true);
+      setForm({ firstName: "", lastName: "", email: "", phone: "", message: "" });
+      setTimeout(() => setSuccess(false), 5000); // Hide after 5 seconds
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Auto-hiding Navigation */}
@@ -133,7 +181,7 @@ export default function Home() {
                 <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
                   {experiences[0].defaultContent.shortDescription}
                 </p>
-                <Link href={`/book-experience/${experiences[0].id}`}>
+                <Link href={`/book-experience/${experiences[0].slug}`}>
                   <Button
                     className="bg-white/20 hover:bg-white/30 text-white font-sans px-12 py-3 rounded-full backdrop-blur-sm border border-white/30 w-full">
                     Book Experience
@@ -160,7 +208,7 @@ export default function Home() {
                     <p className="text-white/90 mb-3 text-sm font-sans leading-relaxed">
                       {experience.defaultContent.shortDescription}
                     </p>
-                    <Link href={`/book-experience/${experience.id}`}>
+                    <Link href={`/book-experience/${experience.slug}`}>
                       <Button
                         size="sm"
                         className="bg-white/20 hover:bg-white/30 text-white font-sans px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
@@ -249,28 +297,27 @@ export default function Home() {
             {/* Form section */}
             <div className="order-2 md:order-2">
               <div className="md:pt-[165px]">
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleSubmit}>
                   <div>
-                    <Input type="text" placeholder="First Name" className="bg-white border-gray-200 font-sans w-full" />
+                    <Input name="firstName" value={form.firstName} onChange={handleChange} type="text" placeholder="First Name" className="bg-white border-gray-200 font-sans w-full" />
                   </div>
                   <div>
-                    <Input type="text" placeholder="Last Name" className="bg-white border-gray-200 font-sans w-full" />
+                    <Input name="lastName" value={form.lastName} onChange={handleChange} type="text" placeholder="Last Name" className="bg-white border-gray-200 font-sans w-full" />
                   </div>
                   <div>
-                    <Input type="email" placeholder="Email" className="bg-white border-gray-200 font-sans w-full" />
+                    <Input name="email" value={form.email} onChange={handleChange} type="email" placeholder="Email" className="bg-white border-gray-200 font-sans w-full" />
                   </div>
                   <div>
-                    <Input type="tel" placeholder="Phone" className="bg-white border-gray-200 font-sans w-full" />
+                    <Input name="phone" value={form.phone} onChange={handleChange} type="tel" placeholder="Phone" className="bg-white border-gray-200 font-sans w-full" />
                   </div>
                   <div>
-                    <Textarea
-                      placeholder="Tell us about your dream experience"
-                      className="bg-white border-gray-200 min-h-[120px] font-sans w-full"
-                    />
+                    <Textarea name="message" value={form.message} onChange={handleChange} placeholder="Tell us about your dream experience" className="bg-white border-gray-200 min-h-[120px] font-sans w-full" />
                   </div>
-                  <Button className="w-full bg-gray-900 hover:bg-gray-800 text-white font-body rounded-full py-3">
-                    Enquire
+                  {error && <div className="text-red-600 mt-2">{error}</div>}
+                  <Button type="submit" className="w-full bg-gray-900 hover:bg-gray-800 text-white font-body rounded-full py-3" disabled={loading}>
+                    {loading ? "Sending..." : "Enquire"}
                   </Button>
+                  {success && <div className="text-green-600 mt-2">Thank you! Your enquiry has been sent.</div>}
                 </form>
               </div>
             </div>

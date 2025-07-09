@@ -1,10 +1,44 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
 import { Instagram, Facebook, Twitter, MessageCircle } from "lucide-react"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
+import React, { useState } from "react"
 
 export function SiteFooter() {
+  // Add state for the email input and feedback
+  const [email, setEmail] = useState("")
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
+  const [message, setMessage] = useState("")
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setStatus("loading")
+    setMessage("")
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      })
+      if (res.ok) {
+        setStatus("success")
+        setMessage("Thank you for subscribing!")
+        setEmail("")
+      } else {
+        const data = await res.json()
+        setStatus("error")
+        setMessage(data.error || "Something went wrong. Please try again.")
+      }
+    } catch {
+      setStatus("error")
+      setMessage("Something went wrong. Please try again.")
+    }
+  }
+
   return (
     <footer className="bg-slate-800 text-white">
       <div className="container mx-auto px-6 py-16">
@@ -119,16 +153,29 @@ export function SiteFooter() {
               Get curated travel inspiration, special offers, and behind-the-scenes access.
             </p>
 
-            <div className="space-y-4">
+            {/* Newsletter Form */}
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <Input
                 type="email"
                 placeholder="Email address"
                 className="bg-white border-0 text-slate-800 font-sans placeholder:text-gray-500"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                required
               />
-              <Button className="w-full bg-amber-100 text-slate-800 hover:bg-amber-200 font-sans font-medium py-3 rounded-md">
-                STAY IN THE LOOP
+              <Button
+                className="w-full bg-amber-100 text-slate-800 hover:bg-amber-200 font-sans font-medium py-3 rounded-md"
+                type="submit"
+                disabled={status === "loading"}
+              >
+                {status === "loading" ? "Subscribing..." : "STAY IN THE LOOP"}
               </Button>
-            </div>
+            </form>
+            {message && (
+              <p className={`text-xs mt-2 font-sans ${status === "success" ? "text-green-400" : "text-red-400"}`}>
+                {message}
+              </p>
+            )}
 
             <p className="text-xs text-gray-400 mt-4 mb-6 font-sans">
               We may share select info with trusted partners to elevate your experience.

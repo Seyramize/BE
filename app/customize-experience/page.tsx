@@ -12,6 +12,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { CountrySelector } from "@/components/country-selector"
+import { toast } from "@/hooks/use-toast"
+import { CheckCircle } from "lucide-react"
 
 interface FormData {
   fullName: string
@@ -86,35 +88,85 @@ export default function CustomizeExperiencePage() {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
     // Validation for required fields
-    const newErrors: { [key: string]: string } = {}
-    if (!formData.fullName.trim()) newErrors.fullName = "Full name is required"
-    if (!formData.email.trim()) newErrors.email = "Email is required"
-    if (!formData.phoneNumber.trim()) newErrors.phoneNumber = "Phone number is required"
-    if (!formData.preferredContact.trim()) newErrors.preferredContact = "Preferred contact method is required"
-    if (!formData.experienceVision.trim()) newErrors.experienceVision = "Experience vision is required"
-    if (!formData.groupSize.trim()) newErrors.groupSize = "Group size is required"
-    if (!formData.travelDates.trim()) newErrors.travelDates = "Preferred travel dates are required"
+    const newErrors: { [key: string]: string } = {};
+    if (!formData.fullName.trim()) newErrors.fullName = "Full name is required";
+    if (!formData.email.trim()) newErrors.email = "Email is required";
+    if (!formData.phoneNumber.trim()) newErrors.phoneNumber = "Phone number is required";
+    if (!formData.preferredContact.trim()) newErrors.preferredContact = "Preferred contact method is required";
+    if (!formData.experienceVision.trim()) newErrors.experienceVision = "Experience vision is required";
+    if (!formData.groupSize.trim()) newErrors.groupSize = "Group size is required";
+    if (!formData.travelDates.trim()) newErrors.travelDates = "Preferred travel dates are required";
 
-    setErrors(newErrors)
+    setErrors(newErrors);
 
     if (Object.keys(newErrors).length > 0) {
       // There are errors, do not submit
-      return
+      return;
     }
 
-    console.log("Custom experience form submitted:", formData)
-    // Handle form submission logic here
+    try {
+      const response = await fetch("/api/customize-experience", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    // Show success message and redirect after submission
-    alert(
-      "Thank you! Your custom experience request has been submitted. Our travel planners will contact you within 24 hours.",
-    )
-    handleClose()
-  }
+      if (response.ok) {
+        toast({
+          title: (
+            <span className="flex items-center gap-2 text-green-700 dark:text-green-400">
+              <CheckCircle className="w-5 h-5" />
+              Request submitted!
+            </span>
+          ),
+          description: (
+            <span className="text-slate-700 dark:text-slate-200">
+              Our travel planners will contact you within 24 hours.
+            </span>
+          ),
+          className: "bg-white dark:bg-slate-900 border-green-200 dark:border-green-700 shadow-xl",
+        });
+        setTimeout(() => {
+          router.push("/");
+        }, 2000);
+      } else {
+        const data = await response.json();
+        toast({
+          title: (
+            <span className="flex items-center gap-2 text-red-700 dark:text-red-400">
+              <X className="w-5 h-5" />
+              Submission failed
+            </span>
+          ),
+          description: (
+            <span className="text-slate-700 dark:text-slate-200">
+              {data.error || "There was an error submitting your request. Please try again later."}
+            </span>
+          ),
+          className: "bg-white dark:bg-slate-900 border-red-200 dark:border-red-700 shadow-xl",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: (
+          <span className="flex items-center gap-2 text-red-700 dark:text-red-400">
+            <X className="w-5 h-5" />
+            Submission failed
+          </span>
+        ),
+        description: (
+          <span className="text-slate-700 dark:text-slate-200">
+            There was an error submitting your request. Please try again later.
+          </span>
+        ),
+        className: "bg-white dark:bg-slate-900 border-red-200 dark:border-red-700 shadow-xl",
+      });
+    }
+  };
 
   const handleClose = () => {
     console.log("Close button clicked")
@@ -270,7 +322,7 @@ export default function CustomizeExperiencePage() {
                   </label>
                   <Select
                     value={formData.preferredContact}
-                    onValueChange={(value) => handleInputChange("preferredContact", value)}
+                    onValueChange={(value: string) => handleInputChange("preferredContact", value)}
                   >
                     <SelectTrigger className="w-full bg-white border-slate-200 h-12">
                       <SelectValue placeholder="Email" />
@@ -320,7 +372,7 @@ export default function CustomizeExperiencePage() {
                 </label>
                 <Select
                   value={formData.preferredDestination}
-                  onValueChange={(value) => handleInputChange("preferredDestination", value)}
+                  onValueChange={(value: string) => handleInputChange("preferredDestination", value)}
                 >
                   <SelectTrigger className="w-full bg-white border-slate-200 h-12">
                     <SelectValue placeholder="Ghana" />

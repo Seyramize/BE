@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { CountrySelector } from "@/components/country-selector"
+import { useToast } from "@/components/ui/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 
 interface TravelPlannerModalProps {
   children: React.ReactNode
@@ -23,11 +25,22 @@ interface FormData {
   helpMessage: string
 }
 
+// Place this function inside or above your component
+function validateForm(data: FormData) {
+  if (!data.fullName.trim()) return "Full name is required.";
+  if (!data.email.trim()) return "Email is required.";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return "Invalid email address.";
+  if (!data.phoneNumber.trim()) return "Phone number is required.";
+  if (!data.date.trim() && !data.isFlexible) return "Please select a date or mark as flexible.";
+  return null;
+}
+
 export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [mounted, setMounted] = useState(false)
   const modalRef = useRef<HTMLDivElement>(null)
+  const { toast } = useToast();
 
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
@@ -72,25 +85,61 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitted(true)
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-    // Reset form after 3 seconds and close modal
-    setTimeout(() => {
-      setIsSubmitted(false)
-      setIsOpen(false)
-      setFormData({
-        fullName: "",
-        email: "",
-        phoneNumber: "",
-        countryCode: "GH",
-        date: "",
-        isFlexible: false,
-        helpMessage: "",
-      })
-    }, 3000)
-  }
+    const errorMsg = validateForm(formData);
+    if (errorMsg) {
+      toast({
+        title: "Validation Error",
+        description: errorMsg,
+        status: "error",
+      });
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/travel-planner", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setIsSubmitted(true);
+        toast({
+          title: "Call Scheduled!",
+          description: "We've received your request. Check your email for confirmation.",
+          status: "success",
+        });
+        setTimeout(() => {
+          setIsSubmitted(false);
+          setIsOpen(false);
+          setFormData({
+            fullName: "",
+            email: "",
+            phoneNumber: "",
+            countryCode: "GH",
+            date: "",
+            isFlexible: false,
+            helpMessage: "",
+          });
+        }, 3000);
+      } else {
+        const errorData = await res.json();
+        toast({
+          title: "Something went wrong",
+          description: errorData?.error || "We couldn't schedule your call. Please try again.",
+          status: "error",
+        });
+      }
+    } catch (err: any) {
+      toast({
+        title: "Network error",
+        description: err?.message || "Please check your connection and try again.",
+        status: "error",
+      });
+    }
+  };
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -188,7 +237,7 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
                       />
                       <Input
                         type="tel"
-                        placeholder="+1(123) 000-000"
+                        placeholder="+233(123) 000-000"
                         value={formData.phoneNumber}
                         onChange={(e) => handleInputChange("phoneNumber", e.target.value)}
                         className="flex-1 bg-white border-slate-200 text-slate-800 placeholder:text-slate-400 h-12 rounded-md"
@@ -274,6 +323,7 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
         {children}
       </div>
       {mounted && modalContent && createPortal(modalContent, document.body)}
+      <Toaster />
     </>
   )
 }
