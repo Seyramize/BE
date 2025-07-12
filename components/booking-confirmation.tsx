@@ -94,14 +94,14 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
         aria-modal="true"
         aria-labelledby="confirmation-modal-title"
       >
-        <div className="relative flex flex-col lg:flex-row w-full max-w-6xl h-[95vh] lg:h-[90vh] max-h-[700px] bg-white rounded-lg overflow-hidden shadow-2xl">
+        <div className="relative flex flex-col lg:flex-row w-full max-w-6xl h-[95dvh] lg:h-[90vh] max-h-[95dvh] lg:max-h-[700px] bg-white rounded-lg overflow-hidden shadow-2xl">
           {/* Left Side - Confirmation Image */}
-          <div className="relative w-full lg:w-2/5 h-48 lg:h-full">
+          <div className="relative w-full lg:w-2/5 h-40 sm:h-48 lg:h-full min-h-[120px]">
             <Image src="/placeholder.svg?height=400&width=600" alt="Booking confirmed" fill className="object-cover" />
             <div className="absolute inset-0 bg-black/20" />
-            <div className="absolute inset-0 flex items-center justify-left p-4 lg:p-8">
+            <div className="absolute inset-0 flex items-center justify-left p-3 sm:p-4 lg:p-8">
               <div className="text-left text-white">
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-serif font-normal leading-tight">
+                <h2 className="text-2xl sm:text-3xl lg:text-5xl xl:text-6xl font-serif font-normal leading-tight">
                   Booking
                   <br />
                   Confirmed
@@ -115,7 +115,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 lg:top-6 lg:right-6 text-slate-600 hover:text-slate-800 transition-colors z-10"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 lg:top-6 lg:right-6 text-slate-600 hover:text-slate-800 transition-colors z-10"
               type="button"
               aria-label="Close confirmation"
             >
@@ -123,51 +123,49 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
             </button>
 
             {/* Content */}
-            <div className="flex-1 overflow-y-auto p-4 lg:p-8 pt-12 lg:pt-16">
+            <div className="flex-1 overflow-y-auto p-3 sm:p-4 lg:p-8 pt-10 sm:pt-12 lg:pt-16">
               <div className="max-w-md mx-auto">
                 {/* Success Icon */}
-                <div className="flex justify-center mb-6">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-                    <Check className="w-8 h-8 text-green-600" />
+                <div className="flex justify-center mb-4 sm:mb-6">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center">
+                    <Check className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
                   </div>
                 </div>
 
                 {/* Header */}
-                <div className="text-left mb-8">
-                  <h3 className="text-2xl lg:text-3xl font-sans font-normal text-slate-800 mb-4">
+                <div className="text-left mb-6 sm:mb-8">
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-sans font-normal text-slate-800 mb-3 sm:mb-4">
                     Experience Summary
                   </h3>
                 </div>
 
                 {/* Booking Details */}
-                <div className="space-y-6 mb-8">
+                <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
                   {/* Experience */}
                   <div>
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className="flex items-center gap-2 mb-1 sm:mb-2">
                       <MapPin className="w-4 h-4 text-slate-600" />
-                      <span className="text-sm font-medium text-slate-600 uppercase tracking-wider">EXPERIENCE</span>
+                      <span className="text-xs sm:text-sm font-medium text-slate-600 uppercase tracking-wider">EXPERIENCE</span>
                     </div>
-                    <p className="text-lg font-sans text-slate-800">{bookingDetails.experienceName}</p>
+                    <p className="text-base sm:text-lg font-sans text-slate-800">{bookingDetails.experienceName}</p>
                   </div>
-
                   {/* Guests */}
                   <div>
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className="flex items-center gap-2 mb-1 sm:mb-2">
                       <Users className="w-4 h-4 text-slate-600" />
-                      <span className="text-sm font-medium text-slate-600 uppercase tracking-wider">GUESTS</span>
+                      <span className="text-xs sm:text-sm font-medium text-slate-600 uppercase tracking-wider">GUESTS</span>
                     </div>
-                    <p className="text-lg font-sans text-slate-800">
+                    <p className="text-base sm:text-lg font-sans text-slate-800">
                       {bookingDetails.guests} Person{bookingDetails.guests !== 1 ? "s" : ""}
                     </p>
                   </div>
-
                   {/* Preferred Date */}
                   <div>
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className="flex items-center gap-2 mb-1 sm:mb-2">
                       <Calendar className="w-4 h-4 text-slate-600" />
-                      <span className="text-sm font-medium text-slate-600 uppercase tracking-wider">PREFERRED DATE</span>
+                      <span className="text-xs sm:text-sm font-medium text-slate-600 uppercase tracking-wider">PREFERRED DATE</span>
                     </div>
-                    <p className="text-lg font-sans text-slate-800">
+                    <p className="text-base sm:text-lg font-sans text-slate-800">
                       {new Date(bookingDetails.preferredDate).toLocaleDateString("en-US", {
                         weekday: "long",
                         day: "numeric",
@@ -178,11 +176,11 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                   </div>
                   {/* Alternate Date */}
                   <div>
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className="flex items-center gap-2 mb-1 sm:mb-2">
                       <Calendar className="w-4 h-4 text-slate-600" />
-                      <span className="text-sm font-medium text-slate-600 uppercase tracking-wider">ALTERNATE DATE</span>
+                      <span className="text-xs sm:text-sm font-medium text-slate-600 uppercase tracking-wider">ALTERNATE DATE</span>
                     </div>
-                    <p className="text-lg font-sans text-slate-800">
+                    <p className="text-base sm:text-lg font-sans text-slate-800">
                       {new Date(bookingDetails.alternateDate).toLocaleDateString("en-US", {
                         weekday: "long",
                         day: "numeric",
@@ -191,18 +189,17 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                       })}
                     </p>
                   </div>
-
                   {/* What's Included */}
                   {bookingDetails.includedItems && bookingDetails.includedItems.length > 0 && (
                     <div>
-                      <span className="text-sm font-sans font-medium text-slate-600 uppercase tracking-wider mb-3 block">
+                      <span className="text-xs sm:text-sm font-sans font-medium text-slate-600 uppercase tracking-wider mb-2 sm:mb-3 block">
                         WHAT'S INCLUDED?
                       </span>
-                      <ul className="space-y-2">
+                      <ul className="space-y-1 sm:space-y-2">
                         {bookingDetails.includedItems.map((item, index) => (
                           <li key={index} className="flex items-start gap-2 text-slate-800">
                             <div className="w-1.5 h-1.5 bg-slate-400 rounded-full mt-2 flex-shrink-0" />
-                            <span className="text-sm">{item}</span>
+                            <span className="text-xs sm:text-sm">{item}</span>
                           </li>
                         ))}
                       </ul>
@@ -211,21 +208,19 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                 </div>
 
                 {/* Divider */}
-                <div className="border-t border-slate-200 my-8" />
+                <div className="border-t border-slate-200 my-6 sm:my-8" />
 
                 {/* Email Confirmation */}
-                <div className="mb-8">
-                  <p className="text-sm text-slate-600 mb-4">
+                <div className="mb-6 sm:mb-8">
+                  <p className="text-xs sm:text-sm text-slate-600 mb-3 sm:mb-4">
                     A detailed confirmation has been sent to{" "}
-                    <span className="font-medium text-slate-800">{bookingDetails.email}</span>.
+                    <span className="font-medium text-slate-800 break-all">{bookingDetails.email}</span>.
                     <br />
                     Please check your inbox (and your spam folder just in case).
                   </p>
-
-                  <div className="flex items-center gap-2 text-sm text-slate-600 mb-4">
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 mb-3 sm:mb-4">
                     <span>Didn't receive the email?</span>
                   </div>
-
                   <Button
                     onClick={handleResendEmail}
                     variant="outline"
@@ -246,19 +241,19 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                 </div>
 
                 {/* Booking Reference */}
-                <div className="bg-white rounded-lg p-4 mb-8 border border-stone-200">
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between items-center">
+                <div className="bg-white rounded-lg p-3 sm:p-4 mb-6 sm:mb-8 border border-stone-200">
+                  <div className="space-y-2 text-xs sm:text-sm">
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 sm:gap-0">
                       <span className="text-slate-600">Booking ID:</span>
-                      <span className="text-slate-800 font-mono flex items-center">
+                      <span className="text-slate-800 font-mono flex items-center break-all">
                         {shortenId(bookingDetails.bookingId)}
                         <CopyButton value={bookingDetails.bookingId} />
                       </span>
                     </div>
                     {bookingDetails.transactionId && (
-                      <div className="flex justify-between items-center">
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 sm:gap-0">
                         <span className="text-slate-600">Transaction ID:</span>
-                        <span className="text-slate-800 font-mono flex items-center">
+                        <span className="text-slate-800 font-mono flex items-center break-all">
                           {shortenId(bookingDetails.transactionId)}
                           <CopyButton value={bookingDetails.transactionId} />
                         </span>

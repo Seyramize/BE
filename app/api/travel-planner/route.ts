@@ -67,7 +67,14 @@ export async function POST(req: Request) {
     await sgMail.send(clientMsg);
     return NextResponse.json({ success: true });
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : "Unknown error";
+    console.error('SendGrid error:', error);
+    let message = 'Unknown error';
+    if (error instanceof Error) {
+      message = error.message;
+    } else if (typeof error === 'object' && error !== null && 'response' in error) {
+      // @ts-ignore
+      message = JSON.stringify(error.response?.body || error);
+    }
     return NextResponse.json({ success: false, error: message }, { status: 500 });
   }
 }

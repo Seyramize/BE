@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { CountrySelector } from "@/components/country-selector"
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
+import { parsePhoneNumberFromString, CountryCode } from "libphonenumber-js";
 
 interface TravelPlannerModalProps {
   children: React.ReactNode
@@ -31,6 +32,16 @@ function validateForm(data: FormData) {
   if (!data.email.trim()) return "Email is required.";
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return "Invalid email address.";
   if (!data.phoneNumber.trim()) return "Phone number is required.";
+
+  // Phone number validation using libphonenumber-js
+  const phoneNumber = parsePhoneNumberFromString(
+    data.phoneNumber,
+    data.countryCode as CountryCode
+  );
+  if (!phoneNumber || !phoneNumber.isValid()) {
+    return "Please enter a valid phone number for the selected country.";
+  }
+
   if (!data.date.trim() && !data.isFlexible) return "Please select a date or mark as flexible.";
   return null;
 }
@@ -93,7 +104,7 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
       toast({
         title: "Validation Error",
         description: errorMsg,
-        status: "error",
+        variant: "destructive",
       });
       return;
     }
@@ -109,7 +120,7 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
         toast({
           title: "Call Scheduled!",
           description: "We've received your request. Check your email for confirmation.",
-          status: "success",
+          variant: "default",
         });
         setTimeout(() => {
           setIsSubmitted(false);
@@ -129,14 +140,14 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
         toast({
           title: "Something went wrong",
           description: errorData?.error || "We couldn't schedule your call. Please try again.",
-          status: "error",
+          variant: "destructive",
         });
       }
     } catch (err: any) {
       toast({
         title: "Network error",
         description: err?.message || "Please check your connection and try again.",
-        status: "error",
+        variant: "destructive",
       });
     }
   };
@@ -237,7 +248,7 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
                       />
                       <Input
                         type="tel"
-                        placeholder="+233(123) 000-000"
+                        placeholder="123-000-000"
                         value={formData.phoneNumber}
                         onChange={(e) => handleInputChange("phoneNumber", e.target.value)}
                         className="flex-1 bg-white border-slate-200 text-slate-800 placeholder:text-slate-400 h-12 rounded-md"

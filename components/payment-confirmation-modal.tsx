@@ -189,9 +189,9 @@ export function PaymentConfirmationModal({
         aria-modal="true"
         aria-labelledby="payment-modal-title"
       >
-        <div className="relative flex flex-col lg:flex-row w-full max-w-6xl h-[95vh] lg:h-[90vh] max-h-[700px] bg-white rounded-lg overflow-hidden shadow-2xl">
+        <div className="relative flex flex-col lg:flex-row w-full max-w-6xl h-[90vh] sm:h-[95vh] lg:h-[90vh] max-h-[700px] bg-white rounded-lg overflow-hidden shadow-2xl">
           {/* Left Side - Experience Image */}
-          <div className="relative w-full lg:w-2/5 h-48 lg:h-full">
+          <div className="relative w-full lg:w-2/5 h-40 sm:h-48 lg:h-full">
             <Image
               src={bookingDetails.experienceImage || "/placeholder.svg?height=400&width=600"}
               alt={bookingDetails.experienceName}
@@ -199,12 +199,12 @@ export function PaymentConfirmationModal({
               className="object-cover"
             />
             <div className="absolute inset-0 bg-black/30" />
-            <div className="absolute inset-0 flex items-center justify-center p-4 lg:p-8">
-              <div className="text-left text-white">
-                <p className="text-xs sm:text-sm font-sans uppercase tracking-wider mb-2 lg:mb-4 opacity-90">
+            <div className="absolute inset-0 flex items-center justify-center p-3 sm:p-4 lg:p-8">
+              <div className="text-left text-white w-full">
+                <p className="text-xs sm:text-sm font-sans uppercase tracking-wider mb-1 sm:mb-2 lg:mb-4 opacity-90">
                   YOU'RE BOOKING THE
                 </p>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif font-normal leading-tight">
+                <h2 className="text-xl sm:text-2xl lg:text-4xl xl:text-5xl font-serif font-normal leading-tight break-words">
                   {bookingDetails.experienceName}
                 </h2>
               </div>
@@ -212,9 +212,9 @@ export function PaymentConfirmationModal({
           </div>
 
           {/* Right Side - Payment Form */}
-          <div className="flex-1 bg-stone-50 relative flex flex-col">
+          <div className="flex-1 bg-stone-50 relative flex flex-col min-h-0">
             {/* Header with navigation */}
-            <div className="flex items-center justify-between p-4 lg:p-6 border-b border-stone-200">
+            <div className="flex items-center justify-between p-3 sm:p-4 lg:p-6 border-b border-stone-200">
               <button
                 onClick={onGoBack}
                 disabled={isProcessing}
@@ -238,48 +238,48 @@ export function PaymentConfirmationModal({
             </div>
 
             {/* Content */}
-            <div className="flex-1 overflow-y-auto p-4 lg:p-6">
+            <div className="flex-1 overflow-y-auto p-3 sm:p-4 lg:p-6">
               <div className="max-w-md mx-auto">
                 {/* Header */}
-                <div className="text-center mb-6 lg:mb-8">
-                  <h3 className="text-2xl lg:text-3xl font-sans font-normal text-slate-800 mb-2">Almost there</h3>
-                  <div className="flex items-center justify-center gap-2 text-slate-600 text-sm mb-1">
+                <div className="text-center mb-4 sm:mb-6 lg:mb-8">
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-sans font-normal text-slate-800 mb-1 sm:mb-2">Almost there</h3>
+                  <div className="flex items-center justify-center gap-2 text-slate-600 text-xs sm:text-sm mb-1">
                     <Shield className="w-4 h-4" />
                     <span>All payments are protected and encrypted.</span>
                   </div>
-                  <p className="text-slate-600 font-sans text-sm">Your journey is just a step away.</p>
+                  <p className="text-slate-600 font-sans text-xs sm:text-sm">Your journey is just a step away.</p>
                 </div>                {/* Booking Summary */}
-                <div className="bg-white rounded-lg p-4 mb-6 border border-stone-200">
-                  <h4 className="font-sans text-lg text-slate-800 mb-3">Booking Summary</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
+                <div className="bg-white rounded-lg p-3 sm:p-4 mb-4 sm:mb-6 border border-stone-200">
+                  <h4 className="font-sans text-base sm:text-lg text-slate-800 mb-2 sm:mb-3">Booking Summary</h4>
+                  <div className="space-y-2 text-xs sm:text-sm">
+                    <div className="flex flex-col sm:flex-row sm:justify-between">
                       <span className="text-slate-600">Experience:</span>
-                      <span className="text-slate-800 font-medium">{bookingDetails.experienceName}</span>
+                      <span className="text-slate-800 font-medium break-words text-right sm:text-left">{bookingDetails.experienceName}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex flex-col sm:flex-row sm:justify-between">
                       <span className="text-slate-600">Guest Name:</span>
-                      <span className="text-slate-800 font-medium">{bookingDetails.fullName}</span>
+                      <span className="text-slate-800 font-medium break-words text-right sm:text-left">{bookingDetails.fullName}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex flex-col sm:flex-row sm:justify-between">
                       <span className="text-slate-600">Email:</span>
-                      <span className="text-slate-800">{bookingDetails.email}</span>
+                      <span className="text-slate-800 break-all text-right sm:text-left">{bookingDetails.email}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex flex-col sm:flex-row sm:justify-between">
                       <span className="text-slate-600">Number of Guests:</span>
                       <span className="text-slate-800">
                         {bookingDetails.guests} person{bookingDetails.guests !== 1 ? "s" : ""}
                       </span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex flex-col sm:flex-row sm:justify-between">
                       <span className="text-slate-600">Preferred Date:</span>
                       <span className="text-slate-800">{new Date(bookingDetails.preferredDate).toLocaleDateString()}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex flex-col sm:flex-row sm:justify-between">
                       <span className="text-slate-600">Alternate Date:</span>
                       <span className="text-slate-800">{new Date(bookingDetails.alternateDate).toLocaleDateString()}</span>
                     </div>
                     <div className="border-t border-stone-200 pt-2 mt-3">
-                      <div className="flex justify-between font-serif text-lg">
+                      <div className="flex flex-col sm:flex-row sm:justify-between font-serif text-base sm:text-lg">
                         <span className="text-slate-800">Total:</span>
                         <span className="text-slate-800 font-semibold">${bookingDetails.totalAmount}</span>
                       </div>
@@ -288,7 +288,7 @@ export function PaymentConfirmationModal({
                 </div>
 
                 {/* Payment Form */}
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   <div>
                     <h4 className="text-lg font-sans font-normal text-slate-800 mb-4">Payment details</h4>
                     <p className="text-slate-600 font-sans text-sm mb-6">
@@ -363,7 +363,7 @@ export function PaymentConfirmationModal({
                         </div>
 
                         {/* Expiry and CVV */}
-                        <div className="grid grid-cols-2 gap-4 mb-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                           <div>
                             <label htmlFor="expiryDate" className="block text-slate-800 font-sans text-sm font-medium mb-2">
                               Expiry date
