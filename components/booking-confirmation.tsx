@@ -94,14 +94,34 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
         aria-modal="true"
         aria-labelledby="confirmation-modal-title"
       >
-        <div className="relative flex flex-col lg:flex-row w-full max-w-lg sm:max-w-2xl lg:max-w-6xl h-[98dvh] sm:h-[95dvh] lg:h-[90vh] max-h-[98dvh] sm:max-h-[95dvh] lg:max-h-[700px] bg-white rounded-lg overflow-hidden shadow-2xl">
+        <div
+          className="
+            relative flex flex-col lg:flex-row w-full
+            max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-5xl
+            h-screen sm:h-[95dvh] lg:h-[90vh]
+            max-h-screen sm:max-h-[95dvh] lg:max-h-[700px]
+            bg-white rounded-lg overflow-hidden shadow-2xl
+          "
+        >
           {/* Left Side - Confirmation Image */}
-          <div className="relative w-full lg:w-2/5 h-32 sm:h-48 lg:h-full min-h-[100px]">
-            <Image src="/placeholder.svg?height=400&width=600" alt="Booking confirmed" fill className="object-cover" />
+          <div className="
+            relative w-full lg:w-2/5
+            h-36 sm:h-56 md:h-64 lg:h-full
+            min-h-[100px]
+            flex-shrink-0
+          ">
+            <Image
+              src="/placeholder.svg?height=400&width=600"
+              alt="Booking confirmed"
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 768px) 100vw, 40vw"
+            />
             <div className="absolute inset-0 bg-black/20" />
-            <div className="absolute inset-0 flex items-center justify-left p-2 sm:p-4 lg:p-8">
+            <div className="absolute inset-0 flex items-center justify-left p-3 sm:p-6 lg:p-8">
               <div className="text-left text-white">
-                <h2 className="text-xl sm:text-3xl lg:text-5xl xl:text-6xl font-serif font-normal leading-tight">
+                <h2 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-serif font-normal leading-tight">
                   Booking
                   <br />
                   Confirmed
@@ -111,24 +131,31 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
           </div>
 
           {/* Right Side - Experience Summary */}
-          <div className="flex-1 bg-stone-50 relative flex flex-col">
+          <div className="flex-1 bg-stone-50 relative flex flex-col min-h-0">
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-2 right-2 sm:top-4 sm:right-4 lg:top-6 lg:right-6 text-slate-600 hover:text-slate-800 transition-colors z-10"
+              className="
+                absolute top-2 right-2
+                sm:top-4 sm:right-4
+                lg:top-6 lg:right-6
+                text-slate-600 hover:text-slate-800 transition-colors z-10
+                p-2
+              "
               type="button"
               aria-label="Close confirmation"
+              style={{ touchAction: "manipulation" }}
             >
-              <X className="w-5 h-5" />
+              <X className="w-6 h-6 sm:w-7 sm:h-7" />
             </button>
 
             {/* Content */}
-            <div className="flex-1 overflow-y-auto p-2 sm:p-4 lg:p-8 pt-8 sm:pt-12 lg:pt-16">
-              <div className="max-w-full sm:max-w-md mx-auto">
+            <div className="flex-1 min-h-0 overflow-y-auto p-3 sm:p-6 lg:p-8 pt-10 sm:pt-14 lg:pt-16">
+              <div className="max-w-full sm:max-w-lg md:max-w-xl mx-auto">
                 {/* Success Icon */}
-                <div className="flex justify-center mb-3 sm:mb-6">
-                  <div className="w-10 h-10 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center">
-                    <Check className="w-5 h-5 sm:w-8 sm:h-8 text-green-600" />
+                <div className="flex justify-center mb-4 sm:mb-6">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center">
+                    <Check className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
                   </div>
                 </div>
 

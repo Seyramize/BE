@@ -235,22 +235,8 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
       >
         {/* Modal Content */}
         <div className="relative w-full max-w-6xl h-full max-h-[95vh] bg-white rounded-lg overflow-hidden shadow-2xl flex flex-col lg:flex-row">
-          {/* Mobile Header - Only visible on small screens */}
-          <div className="lg:hidden bg-slate-800 text-white p-4 text-center relative flex-shrink-0">
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
-              type="button"
-              aria-label="Close booking form"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <p className="text-xs font-sans uppercase tracking-wider mb-2 opacity-90">YOU'RE BOOKING THE</p>
-            <h2 className="text-xl font-serif font-normal">{experience.title}</h2>
-          </div>
-
-          {/* Left Side - Experience Image (Hidden on mobile) */}
-          <div className="relative w-full lg:w-2/5 h-48 lg:h-full hidden lg:block flex-shrink-0">
+          {/* Left Side - Experience Image (Now visible on mobile) */}
+          <div className="relative w-full lg:w-2/5 h-48 lg:h-full flex-shrink-0">
             <Image
               src={experience.heroImage || "/placeholder.svg"}
               alt={experience.title}
@@ -261,7 +247,7 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
             <div className="absolute inset-0 flex items-center justify-center p-8">
               <div className="text-left text-white">
                 <p className="text-sm font-sans uppercase tracking-wider mb-4 opacity-90">YOU'RE BOOKING THE</p>
-                <h2 className="text-3xl xl:text-4xl font-serif font-normal leading-tight" id="booking-modal-title">
+                <h2 className="text-2xl lg:text-3xl xl:text-4xl font-serif font-normal leading-tight" id="booking-modal-title">
                   {experience.title}
                 </h2>
               </div>
@@ -279,6 +265,16 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
             >
               <span className="text-sm font-sans">Close</span>
               <X className="w-4 h-4" />
+            </button>
+
+            {/* Mobile Close Button - Only visible on mobile */}
+            <button
+              onClick={onClose}
+              className="lg:hidden absolute top-4 right-4 text-black hover:text-gray-300 transition-colors z-10"
+              type="button"
+              aria-label="Close booking form"
+            >
+              <X className="w-5 h-5" />
             </button>
 
             {/* Fixed Header */}
