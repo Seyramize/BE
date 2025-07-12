@@ -89,19 +89,19 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
 
       {/* Modal */}
       <div
-        className="fixed inset-0 flex items-center justify-center z-50 p-2 sm:p-4"
+        className="fixed inset-0 flex items-center justify-center z-50 p-1 sm:p-4"
         role="dialog"
         aria-modal="true"
         aria-labelledby="confirmation-modal-title"
       >
-        <div className="relative flex flex-col lg:flex-row w-full max-w-6xl h-[95dvh] lg:h-[90vh] max-h-[95dvh] lg:max-h-[700px] bg-white rounded-lg overflow-hidden shadow-2xl">
+        <div className="relative flex flex-col lg:flex-row w-full max-w-lg sm:max-w-2xl lg:max-w-6xl h-[98dvh] sm:h-[95dvh] lg:h-[90vh] max-h-[98dvh] sm:max-h-[95dvh] lg:max-h-[700px] bg-white rounded-lg overflow-hidden shadow-2xl">
           {/* Left Side - Confirmation Image */}
-          <div className="relative w-full lg:w-2/5 h-40 sm:h-48 lg:h-full min-h-[120px]">
+          <div className="relative w-full lg:w-2/5 h-32 sm:h-48 lg:h-full min-h-[100px]">
             <Image src="/placeholder.svg?height=400&width=600" alt="Booking confirmed" fill className="object-cover" />
             <div className="absolute inset-0 bg-black/20" />
-            <div className="absolute inset-0 flex items-center justify-left p-3 sm:p-4 lg:p-8">
+            <div className="absolute inset-0 flex items-center justify-left p-2 sm:p-4 lg:p-8">
               <div className="text-left text-white">
-                <h2 className="text-2xl sm:text-3xl lg:text-5xl xl:text-6xl font-serif font-normal leading-tight">
+                <h2 className="text-xl sm:text-3xl lg:text-5xl xl:text-6xl font-serif font-normal leading-tight">
                   Booking
                   <br />
                   Confirmed
@@ -115,7 +115,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-3 right-3 sm:top-4 sm:right-4 lg:top-6 lg:right-6 text-slate-600 hover:text-slate-800 transition-colors z-10"
+              className="absolute top-2 right-2 sm:top-4 sm:right-4 lg:top-6 lg:right-6 text-slate-600 hover:text-slate-800 transition-colors z-10"
               type="button"
               aria-label="Close confirmation"
             >
@@ -123,24 +123,24 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
             </button>
 
             {/* Content */}
-            <div className="flex-1 overflow-y-auto p-3 sm:p-4 lg:p-8 pt-10 sm:pt-12 lg:pt-16">
-              <div className="max-w-md mx-auto">
+            <div className="flex-1 overflow-y-auto p-2 sm:p-4 lg:p-8 pt-8 sm:pt-12 lg:pt-16">
+              <div className="max-w-full sm:max-w-md mx-auto">
                 {/* Success Icon */}
-                <div className="flex justify-center mb-4 sm:mb-6">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center">
-                    <Check className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
+                <div className="flex justify-center mb-3 sm:mb-6">
+                  <div className="w-10 h-10 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center">
+                    <Check className="w-5 h-5 sm:w-8 sm:h-8 text-green-600" />
                   </div>
                 </div>
 
                 {/* Header */}
-                <div className="text-left mb-6 sm:mb-8">
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-sans font-normal text-slate-800 mb-3 sm:mb-4">
+                <div className="text-left mb-4 sm:mb-8">
+                  <h3 className="text-lg sm:text-2xl lg:text-3xl font-sans font-normal text-slate-800 mb-2 sm:mb-4">
                     Experience Summary
                   </h3>
                 </div>
 
                 {/* Booking Details */}
-                <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
+                <div className="space-y-3 sm:space-y-6 mb-4 sm:mb-8">
                   {/* Experience */}
                   <div>
                     <div className="flex items-center gap-2 mb-1 sm:mb-2">
@@ -208,17 +208,17 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                 </div>
 
                 {/* Divider */}
-                <div className="border-t border-slate-200 my-6 sm:my-8" />
+                <div className="border-t border-slate-200 my-4 sm:my-8" />
 
                 {/* Email Confirmation */}
-                <div className="mb-6 sm:mb-8">
-                  <p className="text-xs sm:text-sm text-slate-600 mb-3 sm:mb-4">
+                <div className="mb-4 sm:mb-8">
+                  <p className="text-xs sm:text-sm text-slate-600 mb-2 sm:mb-4">
                     A detailed confirmation has been sent to{" "}
                     <span className="font-medium text-slate-800 break-all">{bookingDetails.email}</span>.
                     <br />
                     Please check your inbox (and your spam folder just in case).
                   </p>
-                  <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 mb-3 sm:mb-4">
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 mb-2 sm:mb-4">
                     <span>Didn't receive the email?</span>
                   </div>
                   <Button
@@ -226,7 +226,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                     variant="outline"
                     size="sm"
                     disabled={!emailSent}
-                    className="border-slate-900 text-slate-900 hover:bg-slate-50 font-sans"
+                    className="w-full sm:w-auto border-slate-900 text-slate-900 hover:bg-slate-50 font-sans"
                   >
                     {emailSent ? (
                       <>
@@ -241,7 +241,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                 </div>
 
                 {/* Booking Reference */}
-                <div className="bg-white rounded-lg p-3 sm:p-4 mb-6 sm:mb-8 border border-stone-200">
+                <div className="bg-white rounded-lg p-2 sm:p-4 mb-4 sm:mb-8 border border-stone-200">
                   <div className="space-y-2 text-xs sm:text-sm">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 sm:gap-0">
                       <span className="text-slate-600">Booking ID:</span>
