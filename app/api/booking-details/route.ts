@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
     if (bookingDetails.email && !sentEmailSessions.has(sessionId)) {
       // Email to internal team
       const internalMsg = {
-        to: "seyramalifo@gmail.com", // TODO: Replace with your team's email
+        to: "concierge@experiencesbybeyond.com", // TODO: Replace with your team's email
         from: "concierge@experiencesbybeyond.com",    // must be a verified sender in SendGrid
         subject: `New Booking: ${bookingDetails.experienceName}`,
         html: `

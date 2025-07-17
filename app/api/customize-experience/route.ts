@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
 
   // Email to internal team
   const internalMsg = {
-    to: "seyramalifo@gmail.com", // TODO: Replace with your team's email
+    to: "concierge@experiencesbybeyond.com", // TODO: Replace with your team's email
     from: "concierge@experiencesbybeyond.com", // Use a verified sender
     subject: "New Custom Experience Request",
     text: `A new custom experience request was submitted:\n\n${formatFormData(data)}`,

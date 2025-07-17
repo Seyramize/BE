@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
 
     // Email to internal team
     const internalMsg = {
-      to: ["seyramalifo@gmail.com", "s.noahlarsey@gmail.com"], // change to your team email
+      to: "concierge@experiencesbybeyond.com", // change to your team email
       from: "concierge@experiencesbybeyond.com",    // must be a verified sender in SendGrid
       subject: "New Enquiry Form Submission",
       html: `

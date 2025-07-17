@@ -35,7 +35,7 @@ export async function POST(req: Request) {
 
   // Email to internal team
   const internalMsg = {
-    to: ["seyramalifo@gmail.com", "s.noahlarsey@gmail.com"], // replace with your internal team email
+    to: "concierge@experiencesbybeyond.com", // replace with your internal team email
     from: "concierge@experiencesbybeyond.com", // your verified sender
     subject: "New Travel Planner Call Scheduled",
     text: `
