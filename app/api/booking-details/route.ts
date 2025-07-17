@@ -50,8 +50,8 @@ export async function GET(req: NextRequest) {
     if (bookingDetails.email && !sentEmailSessions.has(sessionId)) {
       // Email to internal team
       const internalMsg = {
-        to: "internal-team@yourdomain.com", // TODO: Replace with your team's email
-        from: "no-reply@yourdomain.com",    // must be a verified sender in SendGrid
+        to: "seyramalifo@gmail.com", // TODO: Replace with your team's email
+        from: "concierge@experiencesbybeyond.com",    // must be a verified sender in SendGrid
         subject: `New Booking: ${bookingDetails.experienceName}`,
         html: `
           <h2>New Booking Received</h2>
@@ -69,7 +69,7 @@ export async function GET(req: NextRequest) {
       // Confirmation email to client
       const userMsg = {
         to: bookingDetails.email,
-        from: "no-reply@yourdomain.com", // must be a verified sender in SendGrid
+        from: "concierge@experiencesbybeyond.com", // must be a verified sender in SendGrid
         subject: `Your Booking is Confirmed: ${bookingDetails.experienceName}`,
         html: `
           <h2>Thank you for your booking!</h2>

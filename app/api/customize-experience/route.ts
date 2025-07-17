@@ -25,8 +25,8 @@ export async function POST(req: NextRequest) {
 
   // Email to internal team
   const internalMsg = {
-    to: "internal-team@example.com", // TODO: Replace with your team's email
-    from: "no-reply@beyondexperiences.com", // Use a verified sender
+    to: "seyramalifo@gmail.com", // TODO: Replace with your team's email
+    from: "concierge@experiencesbybeyond.com", // Use a verified sender
     subject: "New Custom Experience Request",
     text: `A new custom experience request was submitted:\n\n${formatFormData(data)}`,
   };
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
   // Confirmation email to client
   const clientMsg = {
     to: data.email,
-    from: "no-reply@beyondexperiences.com",
+    from: "concierge@experiencesbybeyond.com",
     subject: "We've received your custom experience request!",
     text: `Thank you, ${data.fullName}, for your request. Here’s what you submitted:\n\n${formatFormData(data)}\n\nOur travel planners will contact you within 24 hours.`,
   };

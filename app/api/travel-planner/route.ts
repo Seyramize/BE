@@ -35,8 +35,8 @@ export async function POST(req: Request) {
 
   // Email to internal team
   const internalMsg = {
-    to: "internal-team@example.com", // replace with your internal team email
-    from: "no-reply@beyondexperiences.com", // your verified sender
+    to: ["seyramalifo@gmail.com", "s.noahlarsey@gmail.com"], // replace with your internal team email
+    from: "concierge@experiencesbybeyond.com", // your verified sender
     subject: "New Travel Planner Call Scheduled",
     text: `
       Name: ${data.fullName}
@@ -50,7 +50,7 @@ export async function POST(req: Request) {
   // Email to client
   const clientMsg = {
     to: data.email,
-    from: "no-reply@beyondexperiences.com", // your verified sender
+    from: "concierge@experiencesbybeyond.com", // your verified sender
     subject: "Your Travel Planner Call is Scheduled",
     text: `
       Hi ${data.fullName},

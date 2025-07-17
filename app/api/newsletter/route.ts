@@ -24,7 +24,28 @@ export async function POST(req: NextRequest) {
   })
 
   if (res.ok) {
-    return NextResponse.json({ success: true })
+    // Send thank-you email
+    await fetch("https://api.sendgrid.com/v3/mail/send", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${SENDGRID_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        personalizations: [
+          {
+            to: [{ email }],
+            dynamic_template_data: {
+              // Add any variables you want to use in your template
+            },
+          },
+        ],
+        from: { email: "concierge@experiencesbybeyond.com", name: "Experiences by Beyond" },
+        template_id: "d-6dcfd45d1bf04186a5e16756547c8c96",
+      }),
+    });
+
+    return NextResponse.json({ success: true });
   } else {
     const data = await res.json()
     return NextResponse.json({ error: data.errors?.[0]?.message || "Subscription failed." }, { status: 500 })

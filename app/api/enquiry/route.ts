@@ -9,8 +9,8 @@ export async function POST(req: NextRequest) {
 
     // Email to internal team
     const internalMsg = {
-      to: "internal-team@yourdomain.com", // change to your team email
-      from: "no-reply@yourdomain.com",    // must be a verified sender in SendGrid
+      to: ["seyramalifo@gmail.com", "s.noahlarsey@gmail.com"], // change to your team email
+      from: "concierge@experiencesbybeyond.com",    // must be a verified sender in SendGrid
       subject: "New Enquiry Form Submission",
       html: `
         <h2>New Enquiry Received</h2>
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     // Confirmation email to user
     const userMsg = {
       to: email,
-      from: "no-reply@yourdomain.com", // must be a verified sender in SendGrid
+      from: "concierge@experiencesbybeyond.com", // must be a verified sender in SendGrid
       subject: "Thank you for your enquiry",
       html: `
         <h2>Thank you, ${firstName}!</h2>
