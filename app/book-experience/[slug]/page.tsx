@@ -452,7 +452,7 @@ export default function BookExperiencePage() {
                     <Link href="/customize-experience" className="w-full sm:w-auto">
                       <Button
                         variant="outline"
-                        className="w-full border-blue-600 text-blue-600 bg-white hover:bg-blue-50 font-sans px-6 sm:px-8 py-3 rounded-sm"
+                        className="w-full border-slate-900 text-slate-900 bg-white  font-sans px-6 sm:px-8 py-3 rounded-sm"
                       >
                         Customize my experience
                       </Button>

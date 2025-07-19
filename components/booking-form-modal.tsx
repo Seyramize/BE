@@ -511,7 +511,7 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
                               type="button"
                               variant="outline"
                               size="sm"
-                              className="border border-blue-600 text-blue-600 bg-white hover:bg-blue-600 hover:text-white font-sans px-6 py-2 text-sm whitespace-nowrap min-w-[200px]"
+                              className="border border-slate-900 text-slate-900 bg-white  font-sans px-6 py-2 text-sm whitespace-nowrap min-w-[200px]"
                             >
                               Speak to a Travel Planner
                             </Button>
