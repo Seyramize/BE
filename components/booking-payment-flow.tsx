@@ -19,6 +19,8 @@ interface BookingPaymentFlowProps {
     includedItems?: string[]
     experienceId: string
     experienceSlug: string
+    countryCode: string
+    phoneNumber: string
   }
 }
 
@@ -67,6 +69,8 @@ export function BookingPaymentFlow({ isOpen, onClose, bookingDetails }: BookingP
             fullName: bookingDetails.fullName,
             experienceId: bookingDetails.experienceId,
             experienceSlug: bookingDetails.experienceSlug,
+            countryCode: bookingDetails.countryCode,
+            phoneNumber: bookingDetails.phoneNumber,
           }}
         />
       )}

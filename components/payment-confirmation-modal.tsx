@@ -26,6 +26,8 @@ interface PaymentConfirmationModalProps {
     fullName: string
     experienceId: string
     experienceSlug: string // Added experienceSlug to the interface
+    countryCode: string      // <-- add this
+    phoneNumber: string      // <-- add this
   }
 }
 
@@ -139,6 +141,14 @@ export function PaymentConfirmationModal({
     setIsProcessing(true)
 
     try {
+      // Combine country code and phone number from bookingDetails
+      const fullPhone = `${bookingDetails.countryCode || ""}${bookingDetails.phoneNumber || ""}`;
+      // Use mobile money phone if payment method is mobile money, otherwise use the full phone from bookingDetails
+      const phoneToSend =
+        formData.paymentMethod === "mobile-money"
+          ? formData.mobileMoneyPhone
+          : fullPhone;
+
       // Stripe Checkout for both card and mobile money
       const res = await fetch("/api/create-checkout-session", {
         method: "POST",
@@ -147,14 +157,14 @@ export function PaymentConfirmationModal({
           amount: bookingDetails.totalAmount,
           email: bookingDetails.email,
           experienceName: bookingDetails.experienceName,
-          phone: formData.mobileMoneyPhone,
+          phone: phoneToSend, // <-- always send the correct phone
           mobileMoneyProvider: formData.mobileMoneyProvider,
           guests: bookingDetails.guests,
           preferredDate: bookingDetails.preferredDate,
           alternateDate: bookingDetails.alternateDate,
           fullName: bookingDetails.fullName,
           experienceId: bookingDetails.experienceId,
-          experienceSlug: bookingDetails.experienceSlug, // <-- ADD THIS
+          experienceSlug: bookingDetails.experienceSlug,
         }),
       })
       const data = await res.json()

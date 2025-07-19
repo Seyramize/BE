@@ -8,6 +8,10 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
 // In-memory set to track which session IDs have had emails sent (demo only)
 const sentEmailSessions = new Set<string>();
 
+// SendGrid template IDs
+const USER_CONFIRMATION_TEMPLATE_ID = "d-830cac9ed61344ac90a5390c896d6400";
+const INTERNAL_TEAM_TEMPLATE_ID = "d-3a09c71153994bc7b5217425747763be";
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function GET(req: NextRequest) {
@@ -32,53 +36,78 @@ export async function GET(req: NextRequest) {
       experience = experiences.find(exp => exp.bookingContent.title.toLowerCase() === productNameStr.toLowerCase() || exp.defaultContent.title.toLowerCase() === productNameStr.toLowerCase());
     }
     const guests = meta.guests ? parseInt(meta.guests) : 1;
+    // Extract first name from full name
+    const fullName = meta.fullName || '';
+    const firstName = fullName.split(' ')[0] || fullName;
+    
     const bookingDetails = {
       experienceName: experience?.bookingContent.title || productNameStr || meta.experienceName || '',
       preferredDate: meta.preferredDate || '',
       alternateDate: meta.alternateDate || '',
       guests,
       email: session.customer_email || meta.email || '',
-      fullName: meta.fullName || '',
+      fullName,
+      firstName,
       phone: meta.phone || '',
-      amount: meta.amount || '',
+      amount: (() => {
+        // Try to get amount from Stripe session
+        if (session.amount_total) {
+          // Convert from cents to dollars and format
+          const amountInDollars = session.amount_total / 100;
+          return `$${amountInDollars.toFixed(2)}`;
+        }
+        // Fallback to metadata amount
+        if (meta.amount) {
+          return meta.amount;
+        }
+        // Fallback to line item amount
+        if (lineItem?.amount_total) {
+          const amountInDollars = lineItem.amount_total / 100;
+          return `$${amountInDollars.toFixed(2)}`;
+        }
+        return '';
+      })(),
       bookingId: session.id,
       transactionId: session.payment_intent?.toString() || '',
       includedItems: experience?.bookingContent.included || [],
+      supportEmail: "concierge@experiencesbybeyond.com",
+      supportPhone: "+233546506220",
+      paymentMethod: (() => {
+        // Try to get payment method details from the session
+        if (session.payment_intent && typeof session.payment_intent === 'object') {
+          const paymentIntent = session.payment_intent as any;
+          // For card payments, we can get the card details
+          if (paymentIntent?.payment_method_details?.type === 'card') {
+            const card = paymentIntent.payment_method_details.card;
+            if (card?.brand && card?.last4) {
+              return `${card.brand.charAt(0).toUpperCase() + card.brand.slice(1)} card ending ****${card.last4}`;
+            }
+          }
+        }
+        // Fallback to payment method type
+        return session.payment_method_types?.[0] || 'card';
+      })(),
     };
 
     // Idempotency: Only send emails if not already sent for this session
     if (bookingDetails.email && !sentEmailSessions.has(sessionId)) {
-      // Email to internal team
+      // Email to internal team using SendGrid template
       const internalMsg = {
         to: "concierge@experiencesbybeyond.com", // TODO: Replace with your team's email
         from: "concierge@experiencesbybeyond.com",    // must be a verified sender in SendGrid
-        subject: `New Booking: ${bookingDetails.experienceName}`,
-        html: `
-          <h2>New Booking Received</h2>
-          <p><b>Name:</b> ${bookingDetails.fullName}</p>
-          <p><b>Email:</b> ${bookingDetails.email}</p>
-          <p><b>Phone:</b> ${bookingDetails.phone}</p>
-          <p><b>Experience:</b> ${bookingDetails.experienceName}</p>
-          <p><b>Preferred Date:</b> ${bookingDetails.preferredDate}</p>
-          <p><b>Alternate Date:</b> ${bookingDetails.alternateDate}</p>
-          <p><b>Guests:</b> ${bookingDetails.guests}</p>
-          <p><b>Booking ID:</b> ${bookingDetails.bookingId}</p>
-          <p><b>Transaction ID:</b> ${bookingDetails.transactionId}</p>
-        `,
+        templateId: INTERNAL_TEAM_TEMPLATE_ID,
+        dynamic_template_data: {
+          ...bookingDetails,
+        },
       };
-      // Confirmation email to client
+      // Confirmation email to client using SendGrid template
       const userMsg = {
         to: bookingDetails.email,
         from: "concierge@experiencesbybeyond.com", // must be a verified sender in SendGrid
-        subject: `Your Booking is Confirmed: ${bookingDetails.experienceName}`,
-        html: `
-          <h2>Thank you for your booking!</h2>
-          <p>Your booking for <b>${bookingDetails.experienceName}</b> is confirmed.</p>
-          <p><b>Date:</b> ${bookingDetails.preferredDate}</p>
-          <p><b>Guests:</b> ${bookingDetails.guests}</p>
-          <p><b>Booking ID:</b> ${bookingDetails.bookingId}</p>
-          <p>We look forward to welcoming you!</p>
-        `,
+        templateId: USER_CONFIRMATION_TEMPLATE_ID,
+        dynamic_template_data: {
+          ...bookingDetails,
+        },
       };
       try {
         await Promise.all([

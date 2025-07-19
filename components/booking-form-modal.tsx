@@ -199,7 +199,9 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
             "Restorative waterfall massage",
           ],
           experienceId: experience.id,
-          experienceSlug: experience.slug, // <-- Add this line
+          experienceSlug: experience.slug,
+          countryCode: formData.countryCode, // <-- add this
+          phoneNumber: formData.phoneNumber, // <-- add this
         }}
       />
     )
