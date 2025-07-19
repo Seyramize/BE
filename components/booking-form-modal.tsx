@@ -33,7 +33,8 @@ interface FormData {
   fullName: string
   email: string
   phoneNumber: string
-  countryDialCode: string
+  countryCode: string // ISO code, e.g. 'GH'
+  countryDialCode: string // Dial code, e.g. '+233'
   location: string
   locationCountry: string
   preferredDate: string
@@ -49,6 +50,7 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
     fullName: "",
     email: "",
     phoneNumber: "",
+    countryCode: "GH",
     countryDialCode: "+233",
     location: "",
     locationCountry: "GH",
@@ -159,6 +161,7 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
       fullName: "",
       email: "",
       phoneNumber: "",
+      countryCode: "GH",
       countryDialCode: "+233",
       location: "",
       locationCountry: "GH",
@@ -356,8 +359,11 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
                         </label>
                         <div className="flex gap-2">
                           <CountrySelector
-                            value={formData.countryDialCode}
-                            onChange={(country) => handleInputChange("countryDialCode", country.dialCode)}
+                            value={formData.countryCode}
+                            onChange={(country) => {
+                              handleInputChange("countryCode", country.code);
+                              handleInputChange("countryDialCode", country.dialCode);
+                            }}
                           />
                           <Input
                             id="phoneNumber"
