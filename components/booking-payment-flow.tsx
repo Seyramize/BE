@@ -19,7 +19,7 @@ interface BookingPaymentFlowProps {
     includedItems?: string[]
     experienceId: string
     experienceSlug: string
-    countryCode: string
+    countryDialCode: string // <-- use dial code
     phoneNumber: string
   }
 }
@@ -69,7 +69,7 @@ export function BookingPaymentFlow({ isOpen, onClose, bookingDetails }: BookingP
             fullName: bookingDetails.fullName,
             experienceId: bookingDetails.experienceId,
             experienceSlug: bookingDetails.experienceSlug,
-            countryCode: bookingDetails.countryCode,
+            countryDialCode: bookingDetails.countryDialCode, // <-- use dial code
             phoneNumber: bookingDetails.phoneNumber,
           }}
         />

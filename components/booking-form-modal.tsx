@@ -33,7 +33,7 @@ interface FormData {
   fullName: string
   email: string
   phoneNumber: string
-  countryCode: string
+  countryDialCode: string
   location: string
   locationCountry: string
   preferredDate: string
@@ -49,7 +49,7 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
     fullName: "",
     email: "",
     phoneNumber: "",
-    countryCode: "GH",
+    countryDialCode: "+233",
     location: "",
     locationCountry: "GH",
     preferredDate: "",
@@ -159,7 +159,7 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
       fullName: "",
       email: "",
       phoneNumber: "",
-      countryCode: "GH",
+      countryDialCode: "+233",
       location: "",
       locationCountry: "GH",
       preferredDate: "",
@@ -200,8 +200,8 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
           ],
           experienceId: experience.id,
           experienceSlug: experience.slug,
-          countryCode: formData.countryCode, // <-- add this
-          phoneNumber: formData.phoneNumber, // <-- add this
+          countryDialCode: formData.countryDialCode, // <-- use dial code
+          phoneNumber: formData.phoneNumber,
         }}
       />
     )
@@ -356,8 +356,8 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
                         </label>
                         <div className="flex gap-2">
                           <CountrySelector
-                            value={formData.countryCode}
-                            onChange={(value: string) => handleInputChange("countryCode", value)}
+                            value={formData.countryDialCode}
+                            onChange={(country) => handleInputChange("countryDialCode", country.dialCode)}
                           />
                           <Input
                             id="phoneNumber"

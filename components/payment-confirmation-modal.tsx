@@ -26,8 +26,8 @@ interface PaymentConfirmationModalProps {
     fullName: string
     experienceId: string
     experienceSlug: string // Added experienceSlug to the interface
-    countryCode: string      // <-- add this
-    phoneNumber: string      // <-- add this
+    countryDialCode: string // <-- use dial code
+    phoneNumber: string
   }
 }
 
@@ -142,7 +142,7 @@ export function PaymentConfirmationModal({
 
     try {
       // Combine country code and phone number from bookingDetails
-      const fullPhone = `${bookingDetails.countryCode || ""}${bookingDetails.phoneNumber || ""}`;
+      const fullPhone = `${bookingDetails.countryDialCode || ""}${bookingDetails.phoneNumber || ""}`;
       // Use mobile money phone if payment method is mobile money, otherwise use the full phone from bookingDetails
       const phoneToSend =
         formData.paymentMethod === "mobile-money"

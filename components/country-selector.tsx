@@ -6,7 +6,7 @@ import { countries, type CountryData } from "@/lib/country-data"
 
 interface CountrySelectorProps {
   value: string
-  onChange: (value: string) => void
+  onChange: (country: CountryData) => void // <-- changed to return full country
   className?: string
   hideDialCode?: boolean
   showCountryName?: boolean
@@ -64,7 +64,7 @@ export function CountrySelector({ value, onChange, className = "", hideDialCode 
   }
 
   const handleSelectCountry = (country: CountryData) => {
-    onChange(country.code)
+    onChange(country) // <-- pass full country object
     setIsOpen(false)
     setSearchQuery("")
   }

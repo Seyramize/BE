@@ -68,7 +68,9 @@ export async function GET(req: NextRequest) {
         return '';
       })(),
       bookingId: session.id,
-      transactionId: session.payment_intent?.toString() || '',
+      transactionId: (typeof session.payment_intent === 'object' && session.payment_intent?.id)
+        ? session.payment_intent.id
+        : (typeof session.payment_intent === 'string' ? session.payment_intent : ''),
       includedItems: experience?.bookingContent.included || [],
       supportEmail: "concierge@experiencesbybeyond.com",
       supportPhone: "+233546506220",
