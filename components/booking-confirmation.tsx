@@ -111,7 +111,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
             flex-shrink-0
           ">
             <Image
-              src="/placeholder.svg?height=400&width=600"
+              src="/images/bookingconfirmation.jpg?height=400&width=600"
               alt="Booking confirmed"
               fill
               className="object-cover"

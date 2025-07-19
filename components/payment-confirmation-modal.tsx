@@ -262,17 +262,17 @@ export function PaymentConfirmationModal({
                 <div className="bg-white rounded-lg p-3 sm:p-4 mb-4 sm:mb-6 border border-stone-200">
                   <h4 className="font-sans text-base sm:text-lg text-slate-800 mb-2 sm:mb-3">Booking Summary</h4>
                   <div className="space-y-2 text-xs sm:text-sm">
-                    <div className="flex flex-col sm:flex-row sm:justify-between">
+                    <div className="flex flex-col">
                       <span className="text-slate-600">Experience:</span>
-                      <span className="text-slate-800 font-medium break-words text-right sm:text-left">{bookingDetails.experienceName}</span>
+                      <span className="text-slate-800 font-medium break-words">{bookingDetails.experienceName}</span>
                     </div>
-                    <div className="flex flex-col sm:flex-row sm:justify-between">
+                    <div className="flex flex-col">
                       <span className="text-slate-600">Guest Name:</span>
-                      <span className="text-slate-800 font-medium break-words text-right sm:text-left">{bookingDetails.fullName}</span>
+                      <span className="text-slate-800 font-medium break-words">{bookingDetails.fullName}</span>
                     </div>
-                    <div className="flex flex-col sm:flex-row sm:justify-between">
+                    <div className="flex flex-col">
                       <span className="text-slate-600">Email:</span>
-                      <span className="text-slate-800 break-all text-right sm:text-left">{bookingDetails.email}</span>
+                      <span className="text-slate-800 break-all">{bookingDetails.email}</span>
                     </div>
                     <div className="flex flex-col sm:flex-row sm:justify-between">
                       <span className="text-slate-600">Number of Guests:</span>
@@ -297,197 +297,59 @@ export function PaymentConfirmationModal({
                   </div>
                 </div>
 
-                {/* Payment Form */}
-                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-                  <div>
-                    <h4 className="text-lg font-sans font-normal text-slate-800 mb-4">Payment details</h4>
-                    <p className="text-slate-600 font-sans text-sm mb-6">
-                      Please provide the information of the primary guest
-                    </p>
-
-                    {/* Payment Method */}
-                    <div className="mb-6">
-                      <label className="block text-slate-800 font-sans text-sm font-medium mb-3">Payment method</label>
-                      <Select
-                        value={formData.paymentMethod}
-                        onValueChange={(value: string) => handleInputChange("paymentMethod", value)}
-                      >
-                        <SelectTrigger className="w-full bg-white border-stone-200 h-12">
-                          <div className="flex items-center gap-2">
-                            <CreditCard className="w-4 h-4 text-slate-600" />
-                            <SelectValue />
-                          </div>
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="credit-debit-card">Credit/Debit card</SelectItem>
-                          {/* <SelectItem value="mobile-money">Mobile Money</SelectItem> */}
-                        </SelectContent>
-                      </Select>
+                {/* Stripe Checkout Button */}
+                <Button
+                  onClick={async () => {
+                    setIsProcessing(true);
+                    try {
+                      const res = await fetch("/api/create-checkout-session", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          amount: bookingDetails.totalAmount,
+                          email: bookingDetails.email,
+                          experienceName: bookingDetails.experienceName,
+                          phone: `${bookingDetails.countryDialCode || ""}${bookingDetails.phoneNumber || ""}`,
+                          guests: bookingDetails.guests,
+                          preferredDate: bookingDetails.preferredDate,
+                          alternateDate: bookingDetails.alternateDate,
+                          fullName: bookingDetails.fullName,
+                          experienceId: bookingDetails.experienceId,
+                          experienceSlug: bookingDetails.experienceSlug,
+                        }),
+                      });
+                      const data = await res.json();
+                      if (data.url) {
+                        window.location.href = data.url;
+                      } else {
+                        alert("Failed to initiate payment.");
+                      }
+                    } catch (error) {
+                      alert("Payment failed. Please try again.");
+                    } finally {
+                      setIsProcessing(false);
+                    }
+                  }}
+                  disabled={isProcessing}
+                  className="w-full bg-slate-900 hover:bg-slate-800 text-white font-sans py-3 h-12 text-base disabled:opacity-50 mt-4"
+                >
+                  {isProcessing ? (
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      Redirecting to Payment...
                     </div>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <Lock className="w-4 h-4" />
+                      Proceed to Checkout - ${bookingDetails.totalAmount}
+                    </div>
+                  )}
+                </Button>
 
-                    {/* Conditionally render payment fields */}
-                    {formData.paymentMethod === "credit-debit-card" && (
-                      <>
-                        {/* Name on Card */}
-                        <div className="mb-6">
-                          <label htmlFor="nameOnCard" className="block text-slate-800 font-sans text-sm font-medium mb-2">
-                            Name on card
-                          </label>
-                          <div className="relative">
-                            <UserRound className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                            <Input
-                              id="nameOnCard"
-                              type="text"
-                              placeholder="Match the name exactly"
-                              value={formData.nameOnCard}
-                              onChange={(e) => handleInputChange("nameOnCard", e.target.value)}
-                              disabled={isProcessing}
-                              className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 pl-9 ${
-                                errors.nameOnCard ? "border-red-500" : ""
-                              }`}
-                            />
-                          </div>
-                          {errors.nameOnCard && <p className="text-red-500 text-xs mt-1">{errors.nameOnCard}</p>}
-                        </div>
-
-                        {/* Card Number */}
-                        <div className="mb-6">
-                          <label htmlFor="cardNumber" className="block text-slate-800 font-sans text-sm font-medium mb-2">
-                            Card number
-                          </label>
-                          <div className="relative">
-                            <BookUser className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                            <Input
-                              id="cardNumber"
-                              type="text"
-                              placeholder="1234 5678 9012 3456"
-                              value={formData.cardNumber}
-                              onChange={(e) => handleInputChange("cardNumber", e.target.value)}
-                              disabled={isProcessing}
-                              className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 pl-9 ${
-                                errors.cardNumber ? "border-red-500" : ""
-                              }`}
-                            />
-                          </div>
-                          {errors.cardNumber && <p className="text-red-500 text-xs mt-1">{errors.cardNumber}</p>}
-                        </div>
-
-                        {/* Expiry and CVV */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                          <div>
-                            <label htmlFor="expiryDate" className="block text-slate-800 font-sans text-sm font-medium mb-2">
-                              Expiry date
-                            </label>
-                            <div className="relative">
-                              <ShieldPlus className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                              <Input
-                                id="expiryDate"
-                                type="text"
-                                placeholder="MM/YY"
-                                value={formData.expiryDate}
-                                onChange={(e) => handleInputChange("expiryDate", e.target.value)}
-                                disabled={isProcessing}
-                                className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 pl-9 ${
-                                  errors.expiryDate ? "border-red-500" : ""
-                                }`}
-                              />
-                            </div>
-                            {errors.expiryDate && <p className="text-red-500 text-xs mt-1">{errors.expiryDate}</p>}
-                          </div>
-                          <div>
-                            <label htmlFor="cvv" className="block text-slate-800 font-sans text-sm font-medium mb-2">
-                              CVV
-                            </label>
-                            <Input
-                              id="cvv"
-                              type="text"
-                              placeholder="123"
-                              value={formData.cvv}
-                              onChange={(e) => handleInputChange("cvv", e.target.value)}
-                              disabled={isProcessing}
-                              className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 ${
-                                errors.cvv ? "border-red-500" : ""
-                              }`}
-                            />
-                            {errors.cvv && <p className="text-red-500 text-xs mt-1">{errors.cvv}</p>}
-                          </div>
-                        </div>
-                      </>
-                    )}
-                    {/*
-                    {formData.paymentMethod === "mobile-money" && (
-                      <>
-                        <div className="mb-6">
-                          <label htmlFor="mobileMoneyPhone" className="block text-slate-800 font-sans text-sm font-medium mb-2">
-                            Mobile Money Phone Number
-                          </label>
-                          <Input
-                            id="mobileMoneyPhone"
-                            type="tel"
-                            placeholder="e.g. 024XXXXXXX"
-                            value={formData.mobileMoneyPhone}
-                            onChange={(e) => handleInputChange("mobileMoneyPhone", e.target.value)}
-                            disabled={isProcessing}
-                            className={`w-full bg-white border-stone-200 text-slate-800 placeholder:text-slate-400 h-12 ${
-                              errors.mobileMoneyPhone ? "border-red-500" : ""
-                            }`}
-                          />
-                          {errors.mobileMoneyPhone && <p className="text-red-500 text-xs mt-1">{errors.mobileMoneyPhone}</p>}
-                        </div>
-                        <div className="mb-6">
-                          <label htmlFor="mobileMoneyProvider" className="block text-slate-800 font-sans text-sm font-medium mb-2">
-                            Mobile Money Provider
-                          </label>
-                          <Select
-                            value={formData.mobileMoneyProvider}
-                            onValueChange={(value: string) => handleInputChange("mobileMoneyProvider", value)}
-                          >
-                            <SelectTrigger className="w-full bg-white border-stone-200 h-12">
-                              <SelectValue placeholder="Select provider" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="mtn">MTN</SelectItem>
-                              <SelectItem value="telecel">Telecel</SelectItem>
-                              <SelectItem value="airtel-tigo">AirtelTigo</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          {errors.mobileMoneyProvider && <p className="text-red-500 text-xs mt-1">{errors.mobileMoneyProvider}</p>}
-                        </div>
-                      </>
-                    )}
-                    */}
-
-                    {errors.general && (
-                      <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-md">
-                        <p className="text-red-600 text-sm">{errors.general}</p>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Submit Button */}
-                  <Button
-                    type="submit"
-                    disabled={isProcessing}
-                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-sans py-3 h-12 text-base disabled:opacity-50"
-                  >
-                    {isProcessing ? (
-                      <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                        Processing Payment...
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-2">
-                        <Lock className="w-4 h-4" />
-                        Complete Payment - ${bookingDetails.totalAmount}
-                      </div>
-                    )}
-                  </Button>
-
-                  <p className="text-xs text-slate-500 text-center px-4">
-                    Your payment information is secure and encrypted. By completing this payment, you agree to our terms
-                    and conditions.
-                  </p>
-                </form>
+                <p className="text-xs text-slate-500 text-center px-4 mt-6">
+                  Your payment information is secure and encrypted. By completing this payment, you agree to our terms
+                  and conditions.
+                </p>
               </div>
             </div>
           </div>

@@ -189,9 +189,9 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
             {/* Hero Section */}
             <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
               <img
-                src="/images/discovery-call-modal.png"
+                src="/images/travelplanner.jpg"
                 alt="Professional travel planner with headset ready to assist"
-                className="w-full h-full object-cover object-center"
+                className="w-full h-full object-cover object-top sm:object-position:50%_20% md:object-position:40%_30%"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
 
@@ -243,7 +243,7 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
                     <div className="flex gap-2">
                       <CountrySelector
                         value={formData.countryCode}
-                        onChange={(value) => handleInputChange("countryCode", value)}
+                        onChange={(country) => handleInputChange("countryCode", country.code)}
                         className="w-30"
                       />
                       <Input

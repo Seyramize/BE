@@ -495,26 +495,28 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
 
                   {/* Action Buttons */}
                   <div className="space-y-4 pb-8">
-                      <div className="flex items-center justify-between gap-4 mb-4">
+                      <div className="flex flex-row sm:flex-row items-start sm:items-center gap-4 mb-4 w-full">
                         <button
                           type="button"
-                          className="underline hover:text-slate-800 text-slate-600 text-sm"
+                          className="underline hover:text-slate-800 text-slate-600 text-sm self-start text-left"
                           onClick={() => {
                             console.log("More than six guests clicked")
                           }}
                         >
                           More than six guests?
                         </button>
-                        <TravelPlannerModal>
-                          <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            className="bg-slate-900 text-white hover:bg-slate-800 font-sans px-6 py-2 text-sm whitespace-nowrap min-w-[200px]"
-                          >
-                            Speak to a Travel Planner
-                          </Button>
-                        </TravelPlannerModal>
+                        <div className="flex-1 flex justify-end">
+                          <TravelPlannerModal>
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              className="border border-blue-600 text-blue-600 bg-white hover:bg-blue-600 hover:text-white font-sans px-6 py-2 text-sm whitespace-nowrap min-w-[200px]"
+                            >
+                              Speak to a Travel Planner
+                            </Button>
+                          </TravelPlannerModal>
+                        </div>
                       </div>
                     <Button
                       type="submit"

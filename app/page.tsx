@@ -90,7 +90,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-16">
               <Link href="/experiences">
-                <Button className="text-normal px-8 py-3 rounded-full bg-[#B55A30] hover:bg-[#B55A30] text-white font-sans border-0">
+                <Button className="text-normal px-8 py-3 rounded-full bg-[#f67d46] hover:bg-[#f67d46] text-white font-sans border-0">
                   Explore Experiences 👣
                 </Button>
               </Link>
@@ -281,8 +281,22 @@ export default function Home() {
                   Can I speak to someone before booking?
                 </AccordionTrigger>
                 <AccordionContent className="px-6 py-4 bg-gray-800/30 font-sans leading-relaxed">
-                  Of course! If you have questions or need clarification, you can reach our team via WhatsApp or email
-                  using the contact details in the footer. We're happy to help!
+                  Of course! If you have questions or need clarification, you can reach our team via{' '}
+                  <a
+                    href="https://wa.me/1234567890"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-amber-400 underline hover:text-amber-300"
+                  >
+                    WhatsApp
+                  </a>{' '}or{' '}
+                  <a
+                    href="mailto:info@example.com"
+                    className="text-amber-400 underline hover:text-amber-300"
+                  >
+                    Email
+                  </a>
+                  {' '}using the contact details in the footer. We're happy to help!
                 </AccordionContent>
               </AccordionItem>
             </Accordion>

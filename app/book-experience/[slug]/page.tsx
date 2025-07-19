@@ -359,27 +359,27 @@ export default function BookExperiencePage() {
         <div className="relative w-full max-w-5xl mx-auto px-4 text-center z-10">
           <h1 className="font-serif font-normal text-white mb-2 drop-shadow-md text-[clamp(2rem,6vw,4rem)]"
            style={{
-            textShadow: `
-              0 4px 24px rgba(0,0,0,0.55), 
-              0 2px 8px rgba(0,0,0,0.45), 
-              0 1px 0 #fff
-            `
+            // textShadow: `
+            //   0 4px 24px rgba(0,0,0,0.55), 
+            //   0 2px 8px rgba(0,0,0,0.45), 
+            //   0 1px 0 #fff
+            // `
           }}>
             {bookingContent.title}
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 md:mb-8 max-w-3xl mx-auto font-sans leading-relaxed"
            style={{
-            textShadow: `
-              0 4px 24px rgba(0,0,0,0.55), 
-              0 2px 8px rgba(0,0,0,0.45), 
-              0 1px 0 #fff
-            `
+            // textShadow: `
+            //   0 4px 24px rgba(0,0,0,0.55), 
+            //   0 2px 8px rgba(0,0,0,0.45), 
+            //   0 1px 0 #fff
+            // `
           }}>
             {bookingContent.subtitle}
           </p>
           <div className="inline-flex items-center justify-center gap-3 sm:gap-2 px-2 sm:px-8 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-sm text-[clamp(0.55rem,2vw,0.95rem)] uppercase tracking-widest font-sans text-white whitespace-nowrap"
            style={{
-            textShadow: "0 2px 8px rgba(0,0,0,0.10), 0 1px 0 #fff"
+            // textShadow: "0 2px 8px rgba(0,0,0,0.10), 0 1px 0 #fff"
           }}>
             <span>{bookingContent.duration}</span>
             <span>•</span>
@@ -452,7 +452,7 @@ export default function BookExperiencePage() {
                     <Link href="/customize-experience" className="w-full sm:w-auto">
                       <Button
                         variant="outline"
-                        className="w-full border-slate-300 text-slate-700 hover:bg-amber-50 bg-amber-50 font-sans px-6 sm:px-8 py-3 rounded-sm"
+                        className="w-full border-blue-600 text-blue-600 bg-white hover:bg-blue-50 font-sans px-6 sm:px-8 py-3 rounded-sm"
                       >
                         Customize my experience
                       </Button>
@@ -470,7 +470,7 @@ export default function BookExperiencePage() {
                   {bookingContent.included.map((item, index) => {
                     const Icon = includedIcons[item] || Check
                     return (
-                      <div key={index} className={`flex items-center gap-3 border-b border-black pb-3 ${index < 2 ? 'border-t border-black pt-3' : ''}`}>
+                      <div key={index} className={`flex items-center gap-3 border-b border-black pb-3 ${index === 0 ? 'border-t border-black pt-3' : ''} ${index === 1 ? 'sm:border-t sm:border-black sm:pt-3' : ''}`}>
                         <Icon className="w-4 h-4 text-slate-600 flex-shrink-0" />
                         <span className="text-slate-700 font-sans text-sm sm:text-base">
                           {item}

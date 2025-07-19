@@ -88,7 +88,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             <div className="flex items-start gap-4">
               <div className="flex-shrink-0">
-                <Map className="w-16 h-16 text-slate-700" />
+                <Map className="w-14 h-14 text-slate-600" />
               </div>
               <div className="flex flex-col">
                 <h3 className="text-sm font-sans font-semibold mb-1">HANDPICKED ITINERARIES</h3>
@@ -97,7 +97,7 @@ export default function AboutPage() {
             </div>
             <div className="flex items-start gap-4">
               <div className="flex-shrink-0">
-                <Clock className="w-16 h-16 text-slate-700" />
+                <Clock className="w-14 h-14 text-slate-600" />
               </div>
               <div className="flex flex-col">
                 <h3 className="text-sm font-sans font-semibold mb-1">INSTANT ACCESS</h3>
@@ -106,7 +106,7 @@ export default function AboutPage() {
             </div>
             <div className="flex items-start gap-4">
               <div className="flex-shrink-0">
-                <Users className="w-16 h-16 text-slate-700" />
+                <Users className="w-14 h-14 text-slate-600" />
               </div>
               <div className="flex flex-col">
                 <h3 className="text-sm font-sans font-semibold mb-1">AUTHENTIC IMMERSION</h3>
@@ -115,7 +115,7 @@ export default function AboutPage() {
             </div>
             <div className="flex items-start gap-4">
               <div className="flex-shrink-0">
-                <Sparkle className="w-16 h-16 text-slate-700" />
+                <Sparkle className="w-14 h-14 text-slate-600" />
               </div>
               <div className="flex flex-col">
                 <h3 className="text-sm font-sans font-semibold mb-1">ACCESSIBLE LUXURY</h3>
@@ -127,7 +127,7 @@ export default function AboutPage() {
       </section>
 
       {/* Sustainability Section */}
-      <section className="py-20 bg-[#556B2F] text-white">
+      <section className="py-20 bg-[#142929] text-white">
         <div className="container mx-auto px-6">
           {/* Centered heading */}
           <h2 className="text-3xl md:text-4xl font-sans font-normal mb-10 text-center max-w-3xl mx-auto leading-tight">
@@ -163,7 +163,7 @@ export default function AboutPage() {
             <div className="lg:col-span-5">
               <div className="flex gap-4">
                 {/* First image - slightly wider */}
-                <div className="relative h-[350px] w-[58%] rounded-lg overflow-hidden">
+                <div className="relative h-[200px] md:h-[320px] lg:h-[350px] w-[58%] rounded-lg overflow-hidden">
                   <Image
                     src="/images/about-us/sustainability1.jpg?height=300&width=500&text=Community+Sustainability+Initiatives"
                     alt="Community sustainability initiatives and local partnerships"
@@ -174,7 +174,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* Second image - slightly narrower */}
-                <div className="relative h-[350px] w-[42%] rounded-lg overflow-hidden">
+                <div className="relative h-[200px] md:h-[320px] lg:h-[350px] w-[42%] rounded-lg overflow-hidden">
                   <Image
                     src="/images/about-us/sustainability2.jpg?height=250&width=400&text=Environmental+Conservation+Efforts"
                     alt="Environmental conservation and eco-friendly practices"
@@ -204,10 +204,10 @@ export default function AboutPage() {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-normal mb-8 leading-tight">
             Go Beyond the Ordinary.
           </h2>
-          <p className="text-sm md:text-lg text-white/90 mb-4 font-sans max-w-3xl mx-auto leading-none">
+          <p className="text-sm md:text-lg text-white/90 mb-4 font-sans max-w-3xl mx-auto leading-relaxed">
             Adventure is calling—and it's closer than you think.
             <br className="leading-tight" />
-            <span className="block -mt-1 sm:-mt-2">Book your next story today with Beyond Experiences and discover a world waiting to meet you.</span>
+            <span className="block mt-2 sm:mt-3">Book your next story today with Beyond Experiences and discover a world waiting to meet you.</span>
           </p>
           <Button className="bg-white hover:bg-white text-black font-sans px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
             Explore Experiences
