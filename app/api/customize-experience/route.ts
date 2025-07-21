@@ -5,6 +5,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
 
 function formatFormData(data: any) {
   return `
+Experience Name: ${data.experienceName || "N/A"}
 Full Name: ${data.fullName}
 Email: ${data.email}
 Phone Number: ${data.phoneNumber}
@@ -23,20 +24,36 @@ Additional Notes: ${data.additionalNotes}
 export async function POST(req: NextRequest) {
   const data = await req.json();
 
-  // Email to internal team
+  // Extract first name from full name
+  const firstName = data.fullName?.split(" ")[0] || "";
+
+  // Email to internal team using dynamic template
   const internalMsg = {
-    to: "concierge@experiencesbybeyond.com", // TODO: Replace with your team's email
+    to: "concierge@experiencesbybeyond.com", // TODO: Replace with your team's email if needed
     from: "concierge@experiencesbybeyond.com", // Use a verified sender
-    subject: "New Custom Experience Request",
-    text: `A new custom experience request was submitted:\n\n${formatFormData(data)}`,
+    templateId: "d-6042d804b96a42c99eee2b9f32c5a8eb", // Set this in your .env
+    dynamic_template_data: {
+      experienceName: data.experienceName, // or whatever field you use
+      fullName: data.fullName,
+      email: data.email,
+      phone: data.phoneNumber, // map to 'phone'
+      preferredContactMethod: data.preferredContact, // map to 'preferredContactMethod'
+      preferredDate: data.travelDates, // map to 'preferredDate'
+      guests: data.groupSize, // map to 'guests'
+      message: data.experienceVision, // map to 'message'
+      // add any other mappings as needed
+    },
   };
 
-  // Confirmation email to client
+  // Confirmation email to client using dynamic template
   const clientMsg = {
     to: data.email,
     from: "concierge@experiencesbybeyond.com",
-    subject: "We've received your custom experience request!",
-    text: `Thank you, ${data.fullName}, for your request. Here’s what you submitted:\n\n${formatFormData(data)}\n\nOur travel planners will contact you within 24 hours.`,
+    templateId: "d-a7094e3c9fb84d99b739f885bcf4c3ae", // Set this in your .env
+    dynamic_template_data: {
+      ...data,
+      firstName, // add firstName for SendGrid template
+    },
   };
 
   try {

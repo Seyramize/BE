@@ -449,7 +449,7 @@ export default function BookExperiencePage() {
                     >
                       Book this experience
                     </Button>
-                    <Link href="/customize-experience" className="w-full sm:w-auto">
+                    <Link href={`/customize-experience?experience=${encodeURIComponent(bookingContent.title)}`} className="w-full sm:w-auto">
                       <Button
                         variant="outline"
                         className="w-full border-slate-900 text-slate-900 bg-white  font-sans px-6 sm:px-8 py-3 rounded-sm"

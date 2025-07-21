@@ -14,6 +14,7 @@ import Link from "next/link"
 import { CountrySelector } from "@/components/country-selector"
 import { toast } from "@/hooks/use-toast"
 import { CheckCircle } from "lucide-react"
+import { useSearchParams } from "next/navigation"
 
 interface FormData {
   fullName: string
@@ -28,10 +29,13 @@ interface FormData {
   isFlexible: boolean
   groupSizeDetails: string
   additionalNotes: string
+  experienceName?: string
 }
 
 export default function CustomizeExperiencePage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const experienceFromQuery = searchParams.get("experience") || ""
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     email: "",
@@ -45,6 +49,7 @@ export default function CustomizeExperiencePage() {
     isFlexible: false,
     groupSizeDetails: "",
     additionalNotes: "",
+    experienceName: experienceFromQuery,
   })
   const [hasHistory, setHasHistory] = useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
@@ -80,6 +85,15 @@ export default function CustomizeExperiencePage() {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+
+  useEffect(() => {
+    if (experienceFromQuery) {
+      setFormData((prev) => ({
+        ...prev,
+        experienceName: experienceFromQuery,
+      }))
+    }
+  }, [experienceFromQuery])
 
   const handleInputChange = (field: keyof FormData, value: string | boolean) => {
     setFormData((prev) => ({
@@ -117,17 +131,8 @@ export default function CustomizeExperiencePage() {
 
       if (response.ok) {
         toast({
-          title: (
-            <span className="flex items-center gap-2 text-green-700 dark:text-green-400">
-              <CheckCircle className="w-5 h-5" />
-              Request submitted!
-            </span>
-          ),
-          description: (
-            <span className="text-slate-700 dark:text-slate-200">
-              Our travel planners will contact you within 24 hours.
-            </span>
-          ),
+          title: "Request submitted!",
+          description: "Our travel planners will contact you within 24 hours.",
           className: "bg-white dark:bg-slate-900 border-green-200 dark:border-green-700 shadow-xl",
         });
         setTimeout(() => {
@@ -136,33 +141,15 @@ export default function CustomizeExperiencePage() {
       } else {
         const data = await response.json();
         toast({
-          title: (
-            <span className="flex items-center gap-2 text-red-700 dark:text-red-400">
-              <X className="w-5 h-5" />
-              Submission failed
-            </span>
-          ),
-          description: (
-            <span className="text-slate-700 dark:text-slate-200">
-              {data.error || "There was an error submitting your request. Please try again later."}
-            </span>
-          ),
+          title: "Submission failed",
+          description: data.error || "There was an error submitting your request. Please try again later.",
           className: "bg-white dark:bg-slate-900 border-red-200 dark:border-red-700 shadow-xl",
         });
       }
     } catch (error) {
       toast({
-        title: (
-          <span className="flex items-center gap-2 text-red-700 dark:text-red-400">
-            <X className="w-5 h-5" />
-            Submission failed
-          </span>
-        ),
-        description: (
-          <span className="text-slate-700 dark:text-slate-200">
-            There was an error submitting your request. Please try again later.
-          </span>
-        ),
+        title: "Submission failed",
+        description: "There was an error submitting your request. Please try again later.",
         className: "bg-white dark:bg-slate-900 border-red-200 dark:border-red-700 shadow-xl",
       });
     }
@@ -206,7 +193,7 @@ export default function CustomizeExperiencePage() {
   return (
     <div className="min-h-screen bg-stone-100">
       {/* Hero Section */}
-      <section className="relative h-[50vh] bg-slate-900 overflow-hidden">
+      <section className="relative h-[40vh] md:h-[50vh] lg:h-[60vh] bg-slate-900 overflow-hidden">
         {/* Abstract background with flowing shapes */}
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
@@ -230,8 +217,8 @@ export default function CustomizeExperiencePage() {
         </div>
 
         {/* Hero content */}
-        <div className="relative z-10 flex items-center justify-center h-full px-6">
-          <div className="text-center">
+        <div className="relative z-10 flex items-center justify-center h-full px-6 bg-[url('/images/expereincecustomisation.png')] bg-cover bg-no-repeat bg-center">
+          <div className="text-center relative z-10">
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-serif font-normal text-stone-100 leading-tight">
               Tailor your
               <br />
@@ -301,7 +288,7 @@ export default function CustomizeExperiencePage() {
                   <div className="flex gap-2">
                     <CountrySelector
                       value={formData.countryCode}
-                      onChange={(value) => handleInputChange("countryCode", value)}
+                      onChange={(country) => handleInputChange("countryCode", country.code)}
                     />
                     <Input
                       id="phoneNumber"
@@ -424,42 +411,9 @@ export default function CustomizeExperiencePage() {
                 {errors.travelDates && <p className="text-red-500 text-xs mt-1">{errors.travelDates}</p>}
               </div>
             </div>
+            {/* End of Travel Details */}
+            <hr className="border-black my-8" />
 
-            {/* Group Size Details */}
-            <div>
-              <label htmlFor="groupSizeDetails" className="block text-slate-800 font-sans text-sm font-medium mb-3">
-                Group Size
-              </label>
-              <Input
-                id="groupSizeDetails"
-                type="text"
-                placeholder="Group Size"
-                value={formData.groupSizeDetails}
-                onChange={(e) => handleInputChange("groupSizeDetails", e.target.value)}
-                className="w-full bg-white border-slate-200 text-slate-800 placeholder:text-slate-400 h-12"
-              />
-            </div>
-
-            {/* Additional Notes */}
-            <div className="border-b-2 border-black pb-8">
-              <h3 className="text-2xl font-sans font-normal text-slate-800 mb-2">Additional Notes</h3>
-              <p className="text-slate-600 font-sans mb-8">
-                Every detail matters. Is there anything else we should know to make this unforgettable?
-              </p>
-
-              <div>
-                <label htmlFor="additionalNotes" className="block text-slate-800 font-sans text-sm font-medium mb-3">
-                  Tell us more
-                </label>
-                <Textarea
-                  id="additionalNotes"
-                  placeholder="Special celebrations, must-haves, names of guests, or anything else on your mind..."
-                  value={formData.additionalNotes}
-                  onChange={(e) => handleInputChange("additionalNotes", e.target.value)}
-                  className="w-full bg-white border-slate-200 text-slate-800 placeholder:text-slate-400 min-h-[120px] resize-none"
-                />
-              </div>
-            </div>
 
             {/* Submit Button */}
             <div className="pt-8">

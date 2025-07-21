@@ -22,6 +22,10 @@ function validateForm(data: FormData) {
   return null;
 }
 
+function getFirstName(fullName: string) {
+  return fullName.trim().split(" ")[0];
+}
+
 sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
 
 export async function POST(req: Request) {
@@ -33,33 +37,42 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: false, error: errorMsg }, { status: 400 });
   }
 
-  // Email to internal team
+  // Format date for better readability
+  const formattedDate = data.isFlexible ? "Flexible" : new Date(data.date).toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+
+  const firstName = getFirstName(data.fullName);
+
+  // Email to internal team using template
   const internalMsg = {
-    to: "concierge@experiencesbybeyond.com", // replace with your internal team email
-    from: "concierge@experiencesbybeyond.com", // your verified sender
-    subject: "New Travel Planner Call Scheduled",
-    text: `
-      Name: ${data.fullName}
-      Email: ${data.email}
-      Phone: ${data.countryCode} ${data.phoneNumber}
-      Date: ${data.date} ${data.isFlexible ? "(Flexible)" : ""}
-      Message: ${data.helpMessage}
-    `,
+    to: "concierge@experiencesbybeyond.com",
+    from: "concierge@experiencesbybeyond.com",
+    templateId: "d-6939718cc86c4dd481d6e7db57416ef5",
+    dynamicTemplateData: {
+      fullName: data.fullName,
+      email: data.email,
+      phone: `${data.countryCode} ${data.phoneNumber}`,
+      date: formattedDate,
+      flexible: data.isFlexible ? "Yes" : "No", // <-- Add this line
+      message: data.helpMessage
+    }
   };
 
-  // Email to client
+  // Email to client using template
   const clientMsg = {
     to: data.email,
-    from: "concierge@experiencesbybeyond.com", // your verified sender
-    subject: "Your Travel Planner Call is Scheduled",
-    text: `
-      Hi ${data.fullName},
-
-      Thank you for scheduling a call with us! We'll be in touch within 24 hours to confirm your appointment.
-
-      Best,
-      The Beyond Experiences Team
-    `,
+    from: "concierge@experiencesbybeyond.com",
+    templateId: "d-8f55f56a6e6343a0bf6e58947f964170",
+    dynamicTemplateData: {
+      fullName: data.fullName,
+      firstName,
+      date: formattedDate,
+      flexible: data.isFlexible ? "Yes" : "No" // <-- Add if needed
+    }
   };
 
   try {

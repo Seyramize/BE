@@ -6,6 +6,7 @@ import { Instagram, Facebook, Twitter, MessageCircle } from "lucide-react"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import React, { useState } from "react"
+import { SocialIcon } from 'react-social-icons'
 
 export function SiteFooter() {
   // Add state for the email input and feedback
@@ -185,29 +186,10 @@ export function SiteFooter() {
             <div>
               <p className="text-sm font-sans font-semibold uppercase tracking-wider mb-3">CONNECT</p>
               <div className="flex space-x-4">
-                <Link href="#" className="text-white hover:text-gray-300 transition-colors">
-                  <MessageCircle size={20} />
-                  <span className="sr-only">WhatsApp</span>
-                </Link>
-                <Link href="#" className="text-white hover:text-gray-300 transition-colors">
-                  <Instagram size={20} />
-                  <span className="sr-only">Instagram</span>
-                </Link>
-                <Link href="#" className="text-white hover:text-gray-300 transition-colors">
-                  <Facebook size={20} />
-                  <span className="sr-only">Facebook</span>
-                </Link>
-                <Link href="#" className="text-white hover:text-gray-300 transition-colors">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.5 12.5c0-3.086.85-5.94 2.495-8.491C5.845 1.205 8.598.024 12.179 0h.014c3.581.024 6.334 1.205 8.184 3.509C21.65 5.56 22.5 8.414 22.5 11.5c0 3.086-.85 5.94-2.495 8.491C18.361 22.795 15.608 23.976 12.186 24zM12.179 2c-2.757.02-4.87.942-6.28 2.739C4.508 6.533 3.75 8.789 3.75 11.5s.758 4.967 2.149 6.761c1.41 1.797 3.523 2.719 6.28 2.739h.007c2.757-.02 4.87-.942 6.28-2.739C19.858 16.467 20.616 14.211 20.616 11.5s-.758-4.967-2.149-6.761C17.057 2.942 14.944 2.02 12.186 2h-.007z" />
-                    <path d="M12 16.5c-2.481 0-4.5-2.019-4.5-4.5s2.019-4.5 4.5-4.5 4.5 2.019 4.5 4.5-2.019 4.5-4.5 4.5zm0-7c-1.378 0-2.5 1.122-2.5 2.5s1.122 2.5 2.5 2.5 2.5-1.122 2.5-2.5-1.122-2.5-2.5-2.5z" />
-                  </svg>
-                  <span className="sr-only">Threads</span>
-                </Link>
-                <Link href="#" className="text-white hover:text-gray-300 transition-colors">
-                  <Twitter size={20} />
-                  <span className="sr-only">Twitter</span>
-                </Link>
+                <SocialIcon url="https://api.whatsapp.com/send?phone=233504513123&text=Hi%20beyond%20team%2C%20" bgColor="#1e293b" fgColor="#fff" style={{ height: 40, width: 40 }} />
+                <SocialIcon url="https://www.instagram.com/beyondaccra/" network="instagram" bgColor="#1e293b" fgColor="#fff" style={{ height: 40, width: 40 }} />
+                <SocialIcon url="https://www.facebook.com/p/Beyond-Accra-100090689846628/" network="facebook" bgColor="#1e293b" fgColor="#fff" style={{ height: 40, width: 40 }} />
+                
               </div>
             </div>
           </div>

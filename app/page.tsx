@@ -283,7 +283,7 @@ export default function Home() {
                 <AccordionContent className="px-6 py-4 bg-gray-800/30 font-sans leading-relaxed">
                   Of course! If you have questions or need clarification, you can reach our team via{' '}
                   <a
-                    href="https://wa.me/1234567890"
+                    href="https://api.whatsapp.com/send?phone=233504513123&text=Hi%20beyond%20team%2C%20"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-amber-400 underline hover:text-amber-300"

@@ -6,31 +6,30 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
 export async function POST(req: NextRequest) {
   try {
     const { firstName, lastName, email, phone, message } = await req.json();
+    const fullName = `${firstName} ${lastName}`;
 
     // Email to internal team
     const internalMsg = {
       to: "concierge@experiencesbybeyond.com", // change to your team email
-      from: "concierge@experiencesbybeyond.com",    // must be a verified sender in SendGrid
-      subject: "New Enquiry Form Submission",
-      html: `
-        <h2>New Enquiry Received</h2>
-        <p><b>Name:</b> ${firstName} ${lastName}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Phone:</b> ${phone}</p>
-        <p><b>Message:</b> ${message}</p>
-      `,
+      from: "concierge@experiencesbybeyond.com", // must be a verified sender in SendGrid
+      templateId: "d-81252be20f1d4916a28e595c0df9a32f",
+      dynamicTemplateData: {
+        fullName,
+        email,
+        phone,
+        message,
+      },
     };
 
     // Confirmation email to user
     const userMsg = {
       to: email,
       from: "concierge@experiencesbybeyond.com", // must be a verified sender in SendGrid
-      subject: "Thank you for your enquiry",
-      html: `
-        <h2>Thank you, ${firstName}!</h2>
-        <p>We have received your enquiry and will get back to you soon.</p>
-        <p><b>Your message:</b> ${message}</p>
-      `,
+      templateId: "d-512264a7453742259196cb8b625458df",
+      dynamicTemplateData: {
+        firstName,
+        message,
+      },
     };
 
     await Promise.all([sgMail.send(internalMsg), sgMail.send(userMsg)]);
