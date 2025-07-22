@@ -204,6 +204,7 @@ export default function Home() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <span className="text-white/80 uppercase text-sm tracking-wider font-sans">{experience.defaultContent.location}</span>
                     <h3 className="text-2xl font-serif font-normal text-white mb-2">{experience.defaultContent.title}</h3>
                     <p className="text-white/90 mb-3 text-sm font-sans leading-relaxed">
                       {experience.defaultContent.shortDescription}
