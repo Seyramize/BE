@@ -1,0 +1,96 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // This will come from Vercel/Neon
+}
+
+// Model for user accounts
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String? // Profile picture URL
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  bookings Booking[] // A user can have many bookings
+  reviews  Review[]  // A user can write many reviews
+}
+
+// Model for the experiences you offer
+model Experience {
+  id               String   @id @default(cuid())
+  name             String   @unique // From defaultContent.title
+  slug             String   @unique // From slug
+
+  // Text content
+  shortDescription String // From defaultContent.shortDescription
+  subtitle         String // From bookingContent.subtitle
+  overview         String   @db.Text // From bookingContent.overview
+
+  // Core details
+  price            Float // From bookingContent.startingPrice
+  duration         String // From bookingContent.duration
+  location         String // From defaultContent.location
+  destinations     String // From bookingContent.destinations. e.g. "3 DESTINATIONS"
+
+  // Guest details
+  minGuests        Int // From bookingContent.minimumGuests
+  maxGuests        Int // From bookingContent.maxGuests (we need to parse the number out)
+
+  // Media
+  heroImage        String // From bookingContent.heroImage
+  galleryImages    String[] // From bookingContent.galleryImages
+
+  // Lists
+  highlights       String[] // From bookingContent.highlights
+  included         String[] // From bookingContent.included
+  tags             String[] // From tags
+
+  // Flags for marketing
+  isFeatured       Boolean  @default(false)
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  bookings Booking[]
+  reviews  Review[]
+}
+
+// Model for customer bookings
+model Booking {
+  id               String   @id @default(cuid())
+  createdAt        DateTime @default(now())
+  bookingDate      DateTime
+  numberOfGuests   Int
+  totalPrice       Float
+  status           String   @default("PENDING") // PENDING, CONFIRMED, CANCELLED
+  stripeCheckoutId String   @unique // The session ID from Stripe
+
+  userId String
+  user   User     @relation(fields: [userId], references: [id])
+
+  experienceId String
+  experience   Experience @relation(fields: [experienceId], references: [id])
+}
+
+// Model for user reviews
+model Review {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  rating    Int // Rating from 1 to 5
+  comment   String   @db.Text
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  experienceId String
+  experience   Experience @relation(fields: [experienceId], references: [id])
+}

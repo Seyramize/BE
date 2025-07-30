@@ -5,7 +5,11 @@ import { Logo } from "./logo"
 import Link from "next/link"
 import { Button } from "./ui/button"
 import { usePathname } from "next/navigation"
-import { Menu, X } from "lucide-react"
+import { Menu, X, } from "lucide-react"
+import { FaWhatsapp, FaInstagram } from 'react-icons/fa';
+import { SiX, SiThreads, SiFacebook } from "react-icons/si";
+
+
 
 export function SiteHeader() {
   const [isVisible, setIsVisible] = useState(true)
@@ -161,74 +165,51 @@ export function SiteHeader() {
           <Menu className="h-6 w-6" />
         </Button>
 
-        {/* Mobile menu overlay with slide-in animation */}
-        <div className={`fixed inset-0 w-full min-h-screen z-[150] md:hidden ${isMobileMenuOpen ? '' : 'pointer-events-none'}`}>
-          {/* Backdrop blur and overlay */}
-          <div 
-            className={`fixed inset-0 w-full min-h-screen backdrop-blur-lg bg-gradient-to-br from-black/40 to-black/30 transition-all duration-700 ease-in-out ${
-              isMobileMenuOpen ? 'opacity-100 backdrop-saturate-150' : 'opacity-0 backdrop-saturate-100'
-            }`}
-            aria-hidden="true"
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
-          
-          {/* Slide-in menu container */}
-          <div
-            className={`fixed top-0 right-0 h-[100dvh] w-4/5 max-w-sm bg-gradient-to-br from-amber-50/90 via-white/95 to-amber-100/80 backdrop-blur-2xl shadow-[0_0_50px_5px_rgba(251,191,36,0.15)] transform transition-all duration-700 ease-out origin-right rounded-l-2xl border border-amber-200/40 ${
-              isMobileMenuOpen 
-                ? 'translate-x-0 opacity-100 scale-100 rotate-0 shadow-[0_0_45px_5px_rgba(251,191,36,0.1)]' 
-                : 'translate-x-[103%] opacity-0 scale-95 rotate-2 shadow-[0_0_45px_5px_rgba(251,191,36,0)]'
-            }`}
-          >
-            {/* Close button */}
-            <Button
-              variant="ghost"
+        {/* Mobile menu overlay */}
+        <div
+          className={`fixed inset-0 w-full min-h-screen z-[150] md:hidden transition-all duration-500 ease-in-out ${
+            isMobileMenuOpen ? 'opacity-95 bg-black' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          <div className="flex flex-col items-center justify-between h-full py-24 text-white">
+            {/* Menu Header */}
+            <div className="flex flex-col items-center space-y-2">
+              <Logo />
+              <span className="text-xs tracking-widest">MENU</span>
+            </div>
+
+            {/* Navigation Links */}
+            <nav className="flex flex-col items-center space-y-7 text-3xl font-serif">
+              <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-amber-400 transition">Home</Link>
+              <Link href="/experiences" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-amber-400 transition">Experiences</Link>
+              <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-amber-400 transition">About Us</Link>
+              <Link href="/journal" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-amber-400 transition">The Journal</Link>
+            </nav>
+
+            {/* Social Links */}
+            <div className="flex flex-col items-center space-y-2">
+              <span className="text-xs tracking-widest">CONNECT</span>
+              <div className="flex text-2xl space-x-6">
+                <a href="#" className="hover:text-green-400 transition"><FaWhatsapp /></a>
+                <a href="#" className="hover:text-pink-400 transition"><FaInstagram /></a>
+                <a href="#" className="hover:text-blue-400 transition"><SiFacebook /></a>
+                <a href="#" className="hover:text-gray-400 transition"><SiThreads /></a>
+                <a href="#" className="hover:text-gray-400 transition"><SiX /></a>
+              </div>
+            </div>
+
+            {/* Close Button */}
+            <div className="flex flex-col items-center space-y-2 text-white">
+            <div
               onClick={() => setIsMobileMenuOpen(false)}
               aria-label="Close menu"
-              className="absolute right-4 top-4 p-2 rounded-md text-amber-400 hover:text-amber-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-amber-400"
+              className="h-11 w-11 rounded-full border-4 border-white bg-black text-white flex items-center justify-center cursor-pointer"
             >
-              <X className="h-6 w-6" />
-            </Button>
+              <X className="h-7 w-7" />
+            </div>
+            <span className="text-xs tracking-widest">CLOSE MENU</span>
+          </div>
 
-            {/* Menu links */}
-            <nav className="mt-16 px-2 space-y-4">
-              <Link
-                href="/"
-                className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50 ${
-                  pathname === "/" ? "bg-blue-50 text-blue-950" : ""
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Home
-              </Link>
-              <Link
-                href="/experiences"
-                className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50 ${
-                  pathname === "/experiences" ? "bg-blue-50 text-blue-950" : ""
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Experiences
-              </Link>
-              <Link
-                href="/about"
-                className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50 ${
-                  pathname === "/about" ? "bg-blue-50 text-blue-950" : ""
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                About Us
-              </Link>
-              <Link
-                href="/journal"
-                className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50 ${
-                  pathname === "/journal" ? "bg-blue-50 text-blue-950" : ""
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                The Journal
-              </Link>
-            </nav>
           </div>
         </div>
       </div>
