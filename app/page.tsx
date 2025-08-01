@@ -377,7 +377,7 @@ export default function Home() {
       {/* Enquire Section */}
       <section className="pt-0 pb-10 md:py-20 bg-[#f3eae1]">
         <div className="container mx-auto px-0 md:px-16 lg:px-32 xl:px-40">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12">
             {/* Form section */}
             <div className="order-2 md:order-2 px-6 md:px-0">
               <div className="md:pt-[165px]">
