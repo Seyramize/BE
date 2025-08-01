@@ -57,9 +57,9 @@ export function SiteFooter() {
                 Get curated travel inspiration, special offers, and behind-the-scenes access.
               </p>
               <form className="space-y-3" onSubmit={handleSubmit}>
-                <Input type="text" placeholder="First Name" className="bg-gray-100 border-0 text-slate-800 font-sans placeholder:text-gray-500 rounded-lg py-5" value={firstName} onChange={e => setFirstName(e.target.value)} required />
-                <Input type="text" placeholder="Last Name" className="bg-gray-100 border-0 text-slate-800 font-sans placeholder:text-gray-500 rounded-lg py-5" value={lastName} onChange={e => setLastName(e.target.value)} required />
-                <Input type="email" placeholder="E-mail Address" className="bg-gray-100 border-0 text-slate-800 font-sans placeholder:text-gray-500 rounded-lg py-5" value={email} onChange={e => setEmail(e.target.value)} required />
+                <Input type="text" placeholder="First Name" className="bg-gray-100 border-0 text-slate-800 font-sans placeholder:text-gray-500 rounded-lg py-5 placeholder:text-xs" value={firstName} onChange={e => setFirstName(e.target.value)} required />
+                <Input type="text" placeholder="Last Name" className="bg-gray-100 border-0 text-slate-800 font-sans placeholder:text-gray-500 rounded-lg py-5 placeholder:text-xs" value={lastName} onChange={e => setLastName(e.target.value)} required />
+                <Input type="email" placeholder="E-mail Address" className="bg-gray-100 border-0 text-slate-800 font-sans placeholder:text-gray-500 rounded-lg py-5 placeholder:text-xs" value={email} onChange={e => setEmail(e.target.value)} required />
                 <Button className="w-full bg-[#F3EADF] text-slate-800 hover:bg-amber-200 font-sans font-medium py-6 rounded-lg tracking-widest" type="submit" disabled={status === "loading"}>
                   {status === "loading" ? "Subscribing..." : "STAY IN THE LOOP"}
                 </Button>

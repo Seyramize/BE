@@ -158,7 +158,7 @@ export function SiteHeader() {
         {/* Mobile menu button */}
         <Button
           variant="ghost"
-          className="md:hidden absolute right-6 w-10 h-10 bg-black/20 backdrop-blur-sm rounded-lg hover:bg-black/30 flex items-center justify-center p-0"
+          className="md:hidden absolute right-6 w-11 h-11 bg-black/20 backdrop-blur-sm rounded-lg hover:bg-black/30 flex items-center justify-center p-0"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Open menu"
         >

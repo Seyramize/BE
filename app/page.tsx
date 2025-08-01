@@ -83,23 +83,24 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-black/20" />
         </div>
-        <div className="relative container mx-auto px-6 md:px-16 lg:px-32 xl:px-40 h-full flex flex-col justify-center">
+        <div className="relative container mx-auto px-8 md:px-16 lg:px-32 xl:px-40 h-full flex flex-col justify-center">
           <div className="max-w-2xl pt-48 md:pt-64 lg:pt-80 pb-16 text-center md:text-left">
-            <h1 className="text-5xl md:text-5xl lg:text-6xl font-argent font-normal text-white leading-tight mb-6">
-              Go Beyond
+            <h1 className="text-5xl md:text-5xl lg:text-6xl font-argent font-normal text-white leading-none md:leading-tight mb-5">
+              Go beyond
               <br />
               the ordinary
             </h1>
-            <p className="text-lg text-white/90 mb-4 max-w-lg font-sans leading-relaxed">
-              Discover bespoke experiences that redefine the way you travel. <br className="md:hidden" />Whether you seek serenity, thrill, or
-              unforgettable encounters, your next journey begins here.
-            </p>
+            <div className="text-lg text-white/90 mb-5 max-w-lg font-sans leading-none md:leading-relaxed">
+              <p className="md:inline">Discover bespoke experiences that redefine the way you travel. </p>
+              <p className="mt-3 md:inline md:mt-0">Whether you seek serenity, thrill, or unforgettable encounters, your next journey begins here.</p>
+            </div>
             <div className="flex flex-col items-center md:flex-row gap-4 mb-16">
-              <Link href="/experiences" className="w-full md:w-auto">
-                <Button className="w-full md:w-auto text-lg md:text-normal px-8 py-10 md:py-3 rounded-2xl md:rounded-full bg-white/20 md:bg-[#f67d46] hover:bg-white/30 md:hover:bg-[#f67d46] text-white font-sans border md:border-0 border-white flex items-center gap-2">
-                  Explore Experiences
-                  <FaRegMap className="w-10 h-10 text-white" />
-                </Button>
+              <Link href="/experiences" className="w-full md:w-auto px-8 md:px-0">
+                                  <Button className="w-full md:w-auto text-sm md:text-normal px-8 py-8 md:py-3 rounded-xl md:rounded-full bg-black/30 md:bg-[#f67d46] hover:bg-black/70 md:hover:bg-[#f67d46] text-white font-sans border md:border-0 border-white flex items-center gap-2 backdrop-blur-sm">
+                    Explore Experiences  
+                   <FaRegMap className="w-8 h-8 text-white" />
+                  </Button>
+                
               </Link>
               <div className="hidden md:block">
                 <TravelPlannerModal>
@@ -128,7 +129,7 @@ export default function Home() {
               <div className="md:hidden">
                 {/* This div is only for mobile to group the images */}
                 <div className="grid grid-cols-1 gap-4">
-                  <div className="relative h-80">
+                  <div className="relative h-56">
                     <Image
                       src="/images/home/curatedexp2.jpg?height=320&width=240&text=Tropical+Resort"
                       alt="Tropical beach resort"
@@ -138,12 +139,12 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <p className="text-gray-700 mt-6 md:mt-0 mb-6 font-sans leading-relaxed">
+              <p className="text-gray-700 mt-6 md:mt-0 mb-6 font-sans leading-tight">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis molestie dui lorem, at molestie dui
                 accumsan in. Donec tempus, lorem eget venenatis molestie, nulla ipsum consectetur lorem, vel tempor
                 lorem ipsum vel lorem.
               </p>
-              <p className="text-gray-700 mb-8 font-sans leading-relaxed">
+              <p className="text-gray-700 mb-8 font-sans leading-tight">
                 Vestibulum ut consequat elit. Mauris sodales fermentum lorem, ut molestie magna cursus fermentum. Donec
                 quis lorem vel magna cursus fermentum. Donec quis lorem vel magna cursus fermentum. Donec quis lorem vel
                 magna cursus fermentum.
@@ -183,15 +184,15 @@ export default function Home() {
       </section>
 
       {/* Featured Experiences Section */}
-      <section className="pt-4 md:pt-12 pb-16 bg-[#f5f5dc] overflow-hidden">
+      <section className="pt-4 md:pt-12 pb-8 md:pb-16 bg-[#f3eae1] overflow-hidden">
         <div className="md:container md:mx-auto md:px-16 lg:px-32 xl:px-40">
           <h2 className="text-4xl md:text-4xl font-argent font-normal mb-6 md:mb-12 px-6 md:px-0">Featured<br className="md:hidden" /> Experiences</h2>
           {isMobile ? (
-            <Carousel opts={{ align: "start", loop: false }} className="ml-10">
-              <CarouselContent className="pl-4">
+            <Carousel opts={{ align: "start", loop: false }} className="pl-6">
+              <CarouselContent className="-ml-4">
                 {experiences.slice(0, 3).map((experience, index) => (
                   <CarouselItem key={experience.id} className="pl-4 basis-5/6">
-                    <div className="relative rounded-lg overflow-hidden group h-[550px]">
+                    <div className="relative rounded-lg overflow-hidden group h-[470px]">
                       <Image
                         src={experience.defaultContent.image}
                         alt={experience.defaultContent.title}
@@ -207,7 +208,7 @@ export default function Home() {
                         </p>
                         <Link href={`/book-experience/${experience.slug}`}>
                           <Button
-                            className="bg-white/20 hover:bg-white/30 text-white font-sans px-12 py-10 rounded-3xl backdrop-blur-sm border border-white/30 w-full">
+                            className="bg-white/20 hover:bg-white/30 text-white font-sans px-12 py-7 rounded-3xl backdrop-blur-sm border border-white/30 w-full">
                             Book Experience
                           </Button>
                         </Link>
@@ -217,7 +218,7 @@ export default function Home() {
                 ))}
                 <CarouselItem className="pl-4 basis-5/6">
                   <Link href="/experiences">
-                    <div className="relative rounded-lg overflow-hidden group h-[550px] bg-gray-900 flex flex-col justify-center items-center text-center p-6">
+                    <div className="relative rounded-lg overflow-hidden group h-[470px] bg-gray-900 flex flex-col justify-center items-center text-center p-6">
                       <TbBinoculars className="text-white mb-4" size={40} />
                       <h3 className="text-4xl font-serif font-normal text-white mt-2 mb-3">Explore Experiences</h3>
                       <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
@@ -295,8 +296,8 @@ export default function Home() {
       {/* FAQ Section */}
       <section className="pt-6 pb-6 md:py-20 bg-gray-900 text-white">
         <div className="container mx-auto px-6 md:px-16 lg:px-32 xl:px-40">
-          <h2 className="text-3xl md:text-4xl font-argent font-normal mb-4">Frequently Asked Questions</h2>
-          <p className="text-white/80 max-w-3xl mb-8 font-sans leading-relaxed">
+          <h2 className="text-3xl md:text-4xl font-argent leading-7 font-normal mb-4">Frequently<br className="md:hidden" /> Asked Questions</h2>
+          <p className="text-white/80 max-w-3xl mb-8 font-sans leading-tight">
             Find answers to common questions about our experiences and booking process. If you don't see your question
             here, please reach out to us directly.
           </p>
@@ -374,7 +375,7 @@ export default function Home() {
       </section>
 
       {/* Enquire Section */}
-      <section className="pt-0 pb-20 md:py-20 bg-amber-50">
+      <section className="pt-0 pb-10 md:py-20 bg-[#f3eae1]">
         <div className="container mx-auto px-0 md:px-16 lg:px-32 xl:px-40">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Form section */}
@@ -382,19 +383,19 @@ export default function Home() {
               <div className="md:pt-[165px]">
                 <form className="space-y-2 md:space-y-4" onSubmit={handleSubmit}>
                   <div>
-                    <Input name="firstName" value={form.firstName} onChange={handleChange} type="text" placeholder="First Name" className="bg-white border-gray-200 font-sans w-full py-6 md:py-2" />
+                    <Input name="firstName" value={form.firstName} onChange={handleChange} type="text" placeholder="First Name" className="bg-white border-gray-200 font-sans w-full py-6 md:py-2 placeholder:text-xs" />
                   </div>
                   <div>
-                    <Input name="lastName" value={form.lastName} onChange={handleChange} type="text" placeholder="Last Name" className="bg-white border-gray-200 font-sans w-full py-6 md:py-2" />
+                    <Input name="lastName" value={form.lastName} onChange={handleChange} type="text" placeholder="Last Name" className="bg-white border-gray-200 font-sans w-full py-6 md:py-2 placeholder:text-xs" />
                   </div>
                   <div>
-                    <Input name="email" value={form.email} onChange={handleChange} type="email" placeholder="Email" className="bg-white border-gray-200 font-sans w-full py-6 md:py-2" />
+                    <Input name="email" value={form.email} onChange={handleChange} type="email" placeholder="Email" className="bg-white border-gray-200 font-sans w-full py-6 md:py-2 placeholder:text-xs" />
                   </div>
                   <div>
-                    <Input name="phone" value={form.phone} onChange={handleChange} type="tel" placeholder="Phone" className="bg-white border-gray-200 font-sans w-full py-6 md:py-2" />
+                    <Input name="phone" value={form.phone} onChange={handleChange} type="tel" placeholder="Phone" className="bg-white border-gray-200 font-sans w-full py-6 md:py-2 placeholder:text-xs" />
                   </div>
                   <div>
-                    <Textarea name="message" value={form.message} onChange={handleChange} placeholder="Tell us about your dream experience" className="bg-white border-gray-200 min-h-[120px] font-sans w-full py-6 md:py-2" />
+                    <Textarea name="message" value={form.message} onChange={handleChange} placeholder="How can we help?" className="bg-white border-gray-200 min-h-[120px] font-sans w-full py-6 md:py-2 placeholder:text-xs" />
                   </div>
                   {error && <div className="text-red-600 mt-2">{error}</div>}
                   <Button type="submit" className="w-full bg-gray-900 hover:bg-gray-800 text-white font-body rounded-2xl md:rounded-full py-8 md:py-3" disabled={loading}>
@@ -407,18 +408,18 @@ export default function Home() {
 
             {/* Title and photo section */}
             <div className="order-1 md:order-1">
-              <div className="relative h-[250px] md:h-auto overflow-hidden md:hidden">
+              <div className="relative h-[200px] md:h-auto overflow-hidden md:hidden">
                 <Image
                   src="/images/home/enquiry.jpg?height=500&width=800&text=Wooden+Boat+Lake"
                   alt="Wooden boat on a crystal clear lake"
                   fill
                   className="object-cover object-top"
                 />
-                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-amber-50 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#f3eae1] to-transparent" />
               </div>
               <div className="relative md:hidden -mt-8 text-left px-6 z-10">
                 <h2 className="text-3xl font-title font-normal text-gray-900 mb-2">Want to enquire?</h2>
-                <p className="text-gray-700 font-sans leading-relaxed">
+                <p className="text-gray-700 font-sans leading-tight">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis molestie dui lorem, at molestie dui
                   accumsan in. Donec tempus, lorem eget venenatis molestie, nulla ipsum consectetur lorem, vel tempor
                   lorem ipsum vel lorem.
@@ -447,10 +448,10 @@ export default function Home() {
 
       <SiteFooter />
       {/* Mobile-only "Speak to a Travel Planner" Sticky Button */}
-      <div className="md:hidden fixed bottom-4 right-4 z-20">
+      <div className="md:hidden fixed bottom-4 right-6 z-20">
         <TravelPlannerModal>
           <Button
-            className="bg-gray-900/90 hover:bg-gray-900 text-white font-sans w-20 h-12 p-4 rounded-2xl shadow-lg flex items-center justify-center"
+            className="bg-gray-900/90 hover:bg-gray-900 text-white font-sans w-20 h-12 p-4 rounded-xl shadow-lg flex items-center justify-center"
           >
             <img src="/images/ChatsCircle.png" alt="chats" className="w-5 h-5" />
           </Button>
