@@ -109,7 +109,7 @@ export function SiteHeader() {
     >
       <div className="container mx-auto px-4 md:px-2 lg:px-4 flex justify-center relative">
         {/* Logo positioned on the left */}
-        <div className="absolute left-4 md:left-3 lg:left-4 scale-50 md:scale-65 lg:scale-75">
+        <div className="absolute left-4 md:left-3 lg:left-4 scale-[0.8] md:scale-65 lg:scale-75">
           <Logo />
         </div>
 
@@ -156,14 +156,19 @@ export function SiteHeader() {
         </nav>
 
         {/* Mobile menu button */}
-        <Button 
-          variant="ghost" 
-          className="md:hidden text-amber-400 p-2 absolute right-6 hover:bg-amber-50/10"
+        <Button
+          variant="ghost"
+          className="md:hidden absolute right-6 w-10 h-10 bg-black/20 backdrop-blur-sm rounded-lg hover:bg-black/30 flex items-center justify-center p-0"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Open menu"
         >
-          <Menu className="h-6 w-6" />
+          <div className="flex flex-col space-y-1">
+            <span className="block w-4 h-[2px] bg-gray-300"></span>
+            <span className="block w-4 h-[2px] bg-gray-300"></span>
+            <span className="block w-4 h-[2px] bg-gray-300"></span>
+          </div>
         </Button>
+      </div>
 
         {/* Mobile menu overlay */}
         <div
@@ -212,7 +217,6 @@ export function SiteHeader() {
 
           </div>
         </div>
-      </div>
     </header>
   )
 }
