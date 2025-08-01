@@ -13,8 +13,8 @@ import { experiences } from "@/lib/experiences-data"
 import { useState } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useMobile } from "@/hooks/use-mobile";
-import { FiMapPin } from "react-icons/fi";
 import { FaRegMap } from "react-icons/fa";
+import { TbBinoculars } from "react-icons/tb";
 
 export default function Home() {
   const [form, setForm] = useState({
@@ -218,11 +218,12 @@ export default function Home() {
                 <CarouselItem className="pl-4 basis-5/6">
                   <Link href="/experiences">
                     <div className="relative rounded-lg overflow-hidden group h-[550px] bg-gray-900 flex flex-col justify-center items-center text-center p-6">
-                      <h3 className="text-3xl font-serif font-normal text-white mt-2 mb-3">Explore Experiences</h3>
+                      <TbBinoculars className="text-white mb-4" size={40} />
+                      <h3 className="text-4xl font-serif font-normal text-white mt-2 mb-3">Explore Experiences</h3>
                       <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
                         Browse our catalog of experiences curated with you in mind.
                       </p>
-                      <CircleArrowRight className="h-12 w-12 text-white mt-4" />
+                      
                     </div>
                   </Link>
                 </CarouselItem>
