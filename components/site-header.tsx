@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { Logo } from "./logo"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "./ui/button"
 import { usePathname } from "next/navigation"
 import { Menu, X, } from "lucide-react"
@@ -158,7 +159,9 @@ export function SiteHeader() {
         {/* Mobile menu button */}
         <Button
           variant="ghost"
-          className="md:hidden absolute right-6 w-11 h-11 bg-black/20 backdrop-blur-sm rounded-lg hover:bg-black/30 flex items-center justify-center p-0"
+                    className={`md:hidden absolute right-6 w-11 h-11 bg-black/20 backdrop-blur-sm rounded-lg hover:bg-black/30 flex items-center justify-center p-0 transition-opacity duration-300 ${
+            isMobileMenuOpen ? "opacity-0" : "opacity-100"
+          }`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Open menu"
         >
@@ -172,14 +175,14 @@ export function SiteHeader() {
 
         {/* Mobile menu overlay */}
         <div
-          className={`fixed inset-0 w-full min-h-screen z-[150] md:hidden transition-all duration-500 ease-in-out ${
-            isMobileMenuOpen ? 'opacity-95 bg-black' : 'opacity-0 pointer-events-none'
+          className={`fixed inset-0 w-full min-h-screen z-[150] md:hidden bg-black/60 backdrop-blur-lg transition-all duration-500 ease-in-out transform ${
+            isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
           <div className="flex flex-col items-center justify-between h-full py-24 text-white">
             {/* Menu Header */}
             <div className="flex flex-col items-center space-y-2">
-              <Logo />
+              <Image src="/images/whitelogo.png" alt="Hamburger Logo" width={35} height={35} />
               <span className="text-xs tracking-widest">MENU</span>
             </div>
 
@@ -194,7 +197,7 @@ export function SiteHeader() {
             {/* Social Links */}
             <div className="flex flex-col items-center space-y-2">
               <span className="text-xs tracking-widest">CONNECT</span>
-              <div className="flex text-2xl space-x-6">
+              <div className="flex text-xl space-x-6">
                 <a href="#" className="hover:text-green-400 transition"><FaWhatsapp /></a>
                 <a href="#" className="hover:text-pink-400 transition"><FaInstagram /></a>
                 <a href="#" className="hover:text-blue-400 transition"><SiFacebook /></a>
@@ -208,7 +211,7 @@ export function SiteHeader() {
             <div
               onClick={() => setIsMobileMenuOpen(false)}
               aria-label="Close menu"
-              className="h-11 w-11 rounded-full border-4 border-white bg-black text-white flex items-center justify-center cursor-pointer"
+              className="h-11 w-11 rounded-full border-2 border-white bg-black text-white flex items-center justify-center cursor-pointer"
             >
               <X className="h-7 w-7" />
             </div>
