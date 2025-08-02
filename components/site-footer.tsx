@@ -52,7 +52,7 @@ export function SiteFooter() {
               <Image src="/images/footer-logo.png" alt="Beyond Experiences" fill className="object-contain" priority />
             </div>
             <div className="w-full max-w-sm">
-              <h3 className="text-3xl font-normal font-sans mb-3">Stay in the Loop</h3>
+              <h3 className="text-2xl font-normal font-sans mb-3">Stay in the Loop</h3>
               <p className="text-sm text-gray-400 mb-6 font-sans">
                 Get curated travel inspiration, special offers, and behind-the-scenes access.
               </p>

@@ -19,7 +19,7 @@ export default function AboutPage() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-white/20" />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
         <div className="relative text-center text-slate-800 z-10 px-4 w-full">
           {/* Mobile View */}
@@ -57,7 +57,7 @@ export default function AboutPage() {
                   fill
                   className="object-cover [object-position:50%_30%]"
                 />
-                <div className="absolute inset-0 bg-slate-900/60" />
+                <div className="absolute inset-0 bg-slate-900/40" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
                     <Button

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image"
-import { CircleArrowRight } from "lucide-react"
+import { CircleArrowRight, Video } from "lucide-react"
 import Link from "next/link"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
@@ -73,14 +73,15 @@ export default function Home() {
       {/* Hero Section - No spacer needed */}
       <section className="relative min-h-screen">
         <div className="absolute inset-0">
-          <Image
-            src="/images/home/hero.jpg?height=1080&width=1920&text=Mountain+Lake+with+Kayak"
-            alt="Scenic mountain lake with kayak"
-            width={1920}
-            height={1080}
-            className="object-cover w-full h-full"
-            priority
+          <video
+            src="/images/home.mp4"
+            className="w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
           />
+           
           <div className="absolute inset-0 bg-black/20" />
         </div>
         <div className="relative container mx-auto px-8 md:px-16 lg:px-32 xl:px-40 h-full flex flex-col justify-center">
@@ -90,9 +91,9 @@ export default function Home() {
               <br />
               the ordinary
             </h1>
-            <div className="text-lg text-white/90 mb-5 max-w-lg font-sans leading-none md:leading-relaxed">
-              <p className="md:inline">Discover bespoke experiences that redefine the way you travel. </p>
-              <p className="mt-3 md:inline md:mt-0">Whether you seek serenity, thrill, or unforgettable encounters, your next journey begins here.</p>
+            <div className="text-sm text-white/90 mb-5 max-w-lg font-sans leading-none md:leading-relaxed">
+              <p className="md:inline">Experiences that redefine the way you travel. </p>
+              
             </div>
             <div className="flex flex-col items-center md:flex-row gap-4 mb-16">
               <Link href="/experiences" className="w-full md:w-auto px-8 md:px-0">
@@ -144,11 +145,7 @@ export default function Home() {
                 accumsan in. Donec tempus, lorem eget venenatis molestie, nulla ipsum consectetur lorem, vel tempor
                 lorem ipsum vel lorem.
               </p>
-              <p className="text-gray-700 mb-8 font-sans leading-tight">
-                Vestibulum ut consequat elit. Mauris sodales fermentum lorem, ut molestie magna cursus fermentum. Donec
-                quis lorem vel magna cursus fermentum. Donec quis lorem vel magna cursus fermentum. Donec quis lorem vel
-                magna cursus fermentum.
-              </p>
+              
             </div>
 
             {/* Image Column (Right on Desktop, Hidden on Mobile) */}
@@ -186,7 +183,7 @@ export default function Home() {
       {/* Featured Experiences Section */}
       <section className="pt-4 md:pt-12 pb-8 md:pb-16 bg-[#f3eae1] overflow-hidden">
         <div className="md:container md:mx-auto md:px-16 lg:px-32 xl:px-40">
-          <h2 className="text-4xl md:text-4xl font-argent font-normal mb-6 md:mb-12 px-6 md:px-0">Featured<br className="md:hidden" /> Experiences</h2>
+          <h2 className="text-2xl md:text-4xl font-argent font-normal mb-6 md:mb-12 px-6 md:px-0">Featured Experiences</h2>
           {isMobile ? (
             <Carousel opts={{ align: "start", loop: false }} className="pl-6">
               <CarouselContent className="-ml-4">
@@ -201,7 +198,7 @@ export default function Home() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                       <div className="absolute bottom-0 left-0 right-0 p-6">
-                        <span className="text-white/80 uppercase text-sm tracking-wider font-sans">{experience.defaultContent.location}</span>
+                        {/* <span className="text-white/80 uppercase text-sm tracking-wider font-sans">{experience.defaultContent.location}</span> */}
                         <h3 className={`${index === 0 ? 'text-3xl' : 'text-2xl'} font-serif font-normal text-white mt-2 mb-3`}>{experience.defaultContent.title}</h3>
                         <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
                           {experience.defaultContent.shortDescription}
@@ -244,7 +241,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <span className="text-white/80 uppercase text-sm tracking-wider font-sans">{experiences[0].defaultContent.location}</span>
+                  {/* <span className="text-white/80 uppercase text-sm tracking-wider font-sans">{experiences[0].defaultContent.location}</span> */}
                   <h3 className="text-3xl font-serif font-normal text-white mt-2 mb-3">{experiences[0].defaultContent.title}</h3>
                   <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
                     {experiences[0].defaultContent.shortDescription}
@@ -272,7 +269,7 @@ export default function Home() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <span className="text-white/80 uppercase text-sm tracking-wider font-sans">{experience.defaultContent.location}</span>
+                    {/* <span className="text-white/80 uppercase text-sm tracking-wider font-sans">{experience.defaultContent.location}</span> */}
                       <h3 className="text-2xl font-serif font-normal text-white mb-2">{experience.defaultContent.title}</h3>
                       <p className="text-white/90 mb-3 text-sm font-sans leading-relaxed">
                         {experience.defaultContent.shortDescription}
@@ -296,7 +293,7 @@ export default function Home() {
       {/* FAQ Section */}
       <section className="pt-6 pb-6 md:py-20 bg-gray-900 text-white">
         <div className="container mx-auto px-6 md:px-16 lg:px-32 xl:px-40">
-          <h2 className="text-3xl md:text-4xl font-argent leading-7 font-normal mb-4">Frequently<br className="md:hidden" /> Asked Questions</h2>
+          <h2 className="text-2xl md:text-4xl font-argent leading-7 font-normal mb-4">Frequently Asked Questions</h2>
           <p className="text-white/80 max-w-3xl mb-8 font-sans leading-tight">
             Find answers to common questions about our experiences and booking process. If you don't see your question
             here, please reach out to us directly.
@@ -418,7 +415,7 @@ export default function Home() {
                 <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#f3eae1] to-transparent" />
               </div>
               <div className="relative md:hidden -mt-8 text-left px-6 z-10">
-                <h2 className="text-3xl font-title font-normal text-gray-900 mb-2">Want to enquire?</h2>
+                <h2 className="text-2xl font-title font-normal text-gray-900 mb-2">Want to enquire?</h2>
                 <p className="text-gray-700 font-sans leading-tight">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis molestie dui lorem, at molestie dui
                   accumsan in. Donec tempus, lorem eget venenatis molestie, nulla ipsum consectetur lorem, vel tempor

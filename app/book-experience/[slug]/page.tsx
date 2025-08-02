@@ -13,6 +13,9 @@ import { Check, Eye, Sparkle, Hammer, PocketKnife, User, BedDouble, Car, Salad, 
 import { useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { useEffect } from "react"
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
+import { useMobile } from "@/hooks/use-mobile"
+import { TbBinoculars } from "react-icons/tb"
 
 const includedIcons: Record<string, any> = {
   "Private transportation including fuel": Car,
@@ -282,6 +285,7 @@ function getRelatedExperiences(currentExperience: Experience, allExperiences: Ex
 export default function BookExperiencePage() {
   const { slug } = useParams()
   const searchParams = useSearchParams()
+  const isMobile = useMobile()
   const sessionId = searchParams.get('session_id')
   console.log('URL slug:', slug)
   
@@ -338,7 +342,7 @@ export default function BookExperiencePage() {
       <SiteHeader />
 
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] md:min-h-[95vh] flex items-start justify-center pt-28 md:pt-40 pb-24">
+      <section className="relative min-h-[55vh] md:min-h-[95vh] flex items-start justify-center pt-28 md:pt-40 pb-24">
         <div className="absolute inset-0">
           <Image
             src={bookingContent.heroImage}
@@ -348,15 +352,16 @@ export default function BookExperiencePage() {
             style={{ filter: "blur(0.25px)" }} 
             priority
           />
+          <div className="absolute inset-0 bg-black/40" />
           {/* Glassmorphism gradient */}
           <div
-            className="absolute inset-0 pointer-events-none"
+            className="hidden sm:block absolute inset-0 pointer-events-none"
             style={{
               background: "linear-gradient(to bottom, rgba(255,255,255,0) 90%, #fff 100%)"
             }}
           />
         </div>
-        <div className="relative w-full max-w-5xl mx-auto px-4 text-center z-10">
+        <div className="relative w-full max-w-5xl mx-auto px-6 text-center z-10">
           <h1 className="font-serif font-normal text-white mb-2 drop-shadow-md text-[clamp(2rem,6vw,4rem)]"
            style={{
             // textShadow: `
@@ -367,7 +372,7 @@ export default function BookExperiencePage() {
           }}>
             {bookingContent.title}
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 md:mb-8 max-w-3xl mx-auto font-sans leading-relaxed"
+          <p className="hidden sm:block text-3xl sm:text-lg md:text-xl text-white/90 mb-6 md:mb-8 max-w-3xl mx-auto font-sans leading-relaxed"
            style={{
             // textShadow: `
             //   0 4px 24px rgba(0,0,0,0.55), 
@@ -377,7 +382,7 @@ export default function BookExperiencePage() {
           }}>
             {bookingContent.subtitle}
           </p>
-          <div className="inline-flex items-center justify-center gap-3 sm:gap-2 px-2 sm:px-8 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-sm text-[clamp(0.55rem,2vw,0.95rem)] uppercase tracking-widest font-sans text-white whitespace-nowrap"
+          <div className="hidden sm:inline-flex items-center justify-center gap-3 sm:gap-2 px-2 sm:px-8 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-sm text-[clamp(0.55rem,2vw,0.95rem)] uppercase tracking-widest font-sans text-white whitespace-nowrap"
            style={{
             // textShadow: "0 2px 8px rgba(0,0,0,0.10), 0 1px 0 #fff"
           }}>
@@ -391,31 +396,50 @@ export default function BookExperiencePage() {
       </section>
 
       {/* Main Content (starts immediately after the faded hero image) */}
-      <section className="relative z-10 bg-white pt-0 pb-12">
-        <div className="container mx-auto px-4 max-w-6xl">
+      <section className="relative z-10 bg-white pt-4 sm:pt-0 pb-12">
+        <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
             {/* Overview and Highlights */}
             <div className="lg:col-span-2 space-y-8 md:space-y-12">
               {/* Overview */}
               <div>
-                <h2 className="text-sm sm:text-lg font-sans font-bold mb-4 md:mb-6 uppercase tracking-[0.2em] text-slate-800">
+                <h2 className="text-sm sm:text-lg font-sans font-bold mb-2 md:mb-6 uppercase tracking-widest md:tracking-[0.2em] text-slate-800">
                   Overview
                 </h2>
-                <p className="text-slate-700 font-serif font-bold leading-relaxed text-base sm:text-xl">
+                <p className="text-slate-700 font-serif font-normal leading-relaxed text-base sm:text-xl">
                   {bookingContent.overview}
                 </p>
+                {isMobile && (
+                  <div className="relative h-60 sm:h-72 my-6 rounded-lg overflow-hidden">
+                    <Image
+                      src={bookingContent.galleryImages[0] || "/placeholder.svg"}
+                      alt={bookingContent.title}
+                      fill
+                      className="object-cover"
+                    />
+                    <Button
+                      variant="outline"
+                      className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm border-white/50 text-slate-700 hover:bg-white font-sans px-2 py-1 text-xs rounded-sm sm:px-4 sm:py-2 sm:text-sm"
+                      onClick={() => setIsGalleryModalOpen(true)}
+                    >
+                      <Eye className="w-4 h-4 mr-2" />
+                      View Gallery
+                    </Button>
+                  </div>
+                )}
               </div>
 
               {/* Highlights */}
               <div>
-                <h2 className="text-sm sm:text-lg font-sans font-bold mb-4 md:mb-6 uppercase tracking-[0.2em] text-slate-800 border-b border-black pb-2">
+              <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-6 uppercase md:tracking-[0.2em] tracking-widest text-slate-800 border-b border-black pb-2">
                   Highlights
                 </h2>
-                <div className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4">
+
                   {bookingContent.highlights.map((highlight, index) => (
-                    <div key={index} className="flex items-start gap-3 border-b border-black pb-4">
+                    <div key={index} className="flex items-start gap-3 border-b border-black pb-3 sm:pb-4">
                       <Sparkle className="w-4 h-4 text-slate-600 mt-1 flex-shrink-0" />
-                      <p className="text-slate-700 font-sans leading-relaxed text-base sm:text-lg">
+                      <p className="text-slate-700 font-sans leading-relaxed text-sm sm:text-base">
                         {highlight}
                       </p>
                     </div>
@@ -424,8 +448,35 @@ export default function BookExperiencePage() {
               </div>
 
               {/* Pricing and Booking */}
-              <div className="border-t border-gray-200 pt-8 md:pt-12">
-                <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6">
+              <div className="border-t border-gray-200 pt-8 md:pt-12 px-6">
+                {/* Mobile Layout */}
+                <div className="flex sm:hidden items-center justify-between gap-4">
+                  <div>
+                    <h3 className="text-xs uppercase tracking-widest text-slate-600">Starting Price</h3>
+                    <p className="text-xs uppercase tracking-widest text-slate-600 mt-1">Minimum of {bookingContent.minimumGuests} {bookingContent.minimumGuests === 1 ? 'person' : 'people'}</p>
+                  </div>
+                  <div className="relative">
+                    <span className="text-4xl font-sans font-normal text-slate-800">${bookingContent.startingPrice}</span>
+                    <span className="absolute -top-1 right-[-1.2rem] text-sm text-slate-600 font-sans">.00</span>
+                  </div>
+                </div>
+                <div className="sm:hidden mt-6 flex flex-col gap-3">
+                  <Button
+                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-sans px-6 py-6 rounded-sm"
+                    onClick={() => setIsBookingModalOpen(true)}
+                  >
+                    Book this experience
+                  </Button>
+                  <Link href={`/customize-experience?experience=${encodeURIComponent(bookingContent.title)}`} className="w-full">
+                    <Button
+                      variant="outline"
+                      className="w-full border-slate-900 text-slate-900 bg-white font-sans px-6 py-4 rounded-sm"
+                    >
+                      Customize my experience
+                    </Button>
+                  </Link>
+                </div>
+                <div className="hidden sm:flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6">
                   <div>
                     <h3 className="text-lg font-sans uppercase tracking-[0.2em] text-slate-600 mb-3">
                       Starting Price
@@ -444,7 +495,7 @@ export default function BookExperiencePage() {
                   </div>
                   <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-3">
                     <Button
-                      className="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-sans px-6 sm:px-8 py-3 rounded-sm"
+                      className="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-sans px-6 sm:px-8 py-5 sm:py-3 rounded-sm"
                       onClick={() => setIsBookingModalOpen(true)}
                     >
                       Book this experience
@@ -452,7 +503,7 @@ export default function BookExperiencePage() {
                     <Link href={`/customize-experience?experience=${encodeURIComponent(bookingContent.title)}`} className="w-full sm:w-auto">
                       <Button
                         variant="outline"
-                        className="w-full border-slate-900 text-slate-900 bg-white  font-sans px-6 sm:px-8 py-3 rounded-sm"
+                        className="w-full border-slate-900 text-slate-900 bg-white  font-sans px-6 sm:px-8 py-5 sm:py-3 rounded-sm"
                       >
                         Customize my experience
                       </Button>
@@ -463,10 +514,10 @@ export default function BookExperiencePage() {
 
               {/* What's Included */}
               <div>
-                <h2 className="text-md sm:text-lg font-sans font-bold mb-4 md:mb-6 uppercase tracking-[0.2em] text-slate-800">
+                <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-6 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
                   What's Included
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4">
                   {bookingContent.included.map((item, index) => {
                     const Icon = includedIcons[item] || Check
                     return (
@@ -483,7 +534,7 @@ export default function BookExperiencePage() {
             </div>
 
             {/* Right Column - Gallery */}
-            <div className="lg:col-span-1">
+            <div className="hidden lg:block lg:col-span-1">
               <div className="sticky top-24">
                 <div className="relative">
                   <div className="relative h-96 rounded-lg overflow-hidden mb-4">
@@ -496,7 +547,7 @@ export default function BookExperiencePage() {
                   </div>
                   <Button
                     variant="outline"
-                    className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm border-white/50 text-slate-700 hover:bg-white font-sans px-4 py-2 rounded-sm"
+                    className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm border-white/50 text-slate-700 hover:bg-white font-sans px-3 py-1 text-xs rounded-sm sm:px-4 sm:py-2 sm:text-sm"
                     onClick={() => setIsGalleryModalOpen(true)}
                   >
                     <Eye className="w-4 h-4 mr-2" />
@@ -510,8 +561,8 @@ export default function BookExperiencePage() {
       </section>
 
       {/* More Ghanaian Adventures */}
-      <section className="py-8 sm:py-12 md:py-16 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
+      <section className="py-4 sm:py-12 md:py-16 bg-gray-50">
+        <div className="container mx-auto px-6 sm:px-6 max-w-6xl">
           <div className="flex items-center gap-3 mb-8 md:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-normal text-slate-800">
               More {countryName} adventures
@@ -521,7 +572,52 @@ export default function BookExperiencePage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+           {/* Mobile Carousel */}
+          <div className="sm:hidden">
+            <Carousel opts={{ align: 'start', loop: false }} className="pl-2">
+              <CarouselContent className="-ml-4">
+                {relatedExperiences.map((experience) => (
+                  <CarouselItem key={experience.id} className="pl-4 basis-5/6">
+                    <div className="relative rounded-lg overflow-hidden group h-[400px] sm:h-[470px]">
+                      <Image
+                        src={experience.defaultContent.image || '/placeholder.svg'}
+                        alt={experience.defaultContent.title}
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                      <div className="absolute bottom-0 left-0 right-0 p-6">
+                        <span className="text-white/80 uppercase text-sm tracking-wider font-sans">{experience.defaultContent.location}</span>
+                        <h3 className="text-2xl font-serif font-normal text-white mt-2 mb-3">{experience.defaultContent.title}</h3>
+                        <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
+                          {experience.defaultContent.shortDescription}
+                        </p>
+                        <Link href={`/book-experience/${experience.slug}`}>
+                          <Button
+                            className="bg-white/20 hover:bg-white/30 text-white font-sans px-12 py-7 rounded-3xl backdrop-blur-sm border border-white/30 w-full">
+                            Book Experience
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                ))}
+                <CarouselItem className="pl-4 basis-5/6">
+                  <Link href="/experiences">
+                    <div className="relative rounded-lg overflow-hidden group h-[400px] sm:h-[470px] bg-gray-900 flex flex-col justify-center items-center text-center p-6">
+                      <TbBinoculars className="text-white mb-4" size={40} />
+                      <h3 className="text-3xl font-serif font-normal text-white mt-2 mb-3">Explore Experiences</h3>
+                      <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
+                        Browse our catalog of experiences curated with you in mind.
+                      </p>
+                    </div>
+                  </Link>
+                </CarouselItem>
+              </CarouselContent>
+            </Carousel>
+          </div>
+
+          <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {relatedExperiences.map((experience) => (
               <div key={experience.id} className="group">
                 <div className="relative h-48 sm:h-56 rounded-lg overflow-hidden mb-4">
