@@ -96,28 +96,28 @@ export default function ExperiencesPage() {
 							<h3 className="text-xl font-sans font-medium text-white mb-2">
 								{defaultContent.title}
 							</h3>
-							<p className="text-white/90 text-sm mb-3 font-sans leading-relaxed">
+							<p className="text-white/90 text-sm mb-3 font-sans leading-tight sm:leading-relaxed">
 								{defaultContent.shortDescription}
 							</p>
-							<div className="h-[2px] w-[45%] bg-white/90 mb-3" />
+							<div className="h-[2px] w-full md:w-[45%] bg-white/90 mb-2 sm:mb-3" />
 							<div className="flex items-center text-white/80 text-xs font-sans">
 								<MapPin className="w-3 h-3 mr-1" />
 								{defaultContent.location}
 							</div>
 							{/* Book Experience Button: always on mobile, on hover for desktop */}
-							<div className="mt-4 flex justify-center">
-								<Link href={`/book-experience/${experience.slug}`}>
+							<div className="mt-3 sm:mt-4 w-full sm:flex sm:justify-center">
+								<Link href={`/book-experience/${experience.slug}`} className="block w-full sm:inline-block sm:w-auto">
 									<Button
 										className={`
-											bg-transparent border border-white text-white font-sans px-12 py-2 rounded-full transition-colors text-sm min-w-[180px] hover:bg-white/10
-											block sm:hidden
+											bg-white/20 backdrop-blur-sm border border-white/30 text-white font-sans w-full px-6 py-3 rounded-2xl transition-colors text-sm hover:bg-white/30
+											inline-flex sm:hidden
 										`}
 									>
 										Book Experience
 									</Button>
 								</Link>
 								{isHovered && (
-									<Link href={`/book-experience/${experience.slug}`}>
+									<Link href={`/book-experience/${experience.slug}`} className="block w-full sm:inline-block sm:w-auto">
 										<Button
 											className={`
 												bg-transparent border border-white text-white font-sans px-12 py-2 rounded-full transition-colors text-sm min-w-[180px] hover:bg-white/10
@@ -201,7 +201,7 @@ export default function ExperiencesPage() {
 			<SiteHeader />
 
 			{/* Hero Section */}
-			<section className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[875px] w-full flex items-center justify-center">
+			<section className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[875px] w-full flex items-end pb-20 sm:pb-0 sm:items-center justify-center">
 				<div className="absolute inset-0">
 					<Image
 						src="/images/elephants.jpg"
@@ -215,11 +215,11 @@ export default function ExperiencesPage() {
 					<div className="absolute inset-0 bg-black/40" />
 					{/* White gradient overlay at the bottom */}
 					<div className="absolute inset-0 pointer-events-none z-10">
-						<div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-white via-white/80 to-transparent" />
+						<div className="hidden sm:block absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-white via-white/80 to-transparent" />
 					</div>
 				</div>
 				<div className="relative text-center text-white z-20 px-4 max-w-[90%] mx-auto">
-					<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-serif font-normal mb-2 sm:mb-4 leading-tight">
+					<h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-serif font-normal mb-2 sm:mb-4 leading-12">
 						Experiences
 					</h1>
 					<p className="text-base sm:text-lg md:text-xl lg:text-2xl font-sans">
@@ -229,7 +229,7 @@ export default function ExperiencesPage() {
 			</section>
 
 			{/* Filter Section */}
-			<section className="relative z-10 pt-0 sm:pt-1 md:pt-2 pb-2 sm:pb-3 md:pb-4 -mt-8 sm:-mt-12 md:-mt-16">
+			<section className="relative z-10 pt-1 sm:pt-1 md:pt-2 pb-0 sm:pb-3 md:pb-4 -mt-2 sm:-mt-12 md:-mt-16">
 				{/* Filter Content */}
 				<div className="relative container mx-auto px-4 sm:px-6 z-30">
 					<div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-8">
@@ -240,7 +240,7 @@ export default function ExperiencesPage() {
 							<div className="flex items-center gap-2 sm:hidden mb-2 w-full mt-4">
 								<Button
 									type="button"
-									className="bg-gray-900 text-white rounded-full px-2 py-1 font-sans hover:bg-gray-800 text-[11px] transition-all duration-300 h-8 min-w-0"
+									className="hidden"
 									onClick={() => setShowMobileFilters((prev) => !prev)}
 									aria-expanded={showMobileFilters}
 									aria-controls="mobile-country-filters"
@@ -250,22 +250,33 @@ export default function ExperiencesPage() {
 								</Button>
 								<Button
 									type="button"
-									className="bg-gray-900 text-white rounded-full px-2 py-1 font-sans hover:bg-gray-800 text-[11px] transition-all duration-300 h-8 min-w-0"
+									className="hidden"
 									// Add your sort logic here
 								>
 									<SlidersHorizontal className="w-3 h-3 mr-1" />
 									<span className="whitespace-nowrap">Sort</span>
 								</Button>
 								<div className="relative flex-1">
-									<Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 w-3 h-3" />
-									<Input
-										placeholder="Search"
-										className="pl-8 pr-2 py-1 rounded-full border-gray-300 font-sans w-full text-base sm:text-[11px] h-8"
-										onFocus={() => setIsSearchFocused(true)}
-										onBlur={() => setIsSearchFocused(false)}
-									/>
-								</div>
-							</div>
+																			<Search className="absolute left-3 top-1/2 -translate-y-1/2 text-black w-4 h-4" />
+																			<Input
+																				placeholder="Search"
+																				className="pl-10 pr-4 py-2 rounded-lg border border-black font-sans text-sm h-10 w-full"
+																				onFocus={() => setIsSearchFocused(true)}
+																				onBlur={() => setIsSearchFocused(false)}
+																			/>
+																		</div>
+																		<Button
+																				type="button"
+																				variant="ghost"
+																				size="icon"
+																				className="border border-gray-700 text-white bg-gray-700 rounded-lg h-10 w-10"
+																				onClick={() => setShowMobileFilters((prev) => !prev)}
+																				aria-expanded={showMobileFilters}
+																				aria-controls="mobile-country-filters"
+																			>
+																				<SlidersHorizontal className="w-4 h-4" />
+																			</Button>
+																	</div>
 							{/* Country filters: visible on sm+ or if toggled on mobile */}
 							<div
 								id="mobile-country-filters"
@@ -315,8 +326,8 @@ export default function ExperiencesPage() {
 			</section>
 
 			{/* Experiences Grid with expanded spacing for hover effects */}
-			<section className="relative py-8 sm:py-12 md:py-16 bg-transparent">
-				<div className="absolute top-0 left-0 w-full h-14 bg-gradient-to-b from-white via-white to-transparent pointer-events-none z-10" />
+			<section className="relative pt-2 pb-6 sm:py-12 md:py-16 bg-transparent">
+				<div className="hidden sm:block absolute top-0 left-0 w-full h-14 bg-gradient-to-b from-white via-white to-transparent pointer-events-none z-10" />
 				<div className="container mx-auto px-4 sm:px-6">
 					{/* Grid with extra spacing to accommodate expanded cards */}
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
@@ -331,8 +342,8 @@ export default function ExperiencesPage() {
 					</div>
 
 					{/* Bespoke Experiences Section */}
-					<div className="mt-8 sm:mt-12 md:mt-16">
-						<div className="relative rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow h-64 sm:h-72 md:h-80">
+					<div className="mt-4 sm:mt-12 md:mt-16">
+						<div className="relative rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow h-96 sm:h-72 md:h-80">
 							<div className="relative h-full">
 								<Image
 									src="/images/experiences/lastcard.jpg?height=320&width=1200&text=Tropical+Beach+Paradise"
@@ -341,17 +352,17 @@ export default function ExperiencesPage() {
 									className="object-cover [object-position:50%_20%]"
 								/>
 								<div className="absolute inset-0 bg-black/40" />
-								<div className="absolute inset-0 p-4 sm:p-6 md:p-8 pl-8 sm:pl-12 md:pl-20 flex flex-col justify-center max-w-full sm:max-w-2xl">
-									<h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-normal text-white mb-2 sm:mb-4">
+								<div className="absolute bottom-0 left-0 right-0 p-6 sm:inset-0 sm:p-6 md:p-8 sm:pl-12 md:pl-20 flex flex-col justify-start sm:justify-center bg-[#0d1c2e] sm:bg-transparent max-w-full sm:max-w-2xl">
+									<h2 className="text-3xl sm:text-3xl md:text-4xl font-serif font-normal text-white mb-2 sm:mb-4">
 										Bespoke Experiences
 									</h2>
-									<p className="text-white/90 mb-4 sm:mb-6 font-sans leading-relaxed text-sm sm:text-base">
+									<p className="text-white/90 mb-4 sm:mb-6 font-sans leading-tight text-xs sm:text-base">
 										A curated selection of exclusive experiences designed to exceed your expectations. Tell us
 										what you're looking for and we'll create something extraordinary just for you.
 									</p>
 									<div className="w-full sm:max-w-md">
 										<Link href="/customize-experience">
-											<Button className="w-full sm:w-auto bg-white hover:bg-white text-black font-sans px-6 sm:px-8 py-2.5 sm:py-3 rounded-md transition-colors text-sm sm:text-base">
+											<Button className="w-full sm:w-auto bg-[#f5ede5] hover:bg-[#f5ede5] text-black font-sans px-6 sm:px-8 py-4 sm:py-3 rounded-xl transition-colors text-base sm:text-base">
 												Customize my experience
 											</Button>
 										</Link>
