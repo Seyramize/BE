@@ -97,9 +97,9 @@ export default function Home() {
             </div>
             <div className="flex flex-col items-center md:flex-row gap-4 mb-16">
               <Link href="/experiences" className="w-full md:w-auto px-8 md:px-0">
-                                  <Button className="w-full md:w-auto text-sm md:text-normal px-8 py-8 md:py-3 rounded-xl md:rounded-full bg-black/30 md:bg-[#f67d46] hover:bg-black/70 md:hover:bg-[#f67d46] text-white font-sans border md:border-0 border-white flex items-center gap-2 backdrop-blur-sm">
+                                  <Button className="w-full md:w-auto text-sm md:text-normal px-8 py-8 md:py-3 rounded-2xl md:rounded-full bg-[#EFE6DA] md:bg-[#EFE6DA] text-gray-900 font-sans hover:text-white hover:md:text-white flex items-center gap-2 backdrop-blur-sm">
                     Explore Experiences  
-                   <FaRegMap className="w-8 h-8 text-white" />
+                   <FaRegMap className="w-8 h-8 text-gray-900 hover:text-white" />
                   </Button>
                 
               </Link>

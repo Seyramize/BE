@@ -218,8 +218,9 @@ export default function CustomizeExperienceForm() {
 
         {/* Hero content */}
         <div className="relative z-10 flex items-center justify-center h-full px-6 bg-[url('/images/expereincecustomisation.png')] bg-cover bg-no-repeat bg-center">
+          <div className="absolute inset-0 bg-black/40" />
           <div className="text-center relative z-10">
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-serif font-normal text-stone-100 leading-tight">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-normal text-stone-100 leading-10">
               Tailor your
               <br />
               experience

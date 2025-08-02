@@ -1,10 +1,17 @@
+"use client"  
+
 import Image from "next/image"
+import { useState, useRef } from "react"
 import { Play, Calendar, Map, Clock, Users, Sparkle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 
 export default function AboutPage() {
+  const [playingMobile, setPlayingMobile] = useState(false)
+  const mobileRef = useRef<HTMLVideoElement>(null)
+  const [playingDesktop, setPlayingDesktop] = useState(false)
+  const desktopRef = useRef<HTMLVideoElement>(null)
   return (
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
@@ -57,12 +64,25 @@ export default function AboutPage() {
                   fill
                   className="object-cover [object-position:50%_30%]"
                 />
-                <div className="absolute inset-0 bg-slate-900/40" />
+                <video
+                  ref={mobileRef}
+                  src="/images/about.mp4"
+                  className={`absolute inset-0 w-full h-full object-cover [object-position:50%_30%] ${playingMobile ? 'block' : 'hidden'}`}
+                  playsInline controls
+                  loop
+                />
+                <div className="absolute inset-0 bg-slate-900/40 pointer-events-none" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
                     <Button
                       variant="ghost"
                       className="bg-white/20 hover:bg-white/30 text-white rounded-full p-4 backdrop-blur-sm"
+                      onClick={() => {
+                        setPlayingMobile(true);
+                        mobileRef.current?.play();
+                        setPlayingDesktop(true);
+  desktopRef.current?.play();
+                      }}
                     >
                       <Play className="w-8 h-8" fill="currentColor" />
                     </Button>
@@ -116,18 +136,34 @@ export default function AboutPage() {
             </div>
             <div className="relative rounded-lg overflow-hidden w-full mx-auto mb-32 px-8 lg:px-16 max-w-7xl">
               <div className="relative h-[60vh] md:h-[70vh] w-full flex items-center justify-center">
-                <Image
-                  src="/images/about-us/aboutusvideo.jpg?height=500&width=800&text=Silhouettes+Against+Twilight+Sky"
-                  alt="People silhouettes against twilight sky"
-                  fill
-                  className="object-cover [object-position:50%_30%]"
+                {/* Poster Image */}
+                {!playingDesktop && (
+                  <Image
+                    src="/images/about-us/aboutusvideo.jpg?height=500&width=800&text=Silhouettes+Against+Twilight+Sky"
+                    alt="People silhouettes against twilight sky"
+                    fill
+                    className="object-cover [object-position:50%_30%]"
+                  />
+                )}
+                {/* Video element */}
+                <video
+                  ref={desktopRef}
+                  src="/images/home.mp4"
+                  className={`absolute inset-0 w-full h-full object-cover [object-position:50%_30%] ${playingDesktop ? 'block' : 'hidden'}`}
+                  muted
+                  playsInline controls
+                  loop
                 />
-                <div className="absolute inset-0 bg-slate-900/60" />
+                <div className="absolute inset-0 bg-slate-900/60 pointer-events-none" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
                     <Button
                       variant="ghost"
                       className="bg-white/20 hover:bg-white/30 text-white rounded-full p-4 backdrop-blur-sm"
+                      onClick={() => {
+                        setPlayingMobile(true);
+                        mobileRef.current?.play();
+                      }}
                     >
                       <Play className="w-8 h-8" fill="currentColor" />
                     </Button>
