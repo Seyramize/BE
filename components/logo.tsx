@@ -19,7 +19,7 @@ export function Logo({ className = "" }: { className?: string }) {
   return (
     <Link href="/" className={`block ${className}`}>
       <Image
-        src={isMobile ? "/images/mobile-header-logo.png" : "/images/header-logo.png"}
+        src={isMobile ? "/images/White1Logo.svg" : "/images/header-logo.png"}
         alt="Beyond Experiences Logo"
         width={120}
         height={40}

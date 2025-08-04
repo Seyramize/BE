@@ -372,7 +372,7 @@ export default function BookExperiencePage() {
           }}>
             {bookingContent.title}
           </h1>
-          <p className="hidden sm:block text-3xl sm:text-lg md:text-xl text-white/90 mb-6 md:mb-8 max-w-3xl mx-auto font-sans leading-relaxed"
+          {/* <p className="hidden sm:block text-3xl sm:text-lg md:text-xl text-white/90 mb-6 md:mb-8 max-w-3xl mx-auto font-sans leading-relaxed"
            style={{
             // textShadow: `
             //   0 4px 24px rgba(0,0,0,0.55), 
@@ -381,8 +381,8 @@ export default function BookExperiencePage() {
             // `
           }}>
             {bookingContent.subtitle}
-          </p>
-          <div className="hidden sm:inline-flex items-center justify-center gap-3 sm:gap-2 px-2 sm:px-8 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-sm text-[clamp(0.55rem,2vw,0.95rem)] uppercase tracking-widest font-sans text-white whitespace-nowrap"
+          </p> */}
+          {/* <div className="hidden sm:inline-flex items-center justify-center gap-3 sm:gap-2 px-2 sm:px-8 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-sm text-[clamp(0.55rem,2vw,0.95rem)] uppercase tracking-widest font-sans text-white whitespace-nowrap"
            style={{
             // textShadow: "0 2px 8px rgba(0,0,0,0.10), 0 1px 0 #fff"
           }}>
@@ -391,7 +391,7 @@ export default function BookExperiencePage() {
             <span>{bookingContent.destinations}</span>
             <span>•</span>
             <span>{bookingContent.maxGuests}</span>
-          </div>
+          </div> */}
         </div>
       </section>
 

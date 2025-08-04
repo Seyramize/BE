@@ -1,5 +1,6 @@
-"use client"  
+"use client" 
 
+import Link from "next/link"
 import Image from "next/image"
 import { useState, useRef } from "react"
 import { Play, Calendar, Map, Clock, Users, Sparkle } from "lucide-react"
@@ -36,7 +37,7 @@ export default function AboutPage() {
                 <div className="flex justify-center mb-4">
                   <div className="w-8 h-8">
                     <Image
-                      src="/images/whitelogo.png"
+                      src="/images/Group.svg"
                       alt="Beyond Experiences Logo"
                       width={32}
                       height={32}
@@ -67,27 +68,27 @@ export default function AboutPage() {
                 <video
                   ref={mobileRef}
                   src="/images/about.mp4"
-                  className={`absolute inset-0 w-full h-full object-cover [object-position:50%_30%] ${playingMobile ? 'block' : 'hidden'}`}
-                  playsInline controls
-                  loop
+                  className={`absolute inset-0 w-full h-full object-contain bg-black [object-position:50%_30%] ${playingMobile ? 'block' : 'hidden'}`}
+                  playsInline
+                  controls
+                  
                 />
-                <div className="absolute inset-0 bg-slate-900/40 pointer-events-none" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <Button
-                      variant="ghost"
-                      className="bg-white/20 hover:bg-white/30 text-white rounded-full p-4 backdrop-blur-sm"
-                      onClick={() => {
-                        setPlayingMobile(true);
-                        mobileRef.current?.play();
-                        setPlayingDesktop(true);
-  desktopRef.current?.play();
-                      }}
-                    >
-                      <Play className="w-8 h-8" fill="currentColor" />
-                    </Button>
+                {!playingMobile && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center">
+                      <Button
+                        variant="ghost"
+                        className="bg-white/20 hover:bg-white/30 text-white rounded-full p-4 backdrop-blur-sm"
+                        onClick={() => {
+                          setPlayingMobile(true);
+                          mobileRef.current?.play();
+                        }}
+                      >
+                        <Play className="w-8 h-8" fill="currentColor" />
+                      </Button>
+                    </div>
                   </div>
-                </div>
+                )}
                 <div className="absolute bottom-4 right-4">
                   <div className="w-6 h-6 text-white/60">
                     <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
@@ -97,10 +98,12 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="w-full flex justify-start">
-                <Button className="text-sm px-8 py-5 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-sans border border-white mt-4 flex items-center gap-2">
-                  Explore Experiences
-                  <Map className="w-5 h-5" />
-                </Button>
+                <Link href="/experiences">
+                  <Button className="text-sm px-8 py-5 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-sans border border-white mt-4 flex items-center gap-2">
+                    Explore Experiences
+                    <Map className="w-5 h-5" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -130,9 +133,11 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="w-full text-center mb-16">
-              <Button className="text-base px-8 py-3 rounded-full bg-[#B55A30] hover:bg-[#B55A30] text-white font-sans border-0">
-                Explore Experiences
-              </Button>
+              <Link href="/experiences">
+                <Button className="text-base px-8 py-3 rounded-full bg-[#B55A30] hover:bg-[#B55A30] text-white font-sans border-0">
+                  Explore Experiences
+                </Button>
+              </Link>
             </div>
             <div className="relative rounded-lg overflow-hidden w-full mx-auto mb-32 px-8 lg:px-16 max-w-7xl">
               <div className="relative h-[60vh] md:h-[70vh] w-full flex items-center justify-center">
@@ -148,27 +153,29 @@ export default function AboutPage() {
                 {/* Video element */}
                 <video
                   ref={desktopRef}
-                  src="/images/home.mp4"
-                  className={`absolute inset-0 w-full h-full object-cover [object-position:50%_30%] ${playingDesktop ? 'block' : 'hidden'}`}
+                  src="/images/about.mp4"
+                  className={`absolute inset-0 w-full h-full object-contain bg-black [object-position:50%_30%] ${playingDesktop ? 'block' : 'hidden'}`}
                   muted
-                  playsInline controls
-                  loop
+                  playsInline
+                  controls
+                  
                 />
-                <div className="absolute inset-0 bg-slate-900/60 pointer-events-none" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <Button
-                      variant="ghost"
-                      className="bg-white/20 hover:bg-white/30 text-white rounded-full p-4 backdrop-blur-sm"
-                      onClick={() => {
-                        setPlayingMobile(true);
-                        mobileRef.current?.play();
-                      }}
-                    >
-                      <Play className="w-8 h-8" fill="currentColor" />
-                    </Button>
+                {!playingDesktop && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center">
+                      <Button
+                        variant="ghost"
+                        className="bg-white/20 hover:bg-white/30 text-white rounded-full p-4 backdrop-blur-sm"
+                        onClick={() => {
+                          setPlayingDesktop(true);
+                          desktopRef.current?.play();
+                        }}
+                      >
+                        <Play className="w-8 h-8" fill="currentColor" />
+                      </Button>
+                    </div>
                   </div>
-                </div>
+                )}
                 <div className="absolute bottom-4 right-4">
                   <div className="w-6 h-6 text-white/60">
                     <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
@@ -383,10 +390,12 @@ export default function AboutPage() {
               Go beyond<br/>the ordinary
             </h2>
             <div className="mt-24 flex flex-col items-center gap-4">
-              <Button className="text-sm px-8 py-6 rounded-xl border border-white text-white bg-white/20 hover:bg-white/30 flex items-center gap-2">
-                Explore Experiences
-                <Map className="w-5 h-5" />
-              </Button>
+              <Link href="/experiences">
+                <Button className="text-sm px-8 py-6 rounded-xl border border-white text-white bg-white/20 hover:bg-white/30 flex items-center gap-2">
+                  Explore Experiences
+                  <Map className="w-5 h-5" />
+                </Button>
+              </Link>
               <p className="text-sm text-white/80 leading-tight text-center">
                 Adventure is calling, and it&rsquo;s closer <br></br> than you think.
               </p>
@@ -416,9 +425,11 @@ export default function AboutPage() {
             <br className="leading-tight" />
             <span className="block mt-2 sm:mt-3">Book your next story today with Beyond Experiences and discover a world waiting to meet you.</span>
           </p>
-          <Button className="bg-white hover:bg-white text-black font-sans px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
-            Explore Experiences
-          </Button>
+          <Link href="/experiences">
+            <Button className="bg-white hover:bg-white text-black font-sans px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
+              Explore Experiences
+            </Button>
+          </Link>
         </div>
       </section>
 
