@@ -10,9 +10,8 @@ import { BookingFormModal } from "@/components/booking-form-modal"
 import { GalleryModal } from "@/components/gallery-modal"
 import { experiences, type Experience } from "@/lib/experiences-data"
 import { Check, Eye, Sparkle, Hammer, PocketKnife, User, BedDouble, Car, Salad, Users, Drum, VenetianMask, Sailboat, Wifi, Utensils, Gift, GlassWater, Bus,  } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useSearchParams } from "next/navigation"
-import { useEffect } from "react"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { useMobile } from "@/hooks/use-mobile"
 import { TbBinoculars } from "react-icons/tb"
@@ -301,6 +300,8 @@ export default function BookExperiencePage() {
   const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
   const [bookingDetails, setBookingDetails] = useState<any>(null)
+  const [isSticky, setIsSticky] = useState(false)
+  const buttonRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (sessionId) {
@@ -318,6 +319,23 @@ export default function BookExperiencePage() {
         })
     }
   }, [sessionId])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (buttonRef.current) {
+        const buttonTop = buttonRef.current.getBoundingClientRect().top
+        const shouldBeSticky = buttonTop > window.innerHeight
+        if (shouldBeSticky !== isSticky) {
+          setIsSticky(shouldBeSticky)
+        }
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [isSticky])
 
   if (!experience) {
     return (
@@ -460,7 +478,7 @@ export default function BookExperiencePage() {
                     <span className="absolute -top-1 right-[-1.2rem] text-sm text-slate-600 font-sans">.00</span>
                   </div>
                 </div>
-                <div className="sm:hidden mt-6 flex flex-col gap-3">
+                <div ref={buttonRef} className="sm:hidden mt-6 flex flex-col gap-3">
                   <Button
                     className="w-full bg-slate-900 hover:bg-slate-800 text-white font-sans px-6 py-6 rounded-sm"
                     onClick={() => setIsBookingModalOpen(true)}
@@ -673,6 +691,20 @@ export default function BookExperiencePage() {
         images={bookingContent.galleryImages}
         initialImageIndex={0}
       />
+
+      {isMobile && isSticky && (
+        <div className="sm:hidden fixed bottom-0 left-0 right-0 p-4 z-20">
+          <Button
+            className="w-full bg-slate-900 hover:bg-slate-800 text-white font-sans px-6 py-6 rounded-sm"
+            onClick={() => setIsBookingModalOpen(true)}
+            style={{
+              boxShadow: "0 -4px 12px 0 rgba(0, 0, 0, 0.08)",
+            }}
+          >
+            Book this experience
+          </Button>
+        </div>
+      )}
 
       <SiteFooter />
     </div>

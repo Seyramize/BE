@@ -9,6 +9,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { experiences } from "@/lib/experiences-data"
+import { TravelPlannerModal } from "@/components/travel-planner-modal-clean"
 
 const filterOptions = ["Ghana", "Cape Town", "Nigeria", "Namibia"]
 
@@ -377,6 +378,16 @@ export default function ExperiencesPage() {
 			</section>
 
 			<SiteFooter />
+			{/* Mobile-only "Speak to a Travel Planner" Sticky Button */}
+			<div className="md:hidden fixed bottom-4 right-6 z-20">
+				<TravelPlannerModal>
+					<Button
+						className="bg-gray-900/90 hover:bg-gray-900 text-white font-sans w-20 h-12 p-4 rounded-xl shadow-lg flex items-center justify-center"
+					>
+						<img src="/images/ChatsCircle.png" alt="chats" className="w-5 h-5" />
+					</Button>
+				</TravelPlannerModal>
+			</div>
 		</div>
 	)
 }
