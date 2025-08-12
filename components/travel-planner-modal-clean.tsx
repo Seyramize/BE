@@ -118,23 +118,10 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
       if (res.ok) {
         setIsSubmitted(true);
         toast({
-          title: "Call Scheduled!",
+          title: "Call booked!",
           description: "We've received your request. Check your email for confirmation.",
           variant: "default",
         });
-        setTimeout(() => {
-          setIsSubmitted(false);
-          setIsOpen(false);
-          setFormData({
-            fullName: "",
-            email: "",
-            phoneNumber: "",
-            countryCode: "GH",
-            date: "",
-            isFlexible: false,
-            helpMessage: "",
-          });
-        }, 3000);
       } else {
         const errorData = await res.json();
         toast({
@@ -161,6 +148,15 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
   const handleClose = () => {
     setIsOpen(false)
     setIsSubmitted(false)
+    setFormData({
+      fullName: "",
+      email: "",
+      phoneNumber: "",
+      countryCode: "GH",
+      date: "",
+      isFlexible: false,
+      helpMessage: "",
+    })
   }
 
   if (!mounted) {
@@ -311,17 +307,25 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
             </div>
           </>
         ) : (
-          <div className="flex flex-col h-full justify-center items-center text-center p-4 sm:p-6 md:p-8 bg-[#fdf6e9] py-12 sm:py-16">
-            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mb-4 sm:mb-6">
-              <svg className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
+          <div className="flex flex-row w-full bg-white min-h-[10rem]">
+            {/* Left: Image */}
+            <div className="w-[40%] h-40 sm:h-auto">
+              <img
+                src="/images/travelplanner.jpg"
+                alt="Travel planner on a call"
+                className="w-full h-full object-cover"
+              />
             </div>
-            <h3 className="text-xl sm:text-2xl font-sans text-slate-800 mb-3 sm:mb-4">Call Scheduled!</h3>
-            <p className="text-sm sm:text-base text-slate-600 font-sans mb-4 sm:mb-6 max-w-md">
-              Thank you for scheduling a call with our travel planners. We'll be in touch within 24 hours to confirm
-              your appointment and begin crafting your perfect experience.
-            </p>
+
+            {/* Right: Message Panel */}
+            <div className="flex-1 bg-[#fdf6e9] flex items-center">
+              <div className="p-6 sm:p-8">
+                <h3 className="text-3xl sm:text-5xl font-normal font-serif text-[#0f1923] mb-2">Call booked!</h3>
+                <p className="text-sm sm:text-base text-slate-700 max-w-md">
+                  One of our travel planners will reach out shortly to confirm your call and begin your journey.
+                </p>
+              </div>
+            </div>
           </div>
         )}
       </div>

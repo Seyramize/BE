@@ -478,9 +478,9 @@ export default function BookExperiencePage() {
                     <span className="absolute -top-1 right-[-1.2rem] text-sm text-slate-600 font-sans">.00</span>
                   </div>
                 </div>
-                <div ref={buttonRef} className="sm:hidden mt-6 flex flex-col gap-3">
+                <div ref={buttonRef} className="sm:hidden mt-6 flex flex-col gap-3 -mx-6">
                   <Button
-                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-sans px-6 py-6 rounded-sm"
+                    className="w-full bg-[#F7E7CE] hover:bg-[#EAD7BC] text-slate-900 font-sans px-6 py-8 rounded-sm"
                     onClick={() => setIsBookingModalOpen(true)}
                   >
                     Book this experience
@@ -693,13 +693,10 @@ export default function BookExperiencePage() {
       />
 
       {isMobile && isSticky && (
-        <div className="sm:hidden fixed bottom-0 left-0 right-0 p-4 z-20">
+        <div className="sm:hidden fixed bottom-4 left-0 right-0 px-4 z-20">
           <Button
-            className="w-full bg-slate-900 hover:bg-slate-800 text-white font-sans px-6 py-6 rounded-sm"
+            className="w-full bg-[#F7E7CE] hover:bg-[#EAD7BC] text-slate-900 font-sans px-6 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"
             onClick={() => setIsBookingModalOpen(true)}
-            style={{
-              boxShadow: "0 -4px 12px 0 rgba(0, 0, 0, 0.08)",
-            }}
           >
             Book this experience
           </Button>

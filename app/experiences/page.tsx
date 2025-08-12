@@ -102,8 +102,8 @@ export default function ExperiencesPage() {
 							</p>
 							<div className="h-[2px] w-full md:w-[45%] bg-white/90 mb-2 sm:mb-3" />
 							<div className="flex items-center text-white/80 text-xs font-sans">
-								<MapPin className="w-3 h-3 mr-1" />
-								{defaultContent.location}
+								{/* <MapPin className="w-3 h-3 mr-1" /> */}
+								{/* {defaultContent.location} */}
 							</div>
 							{/* Book Experience Button: always on mobile, on hover for desktop */}
 							<div className="mt-3 sm:mt-4 w-full">

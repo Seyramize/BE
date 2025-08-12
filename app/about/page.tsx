@@ -5,6 +5,7 @@ import Image from "next/image"
 import { useState, useRef } from "react"
 import { Play, Calendar, Map, Clock, Users, Sparkle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { TravelPlannerModal } from "@/components/travel-planner-modal-clean"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 
@@ -434,6 +435,16 @@ export default function AboutPage() {
       </section>
 
       <SiteFooter />
+      {/* Mobile-only "Speak to a Travel Planner" Sticky Button */}
+      <div className="md:hidden fixed bottom-4 right-6 z-20">
+        <TravelPlannerModal>
+          <Button
+            className="bg-gray-900/90 hover:bg-gray-900 text-white font-sans w-20 h-12 p-4 rounded-xl shadow-lg flex items-center justify-center"
+          >
+            <img src="/images/ChatsCircle.png" alt="chats" className="w-5 h-5" />
+          </Button>
+        </TravelPlannerModal>
+      </div>
     </div>
   )
 }

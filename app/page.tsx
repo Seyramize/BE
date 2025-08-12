@@ -71,7 +71,7 @@ export default function Home() {
       <SiteHeader />
 
       {/* Hero Section - No spacer needed */}
-      <section className="relative min-h-screen">
+      <section className="relative min-h-screen flex items-center md:block">
         <div className="absolute inset-0">
           <video
             src="/images/home.mp4"
@@ -85,7 +85,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/20" />
         </div>
         <div className="relative container mx-auto px-8 md:px-16 lg:px-32 xl:px-40 h-full flex flex-col justify-center">
-          <div className="max-w-2xl pt-48 md:pt-64 lg:pt-80 pb-16 text-center md:text-left">
+          <div className="max-w-2xl mx-auto md:mx-0 pt-0 md:pt-64 lg:pt-80 pb-0 md:pb-16 text-center md:text-left">
             <h1 className="text-5xl md:text-5xl lg:text-6xl font-argent font-normal text-white leading-none md:leading-tight mb-5">
               Go beyond
               <br />
@@ -95,9 +95,9 @@ export default function Home() {
               <p className="md:inline">Experiences that redefine the way you travel. </p>
               
             </div>
-            <div className="flex flex-col items-center md:flex-row gap-4 mb-16">
+            <div className="flex flex-col items-center md:flex-row gap-4 mb-0 md:mb-16">
               <Link href="/experiences" className="w-full md:w-auto px-8 md:px-0">
-                                  <Button className="w-full md:w-auto text-sm md:text-normal px-8 py-8 md:py-3 rounded-2xl md:rounded-full bg-[#EFE6DA] md:bg-[#EFE6DA] text-gray-900 font-sans hover:text-white hover:md:text-white flex items-center gap-2 backdrop-blur-sm">
+                                  <Button className="w-full md:w-auto text-sm md:text-normal px-8 py-8 md:py-3 rounded-xl md:rounded-full bg-[#EFE6DA] md:bg-[#EFE6DA] text-gray-900 font-sans hover:text-white hover:md:text-white flex items-center gap-2 backdrop-blur-sm">
                     Explore Experiences  
                    <FaRegMap className="w-8 h-8 text-gray-900 hover:text-white" />
                   </Button>
@@ -183,50 +183,88 @@ export default function Home() {
       {/* Featured Experiences Section */}
       <section className="pt-4 md:pt-12 pb-8 md:pb-16 bg-[#f3eae1] overflow-hidden">
         <div className="md:container md:mx-auto md:px-16 lg:px-32 xl:px-40">
-          <h2 className="text-2xl md:text-4xl font-argent font-normal mb-6 md:mb-12 px-6 md:px-0">Featured Experiences</h2>
+          <h2 className="text-2xl md:text-4xl font-argent font-normal mb-3 md:mb-12 px-6 md:px-0">Featured Experiences</h2>
           {isMobile ? (
-            <Carousel opts={{ align: "start", loop: false }} className="pl-6">
-              <CarouselContent className="-ml-4">
-                {experiences.slice(0, 3).map((experience, index) => (
-                  <CarouselItem key={experience.id} className="pl-4 basis-5/6">
-                    <div className="relative rounded-lg overflow-hidden group h-[470px]">
-                      <Image
-                        src={experience.defaultContent.image}
-                        alt={experience.defaultContent.title}
-                        fill
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                      <div className="absolute bottom-0 left-0 right-0 p-6">
-                        {/* <span className="text-white/80 uppercase text-sm tracking-wider font-sans">{experience.defaultContent.location}</span> */}
-                        <h3 className={`${index === 0 ? 'text-3xl' : 'text-2xl'} font-serif font-normal text-white mt-2 mb-3`}>{experience.defaultContent.title}</h3>
-                        <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
-                          {experience.defaultContent.shortDescription}
-                        </p>
-                        <Link href={`/book-experience/${experience.slug}`}>
-                          <Button
-                            className="bg-white/20 hover:bg-white/30 text-white font-sans px-12 py-7 rounded-3xl backdrop-blur-sm border border-white/30 w-full">
-                            Book Experience
-                          </Button>
-                        </Link>
+            <>
+              {/* Ghana title under Featured Experiences */}
+              <h3 className="text-xl font-argent font-normal mb-2 px-6">Ghana</h3>
+              {/* Top carousel (original logic) */}
+              <Carousel opts={{ align: "start", loop: false }} className="pl-6">
+                <CarouselContent className="-ml-4">
+                  {experiences.slice(0, 3).map((experience, index) => (
+                    <CarouselItem key={`top-${experience.id}`} className="pl-4 basis-5/6">
+                      <div className="relative rounded-lg overflow-hidden group h-[470px]">
+                        <Image
+                          src={experience.defaultContent.image}
+                          alt={experience.defaultContent.title}
+                          fill
+                          className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div className="absolute bottom-0 left-0 right-0 p-6">
+                          <h3 className={`${index === 0 ? 'text-3xl' : 'text-2xl'} font-serif font-normal text-white mt-2 mb-3`}>{experience.defaultContent.title}</h3>
+                          <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
+                            {experience.defaultContent.shortDescription}
+                          </p>
+                          <Link href={`/book-experience/${experience.slug}`}>
+                            <Button
+                              className="bg-white/20 hover:bg-white/30 text-white font-sans px-12 py-7 rounded-3xl backdrop-blur-sm border border-white/30 w-full">
+                              Book Experience
+                            </Button>
+                          </Link>
+                        </div>
                       </div>
-                    </div>
+                    </CarouselItem>
+                  ))}
+                  <CarouselItem className="pl-4 basis-5/6">
+                    <Link href="/experiences">
+                      <div className="relative rounded-lg overflow-hidden group h-[470px] bg-gray-900 flex flex-col justify-center items-center text-center p-6">
+                        <TbBinoculars className="text-white mb-4" size={40} />
+                        <h3 className="text-4xl font-serif font-normal text-white mt-2 mb-3">Explore Experiences</h3>
+                        <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
+                          Browse our catalog of experiences curated with you in mind.
+                        </p>
+                      </div>
+                    </Link>
                   </CarouselItem>
-                ))}
-                <CarouselItem className="pl-4 basis-5/6">
-                  <Link href="/experiences">
-                    <div className="relative rounded-lg overflow-hidden group h-[470px] bg-gray-900 flex flex-col justify-center items-center text-center p-6">
-                      <TbBinoculars className="text-white mb-4" size={40} />
-                      <h3 className="text-4xl font-serif font-normal text-white mt-2 mb-3">Explore Experiences</h3>
-                      <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
-                        Browse our catalog of experiences curated with you in mind.
-                      </p>
-                      
-                    </div>
-                  </Link>
-                </CarouselItem>
-              </CarouselContent>
-            </Carousel>
+                </CarouselContent>
+              </Carousel>
+
+              {/* Additional country carousels (mobile only) */}
+              {["Namibia", "Sao Tome", "Nigeria"].map((country) => (
+                <div key={`country-${country}`} className="mt-4">
+                  <h3 className="text-xl font-argent font-normal mb-2 px-6">{country}</h3>
+                  <Carousel opts={{ align: "start", loop: false }} className="pl-6">
+                    <CarouselContent className="-ml-4">
+                      {experiences.slice(0, 3).map((experience) => (
+                        <CarouselItem key={`${country}-${experience.id}`} className="pl-4 basis-5/6">
+                          <div className="relative rounded-lg overflow-hidden group h-[420px]">
+                            <Image
+                              src={experience.defaultContent.image}
+                              alt={experience.defaultContent.title}
+                              fill
+                              className="object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <div className="absolute bottom-0 left-0 right-0 p-6">
+                              <h4 className="text-2xl font-serif font-normal text-white mt-2 mb-3">{experience.defaultContent.title}</h4>
+                              <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
+                                {experience.defaultContent.shortDescription}
+                              </p>
+                              <Link href={`/book-experience/${experience.slug}`}>
+                                <Button className="bg-white/20 hover:bg-white/30 text-white font-sans px-12 py-7 rounded-3xl backdrop-blur-sm border border-white/30 w-full">
+                                  Book Experience
+                                </Button>
+                              </Link>
+                            </div>
+                          </div>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                  </Carousel>
+                </div>
+              ))}
+            </>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* First featured experience - Large card */}

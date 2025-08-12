@@ -249,9 +249,9 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
               className="object-cover"
             />
             <div className="absolute inset-0 bg-black/20" />
-            <div className="absolute inset-0 flex items-center justify-center p-8">
+            <div className="absolute inset-0 flex items-end justify-start p-6 pb-8 lg:items-center lg:justify-center">
               <div className="text-left text-white">
-                <p className="text-sm font-sans uppercase tracking-wider mb-4 opacity-90">YOU'RE BOOKING THE</p>
+                <p className="text-sm font-sans uppercase tracking-wider mb-2 opacity-90">YOU'RE BOOKING THE</p>
                 <h2 className="text-2xl lg:text-3xl xl:text-4xl font-serif font-normal leading-tight" id="booking-modal-title">
                   {experience.title}
                 </h2>
@@ -272,33 +272,42 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
               <X className="w-4 h-4" />
             </button>
 
-            {/* Mobile Close Button - Only visible on mobile */}
-            <button
-              onClick={onClose}
-              className="lg:hidden absolute top-4 right-4 text-black hover:text-gray-300 transition-colors z-10"
-              type="button"
-              aria-label="Close booking form"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            {/* Fixed Header */}
-            <div className="flex-shrink-0 p-4 sm:p-6 lg:p-8 pb-4 pt-4 lg:pt-16 border-b border-slate-200">
-              <h3 className="text-2xl sm:text-3xl font-sans font-normal text-slate-800 mb-3">
-                Confirm
-                <br />
-                your booking
-              </h3>
-              <p className="text-slate-600 font-sans text-sm leading-relaxed">
-                Complete your reservation and prepare
-                <br className="hidden sm:block" />
-                for a seamless, indulgent experience.
-              </p>
+            {/* Mobile Close Overlay - content scrolls underneath */}
+            <div className="lg:hidden absolute top-0 left-0 right-0 z-20 p-4 flex justify-end pointer-events-none">
+              <div className="pointer-events-auto">
+                <button
+                  onClick={onClose}
+                  className="text-black hover:text-gray-700 transition-colors flex items-center gap-1 whitespace-nowrap"
+                  type="button"
+                  aria-label="Close booking form"
+                >
+                  <span className="text-xs font-sans">Close</span>
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
             </div>
+
+            {/* Mobile Close Button will be rendered inside scroll area above the header */}
+
+            {/* Header moved into scrollable area for mobile as requested */}
 
             {/* Scrollable Form Content */}
             <div className="flex-1 overflow-y-auto min-h-0">
               <div className="p-4 sm:p-6 lg:p-8">
+                {/* Spacer to avoid content hiding under absolute close overlay */}
+                <div className="lg:hidden h-8" />
+                <div className="pb-4 border-b border-slate-200">
+                  <h3 className="text-2xl sm:text-3xl font-sans font-normal text-slate-800 mb-3">
+                    Confirm
+                    <br />
+                    your booking
+                  </h3>
+                  <p className="text-slate-600 font-sans text-sm leading-relaxed">
+                    Complete your reservation and prepare
+                    <br className="hidden sm:block" />
+                    for a seamless, indulgent experience.
+                  </p>
+                </div>
                 <form onSubmit={handleSubmit} className="space-y-6 lg:space-y-8">
                   {/* Your Details Section */}
                   <div>
@@ -469,7 +478,7 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
                                   name="guests"
                                   checked={formData.guests.includes(guest.label)}
                                   onChange={() => handleGuestSelection(guest.label)}
-                                  className="w-4 h-4 text-slate-900 border-black focus:ring-black"
+                                  className="w-4 h-4 text-slate-900 border border-slate-400 focus:ring-black appearance-none rounded-none outline outline-1 outline-slate-400 checked:bg-slate-900 checked:border-white checked:outline-2 checked:outline-white"
                                 />
                                 <label htmlFor={guest.label} className="text-sm font-sans text-slate-800">
                                   {guest.label}
