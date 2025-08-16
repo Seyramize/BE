@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import Script from "next/script"
 import localFont from 'next/font/local'
 import { Toaster } from "@/components/ui/toaster"
+import MastercardGate from "@/components/mastercard-gate"
 
 // Argent font for headings
 const argent = localFont({
@@ -33,6 +34,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${argent.variable} ${helvetica.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          {/* Show Mastercard welcome on initial site load */}
+          <MastercardGate />
           {children}
           <Toaster />
         </ThemeProvider>

@@ -71,7 +71,7 @@ export default function Home() {
       <SiteHeader />
 
       {/* Hero Section - No spacer needed */}
-      <section className="relative min-h-screen flex items-center md:block">
+      <section className="relative min-h-screen flex items-center">
         <div className="absolute inset-0">
           <video
             src="/images/home.mp4"
@@ -85,7 +85,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/20" />
         </div>
         <div className="relative container mx-auto px-8 md:px-16 lg:px-32 xl:px-40 h-full flex flex-col justify-center">
-          <div className="max-w-2xl mx-auto md:mx-0 pt-0 md:pt-64 lg:pt-80 pb-0 md:pb-16 text-center md:text-left">
+          <div className="max-w-2xl mx-auto pt-0 pb-0 text-center">
             <h1 className="text-5xl md:text-5xl lg:text-6xl font-argent font-normal text-white leading-none md:leading-tight mb-5">
               Go beyond
               <br />
@@ -95,22 +95,15 @@ export default function Home() {
               <p className="md:inline">Experiences that redefine the way you travel. </p>
               
             </div>
-            <div className="flex flex-col items-center md:flex-row gap-4 mb-0 md:mb-16">
+            <div className="flex flex-col items-center md:flex-row gap-4 mb-0 justify-center">
               <Link href="/experiences" className="w-full md:w-auto px-8 md:px-0">
-                                  <Button className="w-full md:w-auto text-sm md:text-normal px-8 py-8 md:py-3 rounded-xl md:rounded-full bg-[#EFE6DA] md:bg-[#EFE6DA] text-gray-900 font-sans hover:text-white hover:md:text-white flex items-center gap-2 backdrop-blur-sm">
+                                  <Button className="w-full md:w-auto text-sm md:text-normal px-8 py-8 md:py-3 rounded-xl md:rounded-xl bg-[#EFE6DA] md:bg-[#EFE6DA] text-gray-900 font-sans hover:text-white hover:md:text-white flex items-center gap-2 backdrop-blur-sm">
                     Explore Experiences  
                    <FaRegMap className="w-8 h-8 text-gray-900 hover:text-white" />
                   </Button>
                 
               </Link>
-              <div className="hidden md:block">
-                <TravelPlannerModal>
-                  <Button
-                    className="bg-white/20 hover:bg-white/30 text-normal text-black font-sans px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
-                    Speak to a Travel Planner
-                  </Button>
-                </TravelPlannerModal>
-              </div>
+              
             </div>
           </div>
         </div>
@@ -149,8 +142,8 @@ export default function Home() {
             </div>
 
             {/* Image Column (Right on Desktop, Hidden on Mobile) */}
-            <div className="order-1 md:order-2 grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 hidden md:grid">
-              <div className="relative h-80 md:h-96 md:w-[120%] md:-ml-[10%]">
+            <div className="order-1 md:order-2 grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 hidden md:grid">
+              <div className="relative h-80 md:h-96 md:w-[130%] md:-ml-[15%]">
                 <Image
                   src="/images/home/curatedexp2.jpg?height=320&width=240&text=Tropical+Resort"
                   alt="Tropical beach resort"
@@ -158,7 +151,7 @@ export default function Home() {
                   className="object-cover rounded-lg"
                 />
               </div>
-              <Link href="/experiences" className="relative h-80 md:h-96 md:w-[120%] md:mt-12 block group">
+              <Link href="/experiences" className="relative h-80 md:h-96 md:w-full w-full block group">
                 <Image
                   src="/images/home/curatedexp1.jpg?height=320&width=240&text=Hot+Air+Balloon"
                   alt="Hot air balloon over landscape"
@@ -168,10 +161,10 @@ export default function Home() {
                 <div className="absolute bottom-0 left-0 right-0 h-20 md:h-24 rounded-b-lg bg-gradient-to-t from-black/80 to-transparent z-0" />
                 <div className="absolute bottom-4 left-10 md:left-4 lg:left-10 px-1 py-3 z-10">
                   <div className="flex items-center space-x-2">
-                    <span className="font-body text-left text-2xl sm:text-lg md:text-lg lg:text-2xl font-sans text-gray-900">
+                    <span className="font-body text-left text-2xl sm:text-lg md:text-lg lg:text-2xl font-sans text-white">
                       Browse <br className="leading-none" /> <span className="block -mt-1 sm:-mt-2">Experiences</span>
                     </span>
-                    <CircleArrowRight className="h-10 w-10 sm:h-8 sm:w-8 md:h-8 md:w-8 text-gray-900" />
+                    <CircleArrowRight className="h-10 w-10 sm:h-8 sm:w-8 md:h-8 md:w-8 text-white" />
                   </div>
                 </div>
               </Link>
@@ -482,6 +475,16 @@ export default function Home() {
       </section>
 
       <SiteFooter />
+      {/* Desktop/Tablet-only "Speak to a Travel Planner" Sticky Button */}
+      <div className="hidden md:block fixed bottom-6 right-6 z-20">
+        <TravelPlannerModal>
+          <Button
+            className="bg-gray-900/90 hover:bg-gray-900 text-white font-sans w-20 h-12 p-4 rounded-xl shadow-lg flex items-center justify-center"
+          >
+            <img src="/images/ChatsCircle.png" alt="chats" className="w-5 h-5" />
+          </Button>
+        </TravelPlannerModal>
+      </div>
       {/* Mobile-only "Speak to a Travel Planner" Sticky Button */}
       <div className="md:hidden fixed bottom-4 right-6 z-20">
         <TravelPlannerModal>
