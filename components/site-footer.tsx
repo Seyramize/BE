@@ -94,18 +94,18 @@ export function SiteFooter() {
                 <ul className="space-y-0.5">
                   <li><Link href="/contact" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">Contact Us</Link></li>
                   <li><Link href="/faqs" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">FAQs</Link></li>
-                  <li><Link href="/terms" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">Terms & Conditions</Link></li>
-                  <li><Link href="/privacy" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">Privacy Policy</Link></li>
+                  <li><Link href="https://www.beyondaccra.com/terms-and-conditions" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">Terms & Conditions</Link></li>
+                  <li><Link href="https://www.beyondaccra.com/privacy-policy" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">Privacy Policy</Link></li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-xs font-sans text-gray-300 font-semibold uppercase tracking-wider mb-1">CONNECT</h3>
                 <p className="text-xs text-gray-400 mb-4 font-sans">Stay in touch</p>
                 <ul className="space-y-0.5">
-                  <li><Link href="/contact" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">Contact Us</Link></li>
-                  <li><Link href="/faqs" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">FAQs</Link></li>
-                  <li><Link href="/terms" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">Terms & Conditions</Link></li>
-                  <li><Link href="/privacy" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">Privacy Policy</Link></li>
+                  <li>Nyaniba Lk, GL-016-3249</li>
+                  <li>Nyaniba, Accra, Ghana</li>
+                  <li><a href="tel:+233504513123" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">+233 504 513 123</a></li>
+                  <li><a href="mailto:concierge@experiencesbybeyond.com" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">concierge@experiencesbybeyond.com</a>  </li>
                 </ul>
               </div>
             </div>
@@ -139,18 +139,18 @@ export function SiteFooter() {
             <ul className="space-y-2">
               <li><Link href="/contact" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">Contact Us</Link></li>
               <li><Link href="/faqs" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">FAQs</Link></li>
-              <li><Link href="/terms" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">Terms & Conditions</Link></li>
-              <li><Link href="/privacy" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">Privacy Policy</Link></li>
+              <li><Link href="https://www.beyondaccra.com/terms-and-conditions" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">Terms & Conditions</Link></li>
+              <li><Link href="https://www.beyondaccra.com/privacy-policy" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">Privacy Policy</Link></li>
             </ul>
           </div>
           <div className="md:col-span-2">
             <h3 className="text-sm font-sans font-semibold uppercase tracking-wider mb-2">CONNECT</h3>
             <p className="text-xs text-gray-400 mb-4 font-sans">Stay in touch</p>
             <ul className="space-y-2">
-              <li><Link href="/contact" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">Contact Us</Link></li>
-              <li><Link href="/faqs" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">FAQs</Link></li>
-              <li><Link href="/terms" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">Terms & Conditions</Link></li>
-              <li><Link href="/privacy" className="text-white hover:text-gray-300 transition-colors font-sans text-sm">Privacy Policy</Link></li>
+                  <li>Nyaniba Lk, GL-016-3249</li>
+                  <li>Nyaniba, Accra, Ghana</li>
+                  <li><a href="tel:+233504513123" className="text-white hover:text-gray-300 transition-colors font-sans text-xs">+233 504 513 123</a></li>
+                  <li><a href="mailto:concierge@experiencesbybeyond.com" className="text-white hover:text-gray-300 transition-colors font-sans text-xs">concierge@experiencesbybeyond.com</a>  </li>
             </ul>
           </div>
           <div className="md:col-span-4">

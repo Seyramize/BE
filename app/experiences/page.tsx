@@ -203,10 +203,10 @@ export default function ExperiencesPage() {
 			<SiteHeader />
 
 			{/* Hero Section */}
-			<section className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[875px] w-full flex items-end pb-20 sm:pb-0 sm:items-center justify-center">
+			<section className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[875px] w-full flex items-center pb-0 sm:pb-0 sm:items-center justify-center">
 				<div className="absolute inset-0">
 					<Image
-						src="/images/elephants.jpg"
+						src="/images/expihome.jpg"
 						alt="Safari experience with elephants"
 						width={1920}
 						height={875}
@@ -387,10 +387,10 @@ export default function ExperiencesPage() {
 
 			<SiteFooter />
 			{/* Mobile-only "Speak to a Travel Planner" Sticky Button */}
-			<div className="md:hidden fixed bottom-4 right-6 z-20">
+			<div className=" fixed bottom-4 right-6 z-20">
 				<TravelPlannerModal>
 					<Button
-						className="bg-gray-900/90 hover:bg-gray-900 text-white font-sans w-20 h-12 p-4 rounded-xl shadow-lg flex items-center justify-center"
+						className="bg-gray-900/90 hover:bg-gray-900 text-white font-sans w-13 h-13 p-4 rounded-full shadow-lg flex items-center justify-center"
 					>
 						<img src="/images/ChatsCircle.png" alt="chats" className="w-5 h-5" />
 					</Button>

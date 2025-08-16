@@ -62,20 +62,20 @@ export default function AboutPage() {
             <div className="relative rounded-2xl overflow-hidden w-full mx-auto mt-6 mb-4 px-2 max-w-7xl">
               <div className="relative rounded-2xl h-[30vh] w-full flex items-center justify-center">
                 <Image
-                  src="/images/about-us/aboutusvideo.jpg?height=500&width=800&text=Silhouettes+Against+Twilight+Sky"
+                  src="/images/abo1.jpg?height=500&width=800&text=Silhouettes+Against+Twilight+Sky"
                   alt="People silhouettes against twilight sky"
                   fill
-                  className="object-cover [object-position:50%_30%]"
+                  className="object-cover [object-position:50%_20%]"
                 />
-                <video
+                {/* <video
                   ref={mobileRef}
                   src="/images/about.mp4"
                   className={`absolute inset-0 w-full h-full object-contain bg-black [object-position:50%_30%] ${playingMobile ? 'block' : 'hidden'}`}
                   playsInline
                   controls
                   
-                />
-                {!playingMobile && (
+                /> */}
+                {/* {!playingMobile && (
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center">
                       <Button
@@ -85,12 +85,12 @@ export default function AboutPage() {
                           setPlayingMobile(true);
                           mobileRef.current?.play();
                         }}
-                      >
-                        <Play className="w-8 h-8" fill="currentColor" />
+                      > */}
+                        {/* <Play className="w-8 h-8" fill="currentColor" />
                       </Button>
                     </div>
                   </div>
-                )}
+                )} */}
                 <div className="absolute bottom-4 right-4">
                   <div className="w-6 h-6 text-white/60">
                     <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
@@ -99,11 +99,11 @@ export default function AboutPage() {
                   </div>
                 </div>
               </div>
-              <div className="w-full flex justify-start">
+              <div className="w-full flex justify-center py-11">
                 <Link href="/experiences">
-                  <Button className="text-sm px-8 py-5 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-sans border border-white mt-4 flex items-center gap-2">
+                  <Button className="text-sm px-8 py-5 rounded-xl bg-[#EFE6DA] hover:bg-[#EFE6DA] text-black font-sans border border-white mt-4 flex items-center gap-2">
                     Explore Experiences
-                    <FaRegMap className="w-8 h-8 text-gray-900 hover:text-white" />
+                    <FaRegMap className="w-8 h-8 text-black hover:text-black" />
                   </Button>
                 </Link>
               </div>
@@ -138,7 +138,7 @@ export default function AboutPage() {
               <Link href="/experiences">
                 <Button className="text-base px-8 py-3 rounded-xl bg-[#EFE6DA] hover:bg-[#EFE6DA] text-black font-sans border-0">
                   Explore Experiences
-                  <FaRegMap className="w-8 h-8 text-gray-900 hover:text-white" />
+                  <FaRegMap className="w-8 h-8 text-gray-900 hover:text-black" />
                 </Button>
               </Link>
             </div>
@@ -147,10 +147,10 @@ export default function AboutPage() {
                 {/* Poster Image */}
                 {!playingDesktop && (
                   <Image
-                    src="/images/about-us/aboutusvideo.jpg?height=500&width=800&text=Silhouettes+Against+Twilight+Sky"
+                    src="/images/abo1.jpg?height=500&width=800&text=Silhouettes+Against+Twilight+Sky"
                     alt="People silhouettes against twilight sky"
                     fill
-                    className="object-cover [object-position:50%_30%]"
+                    className="object-cover [object-position:50%_10%]"
                   />
                 )}
                 {/* Video element */}
@@ -382,7 +382,7 @@ export default function AboutPage() {
         {/* hero */}
         <div className="relative h-[40vh] w-full">
           <Image
-            src="/images/quad-bikes.jpg"
+            src="/images/abo2.jpg"
             alt="Desert ATV adventure"
             fill
             className="object-cover"
@@ -394,7 +394,7 @@ export default function AboutPage() {
             </h2>
             <div className="mt-24 flex flex-col items-center gap-4">
               <Link href="/experiences">
-                <Button className="text-sm px-8 py-6 rounded-xl border border-white text-white bg-white/20 hover:bg-white/30 flex items-center gap-2">
+                <Button className="text-sm px-8 py-6 rounded-xl border border-white text-black bg-[#EFE6DA] hover:bg-[#EFE6DA] flex items-center gap-2">
                   Explore Experiences
                   <Map className="w-5 h-5" />
                 </Button>
@@ -412,7 +412,7 @@ export default function AboutPage() {
       <section className="hidden md:block relative py-48">
         <div className="absolute inset-0">
           <Image
-            src="/images/quad-bikes.jpg"
+            src="/images/abo2.jpg"
             alt="Desert ATV adventure"
             fill
             className="object-cover"
@@ -429,7 +429,7 @@ export default function AboutPage() {
             <span className="block mt-2 sm:mt-3">Book your next story today with Beyond Experiences and discover a world waiting to meet you.</span>
           </p>
           <Link href="/experiences">
-            <Button className="bg-white hover:bg-white text-black font-sans px-8 py-3 rounded-xl backdrop-blur-sm border border-white/30">
+            <Button className="bg-[#EFE6DA] hover:bg-[#EFE6DA] text-black font-sans px-8 py-3 rounded-xl backdrop-blur-sm border border-white/30">
               Explore Experiences <FaRegMap className="w-8 h-8 text-gray-900 hover:text-white" />
             </Button>
           </Link>
@@ -438,10 +438,10 @@ export default function AboutPage() {
 
       <SiteFooter />
       {/* Mobile-only "Speak to a Travel Planner" Sticky Button */}
-      <div className="md:hidden fixed bottom-4 right-6 z-20">
+      <div className=" fixed bottom-4 right-6 z-20">
         <TravelPlannerModal>
           <Button
-            className="bg-gray-900/90 hover:bg-gray-900 text-white font-sans w-20 h-12 p-4 rounded-xl shadow-lg flex items-center justify-center"
+            className="bg-gray-900/90 hover:bg-gray-900 text-white font-sans w-13 h-13 p-4 rounded-full shadow-lg flex items-center justify-center"
           >
             <img src="/images/ChatsCircle.png" alt="chats" className="w-5 h-5" />
           </Button>
