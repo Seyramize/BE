@@ -11,7 +11,7 @@ import Link from "next/link"
 import { experiences } from "@/lib/experiences-data"
 import { TravelPlannerModal } from "@/components/travel-planner-modal-clean"
 
-const filterOptions = ["Ghana", "Sao Tome", "Nigeria", "Namibia", "Priceless"]
+const filterOptions = ["Ghana", "Priceless"]
 
 export default function ExperiencesPage() {
 	const [hoveredCard, setHoveredCard] = useState<number | null>(null)
@@ -292,9 +292,16 @@ export default function ExperiencesPage() {
 									<Button
 										key={filter}
 										variant="outline"
-										className="rounded-3xl px-3 sm:px-4 py-1 sm:py-1.5 border-gray-300 text-gray-700 hover:bg-gray-100 font-sans whitespace-nowrap text-[10px] sm:text-xs"
+										className="rounded-3xl px-4 sm:px-6 py-1 sm:py-1.5 border-gray-300 text-gray-700 hover:bg-gray-100 font-sans whitespace-nowrap text-[10px] sm:text-xs"
 									>
-										{filter}
+										{filter === "Priceless" ? (
+											<span className="inline-flex items-center gap-1">
+												<img src="/images/mastercard.svg" alt="Mastercard" className="w-3 h-3 sm:w-4 sm:h-4" />
+												<span>Priceless</span>
+											</span>
+										) : (
+											filter
+										)}
 									</Button>
 								))}
 							</div>

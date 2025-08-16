@@ -74,7 +74,7 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center">
         <div className="absolute inset-0">
           <video
-            src="/images/newhomevid.mp4"
+            src="/images/newhome.webm"
             className="w-full h-full object-cover"
             autoPlay
             muted
@@ -125,7 +125,7 @@ export default function Home() {
                 <div className="grid grid-cols-1 gap-4">
                   <div className="relative h-56">
                     <Image
-                      src="/images/home/curatedexp2.jpg?height=320&width=240&text=Tropical+Resort"
+                      src="/images/Ce2.jpg?height=320&width=240&text=Tropical+Resort"
                       alt="Tropical beach resort"
                       fill
                       className="object-cover rounded-lg"
@@ -145,7 +145,7 @@ export default function Home() {
             <div className="order-1 md:order-2 grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 hidden md:grid">
               <div className="relative h-80 md:h-96 md:w-[130%] md:-ml-[15%]">
                 <Image
-                  src="/images/home/curatedexp2.jpg?height=320&width=240&text=Tropical+Resort"
+                  src="/images/Ce2.jpg?height=320&width=240&text=Tropical+Resort"
                   alt="Tropical beach resort"
                   fill
                   className="object-cover rounded-lg"
@@ -153,7 +153,7 @@ export default function Home() {
               </div>
               <Link href="/experiences" className="relative h-80 md:h-96 md:w-full w-full block group">
                 <Image
-                  src="/images/home/curatedexp1.jpg?height=320&width=240&text=Hot+Air+Balloon"
+                  src="/images/hotair.jpg?height=320&width=240&text=Hot+Air+Balloon"
                   alt="Hot air balloon over landscape"
                   fill
                   className="object-cover rounded-lg transition-transform group-hover:scale-[1.02]"
@@ -223,7 +223,7 @@ export default function Home() {
               </Carousel>
 
               {/* Additional country carousels (mobile only) */}
-              {["Ghana", "Namibia", "Sao Tome", "Nigeria"].map((country) => (
+              {/* {["Ghana", "Namibia", "Sao Tome", "Nigeria"].map((country) => (
                 <div key={`country-${country}`} className="mt-4">
                   <h3 className="text-xl font-argent font-normal mb-2 px-6">{country}</h3>
                   <Carousel opts={{ align: "start", loop: false }} className="pl-6">
@@ -266,7 +266,7 @@ export default function Home() {
                     </CarouselContent>
                   </Carousel>
                 </div>
-              ))}
+              ))} */}
             </>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

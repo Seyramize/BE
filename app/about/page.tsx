@@ -6,6 +6,7 @@ import { useState, useRef } from "react"
 import { Play, Calendar, Map, Clock, Users, Sparkle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { TravelPlannerModal } from "@/components/travel-planner-modal-clean"
+import { FaRegMap } from "react-icons/fa"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 
@@ -102,7 +103,7 @@ export default function AboutPage() {
                 <Link href="/experiences">
                   <Button className="text-sm px-8 py-5 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-sans border border-white mt-4 flex items-center gap-2">
                     Explore Experiences
-                    <Map className="w-5 h-5" />
+                    <FaRegMap className="w-8 h-8 text-gray-900 hover:text-white" />
                   </Button>
                 </Link>
               </div>
@@ -135,8 +136,9 @@ export default function AboutPage() {
             </div>
             <div className="w-full text-center mb-16">
               <Link href="/experiences">
-                <Button className="text-base px-8 py-3 rounded-full bg-[#B55A30] hover:bg-[#B55A30] text-white font-sans border-0">
+                <Button className="text-base px-8 py-3 rounded-xl bg-[#EFE6DA] hover:bg-[#EFE6DA] text-black font-sans border-0">
                   Explore Experiences
+                  <FaRegMap className="w-8 h-8 text-gray-900 hover:text-white" />
                 </Button>
               </Link>
             </div>
@@ -200,7 +202,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             <div className="flex items-start gap-4">
               <div className="flex-shrink-0">
-                <Map className="w-6 h-6 md:w-14 md:h-14 text-slate-600" />
+                <Map className="w-6 h-6 md:w-8 md:h-8 text-slate-600" />
               </div>
               <div>
                 <div className="border-l-2 border-black pl-3 md:hidden">
@@ -219,7 +221,7 @@ export default function AboutPage() {
             </div>
             <div className="flex items-start gap-4">
               <div className="flex-shrink-0">
-                <Clock className="w-6 h-6 md:w-14 md:h-14 text-slate-600" />
+                <Clock className="w-6 h-6 md:w-8 md:h-8 text-slate-600" />
               </div>
               <div>
                 <div className="border-l-2 border-black pl-3 md:hidden">
@@ -238,7 +240,7 @@ export default function AboutPage() {
             </div>
             <div className="flex items-start gap-4">
               <div className="flex-shrink-0">
-                <Users className="w-6 h-6 md:w-14 md:h-14 text-slate-600" />
+                <Users className="w-6 h-6 md:w-8 md:h-8 text-slate-600" />
               </div>
               <div>
                 <div className="border-l-2 border-black pl-3 md:hidden">
@@ -257,7 +259,7 @@ export default function AboutPage() {
             </div>
             <div className="flex items-start gap-4">
               <div className="flex-shrink-0">
-                <Sparkle className="w-6 h-6 md:w-14 md:h-14 text-slate-600" />
+                <Sparkle className="w-6 h-6 md:w-8 md:h-8 text-slate-600" />
               </div>
               <div>
                 <div className="border-l-2 border-black pl-3 md:hidden">
@@ -360,7 +362,7 @@ export default function AboutPage() {
                 {/* Second image - slightly narrower */}
                 <div className="relative h-[200px] md:h-[320px] lg:h-[350px] w-[42%] rounded-lg overflow-hidden">
                   <Image
-                    src="/images/about-us/sustainability2.jpg?height=250&width=400&text=Environmental+Conservation+Efforts"
+                    src="/images/Sus1.jpg?height=250&width=400&text=Environmental+Conservation+Efforts"
                     alt="Environmental conservation and eco-friendly practices"
                     fill
                     className="object-cover"
@@ -427,8 +429,8 @@ export default function AboutPage() {
             <span className="block mt-2 sm:mt-3">Book your next story today with Beyond Experiences and discover a world waiting to meet you.</span>
           </p>
           <Link href="/experiences">
-            <Button className="bg-white hover:bg-white text-black font-sans px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
-              Explore Experiences
+            <Button className="bg-white hover:bg-white text-black font-sans px-8 py-3 rounded-xl backdrop-blur-sm border border-white/30">
+              Explore Experiences <FaRegMap className="w-8 h-8 text-gray-900 hover:text-white" />
             </Button>
           </Link>
         </div>
