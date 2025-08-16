@@ -208,7 +208,8 @@ export default function Home() {
                           </p>
                           <Link href={`/book-experience/${experience.slug}`}>
                             <Button
-                              className="bg-white/20 hover:bg-white/30 text-white font-sans px-12 py-7 rounded-3xl backdrop-blur-sm border border-white/30 w-full">
+                              variant="glass"
+                              className="font-sans px-12 py-7 rounded-3xl w-full">
                               Book Experience
                             </Button>
                           </Link>
@@ -252,7 +253,7 @@ export default function Home() {
                                 {experience.defaultContent.shortDescription}
                               </p>
                               <Link href={`/book-experience/${experience.slug}`}>
-                                <Button className="bg-white/20 hover:bg-white/30 text-white font-sans px-12 py-7 rounded-3xl backdrop-blur-sm border border-white/30 w-full">
+                                <Button variant="glass" className="font-sans px-12 py-7 rounded-3xl w-full">
                                   Book Experience
                                 </Button>
                               </Link>
@@ -286,7 +287,8 @@ export default function Home() {
                   </p>
                   <Link href={`/book-experience/${experiences[0].slug}`}>
                     <Button
-                      className="bg-white/20 hover:bg-white/30 text-white font-sans px-12 py-3 rounded-full backdrop-blur-sm border border-white/30 w-full">
+                      variant="glass"
+                      className="font-sans px-12 py-3 rounded-full w-full">
                       Book Experience
                     </Button>
                   </Link>
@@ -313,9 +315,7 @@ export default function Home() {
                         {experience.defaultContent.shortDescription}
                       </p>
                       <Link href={`/book-experience/${experience.slug}`}>
-                        <Button
-                          size="sm"
-                          className="bg-white/20 hover:bg-white/30 text-white font-sans px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
+                        <Button size="sm" variant="glass" className="font-sans px-8 py-3 rounded-full">
                           Book Experience
                         </Button>
                       </Link>

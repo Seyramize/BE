@@ -109,8 +109,9 @@ export default function ExperiencesPage() {
 							<div className="mt-3 sm:mt-4 w-full">
 								<Link href={`/book-experience/${experience.slug}`} className="block w-full">
 									<Button
+										variant="glass"
 										className={`
-											bg-white/20 backdrop-blur-sm border border-white/30 text-white font-sans w-full px-6 py-3 rounded-2xl transition-colors text-sm hover:bg-white/30
+											font-sans w-full px-6 py-3 rounded-2xl transition-colors text-sm
 											inline-flex sm:hidden
 										`}
 									>
@@ -120,9 +121,9 @@ export default function ExperiencesPage() {
 								{isHovered && (
 									<Link href={`/book-experience/${experience.slug}`} className="block w-full">
 										<Button
+											variant="glass"
 											className={`
-												bg-transparent border border-white text-white w-full font-sans px-12 py-2 rounded-2xl transition-colors text-sm  hover:bg-white/10
-												hidden sm:block
+												w-full font-sans px-12 py-2 rounded-2xl transition-colors text-sm  hidden sm:block
 											`}
 										>
 											Book Experience

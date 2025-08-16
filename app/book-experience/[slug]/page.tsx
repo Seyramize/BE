@@ -605,14 +605,15 @@ export default function BookExperiencePage() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                       <div className="absolute bottom-0 left-0 right-0 p-6">
-                        <span className="text-white/80 uppercase text-sm tracking-wider font-sans">{experience.defaultContent.location}</span>
+                        {/* <span className="text-white/80 uppercase text-sm tracking-wider font-sans">{experience.defaultContent.location}</span> */}
                         <h3 className="text-2xl font-serif font-normal text-white mt-2 mb-3">{experience.defaultContent.title}</h3>
                         <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
                           {experience.defaultContent.shortDescription}
                         </p>
                         <Link href={`/book-experience/${experience.slug}`}>
                           <Button
-                            className="bg-white/20 hover:bg-white/30 text-white font-sans px-12 py-7 rounded-3xl backdrop-blur-sm border border-white/30 w-full">
+                            variant="glass"
+                            className="font-sans px-12 py-7 rounded-3xl w-full">
                             Book Experience
                           </Button>
                         </Link>
@@ -654,9 +655,7 @@ export default function BookExperiencePage() {
                       {experience.defaultContent.shortDescription}
                     </p>
                     <Link href={`/book-experience/${experience.slug}`}>
-                      <Button
-                        size="sm"
-                        className="bg-white/20 hover:bg-white/30 text-white font-sans px-8 py-3 rounded-full backdrop-blur-sm border border-white/30">
+                      <Button size="sm" variant="glass" className="font-sans px-8 py-3 rounded-full">
                         Book Experience
                       </Button>
                     </Link>
