@@ -116,19 +116,19 @@ export default function AboutPage() {
               <div className="flex justify-center mb-4">
                 <div className="w-8 h-8">
                   <img
-                    src="/images/AboutLayerIcon.png"
+                    src="/images/Group.svg"
                     alt="Beyond Experiences Logo"
-                    className="w-full h-full object-contain filter brightness-0"
+                    className="w-full h-full object-contain"
                   />
                 </div>
               </div>
-              <p className="text-sm uppercase tracking-[0.2em] font-sans font-bold mb-6">ABOUT US</p>
-              <h1 className="text-6xl lg:text-7xl font-serif font-normal mb-6 leading-none">
+              <p className="text-sm uppercase tracking-[0.2em] font-sans text-white font-bold mb-6">ABOUT US</p>
+              <h1 className="text-6xl lg:text-7xl font-serif font-normal mb-6 leading-none text-white">
                 Born from a
                 <br />
                 love of discovery
               </h1>
-              <p className="text-lg text-slate-700 mb-8 font-sans leading-relaxed max-w-lg mx-auto">
+              <p className="text-lg text-white mb-8 font-sans leading-relaxed max-w-lg mx-auto">
                 At Beyond Experiences, we believe your next great adventure should be just a click away. We offer a curated
                 catalog of premium, ready-made journeys—designed for travelers who crave authentic moments without the
                 heavy lift of planning.
@@ -154,7 +154,7 @@ export default function AboutPage() {
                   />
                 )}
                 {/* Video element */}
-                <video
+                {/* <video
                   ref={desktopRef}
                   src="/images/about.mp4"
                   className={`absolute inset-0 w-full h-full object-contain bg-black [object-position:50%_30%] ${playingDesktop ? 'block' : 'hidden'}`}
@@ -177,8 +177,8 @@ export default function AboutPage() {
                         <Play className="w-8 h-8" fill="currentColor" />
                       </Button>
                     </div>
-                  </div>
-                )}
+                  </div> */}
+                {/* )} */}
                 <div className="absolute bottom-4 right-4">
                   <div className="w-6 h-6 text-white/60">
                     <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
