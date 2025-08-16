@@ -45,7 +45,7 @@ export function MastercardWelcomeModal({
 
   const ButtonContent = (
     <span className="inline-flex items-center gap-2">
-      <span className="whitespace-nowrap">Explore Priceless<span className="align-super text-[10px] ml-0.5">TM</span> experiences</span>
+      <span className="whitespace-nowrap">Explore Priceless<span className="align-super text-[8px] ml-0.5">TM</span> experiences</span>
       {/* Mastercard brand mark */}
       <span className="relative -mr-1 inline-flex items-center">
         <svg width="28" height="18" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -90,15 +90,15 @@ export function MastercardWelcomeModal({
           </button>
 
           {/* Content */}
-          <div className="absolute inset-0 flex items-center">
-            <div className="px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-w-2xl">
-              <h1 className="text-white font-serif font-normal leading-[0.9] text-3xl sm:text-4xl md:text-5xl mb-3">
+          <div className="absolute inset-0 flex items-end sm:items-center">
+            <div className="px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-w-2xl pb-4 sm:pb-0">
+              <h1 className="text-white font-serif text-center sm:text-left font-normal leading-[0.9] text-4xl sm:text-4xl md:text-5xl mb-5">
                 Got a
                 <br />
                 mastercard?
               </h1>
-              <p className="text-white/90 font-sans text-sm sm:text-base md:text-lg leading-relaxed mb-5 max-w-md">
-                Explore Priceless<span className="align-super text-[10px] ml-0.5">TM</span> experiences
+              <p className="text-white/90 font-sans text-sm text-center sm:text-left sm:text-base md:text-lg leading-relaxed mb-10 max-w-md">
+                Explore Priceless<span className="align-super text-[8px] ml-0.5">TM</span> experience
                 for Mastercard holders powered by Beyond Experiences
               </p>
 
@@ -106,14 +106,14 @@ export function MastercardWelcomeModal({
                 <button
                   onClick={onExplore}
                   type="button"
-                  className="inline-flex items-center justify-center gap-2 bg-white text-black hover:bg-white/90 transition-colors rounded-xl px-5 py-3 text-sm sm:text-base shadow-sm"
+                  className="flex sm:inline-flex items-center justify-center mx-auto sm:mx-0 gap-2 bg-white text-black hover:bg-white/90 transition-colors rounded-xl px-5 py-3 text-sm sm:text-base shadow-sm"
                 >
                   {ButtonContent}
                 </button>
               ) : (
                 <Link
                   href={ctaHref}
-                  className="inline-flex items-center justify-center gap-2 bg-white text-black hover:bg-white/90 transition-colors rounded-xl px-5 py-3 text-sm sm:text-base shadow-sm"
+                  className="flex sm:inline-flex items-center justify-center mx-auto sm:mx-0 gap-2 bg-white text-black hover:bg-white/90 transition-colors rounded-xl px-5 py-3 text-sm sm:text-base shadow-sm"
                 >
                   {ButtonContent}
                 </Link>
