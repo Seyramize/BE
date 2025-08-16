@@ -45,15 +45,11 @@ export function MastercardWelcomeModal({
 
   const ButtonContent = (
     <span className="inline-flex items-center gap-2">
-      <span className="whitespace-nowrap">Explore Priceless<span className="align-super text-[8px] ml-0.5">TM</span> experiences</span>
       {/* Mastercard brand mark */}
       <span className="relative -mr-1 inline-flex items-center">
-        <svg width="28" height="18" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="14" cy="12" r="10" fill="#EB001B" />
-          <circle cx="24" cy="12" r="10" fill="#F79E1B" />
-          <rect x="14" y="2" width="10" height="20" fill="#FF5F00" />
-        </svg>
+        <img src="/images/mastercard.svg" alt="Mastercard" className="w-8 h-8" />
       </span>
+      <span className="whitespace-nowrap">Explore Priceless<span className="align-super text-[6px] ml-0.5">TM</span> experiences</span>
     </span>
   )
 
@@ -67,7 +63,7 @@ export function MastercardWelcomeModal({
         <div className="relative w-full max-w-3xl h-[320px] sm:h-[420px] md:h-[420px] rounded-xl overflow-hidden shadow-2xl">
           {/* Background image */}
           <Image
-            src={backgroundImageSrc}
+            src="/images/mastercard-image.jpg"
             alt="Mastercard Priceless welcome"
             fill
             priority
@@ -95,10 +91,10 @@ export function MastercardWelcomeModal({
               <h1 className="text-white font-serif text-center sm:text-left font-normal leading-[0.9] text-4xl sm:text-4xl md:text-5xl mb-5">
                 Got a
                 <br />
-                mastercard?
+                mastercard? 
               </h1>
               <p className="text-white/90 font-sans text-sm text-center sm:text-left sm:text-base md:text-lg leading-relaxed mb-10 max-w-md">
-                Explore Priceless<span className="align-super text-[8px] ml-0.5">TM</span> experience
+                Explore Priceless<span className="align-super text-[6px] ml-0.5">TM</span> experiences
                 for Mastercard holders powered by Beyond Experiences
               </p>
 

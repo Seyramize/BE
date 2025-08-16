@@ -11,7 +11,7 @@ import Link from "next/link"
 import { experiences } from "@/lib/experiences-data"
 import { TravelPlannerModal } from "@/components/travel-planner-modal-clean"
 
-const filterOptions = ["Ghana", "Cape Town", "Nigeria", "Namibia"]
+const filterOptions = ["Ghana", "Sao Tome", "Nigeria", "Namibia", "Priceless"]
 
 export default function ExperiencesPage() {
 	const [hoveredCard, setHoveredCard] = useState<number | null>(null)
@@ -292,7 +292,7 @@ export default function ExperiencesPage() {
 									<Button
 										key={filter}
 										variant="outline"
-										className="rounded-full px-2 sm:px-3 py-1 sm:py-1.5 border-gray-300 text-gray-700 hover:bg-gray-100 font-sans whitespace-nowrap text-[10px] sm:text-xs"
+										className="rounded-3xl px-3 sm:px-4 py-1 sm:py-1.5 border-gray-300 text-gray-700 hover:bg-gray-100 font-sans whitespace-nowrap text-[10px] sm:text-xs"
 									>
 										{filter}
 									</Button>
@@ -303,12 +303,12 @@ export default function ExperiencesPage() {
 						{/* Search and Action Buttons - Right side */}
 						<div className={`hidden sm:flex items-center gap-4 shrink-0 transition-all duration-300 ${isSearchFocused ? 'w-full' : ''}`}>
 							{/* Hide Filter/Sort on mobile, show on sm+ */}
-							<Button className={`bg-gray-900 text-white rounded-full px-3 sm:px-4 py-1.5 sm:py-2 font-sans hover:bg-gray-800 text-xs sm:text-sm transition-all duration-300`}>
+							<Button className={`sm:hidden bg-gray-900 text-white rounded-full px-3 sm:px-4 py-1.5 sm:py-2 font-sans hover:bg-gray-800 text-xs sm:text-sm transition-all duration-300`}>
 								<Filter className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
 								<span className="whitespace-nowrap">Filter</span>
 							</Button>
 							<Button
-								className={`rounded-full px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-900 text-white hover:bg-gray-900 font-sans text-xs sm:text-sm transition-all duration-300`}
+								className={`sm:hidden rounded-full px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-900 text-white hover:bg-gray-900 font-sans text-xs sm:text-sm transition-all duration-300`}
 							>
 								<SlidersHorizontal className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
 								Sort

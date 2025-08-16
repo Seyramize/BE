@@ -74,7 +74,7 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center">
         <div className="absolute inset-0">
           <video
-            src="/images/home.mp4"
+            src="/images/newhomevid.mp4"
             className="w-full h-full object-cover"
             autoPlay
             muted
@@ -179,14 +179,12 @@ export default function Home() {
           <h2 className="text-2xl md:text-4xl font-argent font-normal mb-3 md:mb-12 px-6 md:px-0">Featured Experiences</h2>
           {isMobile ? (
             <>
-              {/* Ghana title under Featured Experiences */}
-              <h3 className="text-xl font-argent font-normal mb-2 px-6">Ghana</h3>
               {/* Top carousel (original logic) */}
               <Carousel opts={{ align: "start", loop: false }} className="pl-6">
                 <CarouselContent className="-ml-4">
                   {experiences.slice(0, 3).map((experience, index) => (
                     <CarouselItem key={`top-${experience.id}`} className="pl-4 basis-5/6">
-                      <div className="relative rounded-lg overflow-hidden group h-[470px]">
+                      <div className="relative rounded-xl overflow-hidden group h-[470px]">
                         <Image
                           src={experience.defaultContent.image}
                           alt={experience.defaultContent.title}
@@ -202,7 +200,7 @@ export default function Home() {
                           <Link href={`/book-experience/${experience.slug}`}>
                             <Button
                               variant="glass"
-                              className="font-sans px-12 py-7 rounded-3xl w-full">
+                              className="font-sans px-12 py-7 rounded-xl w-full">
                               Book Experience
                             </Button>
                           </Link>
@@ -225,14 +223,14 @@ export default function Home() {
               </Carousel>
 
               {/* Additional country carousels (mobile only) */}
-              {["Namibia", "Sao Tome", "Nigeria"].map((country) => (
+              {["Ghana", "Namibia", "Sao Tome", "Nigeria"].map((country) => (
                 <div key={`country-${country}`} className="mt-4">
                   <h3 className="text-xl font-argent font-normal mb-2 px-6">{country}</h3>
                   <Carousel opts={{ align: "start", loop: false }} className="pl-6">
                     <CarouselContent className="-ml-4">
                       {experiences.slice(0, 3).map((experience) => (
                         <CarouselItem key={`${country}-${experience.id}`} className="pl-4 basis-5/6">
-                          <div className="relative rounded-lg overflow-hidden group h-[420px]">
+                          <div className="relative rounded-xl overflow-hidden group h-[420px]">
                             <Image
                               src={experience.defaultContent.image}
                               alt={experience.defaultContent.title}
@@ -246,7 +244,7 @@ export default function Home() {
                                 {experience.defaultContent.shortDescription}
                               </p>
                               <Link href={`/book-experience/${experience.slug}`}>
-                                <Button variant="glass" className="font-sans px-12 py-7 rounded-3xl w-full">
+                                <Button variant="glass" className="font-sans px-12 py-7 rounded-xl w-full">
                                   Book Experience
                                 </Button>
                               </Link>
@@ -254,6 +252,17 @@ export default function Home() {
                           </div>
                         </CarouselItem>
                       ))}
+                      <CarouselItem className="pl-4 basis-5/6">
+                        <Link href="/experiences">
+                          <div className="relative rounded-lg overflow-hidden group h-[420px] bg-gray-900 flex flex-col justify-center items-center text-center p-6">
+                            <TbBinoculars className="text-white mb-4" size={40} />
+                            <h4 className="text-3xl font-serif font-normal text-white mt-2 mb-3">Explore <br /> {country}</h4>
+                            <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
+                              Browse our catalog of experiences curated with you in mind.
+                            </p>
+                          </div>
+                        </Link>
+                      </CarouselItem>
                     </CarouselContent>
                   </Carousel>
                 </div>
@@ -281,7 +290,7 @@ export default function Home() {
                   <Link href={`/book-experience/${experiences[0].slug}`}>
                     <Button
                       variant="glass"
-                      className="font-sans px-12 py-3 rounded-full w-full">
+                      className="font-sans px-12 py-3 rounded-xl w-full">
                       Book Experience
                     </Button>
                   </Link>
@@ -308,7 +317,7 @@ export default function Home() {
                         {experience.defaultContent.shortDescription}
                       </p>
                       <Link href={`/book-experience/${experience.slug}`}>
-                        <Button size="sm" variant="glass" className="font-sans px-8 py-3 rounded-full">
+                        <Button size="sm" variant="glass" className="font-sans px-8 py-3 rounded-xl">
                           Book Experience
                         </Button>
                       </Link>
