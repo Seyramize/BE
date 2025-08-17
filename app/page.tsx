@@ -331,7 +331,7 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section className="pt-6 pb-6 md:py-20 bg-gray-900 text-white">
+      <section id="faq" className="pt-6 pb-6 md:py-20 bg-gray-900 text-white">
         <div className="container mx-auto px-6 md:px-16 lg:px-32 xl:px-40">
           <h2 className="text-2xl md:text-4xl font-argent leading-7 font-normal mb-4">Frequently Asked Questions</h2>
           <p className="text-white/80 max-w-3xl mb-8 font-sans leading-tight">

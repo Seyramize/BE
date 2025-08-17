@@ -89,9 +89,7 @@ export function MastercardWelcomeModal({
           <div className="absolute inset-0 flex items-end sm:items-center">
             <div className="px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-w-2xl pb-4 sm:pb-0">
               <h1 className="text-white font-serif text-center sm:text-left font-normal leading-[0.9] text-4xl sm:text-4xl md:text-5xl mb-5">
-                Got a
-                <br />
-                mastercard? 
+                Mastercard holder? 
               </h1>
               <p className="text-white/90 font-sans text-sm text-center sm:text-left sm:text-base md:text-lg leading-relaxed mb-10 max-w-md">
                 Explore Priceless<span className="align-super text-[6px] ml-0.5">TM</span> experiences

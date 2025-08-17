@@ -125,3 +125,8 @@
     font-family: 'HelveticaNowDisplay', sans-serif;
   }
 }
+
+/* Smooth scroll for in-page anchors */
+html {
+  scroll-behavior: smooth;
+}
