@@ -116,9 +116,9 @@ export default function Home() {
             {/* Text Column (Left on Desktop, Bottom on Mobile) */}
             <div className="order-2 md:order-1">
               <h2 className="text-3xl md:text-4xl font-argent font-normal mb-6 leading-tight hidden md:block">
-                Curated
+                Africa,
                 <br />
-                Experiences
+                curated for you.
               </h2>
               <div className="md:hidden">
                 {/* This div is only for mobile to group the images */}
@@ -134,9 +134,7 @@ export default function Home() {
                 </div>
               </div>
               <p className="text-gray-700 mt-6 md:mt-0 mb-6 font-sans leading-tight">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis molestie dui lorem, at molestie dui
-                accumsan in. Donec tempus, lorem eget venenatis molestie, nulla ipsum consectetur lorem, vel tempor
-                lorem ipsum vel lorem.
+              From Ghana’s golden coast to Namibia’s sweeping deserts and São Tomé’s emerald isles, each journey is designed to immerse you in the soul of the continent. These experiences are not just trips; they’re curated paths into culture, adventure, and memory, where discovery feels effortless and every moment lingers long after you’ve returned.
               </p>
               
             </div>
@@ -335,8 +333,7 @@ export default function Home() {
         <div className="container mx-auto px-6 md:px-16 lg:px-32 xl:px-40">
           <h2 className="text-2xl md:text-4xl font-argent leading-7 font-normal mb-4">Frequently Asked Questions</h2>
           <p className="text-white/80 max-w-3xl mb-8 font-sans leading-tight">
-            Find answers to common questions about our experiences and booking process. If you don't see your question
-            here, please reach out to us directly.
+            Wondering how it all comes together? These are the questions we get most often.
           </p>
 
           <div className="max-w-full">
@@ -398,7 +395,9 @@ export default function Home() {
                     WhatsApp
                   </a>{' '}or{' '}
                   <a
-                    href="mailto:info@example.com"
+                    href="mailto:concierge@experiencesbybeyond.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-amber-400 underline hover:text-amber-300"
                   >
                     Email
@@ -457,17 +456,13 @@ export default function Home() {
               <div className="relative md:hidden -mt-8 text-left px-6 z-10">
                 <h2 className="text-2xl font-title font-normal text-gray-900 mb-2">Want to enquire?</h2>
                 <p className="text-gray-700 font-sans leading-tight">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis molestie dui lorem, at molestie dui
-                  accumsan in. Donec tempus, lorem eget venenatis molestie, nulla ipsum consectetur lorem, vel tempor
-                  lorem ipsum vel lorem.
+                  Whether it’s a custom itinerary, a quick question, or something unique you’d like to add, we’re here to help.
                 </p>
               </div>
               <div className="hidden md:block">
                 <h2 className="text-3xl md:text-4xl font-title font-normal mb-6">Want to enquire?</h2>
                 <p className="text-gray-700 mb-6 font-sans leading-relaxed">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis molestie dui lorem, at molestie dui
-                  accumsan in. Donec tempus, lorem eget venenatis molestie, nulla ipsum consectetur lorem, vel tempor
-                  lorem ipsum vel lorem.
+                  Whether it’s a custom itinerary, a quick question, or something unique you’d like to add, we’re here to help.
                 </p>
                 <div className="relative h-[300px] lg:h-[375px] rounded-lg overflow-hidden">
                   <Image

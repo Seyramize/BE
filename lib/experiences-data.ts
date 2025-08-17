@@ -36,8 +36,8 @@ export type Experience = {
       id: 1,
       slug: "shai-hills-experience",
       defaultContent: {
-        title: "The Shai Hills Experience",
-        shortDescription: "Experience the perfect blend of nature, culture, and adventure at Shai Hills.",
+        title: "Shai Hills Experience",
+        shortDescription: "Discover the perfect blend of nature, culture, and adventure at Shai Hills.",
         image: "/images/home/shaihills.jpg?height=400&width=300&text=Shai+Hills+Adventure",
         location: "Eastern Region, Ghana"
       },
@@ -59,12 +59,12 @@ export type Experience = {
           "/images/experiences/shai-hills/Gallery/GYefu94XIAAy1yw.jpg?height=400&width=300&text=Nature+Activities",
           "/images/experiences/shai-hills/Gallery/shai-hills-resource-reserve.jpg?height=400&width=300&text=Nature+Activities",
         ],
-        overview: "Experience the perfect blend of nature, culture, and adventure at Shai Hills. Begin with a scenic hike up the Mono Hills, exploring ancient caves and enjoying panoramic views of the Volta plains. Dive into the rich heritage of the Shai people at the Wildlife & Heritage Museum, where nature and history meet. Then, kick up the dust on an adrenaline-filled quad biking ride through the forest reserve. It’s a day of discovery, excitement, and unforgettable moments in the wild.",
+        overview: "Discover the perfect blend of nature, culture, and adventure at Shai Hills. Begin with a scenic hike up Mogo Hills, exploring ancient caves and enjoying panoramic views of the Volta plains. Step into heritage at the Wildlife & Heritage Museum, where culture and history meet. Then, kick up the dust on an adrenaline-filled quad biking ride through the forest reserve. A day of discovery, adventure, and moments you’ll never forget.",
         highlights: [
           "Guided hike up Mogo Hills.",
-          "Breathtaking hilltop views & photo ops.",
-          "Interactive Wildlife Museum tour.",
-          "Quad biking adventure through forest trail.",
+          "Panoramic hilltop views and photo opportunities",
+          "Interactive Wildlife and Heritage Museum tour",
+          "Quad biking through forest trails.",
         ],
         startingPrice: 400,
         minimumGuests: 2,

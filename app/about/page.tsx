@@ -287,10 +287,10 @@ export default function AboutPage() {
         {/* hero image */}
         <div className="relative h-[27vh] w-full">
           <Image
-            src="/images/about-us/sustainability1.jpg?height=500&width=800"
+            src="/images/sus1.jpg?height=500&width=800"
             alt="Community sustainability initiatives"
             fill
-            className="object-cover"
+            className="object-cover [object-position:50%_85%]"
           />
         </div>
         {/* dark block */}

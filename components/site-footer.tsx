@@ -107,12 +107,12 @@ export function SiteFooter() {
                   <br />
                   <li>
                     <div className="flex items-center gap-2">
-                      <a href="tel:+233504513123" className="text-white hover:text-gray-300 transition-colors border border-white/30 px-3 py-0.5 rounded-full font-sans text-sm inline-flex items-center gap-1">
-                        <PhoneIcon size={12} strokeWidth={1.75} className="shrink-0" />
+                      <a href="tel:+233504513123" className="text-white hover:text-gray-300 transition-colors border border-white/30 px-4 py-0.5 rounded-full font-sans text-lg inline-flex items-center gap-2">
+                        <PhoneIcon size={14} strokeWidth={1.75} className="shrink-0" />
                         Phone
                       </a>
-                      <a href="mailto:concierge@experiencesbybeyond.com" className="text-white hover:text-gray-300 transition-colors border border-white/30 px-3 py-0.5 rounded-full font-sans text-sm inline-flex items-center gap-1">
-                        <MailIcon size={12} strokeWidth={1.75} className="shrink-0" />
+                      <a href="mailto:concierge@experiencesbybeyond.com" className="text-white hover:text-gray-300 transition-colors border border-white/30 px-4 py-0.5 rounded-full font-sans text-lg inline-flex items-center gap-2">
+                        <MailIcon size={14} strokeWidth={1.75} className="shrink-0" />
                         E-Mail
                       </a>
                     </div>
@@ -156,19 +156,19 @@ export function SiteFooter() {
           <div className="md:col-span-2">
             <h3 className="text-sm font-sans font-semibold uppercase tracking-wider mb-2">CONNECT</h3>
             <p className="text-xs text-gray-400 mb-4 font-sans">Stay in touch</p>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2 text-sm">
                   <li>Nyaniba Lk, GL-016-3249</li>
                   <li>Nyaniba, Accra, Ghana</li>
                   <br />
                   <li>
-                    <div className="flex items-center gap-2">
-                      <a href="tel:+233504513123" className="text-white hover:text-gray-300 transition-colors border border-white/30 px-3 py-0.5 rounded-full font-sans text-xs inline-flex items-center gap-1">
+                    <div className="flex gap-2 items-center md:flex-col md:items-start lg:flex-row lg:items-center">
+                      <a href="tel:+233504513123" className="text-white hover:text-gray-300 transition-colors border border-white/30 px-2 py-0.5 md:px-3 md:py-1 rounded-full font-sans text-sm md:text-sm inline-flex items-center gap-1 whitespace-nowrap leading-none">
                         <PhoneIcon size={12} strokeWidth={1.75} className="shrink-0" />
                         Phone
                       </a>
-                      <a href="mailto:concierge@experiencesbybeyond.com" className="text-white hover:text-gray-300 transition-colors border border-white/30 px-3 py-0.5 rounded-full font-sans text-xs inline-flex items-center gap-1">
+                      <a href="mailto:concierge@experiencesbybeyond.com" className="text-white hover:text-gray-300 transition-colors border border-white/30 px-2 py-0.5 md:px-3 md:py-1 rounded-full font-sans text-sm md:text-sm inline-flex items-center gap-1 whitespace-nowrap leading-none">
                         <MailIcon size={12} strokeWidth={1.75} className="shrink-0" />
-                        E-Mail
+                        Email
                       </a>
                     </div>
                   </li>
