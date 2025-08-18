@@ -398,9 +398,9 @@ export default function BookExperiencePage() {
             {bookingContent.title}
           </h1>
           {experience.tags.includes("Priceless") && (
-            <div className="inline-flex uppercase items-center gap-2 bg-black/30 backdrop-blur-sm text-white px-4 py-2 rounded-full font-sans text-sm mt-1 border border-white/20">
+            <div className="inline-flex uppercase items-center gap-2 bg-black/30 backdrop-blur-sm text-white px-4 py-2 rounded-full font-sans text-xs mt-1 border border-white/20">
               <img src="/images/mastercard.svg" alt="Mastercard" className="w-5 h-5" />
-              <span className="tracking-wider">Mastercard holders only</span>
+              <span className="tracking-widest">Mastercard holders only</span>
             </div>
           )}
           {/* <p className="hidden sm:block text-3xl sm:text-lg md:text-xl text-white/90 mb-6 md:mb-8 max-w-3xl mx-auto font-sans leading-relaxed"

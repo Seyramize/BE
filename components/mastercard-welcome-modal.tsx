@@ -105,6 +105,7 @@ export function MastercardWelcomeModal({
               ) : (
                 <Link
                   href="/experiences?filter=Priceless"
+                  onClick={onClose}
                   className="flex sm:inline-flex items-center justify-center mx-auto sm:mx-0 gap-2 bg-white text-black hover:bg-white/90 transition-colors rounded-xl px-5 py-3 text-sm sm:text-base shadow-sm"
                 >
                   {ButtonContent}

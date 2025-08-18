@@ -39,7 +39,7 @@ export type Experience = {
       defaultContent: {
         title: "Shai Hills Experience",
         shortDescription: "Discover the perfect blend of nature, culture, and adventure at Shai Hills.",
-        image: "/images/home/shaihills.jpg?height=400&width=300&text=Shai+Hills+Adventure",
+        image: "/images/experiences/shai-hills/cover.jpg?height=400&width=300&text=Shai+Hills+Adventure",
         location: "Eastern Region, Ghana"
       },
       expandedContent: {
@@ -55,10 +55,23 @@ export type Experience = {
         maxGuests: "15 GUESTS (MAX)",
         heroImage: "/images/experiences/shai-hills/cover.jpg?height=800&width=1200&text=Zebras+in+Golden+Grassland",
         galleryImages: [
-          "/images/experiences/shai-hills/Gallery/beyondvictor-146 (1).jpg?height=400&width=300&text=Wildlife+Safari",
-          "/images/experiences/shai-hills/Gallery/beyondvictor-148.jpg?height=400&width=300&text=Luxury+Resort",
-          "/images/experiences/shai-hills/Gallery/GYefu94XIAAy1yw.jpg?height=400&width=300&text=Nature+Activities",
-          "/images/experiences/shai-hills/Gallery/shai-hills-resource-reserve.jpg?height=400&width=300&text=Nature+Activities",
+          "/images/experiences/shai-hills/Gallery/1.jpg?height=400&width=300&text=Wildlife+Safari",
+          "/images/experiences/shai-hills/Gallery/2.jpg?height=400&width=300&text=Luxury+Resort",
+          "/images/experiences/shai-hills/Gallery/3.jpg?height=400&width=300&text=Nature+Activities",
+          "/images/experiences/shai-hills/Gallery/4.jpg?height=400&width=300&text=Nature+Activities",
+          "/images/experiences/shai-hills/Gallery/5.jpg?height=400&width=300&text=Nature+Activities",
+          "/images/experiences/shai-hills/Gallery/6.jpg?height=400&width=300&text=Nature+Activities",
+          "/images/experiences/shai-hills/Gallery/7.jpg?height=400&width=300&text=Nature+Activities",
+          "/images/experiences/shai-hills/Gallery/8.jpg?height=400&width=300&text=Nature+Activities",
+          "/images/experiences/shai-hills/Gallery/9.jpg?height=400&width=300&text=Nature+Activities",
+          "/images/experiences/shai-hills/Gallery/10.jpg?height=400&width=300&text=Nature+Activities",
+          "/images/experiences/shai-hills/Gallery/11.jpg?height=400&width=300&text=Nature+Activities",
+          "/images/experiences/shai-hills/Gallery/12.jpg?height=400&width=300&text=Nature+Activities",
+          "/images/experiences/shai-hills/Gallery/13.jpg?height=400&width=300&text=Nature+Activities",
+          "/images/experiences/shai-hills/Gallery/14.jpg?height=400&width=300&text=Nature+Activities",
+          "/images/experiences/shai-hills/Gallery/15.jpg?height=400&width=300&text=Nature+Activities",
+          "/images/experiences/shai-hills/Gallery/16.jpg?height=400&width=300&text=Nature+Activities",
+          "/images/experiences/shai-hills/Gallery/17.jpg?height=400&width=300&text=Nature+Activities",
         ],
         overview: "Discover the perfect blend of nature, culture, and adventure at Shai Hills. Begin with a scenic hike up Mogo Hills, exploring ancient caves and enjoying panoramic views of the Volta plains. Step into heritage at the Wildlife & Heritage Museum, where culture and history meet. Then, kick up the dust on an adrenaline-filled quad biking ride through the forest reserve. A day of discovery, adventure, and moments you’ll never forget.",
         highlights: [
