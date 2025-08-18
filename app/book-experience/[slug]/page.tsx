@@ -15,6 +15,7 @@ import { useSearchParams } from "next/navigation"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { useMobile } from "@/hooks/use-mobile"
 import { TbBinoculars } from "react-icons/tb"
+import { MastercardPaymentBounceModal } from "@/components/mastercard-payment-bounce-modal"
 
 const includedIcons: Record<string, any> = {
   "Private transportation including fuel": Car,
@@ -301,6 +302,7 @@ export default function BookExperiencePage() {
   const [showConfirmation, setShowConfirmation] = useState(false)
   const [bookingDetails, setBookingDetails] = useState<any>(null)
   const [isSticky, setIsSticky] = useState(false)
+  const [isMastercardModalOpen, setIsMastercardModalOpen] = useState(false)
   const buttonRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -317,8 +319,13 @@ export default function BookExperiencePage() {
           setIsBookingModalOpen(true)
           setShowConfirmation(false)
         })
+    } else if (searchParams.get("cancel")) {
+      const experience = experiences.find(exp => exp.slug === slug)
+      if (experience && experience.tags.includes("Priceless")) {
+        setIsMastercardModalOpen(true)
+      }
     }
-  }, [sessionId])
+  }, [sessionId, slug, searchParams])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -360,7 +367,7 @@ export default function BookExperiencePage() {
       <SiteHeader />
 
       {/* Hero Section */}
-      <section className="relative min-h-[55vh] md:min-h-[95vh] flex items-start justify-center pt-28 md:pt-40 pb-24">
+      <section className="relative min-h-[55vh] md:min-h-[95vh] flex items-center justify-center pt-28 md:pt-20 pb-16">
         <div className="absolute inset-0">
           <Image
             src={bookingContent.heroImage}
@@ -390,6 +397,12 @@ export default function BookExperiencePage() {
           }}>
             {bookingContent.title}
           </h1>
+          {experience.tags.includes("Priceless") && (
+            <div className="inline-flex uppercase items-center gap-2 bg-black/30 backdrop-blur-sm text-white px-4 py-2 rounded-full font-sans text-sm mt-1 border border-white/20">
+              <img src="/images/mastercard.svg" alt="Mastercard" className="w-5 h-5" />
+              <span className="tracking-wider">Mastercard holders only</span>
+            </div>
+          )}
           {/* <p className="hidden sm:block text-3xl sm:text-lg md:text-xl text-white/90 mb-6 md:mb-8 max-w-3xl mx-auto font-sans leading-relaxed"
            style={{
             // textShadow: `
@@ -424,9 +437,19 @@ export default function BookExperiencePage() {
                 <h2 className="text-sm sm:text-lg font-sans font-bold mb-2 md:mb-6 uppercase tracking-widest md:tracking-[0.2em] text-slate-800">
                   Overview
                 </h2>
-                <p className="text-slate-700 font-serif font-normal leading-relaxed text-base sm:text-xl">
+                <p className="text-slate-700 font-sans font-normal leading-relaxed text-base sm:text-xl">
                   {bookingContent.overview}
                 </p>
+                {bookingContent.whatsPriceless && (
+                  <div className="mt-8">
+                    <h2 className="text-sm sm:text-lg font-sans font-bold mb-2 md:mb-6 uppercase tracking-widest md:tracking-[0.2em] text-slate-800">
+                      What's Priceless
+                    </h2>
+                    <p className="text-slate-700 font-sans font-normal leading-relaxed text-base sm:text-xl">
+                      {bookingContent.whatsPriceless}
+                    </p>
+                  </div>
+                )}
                 {isMobile && (
                   <div className="relative h-60 sm:h-72 my-6 rounded-lg overflow-hidden">
                     <Image
@@ -689,6 +712,11 @@ export default function BookExperiencePage() {
         onClose={() => setIsGalleryModalOpen(false)}
         images={bookingContent.galleryImages}
         initialImageIndex={0}
+      />
+
+      <MastercardPaymentBounceModal
+        isOpen={isMastercardModalOpen}
+        onClose={() => setIsMastercardModalOpen(false)}
       />
 
       {isMobile && isSticky && (

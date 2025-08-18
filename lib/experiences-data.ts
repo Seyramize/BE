@@ -27,6 +27,7 @@ export type Experience = {
       startingPrice: number
       minimumGuests: number
       included: string[]
+      whatsPriceless?: string
     }
     tags: string[]
   }
@@ -42,7 +43,7 @@ export type Experience = {
         location: "Eastern Region, Ghana"
       },
       expandedContent: {
-        title: "Into the Hills: The Shai Hills Experience",
+        title: "Shai Hills Experience",
         fullDescription: "Nature, heritage, and adventure come together in this day trip featuring scenic hikes, ancient caves, a wildlife museum, and high-energy quad biking through a forest reserve.",
         image: "/placeholder.svg?height=500&width=400&text=Shai+Hills+Detailed+Safari"
       },
@@ -81,10 +82,10 @@ export type Experience = {
     },
     {
       id: 2,
-      slug: "cape-coast-experience",
+      slug: "cape-coast-tour",
       defaultContent: {
-        title: "The Cape Coast Experience",
-        shortDescription: "Journey through Ghana's historic Cape Coast and ancient castles.",
+        title: "Cape Coast Tour",
+        shortDescription: "Trace Ghana’s history and natural beauty in one journey.",
         image: "/images/home/capecoast.jpg?height=400&width=300&text=Cape+Coast+Discovery",
         location: "Central Region, Ghana"
       },
@@ -115,12 +116,11 @@ export type Experience = {
           "/images/experiences/the-cape-coast-experience/Gallery/download.webp?height=400&width=300&text=Cape+Coast+Castle+2",
           "/images/experiences/the-cape-coast-experience/Gallery/IMG_1985-2 (1).jpg?height=400&width=300&text=Cape+Coast+Castle+2",
         ],
-        overview: "Our Cape Coast tour offers a deep dive into Ghana’s history, resilience, and natural beauty. The journey begins at the Assin Manso Slave River, where enslaved Africans took their last bath before being taken to the coast. At Cape Coast Castle, you’ll explore the dungeons and learn about the transatlantic slave trade through guided tours and museum exhibits. A visit to Elmina Castle, the oldest European building in sub-Saharan Africa, reveals more about colonial rule and the human stories behind its walls. The tour also includes Kakum National Park, where you can walk across a breathtaking canopy walkway suspended high above the rainforest.",
+        overview: "Trace Ghana’s history and natural beauty in one journey. Begin at Assin Manso Slave River, where enslaved people took their last bath. Continue to Cape Coast Castle and Elmina Castle, two of West Africa’s most significant historical sites. End at Kakum National Park, where the canopy walkway offers a breathtaking view above the forest.",
         highlights: [
-          "Learn about Ghana’s role in the transatlantic slave trade at Cape Coast and Elmina Castles.",
-          "Stand at the Door of No Return.",
-          "Experience the rainforest from above on Kakum’s canopy walkway.",
-          "Enjoy breathtaking coastal landscapes and countryside views.",
+          "Visit Assin Manso Slave River",
+          "Explore Cape Coast Castle and Elmina Castle",
+          "Walk the canopy bridge at Kakum National Park",
         ],
         startingPrice: 380,
         minimumGuests: 1,
@@ -137,10 +137,66 @@ export type Experience = {
     },
     {
       id: 3,
-      slug: "accra-in-a-day",
+      slug: "cape-coast-castle-by-candlelight",
       defaultContent: {
-        title: "Accra in a Day",
-        shortDescription: "Discover the vibrant capital with markets, museums, and cultural sites.",
+        title: "Cape Coast Castle by Candlelight",
+        shortDescription: "Step into history under the cover of night with an exclusive after-dark tour of Cape Coast Castle.",
+        image: "/images/home/capecoast.jpg?height=400&width=300&text=Cape+Coast+Discovery",
+        location: "Central Region, Ghana"
+      },
+      expandedContent: {
+        title: "Coastlines & Memory: The Cape Coast Experience",
+        fullDescription: "A powerful journey through Ghana’s past — from Assin Manso and the castles of Cape Coast and Elmina, to the rainforest canopy walk at Kakum. History, reflection, and breathtaking views.",
+        image: "/placeholder.svg?height=500&width=400&text=Cape+Coast+Castle+Historical",
+      },
+      bookingContent: {
+        title: "Cape Coast Castle by Candlelight",
+        subtitle: "Embark on a profound journey through Ghana's rich history, from the sacred grounds of Assin Manso to the imposing castles of Cape Coast and Elmina. Experience the breathtaking canopy walk at Kakum National Park, where history and nature intertwine in a truly unforgettable way.",
+        duration: "1 DAY",
+        destinations: "3 DESTINATIONS",
+        maxGuests: "12 GUESTS (MAX)",
+        heroImage: "/images/experiences/the-cape-coast-experience/cover.jpg?height=800&width=1200&text=Cape+Coast+Castle",
+        galleryImages: [
+          "/images/experiences/the-cape-coast-experience/Gallery/beyondsojourn-148 (3).jpg?height=400&width=300&text=Cape+Coast+Castle+2",
+          "/images/experiences/the-cape-coast-experience/Gallery/beyondsojourn-161.jpg?height=400&width=300&text=Cape+Coast+Castle+2",
+          "/images/experiences/the-cape-coast-experience/Gallery/beyondsojourn-162.jpg?height=400&width=300&text=Cape+Coast+Castle+2",
+          "/images/experiences/the-cape-coast-experience/Gallery/beyondsojourn-164.jpg?height=400&width=300&text=Cape+Coast+Castle+2",
+          "/images/experiences/the-cape-coast-experience/Gallery/beyondsojourn-166.jpg?height=400&width=300&text=Cape+Coast+Castle+2",
+          "/images/experiences/the-cape-coast-experience/Gallery/beyondsojourn-171.jpg?height=400&width=300&text=Cape+Coast+Castle+2",
+          "/images/experiences/the-cape-coast-experience/Gallery/beyondsojourn-180.jpg?height=400&width=300&text=Cape+Coast+Castle+2",
+          "/images/experiences/the-cape-coast-experience/Gallery/beyondsojourn-181 (1).jpg?height=400&width=300&text=Cape+Coast+Castle+2",
+          "/images/experiences/the-cape-coast-experience/Gallery/20181107_124315.jpg?height=400&width=300&text=Cape+Coast+Castle+2",
+          "/images/experiences/the-cape-coast-experience/Gallery/At the Assin Manso Slave River, locally known as Donkor Nsuo, slaves from northern Ghana and nei.jpg?height=400&width=300&text=Cape+Coast+Castle+2",
+          "/images/experiences/the-cape-coast-experience/Gallery/caption (3).jpg?height=400&width=300&text=Cape+Coast+Castle+2",
+          "/images/experiences/the-cape-coast-experience/Gallery/download.webp?height=400&width=300&text=Cape+Coast+Castle+2",
+          "/images/experiences/the-cape-coast-experience/Gallery/IMG_1985-2 (1).jpg?height=400&width=300&text=Cape+Coast+Castle+2",
+        ],
+        overview: "Step into history under the cover of night with an exclusive after-dark tour of Cape Coast Castle. By lantern light, wander the dungeons, the governor’s quarters, and the Door of No Return. Haunting silence and the crash of Atlantic waves bring the past into sharp focus. Guided storytelling reveals resilience and memory, culminating in a candlelit reflection in the courtyard. The evening closes with a beachfront dinner, with the option to stay overnight in a private beachfront cabin or return to the capital.",
+        whatsPriceless: "A deeply personal, hauntingly immersive journey through history, walking in the footsteps of the past in a way daylight cannot convey.",
+        highlights: [
+          "Exclusive access after regular hours",
+          "A rare nighttime perspective of the castle",
+          "Private guide with intimate storytelling",
+        ],
+        startingPrice: 380,
+        minimumGuests: 1,
+        included: [
+          "Private transportation including fuel",
+          "Professional tour guide",
+          "Castle entrance fees",
+          "Canopy walkway access",
+          "Lunch and refreshments",
+          "Beyond Experiences Essentials™ Bag",
+        ]
+      },
+      tags: ["Priceless", "2 PAX"]
+    },
+    {
+      id: 4,
+      slug: "accra-city-tour",
+      defaultContent: {
+        title: "Accra City Tour",
+        shortDescription: "Accra is a city alive with history, rhythm, and everyday energy.",
         image: "/images/home/accra.jpeg?height=400&width=300&text=Accra+City+Tour",
         location: "Greater Accra, Ghana",
       },
@@ -150,7 +206,7 @@ export type Experience = {
         image: "/placeholder.svg?height=500&width=400&text=Accra+Skyline+Modern",
       },
       bookingContent: {
-        title: "Accra Unveiled: City in a Day",
+        title: "Accra City Tour",
         subtitle: "Dive into the heart of Ghana’s bustling capital, exploring its vibrant markets, rich museums, and iconic cultural sites—all in one unforgettable day.",
         duration: "1 DAY",
         destinations: "5 DESTINATIONS",
@@ -163,13 +219,12 @@ export type Experience = {
           "/images/experiences/accra-city-tour/Gallery/ousu 362.jpg?height=400&width=300&text=Makola+Market",
           "/images/experiences/accra-city-tour/Gallery/accragallery1.jpeg?height=400&width=300&text=Makola+Market",
         ],
-        overview: "This Accra city tour takes you through Ghana’s rich history, culture, and vibrant daily life. You’ll visit the Kwame Nkrumah Mausoleum, which is a historical site dedicated to Ghana’s first president, Dr. Kwame Nkrumah, where you’ll learn about his life and the independence movement. At the Ghana National Museum, the oldest and biggest museum in Ghana, you'll explore the country’s cultural and historical heritage. At Black Star Square (Independence Square), see one of Ghana’s most iconic landmarks, symbolizing Ghana’s independence and pride. Next, immerse yourself in the bustling Makola Market, one of Accra's largest and busiest hubs, where traders sell everything from textiles to fresh produce. The tour also includes the Accra Arts Centre, where you can explore handmade crafts, meet artisans, and shop for unique souvenirs. For art lovers, there is an art gallery that showcases traditional and contemporary Ghanaian artwork.",
+        overview: "Accra is a city alive with history, rhythm, and everyday energy. Begin at the Kwame Nkrumah Mausoleum, dedicated to Ghana’s first president, then step into the Ghana National Museum to explore centuries of heritage. At Independence Square, feel the spirit of Ghana’s freedom, before diving into the color and chaos of Makola Market. Finish with handmade crafts and art at the Arts Centre, where you meet artisans shaping Ghana’s creative future.",
         highlights: [
-          "Gain a deeper understanding of Ghana’s independence and cultural heritage.",
-          "A sensory overload of colors, sounds, and unique finds at Makola.",
-          "Engage with Ghanaian artisans and discover traditional craftsmanship.",
-          "Capture stunning photos at Black Star Square and historical sites.",
-          "Experience Accra’s energy, storytelling, and everyday life firsthand.",
+          "Learn about Ghana’s independence and heritage",
+          "Experience Makola’s vibrant, sensory overload",
+          "Engage with artisans at the Arts Centre",
+          "Capture stunning photos at Independence Square",
         ],
         startingPrice: 300,
         minimumGuests: 1,
@@ -185,11 +240,59 @@ export type Experience = {
       tags: ["Travel Planner's Choice", "2 PAX"]
     },
     {
-      id: 4,
-      slug: "kente-rhythm-workshop",
+      id: 5,
+      slug: "kente-and-rhythm",
       defaultContent: {
-        title: "Kente & Rhythm Workshop",
-        shortDescription: "Dive into the heart of Ghanaian tradition with this unforgettable cultural experience.",
+        title: "Kente and Rhythm",
+        shortDescription: "Dive into Ghana’s cultural heartbeat at the Accra Arts Centre.",
+        image: "/images/home/accra.jpeg?height=400&width=300&text=Accra+City+Tour",
+        location: "Greater Accra, Ghana",
+      },
+      expandedContent: {
+        title: "City Pulse: Accra in a Day",
+        fullDescription: "Explore Ghana’s capital through its history, culture, and daily life — from monuments and markets to museums and makers. A full immersion into the rhythm of the city.",
+        image: "/placeholder.svg?height=500&width=400&text=Accra+Skyline+Modern",
+      },
+      bookingContent: {
+        title: "Kente and Rhythm",
+        subtitle: "Dive into the heart of Ghana’s bustling capital, exploring its vibrant markets, rich museums, and iconic cultural sites—all in one unforgettable day.",
+        duration: "1 DAY",
+        destinations: "5 DESTINATIONS",
+        maxGuests: "20 GUESTS (MAX)",
+        heroImage: "/images/experiences/accra-city-tour/hero.jpeg?height=800&width=1200&text=Accra+City+Tour",
+        galleryImages: [
+          "/images/experiences/accra-city-tour/Gallery/054a15ec-baf0-4101-8ec5-f546424d233f478ded33e73b97ebbf_black-star-square-7.jpg?height=400&width=300&text=Makola+Market",
+          "/images/experiences/accra-city-tour/Gallery/image (2).jpg?height=400&width=300&text=Makola+Market",
+          "/images/experiences/accra-city-tour/Gallery/ousu 190 (1).jpg?height=400&width=300&text=Makola+Market",
+          "/images/experiences/accra-city-tour/Gallery/ousu 362.jpg?height=400&width=300&text=Makola+Market",
+          "/images/experiences/accra-city-tour/Gallery/accragallery1.jpeg?height=400&width=300&text=Makola+Market",
+        ],
+        overview: "Dive into Ghana’s cultural heartbeat at the Accra Arts Centre. Begin with a private kente weaving workshop, where skilled artisans guide you in creating your own piece and share the meanings behind each pattern. Then, join in the pulse of West Africa through drumming and traditional dance — immersive, hands-on, and unforgettable.",
+        highlights: [
+          "Private kente weaving workshop",
+          "Interactive drumming session",
+          "Traditional dance lesson with local performers",
+          
+        ],
+        startingPrice: 300,
+        minimumGuests: 1,
+        included: [
+          "Private transportation",
+          "Professional city guide",
+          "Museum entrance fees",
+          "Lunch at a local restaurant",
+          "Bottled water",
+          "Beyond Experiences Essentials™ Bag",
+        ]
+      },
+      tags: ["Travel Planner's Choice", "2 PAX"]
+    },
+    {
+      id: 6,
+      slug: "dine-on-a-mat",
+      defaultContent: {
+        title: "Dine on a Mat",
+        shortDescription: "Step into Fulani culture with Chef Fatmata Binta, winner of the Basque Culinary World Prize and UN Ambassador for Responsible Tourism.",
         image: "/images/experiences/kente.jpg?height=400&width=300&text=Kente+Weaving+Workshop",
         location: "Greater Accra, Ghana",
       },
@@ -199,7 +302,7 @@ export type Experience = {
         image: "/placeholder.svg?height=500&width=400&text=Western+Ghana+Canopy+Beach",
       },
       bookingContent: {
-        title: "Kente Weaving & Traditional Dance and Drumming Lessons",
+        title: "Dine on a Mat",
         subtitle: "Immerse yourself in Ghana’s living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
         duration: "1 DAY",
         destinations: "2 DESTINATIONS",
@@ -212,12 +315,12 @@ export type Experience = {
           "/images/experiences/kente/Gallery/Drumming_bottom (1).jpg?height=400&width=300&text=Kente+Weaving",
           "/images/experiences/kente/Gallery/Tsirkormpam-lady-drumming-scaled.jpg?height=400&width=300&text=Kente+Weaving",
         ],
-        overview: "Dive into the heart of Ghanaian tradition with this unforgettable cultural experience at the Accra Art Center. Begin with a private kente weaving workshop, where skilled artisans teach you the meanings behind each pattern and guide you as you create your own piece. Then, feel the rhythm of West Africa through interactive drumming and traditional dance sessions led by vibrant local performers. Perfect for travelers seeking authentic, hands-on cultural immersion.",
+        overview: "Step into Fulani culture with Chef Fatmata Binta, winner of the Basque Culinary World Prize and UN Ambassador for Responsible Tourism. Born in Sierra Leone, Chef Binta reimagines Fulani traditions through food, with an exclusive five-course meal curated for your group. Accompanied by traditional drinks, a tea ceremony, and stories about African gastronomy, the experience is intimate, cultural, and deeply flavorful.Dive into Ghana’s cultural heartbeat at the Accra Arts Centre. Begin with a private kente weaving workshop, where skilled artisans guide you in creating your own piece and share the meanings behind each pattern. Then, join in the pulse of West Africa through drumming and traditional dance — immersive, hands-on, and unforgettable.",
+        whatsPriceless: "Exclusive access to one of Africa’s most celebrated culinary voices and a chance to explore Fulani cuisine in a way few ever do.",
         highlights: [
-          "Exclusive Kente weaving workshop with local master weavers.",
-          "Interactive traditional drumming session.",
-          "High-energy traditional dance lesson with local instructors.",
-          "Experience a high-energy Ghanaian dance session.",
+          "Five-course private dining experience with Chef Binta",
+          "Introduction to Fulani cuisine and culture",
+          "Tea ceremony and storytelling",
         ],
         startingPrice: 235,
         minimumGuests: 2,
@@ -230,14 +333,110 @@ export type Experience = {
           "Beyond Experiences Essentials™ Bag",
         ]
       },
-      tags: ["Travel Planner's Choice", "2 PAX"]
+      tags: ["Priceless", "2 PAX"]
     },
     {
-      id: 5,
-      slug: "chocolate-spa-mansa-gold",
+      id: 7,
+      slug: "a-date-with-fashion",
       defaultContent: {
-        title: "Chocolate + Spa with Mansa Gold",
-        shortDescription: "Discover the rich world of Ghanaian cocoa in a hands-on chocolate-making workshop.",
+        title: "A Date with Fashion",
+        shortDescription: "Step into Ghana’s fashion scene with three pioneering designers whose work has graced the likes of Beyoncé, Cardi B, and Angelique Kidjo.",
+        image: "/images/experiences/kente.jpg?height=400&width=300&text=Kente+Weaving+Workshop",
+        location: "Greater Accra, Ghana",
+      },
+      expandedContent: {
+        title: "Woven Stories: Kente & Rhythm Workshop",
+        fullDescription: "Spend the day learning from Ghanaian artisans and performers — weave your own kente, then feel the beat in a high-energy drumming and traditional dance session.",
+        image: "/placeholder.svg?height=500&width=400&text=Western+Ghana+Canopy+Beach",
+      },
+      bookingContent: {
+        title: "A Date with Fashion",
+        subtitle: "Immerse yourself in Ghana’s living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
+        duration: "1 DAY",
+        destinations: "2 DESTINATIONS",
+        maxGuests: "10 GUESTS (MAX)",
+        heroImage: "/images/experiences/kente/cover.jpg?height=800&width=1200&text=Kente+Workshop",
+        galleryImages: [
+          "/images/experiences/kente/Gallery/8776-bonwire-kente-village.jpg?height=400&width=300&text=Kente+Weaving",
+          "/images/experiences/kente/Gallery/06-Ashanti-Names-DSC02997.jpg?height=400&width=300&text=Kente+Weaving",
+          "/images/experiences/kente/Gallery/343226152_a7e6f12e6e_b_1024x1024.jpg?height=400&width=300&text=Kente+Weaving",
+          "/images/experiences/kente/Gallery/Drumming_bottom (1).jpg?height=400&width=300&text=Kente+Weaving",
+          "/images/experiences/kente/Gallery/Tsirkormpam-lady-drumming-scaled.jpg?height=400&width=300&text=Kente+Weaving",
+        ],
+        overview: "Step into Ghana’s fashion scene with three pioneering designers whose work has graced the likes of Beyoncé, Cardi B, and Angelique Kidjo. Tour their studios, learn about their creative process, and collaborate to design a one-of-a-kind piece to take home. This is more than fashion — it’s artistry, identity, and culture.",
+        whatsPriceless: "Personal interaction with Ghana’s leading designers and the opportunity to co-create a custom piece.",
+        highlights: [
+          "Guided showroom tours with top designers",
+          "Hands-on design session for a custom piece",
+          "Access to unisex fashion suitable for all",
+        ],
+        startingPrice: 235,
+        minimumGuests: 2,
+        included: [
+          "All workshop materials",
+          "Professional instructors",
+          "Cultural performance",
+          "Lunch and refreshments",
+          "Bottled water",
+          "Beyond Experiences Essentials™ Bag",
+        ]
+      },
+      tags: ["Priceless", "2 PAX"]
+    },
+    {
+      id: 8,
+      slug: "afrofuture",
+      defaultContent: {
+        title: "Afrofuture",
+        shortDescription: "Time with the founders and access to headliners in one of Africa’s biggest music stages",
+        image: "/images/experiences/kente.jpg?height=400&width=300&text=Kente+Weaving+Workshop",
+        location: "Greater Accra, Ghana",
+      },
+      expandedContent: {
+        title: "Woven Stories: Kente & Rhythm Workshop",
+        fullDescription: "Spend the day learning from Ghanaian artisans and performers — weave your own kente, then feel the beat in a high-energy drumming and traditional dance session.",
+        image: "/placeholder.svg?height=500&width=400&text=Western+Ghana+Canopy+Beach",
+      },
+      bookingContent: {
+        title: "Afrofuture",
+        subtitle: "Immerse yourself in Ghana’s living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
+        duration: "1 DAY",
+        destinations: "2 DESTINATIONS",
+        maxGuests: "10 GUESTS (MAX)",
+        heroImage: "/images/experiences/kente/cover.jpg?height=800&width=1200&text=Kente+Workshop",
+        galleryImages: [
+          "/images/experiences/kente/Gallery/8776-bonwire-kente-village.jpg?height=400&width=300&text=Kente+Weaving",
+          "/images/experiences/kente/Gallery/06-Ashanti-Names-DSC02997.jpg?height=400&width=300&text=Kente+Weaving",
+          "/images/experiences/kente/Gallery/343226152_a7e6f12e6e_b_1024x1024.jpg?height=400&width=300&text=Kente+Weaving",
+          "/images/experiences/kente/Gallery/Drumming_bottom (1).jpg?height=400&width=300&text=Kente+Weaving",
+          "/images/experiences/kente/Gallery/Tsirkormpam-lady-drumming-scaled.jpg?height=400&width=300&text=Kente+Weaving",
+        ],
+        overview: "Accra is home to Afrofuture, one of the world’s most electrifying African music festivals. Past headliners include Burna Boy, Davido, Black Sherif, and Asake. With this experience, you join the founders’ inner circle. Go backstage, meet the artists, and live the festival from a perspective reserved for only a few.",
+        whatsPriceless: "Time with the founders and access to headliners in one of Africa’s biggest music stages",
+        highlights: [
+          "All-access festival entry",
+          "Backstage experiences and introductions",
+          "Attend as part of the founders’ entourage",
+        ],
+        startingPrice: 235,
+        minimumGuests: 2,
+        included: [
+          "All workshop materials",
+          "Professional instructors",
+          "Cultural performance",
+          "Lunch and refreshments",
+          "Bottled water",
+          "Beyond Experiences Essentials™ Bag",
+        ]
+      },
+      tags: ["Priceless", "2 PAX"]
+    },
+    {
+      id: 9,
+      slug: "gardens-trails-and-cacao",
+      defaultContent: {
+        title: "Gardens, Trails, and Cacao",
+        shortDescription: "Aburi is a perfect blend of history, greenery, and adventure.",
         image: "/images/experiences/mansagold.jpg?height=400&width=300&text=Ashanti+Cultural+Tour",
         location: "Greater Accra, Ghana",
       },
@@ -247,7 +446,7 @@ export type Experience = {
         image: "/placeholder.svg?height=500&width=400&text=Ashanti+Palace+Golden",
       },
       bookingContent: {
-        title: "Chocolate-Making Experience with Mansa Gold",
+        title: "Gardens, Trails, and Cacao",
         subtitle: "From bean to bar, discover the secrets of Ghanaian chocolate, then treat yourself to a world-class spa experience.",
         duration: "1 DAY",
         destinations: "2 DESTINATIONS",
@@ -261,12 +460,12 @@ export type Experience = {
           "/images/experiences/chocolate+spa/Gallery/5.jpg?height=400&width=300&text=Chocolate+Workshop",
           "/images/experiences/chocolate+spa/Gallery/6.jpg?height=400&width=300&text=Chocolate+Workshop",
         ],
-        overview: "Discover the rich world of Ghanaian cocoa in a hands-on chocolate-making workshop. Craft your own delicious treats with guidance from expert chocolatiers. Then, slip into serenity with a soothing massage at the luxurious Resense Spa. This experience blends indulgence and relaxation, perfect for food lovers and wellness seekers alike.",
+        overview: "Aburi is a perfect blend of history, greenery, and adventure. Begin at the Tetteh Quarshie Cocoa Farm, birthplace of Ghana’s cocoa story. Continue to Aburi Botanical Gardens, a serene landscape of exotic trees and curated paths. Then switch pace with quad biking across the Aburi Hills, riding winding trails with panoramic views. End the day at Oboadaka Waterfall, a hidden escape where you can cool off in nature’s calm.",
         highlights: [
-          "Guided chocolate-making using Ghana’s finest cocoa.",
-          "Create and take home your own artisanal chocolates.",
-          "Relaxing massage session at the Resense Spa.",
-          "Ideal for couples or solo travelers seeking luxury and culture.",
+          "Explore Ghana’s cocoa heritage at Tetteh Quarshie Farm",
+          "Stroll through Aburi Botanical Gardens",
+          "Quad biking adventure on Aburi Hills",
+          "Relax at Oboadaka Waterfall",
         ],
         startingPrice: 255,
         minimumGuests: 1,
@@ -282,10 +481,10 @@ export type Experience = {
       tags: ["Travel Planner's Choice", "2 PAX"]
     },
     {
-      id: 6,
-      slug: "trident-experience",
+      id: 10,
+      slug: "abseiling-in-akosombo",
       defaultContent: {
-        title: "The Trident Experience",
+        title: "Abseiling in Akosombo",
         shortDescription: "Dive into an unforgettable water-based adventure on the scenic Volta Lake.",
         image: "/images/experiences/trident.jpg?height=400&width=300&text=Akosombo+Lake+Adventure",
         location: "Volta Region, Ghana",
@@ -296,7 +495,7 @@ export type Experience = {
         image: "/placeholder.svg?height=500&width=400&text=Lake+Volta+Dam+Sunset",
       },
       bookingContent: {
-        title: "The Trident Experience",
+        title: "Abseiling in Akosombo",
         subtitle: "From abseiling to kayaking and a sunset cruise, experience the best of Volta Lake in one action-packed day.",
         duration: "1 DAY",
         destinations: "3 DESTINATIONS",
@@ -310,10 +509,10 @@ export type Experience = {
         ],
         overview: "Dive into an unforgettable water-based adventure on the scenic Volta Lake. Start with a thrilling abseiling experience, descending cliff faces or the Adomi Bridge with expert guidance and breathtaking views. Then, take to the water for a serene yet energizing kayaking session, gliding through the calm currents surrounded by nature and scenic views. As the day winds down, relax with a peaceful sunset boat ride, where golden skies and gentle waves offer the perfect end to your lakeside escape.",
         highlights: [
-          "Abseiling from rocky cliffs or Adomi Bridge.",
-          "Kayaking across the calm waters of Volta Lake.",
-          "Sunset cruise under golden skies.",
-          "Swimming and relaxing on a private lakeside beach.",
+          "Abseiling from  cliffs or Adomi Bridge.",
+          "Kayaking on Volta Lake.",
+          "Sunset boat cruise.",
+          "Perfect mix of adrenaline and serenity",
         ],
         startingPrice: 350,
         minimumGuests: 1,

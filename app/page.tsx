@@ -134,7 +134,7 @@ export default function Home() {
                 </div>
               </div>
               <p className="text-gray-700 mt-6 md:mt-0 mb-6 font-sans leading-tight">
-              From Ghana’s golden coast to Namibia’s sweeping deserts and São Tomé’s emerald isles, each journey is designed to immerse you in the soul of the continent. These experiences are not just trips; they’re curated paths into culture, adventure, and memory, where discovery feels effortless and every moment lingers long after you’ve returned.
+                From Ghana’s golden coast to Namibia’s sweeping deserts and São Tomé’s emerald isles, each journey is designed to immerse you in the soul of the continent. These experiences are not just trips; they’re curated paths into culture, adventure, and memory, where discovery feels effortless and every moment lingers long after you’ve returned.
               </p>
               
             </div>
@@ -157,12 +157,12 @@ export default function Home() {
                   className="object-cover rounded-lg transition-transform group-hover:scale-[1.02]"
                 />
                 <div className="absolute bottom-0 left-0 right-0 h-20 md:h-24 rounded-b-lg bg-gradient-to-t from-black/80 to-transparent z-0" />
-                <div className="absolute bottom-4 left-10 md:left-4 lg:left-10 px-1 py-3 z-10">
+                <div className="absolute bottom-4 left-10 md:left-2 lg:left-4 px-1 py-3 z-10">
                   <div className="flex items-center space-x-2">
-                    <span className="font-body text-left text-2xl sm:text-lg md:text-lg lg:text-2xl font-sans text-white">
+                    <span className="font-body text-left text-2xl sm:text-lg md:text-sm lg:text-2xl font-sans text-white">
                       Browse <br className="leading-none" /> <span className="block -mt-1 sm:-mt-2">Experiences</span>
                     </span>
-                    <CircleArrowRight className="h-10 w-10 sm:h-8 sm:w-8 md:h-8 md:w-8 text-white" />
+                    <CircleArrowRight className="h-10 w-10 sm:h-8 sm:w-8 md:h-6 md:w-6 text-white lg:left-8" />
                   </div>
                 </div>
               </Link>

@@ -8,7 +8,7 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { experiences } from "@/lib/experiences-data"
+import { experiences, Experience } from "@/lib/experiences-data"
 import { TravelPlannerModal } from "@/components/travel-planner-modal-clean"
 
 const filterOptions = ["Ghana", "Priceless"]
@@ -17,6 +17,25 @@ export default function ExperiencesPage() {
 	const [hoveredCard, setHoveredCard] = useState<number | null>(null)
 	const [isSearchFocused, setIsSearchFocused] = useState(false)
 	const [showMobileFilters, setShowMobileFilters] = useState(false)
+	const [activeFilter, setActiveFilter] = useState<string | null>(null)
+	const [searchQuery, setSearchQuery] = useState("")
+
+	const filteredExperiences = experiences.filter(experience => {
+		const matchesFilter =
+			!activeFilter ||
+			(activeFilter === "Priceless" && experience.tags.includes("Priceless")) ||
+			(activeFilter === "Ghana" && experience.defaultContent.location.includes("Ghana"))
+
+		const matchesSearch =
+			!searchQuery ||
+			experience.defaultContent.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+			experience.defaultContent.shortDescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
+			experience.expandedContent.fullDescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
+			experience.bookingContent.overview.toLowerCase().includes(searchQuery.toLowerCase()) ||
+			experience.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+
+		return matchesFilter && matchesSearch
+	})
 
 	const ExperienceCard = ({
 		experience,
@@ -64,8 +83,8 @@ export default function ExperiencesPage() {
 								<div
 									key={index}
 									className={`backdrop-blur-sm text-white text-[10px] px-3 py-1 rounded-full font-sans border border-white/20 ${
-										tag === "Travel Planner's Choice"
-											? "bg-blue-950"
+										tag === "Priceless"
+											? "bg-white/10"
 											: "bg-black/40"
 									} ${tag === "2 PAX" ? "ml-auto" : ""}`}
 								>
@@ -86,6 +105,11 @@ export default function ExperiencesPage() {
 											</svg>
 											<span>2</span>
 										</div>
+									) : tag === "Priceless" ? (
+										<div className="flex items-center gap-1">
+											<img src="/images/mastercard.svg" alt="Mastercard" className="w-3 h-3" />
+											<span>{tag}</span>
+										</div>
 									) : (
 										tag
 									)}
@@ -97,7 +121,7 @@ export default function ExperiencesPage() {
 							<h3 className="text-xl font-sans font-medium text-white mb-2">
 								{defaultContent.title}
 							</h3>
-							<p className="text-white/90 text-sm mb-3 font-sans leading-tight sm:leading-relaxed">
+							<p className="text-white/90 text-sm mb-3 font-sans leading-tight sm:leading-relaxed tracking-tight">
 								{defaultContent.shortDescription}
 							</p>
 							<div className="h-[2px] w-full md:w-[45%] bg-white/90 mb-2 sm:mb-3" />
@@ -263,6 +287,8 @@ export default function ExperiencesPage() {
 																			<Input
 																				placeholder="Search"
 																				className="pl-10 pr-4 py-2 rounded-lg border border-black font-sans text-sm h-10 w-full"
+																				value={searchQuery}
+																				onChange={e => setSearchQuery(e.target.value)}
 																				onFocus={() => setIsSearchFocused(true)}
 																				onBlur={() => setIsSearchFocused(false)}
 																			/>
@@ -292,7 +318,12 @@ export default function ExperiencesPage() {
 									<Button
 										key={filter}
 										variant="outline"
-										className="rounded-3xl px-4 sm:px-6 py-1 sm:py-1.5 border-gray-300 text-gray-700 hover:bg-gray-100 font-sans whitespace-nowrap text-[10px] sm:text-xs"
+										onClick={() => setActiveFilter(activeFilter === filter ? null : filter)}
+                    className={`rounded-3xl px-4 sm:px-6 py-1 sm:py-1.5 border-gray-300 font-sans whitespace-nowrap text-[10px] sm:text-xs ${
+                      activeFilter === filter
+                        ? "bg-[#F7E7CE] text-black"
+                        : "text-gray-700 hover:bg-gray-100"
+                    }`}
 									>
 										{filter === "Priceless" ? (
 											<span className="inline-flex items-center gap-1">
@@ -325,6 +356,8 @@ export default function ExperiencesPage() {
 								<Input
 									placeholder="Search experiences"
 									className="pl-10 rounded-full border-gray-300 font-sans w-full text-xs sm:text-sm"
+									value={searchQuery}
+									onChange={e => setSearchQuery(e.target.value)}
 									onFocus={() => setIsSearchFocused(true)}
 									onBlur={() => setIsSearchFocused(false)}
 								/>
@@ -340,7 +373,7 @@ export default function ExperiencesPage() {
 				<div className="container mx-auto px-4 sm:px-6">
 					{/* Grid with extra spacing to accommodate expanded cards */}
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
-						{experiences.slice(0, 8).map((experience, index) => (
+						{filteredExperiences.map((experience, index) => (
 							<ExperienceCard
 								key={experience.id}
 								experience={experience}
@@ -349,6 +382,13 @@ export default function ExperiencesPage() {
 							/>
 						))}
 					</div>
+
+					{filteredExperiences.length === 0 && (
+						<div className="text-center py-16">
+							<h2 className="text-2xl font-semibold text-gray-700">No experiences found</h2>
+							<p className="text-gray-500 mt-2">Try adjusting your search or filters.</p>
+						</div>
+					)}
 
 					{/* Bespoke Experiences Section */}
 					<div className="mt-4 sm:mt-12 md:mt-16">

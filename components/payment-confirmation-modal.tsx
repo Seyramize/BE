@@ -300,7 +300,7 @@ export function PaymentConfirmationModal({
                 {/* Stripe Checkout Button */}
                 <Button
                   onClick={async () => {
-                    setIsProcessing(true);
+                    setIsProcessing(true)
                     try {
                       const res = await fetch("/api/create-checkout-session", {
                         method: "POST",
@@ -309,7 +309,9 @@ export function PaymentConfirmationModal({
                           amount: bookingDetails.totalAmount,
                           email: bookingDetails.email,
                           experienceName: bookingDetails.experienceName,
-                          phone: `${bookingDetails.countryDialCode || ""}${bookingDetails.phoneNumber || ""}`,
+                          phone: `${bookingDetails.countryDialCode || ""}${
+                            bookingDetails.phoneNumber || ""
+                          }`,
                           guests: bookingDetails.guests,
                           preferredDate: bookingDetails.preferredDate,
                           alternateDate: bookingDetails.alternateDate,
@@ -317,17 +319,17 @@ export function PaymentConfirmationModal({
                           experienceId: bookingDetails.experienceId,
                           experienceSlug: bookingDetails.experienceSlug,
                         }),
-                      });
-                      const data = await res.json();
+                      })
+                      const data = await res.json()
                       if (data.url) {
-                        window.location.href = data.url;
+                        window.location.href = data.url
                       } else {
-                        alert("Failed to initiate payment.");
+                        alert("Failed to initiate payment.")
                       }
                     } catch (error) {
-                      alert("Payment failed. Please try again.");
+                      alert("Payment failed. Please try again.")
                     } finally {
-                      setIsProcessing(false);
+                      setIsProcessing(false)
                     }
                   }}
                   disabled={isProcessing}
