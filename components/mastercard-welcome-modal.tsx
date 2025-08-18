@@ -10,7 +10,6 @@ interface MastercardWelcomeModalProps {
   isOpen: boolean
   onClose: () => void
   onExplore?: () => void
-  ctaHref?: string
   backgroundImageSrc?: string
 }
 
@@ -22,7 +21,6 @@ export function MastercardWelcomeModal({
   isOpen,
   onClose,
   onExplore,
-  ctaHref = "/priceless",
   backgroundImageSrc = "/images/travelplanner.jpg",
 }: MastercardWelcomeModalProps) {
   useEffect(() => {
@@ -106,7 +104,7 @@ export function MastercardWelcomeModal({
                 </button>
               ) : (
                 <Link
-                  href={ctaHref}
+                  href="/experiences?filter=Priceless"
                   className="flex sm:inline-flex items-center justify-center mx-auto sm:mx-0 gap-2 bg-white text-black hover:bg-white/90 transition-colors rounded-xl px-5 py-3 text-sm sm:text-base shadow-sm"
                 >
                   {ButtonContent}

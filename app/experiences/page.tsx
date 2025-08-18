@@ -10,14 +10,18 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { experiences, Experience } from "@/lib/experiences-data"
 import { TravelPlannerModal } from "@/components/travel-planner-modal-clean"
+import { useSearchParams } from "next/navigation"
 
 const filterOptions = ["Ghana", "Priceless"]
 
 export default function ExperiencesPage() {
+	const searchParams = useSearchParams()
 	const [hoveredCard, setHoveredCard] = useState<number | null>(null)
 	const [isSearchFocused, setIsSearchFocused] = useState(false)
 	const [showMobileFilters, setShowMobileFilters] = useState(false)
-	const [activeFilter, setActiveFilter] = useState<string | null>(null)
+	const [activeFilter, setActiveFilter] = useState<string | null>(
+		searchParams.get("filter")
+	)
 	const [searchQuery, setSearchQuery] = useState("")
 
 	const filteredExperiences = experiences.filter(experience => {
