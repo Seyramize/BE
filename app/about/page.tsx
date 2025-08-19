@@ -52,7 +52,7 @@ export default function AboutPage() {
                   <br />
                   love of discovery
                 </h1>
-                <p className="text-md font-sans leading-tight max-w-lg mx-auto px-8">
+                <p className="text-md font-sans leading-snug max-w-lg mx-auto px-8">
                   At Beyond Experiences, we believe your next great adventure
                   should be just a click away. We offer a curated catalog of
                   premium, ready-made journeys—designed for travelers who crave
@@ -63,7 +63,7 @@ export default function AboutPage() {
             <div className="relative rounded-2xl overflow-hidden w-full mx-auto mt-6 mb-4 px-2 max-w-7xl">
               <div className="relative rounded-2xl h-[30vh] w-full flex items-center justify-center">
                 <Image
-                  src="/images/abo1.jpg?height=500&width=800&text=Silhouettes+Against+Twilight+Sky"
+                  src="/images/abo5.jpg?height=500&width=800&text=Silhouettes+Against+Twilight+Sky"
                   alt="People silhouettes against twilight sky"
                   fill
                   className="object-cover [object-position:50%_20%]"
@@ -135,7 +135,7 @@ export default function AboutPage() {
                 <br />
                 love of discovery
               </h1>
-              <p className="text-lg text-white mb-8 font-sans leading-relaxed max-w-lg mx-auto">
+              <p className="text-lg text-white mb-8 font-sans leading-snug max-w-lg mx-auto">
                 At Beyond Experiences, we believe your next great adventure
                 should be just a click away. We offer a curated catalog of
                 premium, ready-made journeys—designed for travelers who crave
@@ -155,7 +155,7 @@ export default function AboutPage() {
                 {/* Poster Image */}
                 {!playingDesktop && (
                   <Image
-                    src="/images/abo1.jpg?height=500&width=800&text=Silhouettes+Against+Twilight+Sky"
+                    src="/images/abo5.jpg?height=500&width=800&text=Silhouettes+Against+Twilight+Sky"
                     alt="People silhouettes against twilight sky"
                     fill
                     className="object-cover [object-position:50%_10%]"
@@ -489,11 +489,9 @@ export default function AboutPage() {
           </h2>
           <p className="text-sm md:text-lg text-white/90 mb-4 font-sans max-w-3xl mx-auto leading-relaxed">
             Adventure is calling—and it's closer than you think.
-            <br className="leading-tight" />
-            <span className="block mt-2 sm:mt-3">
-              Book your next story today with Beyond Experiences and discover a
-              world waiting to meet you.
-            </span>
+            <br />
+            Book your next journey today with Beyond Experiences <br/> and discover a
+            world waiting to meet you.
           </p>
           <Link href="/experiences">
             <Button className="bg-[#EFE6DA] hover:bg-[#EFE6DA] text-black font-sans px-8 py-3 rounded-xl backdrop-blur-sm border border-white/30">

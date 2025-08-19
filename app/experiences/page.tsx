@@ -376,7 +376,7 @@ export default function ExperiencesPage() {
 				<div className="hidden sm:block absolute top-0 left-0 w-full h-14 bg-gradient-to-b from-white via-white to-transparent pointer-events-none z-10" />
 				<div className="container mx-auto px-4 sm:px-6">
 					{/* Grid with extra spacing to accommodate expanded cards */}
-					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-6 md:gap-6 lg:gap-6">
 						{filteredExperiences.map((experience, index) => (
 							<ExperienceCard
 								key={experience.id}

@@ -115,10 +115,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Text Column (Left on Desktop, Bottom on Mobile) */}
             <div className="order-2 md:order-1">
-              <h2 className="text-3xl md:text-4xl font-argent font-normal mb-6 leading-tight hidden md:block">
-                Africa,
-                <br />
-                curated for you.
+              <h2 className="text-3xl md:text-4xl font-argent font-normal mb-6 leading-tight">
+                Africa, <span className="md:block">curated for you.</span>
               </h2>
               <div className="md:hidden">
                 {/* This div is only for mobile to group the images */}
@@ -134,7 +132,7 @@ export default function Home() {
                 </div>
               </div>
               <p className="text-gray-700 mt-6 md:mt-0 mb-6 font-sans leading-tight">
-                From Ghana’s golden coast to Namibia’s sweeping deserts and São Tomé’s emerald isles, each journey is designed to immerse you in the soul of the continent. These experiences are not just trips; they’re curated paths into culture, adventure, and memory, where discovery feels effortless and every moment lingers long after you’ve returned.
+                Our journeys aren’t just about where you go, but how deep your experience is. Every moment is crafted to weave culture, adventure, and memory into experiences that linger long after the trip ends.
               </p>
               
             </div>
@@ -192,7 +190,7 @@ export default function Home() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                         <div className="absolute bottom-0 left-0 right-0 p-6">
                           <h3 className={`${index === 0 ? 'text-3xl' : 'text-2xl'} font-serif font-normal text-white mt-2 mb-3`}>{experience.defaultContent.title}</h3>
-                          <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
+                          <p className="text-white/90 mb-4 max-w-md font-sans leading-tight">
                             {experience.defaultContent.shortDescription}
                           </p>
                           <Link href={`/book-experience/${experience.slug}`}>
@@ -211,7 +209,7 @@ export default function Home() {
                       <div className="relative rounded-lg overflow-hidden group h-[470px] bg-gray-900 flex flex-col justify-center items-center text-center p-6">
                         <TbBinoculars className="text-white mb-4" size={40} />
                         <h3 className="text-4xl font-serif font-normal text-white mt-2 mb-3">Explore Experiences</h3>
-                        <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
+                        <p className="text-white/90 mb-4 max-w-md font-sans leading-tight">
                           Browse our catalog of experiences curated with you in mind.
                         </p>
                       </div>
@@ -282,7 +280,7 @@ export default function Home() {
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   {/* <span className="text-white/80 uppercase text-sm tracking-wider font-sans">{experiences[0].defaultContent.location}</span> */}
                   <h3 className="text-3xl font-serif font-normal text-white mt-2 mb-3">{experiences[0].defaultContent.title}</h3>
-                  <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
+                  <p className="text-white/90 mb-4 max-w-md font-sans leading-tight">
                     {experiences[0].defaultContent.shortDescription}
                   </p>
                   <Link href={`/book-experience/${experiences[0].slug}`}>
@@ -311,7 +309,7 @@ export default function Home() {
                     <div className="absolute bottom-0 left-0 right-0 p-6">
                     {/* <span className="text-white/80 uppercase text-sm tracking-wider font-sans">{experience.defaultContent.location}</span> */}
                       <h3 className="text-2xl font-serif font-normal text-white mb-2">{experience.defaultContent.title}</h3>
-                      <p className="text-white/90 mb-3 text-sm font-sans leading-relaxed">
+                      <p className="text-white/90 mb-3 text-sm font-sans leading-tight">
                         {experience.defaultContent.shortDescription}
                       </p>
                       <Link href={`/book-experience/${experience.slug}`}>
@@ -434,7 +432,7 @@ export default function Home() {
                     <Textarea name="message" value={form.message} onChange={handleChange} placeholder="How can we help?" className="bg-white border-gray-200 min-h-[120px] font-sans w-full py-6 md:py-2 placeholder:text-xs" />
                   </div>
                   {error && <div className="text-red-600 mt-2">{error}</div>}
-                  <Button type="submit" className="w-full bg-gray-900 hover:bg-gray-800 text-white font-body rounded-2xl md:rounded-full py-8 md:py-3" disabled={loading}>
+                  <Button type="submit" className="w-full bg-gray-900 hover:bg-gray-800 text-white font-body rounded-xl md:rounded-xl py-8 md:py-3" disabled={loading}>
                     {loading ? "Sending..." : "Enquire"}
                   </Button>
                   {success && <div className="text-green-600 mt-2">Thank you! Your enquiry has been sent.</div>}
@@ -460,11 +458,11 @@ export default function Home() {
                 </p>
               </div>
               <div className="hidden md:block">
-                <h2 className="text-3xl md:text-4xl font-title font-normal mb-6">Want to enquire?</h2>
-                <p className="text-gray-700 mb-6 font-sans leading-relaxed">
+                <h2 className="text-3xl md:text-4xl font-title font-normal mb-6 md:mb-3">Want to enquire?</h2>
+                <p className="text-gray-700 mb-6 font-sans leading-tight">
                   Whether it’s a custom itinerary, a quick question, or something unique you’d like to add, we’re here to help.
                 </p>
-                <div className="relative h-[300px] lg:h-[375px] rounded-lg overflow-hidden">
+                <div className="relative h-[300px] lg:h-[422px] rounded-lg overflow-hidden">
                   <Image
                     src="/images/home/enquiry.jpg?height=500&width=800&text=Wooden+Boat+Lake"
                     alt="Wooden boat on a crystal clear lake"

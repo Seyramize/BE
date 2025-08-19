@@ -291,7 +291,7 @@ export function PaymentConfirmationModal({
                     <div className="border-t border-stone-200 pt-2 mt-3">
                       <div className="flex flex-col sm:flex-row sm:justify-between font-serif text-base sm:text-lg">
                         <span className="text-slate-800">Total:</span>
-                        <span className="text-slate-800 font-semibold text-2xl">${bookingDetails.totalAmount}</span>
+                        <span className="text-slate-800 font-semibold font-sans text-2xl">${bookingDetails.totalAmount}</span>
                       </div>
                     </div>
                   </div>
