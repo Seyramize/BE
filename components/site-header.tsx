@@ -146,7 +146,7 @@ export function SiteHeader() {
               <span className="relative z-10">{`About Us`}</span>
             </Link>
             <Link
-              href="/journal"
+              href="https://www.beyondaccra.com/blog"
               className={`relative text-sm transition-all duration-300 font-sans group px-3 py-1.5 ${
                 pathname === "/journal" ? "text-blue-950 font-medium" : "text-white hover:text-blue-900"
               }`}
