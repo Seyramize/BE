@@ -13,8 +13,8 @@ export function MastercardPaymentBounceModal({ isOpen, onClose }: MastercardPaym
 	const router = useRouter()
 
 	const handleClose = () => {
-		onClose()
 		router.push("/experiences")
+		onClose()
 	}
 
 	return (
@@ -38,7 +38,7 @@ export function MastercardPaymentBounceModal({ isOpen, onClose }: MastercardPaym
 						<div className="absolute inset-0 bg-black/50" />
 						<button
 							onClick={handleClose}
-							className="absolute right-4 top-4 z-10 flex items-center gap-2 text-white/90 transition-colors hover:text-white sm:right-6 sm:top-6"
+							className="absolute right-4 top-4 z-50 flex items-center gap-2 text-white/90 transition-colors hover:text-white sm:right-6 sm:top-6"
 						>
 							<span className="text-xs">Close</span>
 							<X className="h-5 w-5" />

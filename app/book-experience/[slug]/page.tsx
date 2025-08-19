@@ -324,6 +324,8 @@ export default function BookExperiencePage() {
       if (experience && experience.tags.includes("Priceless")) {
         setIsMastercardModalOpen(true)
       }
+    } else if (searchParams.get("mastercard-bounce")) {
+      setIsMastercardModalOpen(true)
     }
   }, [sessionId, slug, searchParams])
 
@@ -434,7 +436,7 @@ export default function BookExperiencePage() {
             <div className="lg:col-span-2 space-y-8 md:space-y-12">
               {/* Overview */}
               <div>
-                <h2 className="text-sm sm:text-lg font-sans font-bold mb-2 md:mb-6 uppercase tracking-widest md:tracking-[0.2em] text-slate-800">
+                <h2 className="text-sm sm:text-lg font-sans font-bold mb-2 md:mb-2 uppercase tracking-widest md:tracking-[0.2em] text-slate-800">
                   Overview
                 </h2>
                 <p className="text-slate-700 font-sans font-normal leading-relaxed text-base sm:text-xl">
@@ -442,7 +444,7 @@ export default function BookExperiencePage() {
                 </p>
                 {bookingContent.whatsPriceless && (
                   <div className="mt-8">
-                    <h2 className="text-sm sm:text-lg font-sans font-bold mb-2 md:mb-6 uppercase tracking-widest md:tracking-[0.2em] text-slate-800">
+                    <h2 className="text-sm sm:text-lg font-sans font-bold mb-2 md:mb-2 uppercase tracking-widest md:tracking-[0.2em] text-slate-800">
                       What's Priceless
                     </h2>
                     <p className="text-slate-700 font-sans font-normal leading-relaxed text-base sm:text-xl">
@@ -472,7 +474,7 @@ export default function BookExperiencePage() {
 
               {/* Highlights */}
               <div>
-              <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-6 uppercase md:tracking-[0.2em] tracking-widest text-slate-800 border-b border-black pb-2">
+              <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800 border-b border-black pb-2">
                   Highlights
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4">
@@ -498,7 +500,7 @@ export default function BookExperiencePage() {
                   </div>
                   <div className="relative">
                     <span className="text-4xl font-sans font-normal text-slate-800">${bookingContent.startingPrice}</span>
-                    <span className="absolute -top-1 right-[-1.2rem] text-sm text-slate-600 font-sans">.00</span>
+                    {/* <span className="absolute -top-1 right-[-1.2rem] text-sm text-slate-600 font-sans">.00</span> */}
                   </div>
                 </div>
                 <div ref={buttonRef} className="sm:hidden mt-6 flex flex-col gap-3 -mx-6">
@@ -519,20 +521,16 @@ export default function BookExperiencePage() {
                 </div>
                 <div className="hidden sm:flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6">
                   <div>
-                    <h3 className="text-lg font-sans uppercase tracking-[0.2em] text-slate-600 mb-3">
+                    <h3 className="text-lg font-sans uppercase tracking-[0.2em] text-slate-600 mb-3 md:mb-2">
                       Starting Price
                     </h3>
-                    <div className="flex justify-between items-center gap-16 mt-2">
-                      <div className="relative">
-                        <span className="mt-2 text-4xl sm:text-5xl font-sans font-normal text-slate-800">
-                          ${bookingContent.startingPrice}
-                        </span>
-                        <span className="absolute -top-1 right-[-2rem] text-xl text-slate-600 font-sans">.00</span>
-                      </div>
-                      <p className="text-lg text-slate-600 font-sans text-bold">
-                        Minimum of {bookingContent.minimumGuests} {bookingContent.minimumGuests === 1 ? 'person' : 'people'}
-                      </p>
+                    <div className="relative">
+                      <span className="mt-2 text-4xl sm:text-5xl font-sans font-normal text-slate-800">
+                        ${bookingContent.startingPrice}
+                      </span>
+                      {/* <span className="absolute -top-1 right-[-2rem] text-xl text-slate-600 font-sans">.00</span> */}
                     </div>
+                    <p className="text-xs uppercase tracking-widest text-slate-600 mt-1">Minimum of {bookingContent.minimumGuests} {bookingContent.minimumGuests === 1 ? 'person' : 'people'}</p>
                   </div>
                   <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-3">
                     <Button
@@ -555,7 +553,7 @@ export default function BookExperiencePage() {
 
               {/* What's Included */}
               <div>
-                <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-6 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
+                <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
                   What's Included
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4">

@@ -23,6 +23,8 @@ export async function POST(req: NextRequest) {
 
 	try {
 		const success_url = `${process.env.NEXT_PUBLIC_BASE_URL}/book-experience/${experienceSlug}?session_id={CHECKOUT_SESSION_ID}`
+		const cancel_url = `${process.env.NEXT_PUBLIC_BASE_URL}/book-experience/${experienceSlug}?cancel=1`
+		const mastercard_bounce_url = `${process.env.NEXT_PUBLIC_BASE_URL}/book-experience/${experienceSlug}?mastercard-bounce=1`
 
 		const sessionOptions: Stripe.Checkout.SessionCreateParams = {
 			payment_method_types: ["card"],
@@ -53,21 +55,17 @@ export async function POST(req: NextRequest) {
 				fullName: fullName || "",
 			},
 			success_url,
-			cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/book-experience/${experienceSlug}?cancel=1`,
+			cancel_url: cancel_url,
 		}
 
 		if (experience && experience.tags.includes("Priceless")) {
 			sessionOptions.payment_intent_data = {
 				metadata: {
-					restrict_to_mastercard: "true",
-					experience_id: experienceId?.toString() || "",
-					experience_slug: experienceSlug || "",
+					is_priceless_experience: "true",
 				},
 			}
+			sessionOptions.cancel_url = mastercard_bounce_url
 		}
-
-		// Note: Mastercard-only restriction removed to avoid Stripe API error.
-		// Enforce Mastercard-only post-payment via webhook or session validation.
 
 		const session = await stripe.checkout.sessions.create(sessionOptions)
 
