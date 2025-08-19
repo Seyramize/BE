@@ -125,7 +125,7 @@ export default function ExperiencesPage() {
 							<h3 className="text-xl font-sans font-medium text-white mb-2">
 								{defaultContent.title}
 							</h3>
-							<p className="text-white/90 text-sm mb-3 font-sans leading-tight sm:leading-relaxed tracking-tight">
+							<p className="text-white/90 text-sm mb-3 font-sans leading-tight sm:leading-tight tracking-tight">
 								{defaultContent.shortDescription}
 							</p>
 							<div className="h-[2px] w-full md:w-[45%] bg-white/90 mb-2 sm:mb-3" />
@@ -265,7 +265,7 @@ export default function ExperiencesPage() {
 					<div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-8">
       
 						{/* Filter Buttons - Left side */}
-						<div className="w-full sm:flex-1 overflow-x-auto">
+						<div className={`w-full sm:flex-1 overflow-x-auto ${isSearchFocused ? "sm:hidden" : ""}`}>
 							{/* Mobile: Filter, Sort, Search in one row */}
 							<div className="flex items-center gap-2 sm:hidden mb-2 w-full mt-4">
 								<Button
@@ -355,7 +355,7 @@ export default function ExperiencesPage() {
 								<SlidersHorizontal className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
 								Sort
 							</Button>
-							<div className={`relative transition-all duration-300 ${isSearchFocused ? 'w-full' : 'w-40 sm:w-52 md:w-48 lg:w-56'}`}>
+							<div className={`relative transition-all duration-300 ${isSearchFocused ? 'w-full' : 'w-40 sm:w-46 md:w-48 lg:w-46'}`}>
 								<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-2 h-4" />
 								<Input
 									placeholder="Search experiences"

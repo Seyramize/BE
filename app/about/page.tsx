@@ -1,20 +1,20 @@
-"use client" 
+"use client";
 
-import Link from "next/link"
-import Image from "next/image"
-import { useState, useRef } from "react"
-import { Play, Calendar, Map, Clock, Users, Sparkle } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { TravelPlannerModal } from "@/components/travel-planner-modal-clean"
-import { FaRegMap } from "react-icons/fa"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
+import Link from "next/link";
+import Image from "next/image";
+import { useState, useRef } from "react";
+import { Play, Calendar, Map, Clock, Users, Sparkle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { TravelPlannerModal } from "@/components/travel-planner-modal-clean";
+import { FaRegMap } from "react-icons/fa";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 
 export default function AboutPage() {
-  const [playingMobile, setPlayingMobile] = useState(false)
-  const mobileRef = useRef<HTMLVideoElement>(null)
-  const [playingDesktop, setPlayingDesktop] = useState(false)
-  const desktopRef = useRef<HTMLVideoElement>(null)
+  const [playingMobile, setPlayingMobile] = useState(false);
+  const mobileRef = useRef<HTMLVideoElement>(null);
+  const [playingDesktop, setPlayingDesktop] = useState(false);
+  const desktopRef = useRef<HTMLVideoElement>(null);
   return (
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
@@ -53,9 +53,10 @@ export default function AboutPage() {
                   love of discovery
                 </h1>
                 <p className="text-md font-sans leading-tight max-w-lg mx-auto px-8">
-                  At Beyond Experiences, we believe your next great adventure should be just a click away. We offer a
-                  curated catalog of premium, ready-made journeys—designed for travelers who crave authentic moments
-                  without the heavy lift of planning.
+                  At Beyond Experiences, we believe your next great adventure
+                  should be just a click away. We offer a curated catalog of
+                  premium, ready-made journeys—designed for travelers who crave
+                  authentic moments without the heavy lift of planning.
                 </p>
               </div>
             </div>
@@ -86,14 +87,18 @@ export default function AboutPage() {
                           mobileRef.current?.play();
                         }}
                       > */}
-                        {/* <Play className="w-8 h-8" fill="currentColor" />
+                {/* <Play className="w-8 h-8" fill="currentColor" />
                       </Button>
                     </div>
                   </div>
                 )} */}
                 <div className="absolute bottom-4 right-4">
                   <div className="w-6 h-6 text-white/60">
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-full h-full"
+                    >
                       <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" />
                     </svg>
                   </div>
@@ -122,16 +127,19 @@ export default function AboutPage() {
                   />
                 </div>
               </div>
-              <p className="text-sm uppercase tracking-[0.2em] font-sans text-white font-bold mb-6">ABOUT US</p>
+              <p className="text-sm uppercase tracking-[0.2em] font-sans text-white font-bold mb-6">
+                ABOUT US
+              </p>
               <h1 className="text-6xl lg:text-7xl font-serif font-normal mb-6 leading-none text-white">
                 Born from a
                 <br />
                 love of discovery
               </h1>
               <p className="text-lg text-white mb-8 font-sans leading-relaxed max-w-lg mx-auto">
-                At Beyond Experiences, we believe your next great adventure should be just a click away. We offer a curated
-                catalog of premium, ready-made journeys—designed for travelers who crave authentic moments without the
-                heavy lift of planning.
+                At Beyond Experiences, we believe your next great adventure
+                should be just a click away. We offer a curated catalog of
+                premium, ready-made journeys—designed for travelers who crave
+                authentic moments without the heavy lift of planning.
               </p>
             </div>
             <div className="w-full text-center mb-16">
@@ -181,7 +189,11 @@ export default function AboutPage() {
                 {/* )} */}
                 <div className="absolute bottom-4 right-4">
                   <div className="w-6 h-6 text-white/60">
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-full h-full"
+                    >
                       <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" />
                     </svg>
                   </div>
@@ -195,7 +207,9 @@ export default function AboutPage() {
       {/* What We Offer Section */}
       <section className="pt-7 pb-7 md:py-20 bg-white">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-serif text-left mb-6 md:hidden">What we offer</h2>
+          <h2 className="text-4xl font-serif text-left mb-6 md:hidden">
+            What we offer
+          </h2>
           <h2 className="hidden md:block text-5xl md:text-6xl font-sans font-normal text-center mb-8">
             What we offer
           </h2>
@@ -206,16 +220,23 @@ export default function AboutPage() {
               </div>
               <div>
                 <div className="border-l-2 border-black pl-3 md:hidden">
-                  <h3 className="text-sm font-sans font-semibold mb-1">HANDPICKED ITINERARIES</h3>
+                  <h3 className="text-sm font-sans font-semibold mb-1">
+                    HANDPICKED ITINERARIES
+                  </h3>
                   <p className="text-sm text-slate-600 font-sans leading-tight">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis auctor arcu arcu, et sodales dolor
-                    convallis a. Proin venenatis, massa vitae sodales vehicula, sapien sem lobortis felis, eu mollis
-                    mauris nulla vitae ex.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Duis auctor arcu arcu, et sodales dolor convallis a. Proin
+                    venenatis, massa vitae sodales vehicula, sapien sem lobortis
+                    felis, eu mollis mauris nulla vitae ex.
                   </p>
                 </div>
                 <div className="hidden md:flex md:flex-col">
-                  <h3 className="text-sm font-sans font-semibold mb-1">HANDPICKED ITINERARIES</h3>
-                  <p className="text-sm text-slate-600 font-sans">Curated by seasoned local experts</p>
+                  <h3 className="text-sm font-sans font-semibold mb-1">
+                    HANDPICKED ITINERARIES
+                  </h3>
+                  <p className="text-sm text-slate-600 font-sans">
+                    Curated by seasoned local experts
+                  </p>
                 </div>
               </div>
             </div>
@@ -225,16 +246,23 @@ export default function AboutPage() {
               </div>
               <div>
                 <div className="border-l-2 border-black pl-3 md:hidden">
-                  <h3 className="text-sm font-sans font-semibold mb-1">INSTANT ACCESS</h3>
+                  <h3 className="text-sm font-sans font-semibold mb-1">
+                    INSTANT ACCESS
+                  </h3>
                   <p className="text-sm text-slate-600 font-sans leading-tight">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis auctor arcu arcu, et sodales dolor
-                    convallis a. Proin venenatis, massa vitae sodales vehicula, sapien sem lobortis felis, eu mollis
-                    mauris nulla vitae ex.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Duis auctor arcu arcu, et sodales dolor convallis a. Proin
+                    venenatis, massa vitae sodales vehicula, sapien sem lobortis
+                    felis, eu mollis mauris nulla vitae ex.
                   </p>
                 </div>
                 <div className="hidden md:flex md:flex-col">
-                  <h3 className="text-sm font-sans font-semibold mb-1">INSTANT ACCESS</h3>
-                  <p className="text-sm text-slate-600 font-sans">Book in minutes, travel within the week</p>
+                  <h3 className="text-sm font-sans font-semibold mb-1">
+                    INSTANT ACCESS
+                  </h3>
+                  <p className="text-sm text-slate-600 font-sans">
+                    Book in minutes, travel within the week
+                  </p>
                 </div>
               </div>
             </div>
@@ -244,16 +272,23 @@ export default function AboutPage() {
               </div>
               <div>
                 <div className="border-l-2 border-black pl-3 md:hidden">
-                  <h3 className="text-sm font-sans font-semibold mb-1">AUTHENTIC IMMERSION</h3>
+                  <h3 className="text-sm font-sans font-semibold mb-1">
+                    AUTHENTIC IMMERSION
+                  </h3>
                   <p className="text-sm text-slate-600 font-sans leading-tight">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis auctor arcu arcu, et sodales dolor
-                    convallis a. Proin venenatis, massa vitae sodales vehicula, sapien sem lobortis felis, eu mollis
-                    mauris nulla vitae ex.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Duis auctor arcu arcu, et sodales dolor convallis a. Proin
+                    venenatis, massa vitae sodales vehicula, sapien sem lobortis
+                    felis, eu mollis mauris nulla vitae ex.
                   </p>
                 </div>
                 <div className="hidden md:flex md:flex-col">
-                  <h3 className="text-sm font-sans font-semibold mb-1">AUTHENTIC IMMERSION</h3>
-                  <p className="text-sm text-slate-600 font-sans">Real ideas into cultures, people, and landscapes</p>
+                  <h3 className="text-sm font-sans font-semibold mb-1">
+                    AUTHENTIC IMMERSION
+                  </h3>
+                  <p className="text-sm text-slate-600 font-sans">
+                    Real ideas into cultures, people, and landscapes
+                  </p>
                 </div>
               </div>
             </div>
@@ -263,16 +298,23 @@ export default function AboutPage() {
               </div>
               <div>
                 <div className="border-l-2 border-black pl-3 md:hidden">
-                  <h3 className="text-sm font-sans font-semibold mb-1">ACCESSIBLE LUXURY</h3>
+                  <h3 className="text-sm font-sans font-semibold mb-1">
+                    ACCESSIBLE LUXURY
+                  </h3>
                   <p className="text-sm text-slate-600 font-sans leading-tight">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis auctor arcu arcu, et sodales dolor
-                    convallis a. Proin venenatis, massa vitae sodales vehicula, sapien sem lobortis felis, eu mollis
-                    mauris nulla vitae ex.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Duis auctor arcu arcu, et sodales dolor convallis a. Proin
+                    venenatis, massa vitae sodales vehicula, sapien sem lobortis
+                    felis, eu mollis mauris nulla vitae ex.
                   </p>
                 </div>
                 <div className="hidden md:flex md:flex-col">
-                  <h3 className="text-sm font-sans font-semibold mb-1">ACCESSIBLE LUXURY</h3>
-                  <p className="text-sm text-slate-600 font-sans">Premium experiences without the boutique price tag</p>
+                  <h3 className="text-sm font-sans font-semibold mb-1">
+                    ACCESSIBLE LUXURY
+                  </h3>
+                  <p className="text-sm text-slate-600 font-sans">
+                    Premium experiences without the boutique price tag
+                  </p>
                 </div>
               </div>
             </div>
@@ -296,17 +338,32 @@ export default function AboutPage() {
         {/* dark block */}
         <div className="bg-[#142929] text-white px-6 pt-6 pb-10">
           <h2 className="text-3xl font-serif leading-7 font-normal mb-6">
-            Our commitment<br/>to sustainability
+            Our commitment
+            <br />
+            to sustainability
           </h2>
           <div className="space-y-6 text-sm leading-tight text-white/90">
             <p>
-              At Beyond Experiences, we believe that travel should be an enriching force for both travelers and the destinations they visit. That's why we're committed to protecting the communities, cultures, and environments that make our journeys possible. Every experience we offer is designed to create positive impact for the local people and places that share their stories to the ecosystems that host our adventures.
+              At Beyond Experiences, we believe that travel should be an
+              enriching force for both travelers and the destinations they
+              visit. That's why we're committed to protecting the communities,
+              cultures, and environments that make our journeys possible. Every
+              experience we offer is designed to create positive impact for the
+              local people and places that share their stories to the ecosystems
+              that host our adventures.
             </p>
             <p>
-              We partner directly with local artisans, eco-conscious operators, and community-led initiatives that champion belonging, equity, and regeneration. Whether it's booking with guides who give back to their communities, sourcing from businesses that prioritize fair wages, or choosing thoughtful choices at every turn.
+              We partner directly with local artisans, eco-conscious operators,
+              and community-led initiatives that champion belonging, equity, and
+              regeneration. Whether it's booking with guides who give back to
+              their communities, sourcing from businesses that prioritize fair
+              wages, or choosing thoughtful choices at every turn.
             </p>
             <p>
-              From tree-planting travel practices to supporting cultural preservation efforts, we believe that the best way to explore our beautiful world is more than a pleasure—it's a step toward a future where exploration and responsibility go hand in hand.
+              From tree-planting travel practices to supporting cultural
+              preservation efforts, we believe that the best way to explore our
+              beautiful world is more than a pleasure—it's a step toward a
+              future where exploration and responsibility go hand in hand.
             </p>
           </div>
         </div>
@@ -325,22 +382,27 @@ export default function AboutPage() {
             <div className="lg:col-span-7">
               <div className="space-y-4 text-white/90 font-sans leading-relaxed">
                 <p>
-                  At Beyond Experiences, we believe that travel should be an enriching force for both travelers and the
-                  destinations they visit. That's why we're committed to protecting the communities, cultures, and
-                  environments that make our journeys possible. Every experience we offer is designed to create positive
-                  impact for the local people and places that share their stories to the ecosystems that host our
+                  At Beyond Experiences, we believe travel should enrich both
+                  the traveler and the destinations they touch. That’s why we’re
+                  committed to protecting the communities, cultures, and
+                  environments that make our journeys possible. Every experience
+                  is designed to create lasting impact, from the people who
+                  share their stories to the ecosystems that host our
                   adventures.
                 </p>
                 <p>
-                  We partner directly with local artisans, eco-conscious operators, and community-led initiatives that
-                  champion belonging, equity, and regeneration. Whether it's booking with guides who give back to their
-                  communities, sourcing from businesses that prioritize fair wages, or choosing thoughtful choices at
-                  every turn.
+                  We partner directly with local artisans, eco-conscious
+                  operators, and community-led initiatives that champion
+                  belonging, equity, and regeneration. Whether it’s booking with
+                  guides who give back, sourcing from businesses that prioritize
+                  fair wages, or making thoughtful choices at every step,
+                  responsibility is at the core of what we do.
                 </p>
                 <p>
-                  From tree-planting travel practices to supporting cultural preservation efforts, we believe that the
-                  best way to explore our beautiful world is more than a pleasure—it's a step toward a future where
-                  exploration and responsibility go hand in hand.
+                  To reduce plastic and single-use waste, we’ve also introduced
+                  reusable Beyond merchandise for our clients, including
+                  aluminum water bottles and bags made from reclaimed fabric, so
+                  every journey leaves a lighter footprint.
                 </p>
               </div>
             </div>
@@ -390,7 +452,9 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-black/50" />
           <div className="absolute inset-0 flex flex-col items-center justify-center py-4">
             <h2 className="text-4xl font-serif font-normal leading-9 text-white text-center">
-              Go beyond<br/>the ordinary
+              Go beyond
+              <br />
+              the ordinary
             </h2>
             <div className="mt-24 flex flex-col items-center gap-4">
               <Link href="/experiences">
@@ -400,12 +464,12 @@ export default function AboutPage() {
                 </Button>
               </Link>
               <p className="text-sm text-white/80 leading-tight text-center">
-                Adventure is calling, and it&rsquo;s closer <br></br> than you think.
+                Adventure is calling, and it&rsquo;s closer <br></br> than you
+                think.
               </p>
             </div>
           </div>
         </div>
-
       </div>
 
       {/* Desktop / Tablet view */}
@@ -426,11 +490,15 @@ export default function AboutPage() {
           <p className="text-sm md:text-lg text-white/90 mb-4 font-sans max-w-3xl mx-auto leading-relaxed">
             Adventure is calling—and it's closer than you think.
             <br className="leading-tight" />
-            <span className="block mt-2 sm:mt-3">Book your next story today with Beyond Experiences and discover a world waiting to meet you.</span>
+            <span className="block mt-2 sm:mt-3">
+              Book your next story today with Beyond Experiences and discover a
+              world waiting to meet you.
+            </span>
           </p>
           <Link href="/experiences">
             <Button className="bg-[#EFE6DA] hover:bg-[#EFE6DA] text-black font-sans px-8 py-3 rounded-xl backdrop-blur-sm border border-white/30">
-              Explore Experiences <FaRegMap className="w-8 h-8 text-gray-900 hover:text-white" />
+              Explore Experiences{" "}
+              <FaRegMap className="w-8 h-8 text-gray-900 hover:text-white" />
             </Button>
           </Link>
         </div>
@@ -440,13 +508,15 @@ export default function AboutPage() {
       {/* Mobile-only "Speak to a Travel Planner" Sticky Button */}
       <div className=" fixed bottom-4 right-6 z-20">
         <TravelPlannerModal>
-          <Button
-            className="bg-gray-900/90 hover:bg-gray-900 text-white font-sans w-13 h-13 p-4 rounded-full shadow-lg flex items-center justify-center"
-          >
-            <img src="/images/ChatsCircle.png" alt="chats" className="w-5 h-5" />
+          <Button className="bg-gray-900/90 hover:bg-gray-900 text-white font-sans w-13 h-13 p-4 rounded-full shadow-lg flex items-center justify-center">
+            <img
+              src="/images/ChatsCircle.png"
+              alt="chats"
+              className="w-5 h-5"
+            />
           </Button>
         </TravelPlannerModal>
       </div>
     </div>
-  )
+  );
 }
