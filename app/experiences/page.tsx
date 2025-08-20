@@ -11,6 +11,26 @@ import Link from "next/link"
 import { experiences, Experience } from "@/lib/experiences-data"
 import { TravelPlannerModal } from "@/components/travel-planner-modal-clean"
 import { useSearchParams } from "next/navigation"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Experiences",
+  description: "Browse curated travel experiences across Ghana and beyond.",
+  alternates: { canonical: "/experiences" },
+  openGraph: {
+    type: "website",
+    title: "Experiences | Beyond Experiences",
+    description: "Browse curated travel experiences across Ghana and beyond.",
+    url: "/experiences",
+    images: [{ url: "/images/expihome.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Experiences | Beyond Experiences",
+    description: "Browse curated travel experiences across Ghana and beyond.",
+    images: ["/images/expihome.jpg"],
+  },
+}
 
 const filterOptions = ["Ghana", "Priceless"]
 

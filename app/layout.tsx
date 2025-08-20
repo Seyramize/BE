@@ -7,6 +7,8 @@ import localFont from 'next/font/local'
 import { Toaster } from "@/components/ui/toaster"
 import MastercardGate from "@/components/mastercard-gate"
 import { DynamicFavicon } from "@/components/dynamic-favicon"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/next"
 
 // Argent font for headings
 const argent = localFont({
@@ -21,13 +23,52 @@ const helvetica = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "Beyond Experiences - Extraordinary Travel Adventures",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://experiencesbybeyond.com"),
+  title: {
+    default: "Beyond Experiences - Extraordinary Travel Adventures",
+    template: "%s | Beyond Experiences",
+  },
   description:
     "Discover bespoke experiences that redefine the way you travel. Whether you seek serenity, thrill, or unforgettable encounters, your next journey begins here.",
   manifest: "/favicons/manifest.json",
   icons: {
     icon: "/favicons/favicon.ico",
     apple: "/favicons/apple-icon.png",
+  },
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Beyond Experiences",
+    title: "Beyond Experiences - Extraordinary Travel Adventures",
+    description:
+      "Discover bespoke experiences that redefine the way you travel.",
+    images: [
+      {
+        url: "/images/Sus1.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Beyond Experiences",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Beyond Experiences - Extraordinary Travel Adventures",
+    description:
+      "Discover bespoke experiences that redefine the way you travel.",
+    images: [
+      {
+        url: "/images/Sus1.jpg",
+        alt: "Beyond Experiences",
+      },
+    ],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 }
 
@@ -45,6 +86,8 @@ export default function RootLayout({
           <MastercardGate />
           {children}
           <Toaster />
+          <SpeedInsights />
+          <Analytics />
         </ThemeProvider>
       </body>
       {/* Script to clean up any unwanted attributes that might cause hydration issues */}
