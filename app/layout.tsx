@@ -7,8 +7,8 @@ import localFont from 'next/font/local'
 import { Toaster } from "@/components/ui/toaster"
 import MastercardGate from "@/components/mastercard-gate"
 import { DynamicFavicon } from "@/components/dynamic-favicon"
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/react"
+import { Analytics } from "@vercel/analytics/react"
 
 // Argent font for headings
 const argent = localFont({
