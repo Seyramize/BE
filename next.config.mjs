@@ -11,4 +11,10 @@ const nextConfig = {
   },
 }
 
+// next.config.mjs
+import withBundleAnalyzer from '@next/bundle-analyzer';
+
+const isAnalyze = process.env.ANALYZE === 'true';
+
+
 export default nextConfig
