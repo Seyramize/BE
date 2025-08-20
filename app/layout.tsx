@@ -6,6 +6,7 @@ import Script from "next/script"
 import localFont from 'next/font/local'
 import { Toaster } from "@/components/ui/toaster"
 import MastercardGate from "@/components/mastercard-gate"
+import { DynamicFavicon } from "@/components/dynamic-favicon"
 
 // Argent font for headings
 const argent = localFont({
@@ -23,6 +24,11 @@ export const metadata: Metadata = {
   title: "Beyond Experiences - Extraordinary Travel Adventures",
   description:
     "Discover bespoke experiences that redefine the way you travel. Whether you seek serenity, thrill, or unforgettable encounters, your next journey begins here.",
+  manifest: "/favicons/manifest.json",
+  icons: {
+    icon: "/favicons/favicon.ico",
+    apple: "/favicons/apple-icon.png",
+  },
 }
 
 export default function RootLayout({
@@ -34,6 +40,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${argent.variable} ${helvetica.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <DynamicFavicon />
           {/* Show Mastercard welcome on initial site load */}
           <MastercardGate />
           {children}

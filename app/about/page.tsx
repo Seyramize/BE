@@ -224,10 +224,7 @@ export default function AboutPage() {
                     HANDPICKED ITINERARIES
                   </h3>
                   <p className="text-sm text-slate-600 font-sans leading-tight">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Duis auctor arcu arcu, et sodales dolor convallis a. Proin
-                    venenatis, massa vitae sodales vehicula, sapien sem lobortis
-                    felis, eu mollis mauris nulla vitae ex.
+                  Curated by seasoned local experts
                   </p>
                 </div>
                 <div className="hidden md:flex md:flex-col">
@@ -250,10 +247,8 @@ export default function AboutPage() {
                     INSTANT ACCESS
                   </h3>
                   <p className="text-sm text-slate-600 font-sans leading-tight">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Duis auctor arcu arcu, et sodales dolor convallis a. Proin
-                    venenatis, massa vitae sodales vehicula, sapien sem lobortis
-                    felis, eu mollis mauris nulla vitae ex.
+                  Book in minutes, travel within the week
+
                   </p>
                 </div>
                 <div className="hidden md:flex md:flex-col">
@@ -276,10 +271,7 @@ export default function AboutPage() {
                     AUTHENTIC IMMERSION
                   </h3>
                   <p className="text-sm text-slate-600 font-sans leading-tight">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Duis auctor arcu arcu, et sodales dolor convallis a. Proin
-                    venenatis, massa vitae sodales vehicula, sapien sem lobortis
-                    felis, eu mollis mauris nulla vitae ex.
+                  Real ideas into cultures, people, and landscapes
                   </p>
                 </div>
                 <div className="hidden md:flex md:flex-col">
@@ -302,10 +294,7 @@ export default function AboutPage() {
                     ACCESSIBLE LUXURY
                   </h3>
                   <p className="text-sm text-slate-600 font-sans leading-tight">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Duis auctor arcu arcu, et sodales dolor convallis a. Proin
-                    venenatis, massa vitae sodales vehicula, sapien sem lobortis
-                    felis, eu mollis mauris nulla vitae ex.
+                  Premium experiences without the boutique price tag
                   </p>
                 </div>
                 <div className="hidden md:flex md:flex-col">
@@ -355,9 +344,7 @@ export default function AboutPage() {
             <p>
               We partner directly with local artisans, eco-conscious operators,
               and community-led initiatives that champion belonging, equity, and
-              regeneration. Whether it's booking with guides who give back to
-              their communities, sourcing from businesses that prioritize fair
-              wages, or choosing thoughtful choices at every turn.
+              regeneration.
             </p>
             <p>
               From tree-planting travel practices to supporting cultural
@@ -393,10 +380,7 @@ export default function AboutPage() {
                 <p>
                   We partner directly with local artisans, eco-conscious
                   operators, and community-led initiatives that champion
-                  belonging, equity, and regeneration. Whether it’s booking with
-                  guides who give back, sourcing from businesses that prioritize
-                  fair wages, or making thoughtful choices at every step,
-                  responsibility is at the core of what we do.
+                    belonging, equity, and regeneration.
                 </p>
                 <p>
                   To reduce plastic and single-use waste, we’ve also introduced
@@ -411,7 +395,7 @@ export default function AboutPage() {
             <div className="lg:col-span-5">
               <div className="flex gap-4">
                 {/* First image - slightly wider */}
-                <div className="relative h-[200px] md:h-[320px] lg:h-[350px] w-[58%] rounded-lg overflow-hidden">
+                <div className="relative h-[200px] md:h-[320px] lg:h-[270px] w-[58%] rounded-lg overflow-hidden">
                   <Image
                     src="/images/about-us/sustainability1.jpg?height=300&width=500&text=Community+Sustainability+Initiatives"
                     alt="Community sustainability initiatives and local partnerships"
@@ -422,7 +406,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* Second image - slightly narrower */}
-                <div className="relative h-[200px] md:h-[320px] lg:h-[350px] w-[42%] rounded-lg overflow-hidden">
+                <div className="relative h-[200px] md:h-[320px] lg:h-[270px] w-[42%] rounded-lg overflow-hidden">
                   <Image
                     src="/images/Sus1.jpg?height=250&width=400&text=Environmental+Conservation+Efforts"
                     alt="Environmental conservation and eco-friendly practices"
