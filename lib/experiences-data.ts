@@ -37,7 +37,7 @@ export type Experience = {
       id: 1,
       slug: "shai-hills-experience",
       defaultContent: {
-        title: "Shai Hills Experience",
+        title: "Adventuring in Shai Hills",
         shortDescription: "Discover the perfect blend of nature, culture, and adventure at Shai Hills.",
         image: "/images/experiences/shai-hills/cover.jpg?height=400&width=300&text=Shai+Hills+Adventure",
         location: "Eastern Region, Ghana"
@@ -85,9 +85,7 @@ export type Experience = {
         included: [
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
-          "Professional massage at a waterfall",
           "On-the-go internet access",
-          "Lunch and dinner",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
@@ -150,10 +148,8 @@ export type Experience = {
         minimumGuests: 1,
         included: [
           "Private transportation including fuel",
-          "Professional tour guide",
-          "Castle entrance fees",
-          "Canopy walkway access",
-          "Lunch and refreshments",
+          "Dedicated chaperone and access to resident guides",
+          "On-the-go internet access",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
@@ -202,10 +198,8 @@ export type Experience = {
         minimumGuests: 1,
         included: [
           "Private transportation including fuel",
-          "Professional tour guide",
-          "Castle entrance fees",
-          "Canopy walkway access",
-          "Lunch and refreshments",
+          "Dedicated chaperone and access to resident guides",
+          "On-the-go internet access",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
@@ -260,11 +254,9 @@ export type Experience = {
         startingPrice: 300,
         minimumGuests: 1,
         included: [
-          "Private transportation",
-          "Professional city guide",
-          "Museum entrance fees",
-          "Lunch at a local restaurant",
-          "Bottled water",
+          "Private transportation including fuel",
+          "Dedicated chaperone and access to resident guides",
+          "On-the-go internet access",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
@@ -311,11 +303,9 @@ export type Experience = {
         startingPrice: 300,
         minimumGuests: 1,
         included: [
-          "Private transportation",
-          "Professional city guide",
-          "Museum entrance fees",
-          "Lunch at a local restaurant",
-          "Bottled water",
+          "Private transportation including fuel",
+          "Dedicated chaperone and access to resident guides",
+          "On-the-go internet access",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
@@ -359,11 +349,9 @@ export type Experience = {
         startingPrice: 235,
         minimumGuests: 2,
         included: [
-          "All workshop materials",
-          "Professional instructors",
-          "Cultural performance",
-          "Lunch and refreshments",
-          "Bottled water",
+          "Private transportation including fuel",
+          "Dedicated chaperone and access to resident guides",
+          "On-the-go internet access",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
@@ -421,11 +409,9 @@ export type Experience = {
         startingPrice: 235,
         minimumGuests: 2,
         included: [
-          "All workshop materials",
-          "Professional instructors",
-          "Cultural performance",
-          "Lunch and refreshments",
-          "Bottled water",
+         "Private transportation including fuel",
+          "Dedicated chaperone and access to resident guides",
+          "On-the-go internet access",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
@@ -468,11 +454,9 @@ export type Experience = {
         startingPrice: 235,
         minimumGuests: 2,
         included: [
-          "All workshop materials",
-          "Professional instructors",
-          "Cultural performance",
-          "Lunch and refreshments",
-          "Bottled water",
+          "Private transportation including fuel",
+          "Dedicated chaperone and access to resident guides",
+          "On-the-go internet access",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
@@ -535,11 +519,9 @@ export type Experience = {
         startingPrice: 255,
         minimumGuests: 1,
         included: [
-          "Chocolate workshop materials",
-          "Professional chocolatier",
-          "Spa treatment",
-          "Lunch and refreshments",
-          "Luxury Bus",
+          "Private transportation including fuel",
+          "Dedicated chaperone and access to resident guides",
+          "On-the-go internet access",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
@@ -582,11 +564,9 @@ export type Experience = {
         startingPrice: 350,
         minimumGuests: 1,
         included: [
-          "All adventure equipment",
-          "Professional guides",
-          "Luxury Bus",
-          "Boat cruise",
-          "Lunch and refreshments",
+          "Private transportation including fuel",
+          "Dedicated chaperone and access to resident guides",
+          "On-the-go internet access",
           "Beyond Experiences Essentials™ Bag",
         ]
       },

@@ -249,11 +249,11 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
               className="object-cover"
             />
             <div className="absolute inset-0 bg-black/20" />
-            <div className="absolute inset-0 flex items-end justify-start p-6 pb-8 lg:items-center lg:justify-center">
+            <div className="absolute inset-0 flex items-end justify-start lg:p-8 p-6 pb-8 lg:items-center lg:justify-center">
               <div className="text-left text-white">
                 <p className="text-sm font-sans uppercase tracking-wider mb-2 opacity-90">YOU'RE BOOKING THE</p>
-                <h2 className="text-2xl lg:text-3xl xl:text-4xl font-serif font-normal leading-tight" id="booking-modal-title">
-                  {experience.title}
+                <h2 className="text-3xl lg:text-6xl xl:text-6xl font-serif font-normal leading-tight" id="booking-modal-title">
+                  {experience.title} Experience
                 </h2>
               </div>
             </div>
@@ -303,8 +303,8 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
                     your booking
                   </h3>
                   <p className="text-slate-600 font-sans text-sm leading-relaxed">
-                    Complete your reservation and prepare
-                    <br className="hidden sm:block" />
+                    Complete your reservation and prepare 
+                    <br className="sm:block" />
                     for a seamless, indulgent experience.
                   </p>
                 </div>

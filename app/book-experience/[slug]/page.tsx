@@ -1,21 +1,44 @@
-"use client"
+"use client";
 
-import { useParams } from "next/navigation"
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { BookingFormModal } from "@/components/booking-form-modal"
-import { GalleryModal } from "@/components/gallery-modal"
-import { experiences, type Experience } from "@/lib/experiences-data"
-import { Check, Eye, Sparkle, Hammer, PocketKnife, User, BedDouble, Car, Salad, Users, Drum, VenetianMask, Sailboat, Wifi, Utensils, Gift, GlassWater, Bus,  } from "lucide-react"
-import { useState, useEffect, useRef } from "react"
-import { useSearchParams } from "next/navigation"
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
-import { useMobile } from "@/hooks/use-mobile"
-import { TbBinoculars } from "react-icons/tb"
-import { MastercardPaymentBounceModal } from "@/components/mastercard-payment-bounce-modal"
+import { useParams } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import { BookingFormModal } from "@/components/booking-form-modal";
+import { GalleryModal } from "@/components/gallery-modal";
+import { experiences, type Experience } from "@/lib/experiences-data";
+import {
+  Check,
+  Eye,
+  Sparkle,
+  Hammer,
+  PocketKnife,
+  User,
+  BedDouble,
+  Car,
+  Salad,
+  Users,
+  Drum,
+  VenetianMask,
+  Sailboat,
+  Wifi,
+  Utensils,
+  Gift,
+  GlassWater,
+  Bus,
+} from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { useSearchParams } from "next/navigation";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import { useMobile } from "@/hooks/use-mobile";
+import { TbBinoculars } from "react-icons/tb";
+import { MastercardPaymentBounceModal } from "@/components/mastercard-payment-bounce-modal";
 
 const includedIcons: Record<string, any> = {
   "Private transportation including fuel": Car,
@@ -38,313 +61,323 @@ const includedIcons: Record<string, any> = {
   "Boat cruise": Sailboat,
   "Bottled water": GlassWater,
   "Beyond Experiences Essentials™ Bag": Gift,
-}
+};
 
 function getCountryAdjective(country: string): string {
   const countryAdjectives: { [key: string]: string } = {
     // Africa
-    'Ghana': 'Ghanaian',
-    'Kenya': 'Kenyan',
-    'Nigeria': 'Nigerian',
-    'South Africa': 'South African',
-    'Tanzania': 'Tanzanian',
-    'Uganda': 'Ugandan',
-    'Ethiopia': 'Ethiopian',
-    'Rwanda': 'Rwandan',
-    'Botswana': 'Botswanan',
-    'Namibia': 'Namibian',
-    'Zimbabwe': 'Zimbabwean',
-    'Zambia': 'Zambian',
-    'Mozambique': 'Mozambican',
-    'Angola': 'Angolan',
-    'Malawi': 'Malawian',
-    'Lesotho': 'Basotho',
-    'Eswatini': 'Swazi',
-    'Seychelles': 'Seychellois',
-    'Mauritius': 'Mauritian',
-    'Comoros': 'Comorian',
-    'Madagascar': 'Malagasy',
-    'Cape Verde': 'Cape Verdean',
-    'São Tomé and Príncipe': 'São Toméan',
-    'Equatorial Guinea': 'Equatorial Guinean',
-    'Gabon': 'Gabonese',
-    'Cameroon': 'Cameroonian',
-    'Central African Republic': 'Central African',
-    'Chad': 'Chadian',
-    'Sudan': 'Sudanese',
-    'South Sudan': 'South Sudanese',
-    'Eritrea': 'Eritrean',
-    'Djibouti': 'Djiboutian',
-    'Somalia': 'Somali',
-    'Burundi': 'Burundian',
-    'Democratic Republic of the Congo': 'Congolese',
-    'Republic of the Congo': 'Congolese',
-    'Benin': 'Beninese',
-    'Togo': 'Togolese',
-    'Burkina Faso': 'Burkinabe',
-    'Mali': 'Malian',
-    'Niger': 'Nigerien',
-    'Senegal': 'Senegalese',
-    'Gambia': 'Gambian',
-    'Guinea-Bissau': 'Guinea-Bissauan',
-    'Guinea': 'Guinean',
-    'Sierra Leone': 'Sierra Leonean',
-    'Liberia': 'Liberian',
-    'Côte d\'Ivoire': 'Ivorian',
-    'Morocco': 'Moroccan',
-    'Algeria': 'Algerian',
-    'Tunisia': 'Tunisian',
-    'Libya': 'Libyan',
-    'Egypt': 'Egyptian',
-    'Mauritania': 'Mauritanian',
+    Ghana: "Ghanaian",
+    Kenya: "Kenyan",
+    Nigeria: "Nigerian",
+    "South Africa": "South African",
+    Tanzania: "Tanzanian",
+    Uganda: "Ugandan",
+    Ethiopia: "Ethiopian",
+    Rwanda: "Rwandan",
+    Botswana: "Botswanan",
+    Namibia: "Namibian",
+    Zimbabwe: "Zimbabwean",
+    Zambia: "Zambian",
+    Mozambique: "Mozambican",
+    Angola: "Angolan",
+    Malawi: "Malawian",
+    Lesotho: "Basotho",
+    Eswatini: "Swazi",
+    Seychelles: "Seychellois",
+    Mauritius: "Mauritian",
+    Comoros: "Comorian",
+    Madagascar: "Malagasy",
+    "Cape Verde": "Cape Verdean",
+    "São Tomé and Príncipe": "São Toméan",
+    "Equatorial Guinea": "Equatorial Guinean",
+    Gabon: "Gabonese",
+    Cameroon: "Cameroonian",
+    "Central African Republic": "Central African",
+    Chad: "Chadian",
+    Sudan: "Sudanese",
+    "South Sudan": "South Sudanese",
+    Eritrea: "Eritrean",
+    Djibouti: "Djiboutian",
+    Somalia: "Somali",
+    Burundi: "Burundian",
+    "Democratic Republic of the Congo": "Congolese",
+    "Republic of the Congo": "Congolese",
+    Benin: "Beninese",
+    Togo: "Togolese",
+    "Burkina Faso": "Burkinabe",
+    Mali: "Malian",
+    Niger: "Nigerien",
+    Senegal: "Senegalese",
+    Gambia: "Gambian",
+    "Guinea-Bissau": "Guinea-Bissauan",
+    Guinea: "Guinean",
+    "Sierra Leone": "Sierra Leonean",
+    Liberia: "Liberian",
+    "Côte d'Ivoire": "Ivorian",
+    Morocco: "Moroccan",
+    Algeria: "Algerian",
+    Tunisia: "Tunisian",
+    Libya: "Libyan",
+    Egypt: "Egyptian",
+    Mauritania: "Mauritanian",
 
     // Americas
-    'United States': 'American',
-    'Canada': 'Canadian',
-    'Mexico': 'Mexican',
-    'Brazil': 'Brazilian',
-    'Argentina': 'Argentine',
-    'Chile': 'Chilean',
-    'Colombia': 'Colombian',
-    'Peru': 'Peruvian',
-    'Venezuela': 'Venezuelan',
-    'Ecuador': 'Ecuadorian',
-    'Bolivia': 'Bolivian',
-    'Paraguay': 'Paraguayan',
-    'Uruguay': 'Uruguayan',
-    'Guyana': 'Guyanese',
-    'Suriname': 'Surinamese',
-    'French Guiana': 'French Guianese',
-    'Panama': 'Panamanian',
-    'Costa Rica': 'Costa Rican',
-    'Nicaragua': 'Nicaraguan',
-    'Honduras': 'Honduran',
-    'El Salvador': 'Salvadoran',
-    'Guatemala': 'Guatemalan',
-    'Belize': 'Belizean',
-    'Cuba': 'Cuban',
-    'Jamaica': 'Jamaican',
-    'Haiti': 'Haitian',
-    'Dominican Republic': 'Dominican',
-    'Puerto Rico': 'Puerto Rican',
-    'Bahamas': 'Bahamian',
-    'Trinidad and Tobago': 'Trinidadian',
-    'Barbados': 'Barbadian',
-    'Grenada': 'Grenadian',
-    'Saint Lucia': 'Saint Lucian',
-    'Saint Vincent and the Grenadines': 'Vincentian',
-    'Antigua and Barbuda': 'Antiguan',
-    'Dominica': 'Dominican',
-    'Saint Kitts and Nevis': 'Kittitian',
+    "United States": "American",
+    Canada: "Canadian",
+    Mexico: "Mexican",
+    Brazil: "Brazilian",
+    Argentina: "Argentine",
+    Chile: "Chilean",
+    Colombia: "Colombian",
+    Peru: "Peruvian",
+    Venezuela: "Venezuelan",
+    Ecuador: "Ecuadorian",
+    Bolivia: "Bolivian",
+    Paraguay: "Paraguayan",
+    Uruguay: "Uruguayan",
+    Guyana: "Guyanese",
+    Suriname: "Surinamese",
+    "French Guiana": "French Guianese",
+    Panama: "Panamanian",
+    "Costa Rica": "Costa Rican",
+    Nicaragua: "Nicaraguan",
+    Honduras: "Honduran",
+    "El Salvador": "Salvadoran",
+    Guatemala: "Guatemalan",
+    Belize: "Belizean",
+    Cuba: "Cuban",
+    Jamaica: "Jamaican",
+    Haiti: "Haitian",
+    "Dominican Republic": "Dominican",
+    "Puerto Rico": "Puerto Rican",
+    Bahamas: "Bahamian",
+    "Trinidad and Tobago": "Trinidadian",
+    Barbados: "Barbadian",
+    Grenada: "Grenadian",
+    "Saint Lucia": "Saint Lucian",
+    "Saint Vincent and the Grenadines": "Vincentian",
+    "Antigua and Barbuda": "Antiguan",
+    Dominica: "Dominican",
+    "Saint Kitts and Nevis": "Kittitian",
 
     // Europe
-    'United Kingdom': 'British',
-    'France': 'French',
-    'Germany': 'German',
-    'Italy': 'Italian',
-    'Spain': 'Spanish',
-    'Portugal': 'Portuguese',
-    'Netherlands': 'Dutch',
-    'Belgium': 'Belgian',
-    'Switzerland': 'Swiss',
-    'Austria': 'Austrian',
-    'Sweden': 'Swedish',
-    'Norway': 'Norwegian',
-    'Denmark': 'Danish',
-    'Finland': 'Finnish',
-    'Iceland': 'Icelandic',
-    'Ireland': 'Irish',
-    'Poland': 'Polish',
-    'Czech Republic': 'Czech',
-    'Slovakia': 'Slovak',
-    'Hungary': 'Hungarian',
-    'Romania': 'Romanian',
-    'Bulgaria': 'Bulgarian',
-    'Greece': 'Greek',
-    'Croatia': 'Croatian',
-    'Serbia': 'Serbian',
-    'Slovenia': 'Slovenian',
-    'Bosnia and Herzegovina': 'Bosnian',
-    'Montenegro': 'Montenegrin',
-    'Albania': 'Albanian',
-    'North Macedonia': 'Macedonian',
-    'Kosovo': 'Kosovar',
-    'Estonia': 'Estonian',
-    'Latvia': 'Latvian',
-    'Lithuania': 'Lithuanian',
-    'Ukraine': 'Ukrainian',
-    'Belarus': 'Belarusian',
-    'Russia': 'Russian',
-    'Moldova': 'Moldovan',
-    'Georgia': 'Georgian',
-    'Armenia': 'Armenian',
-    'Azerbaijan': 'Azerbaijani',
-    'Turkey': 'Turkish',
-    'Cyprus': 'Cypriot',
-    'Malta': 'Maltese',
-    'Luxembourg': 'Luxembourgish',
-    'Liechtenstein': 'Liechtensteiner',
-    'Monaco': 'Monegasque',
-    'San Marino': 'Sammarinese',
-    'Vatican City': 'Vatican',
-    'Andorra': 'Andorran',
+    "United Kingdom": "British",
+    France: "French",
+    Germany: "German",
+    Italy: "Italian",
+    Spain: "Spanish",
+    Portugal: "Portuguese",
+    Netherlands: "Dutch",
+    Belgium: "Belgian",
+    Switzerland: "Swiss",
+    Austria: "Austrian",
+    Sweden: "Swedish",
+    Norway: "Norwegian",
+    Denmark: "Danish",
+    Finland: "Finnish",
+    Iceland: "Icelandic",
+    Ireland: "Irish",
+    Poland: "Polish",
+    "Czech Republic": "Czech",
+    Slovakia: "Slovak",
+    Hungary: "Hungarian",
+    Romania: "Romanian",
+    Bulgaria: "Bulgarian",
+    Greece: "Greek",
+    Croatia: "Croatian",
+    Serbia: "Serbian",
+    Slovenia: "Slovenian",
+    "Bosnia and Herzegovina": "Bosnian",
+    Montenegro: "Montenegrin",
+    Albania: "Albanian",
+    "North Macedonia": "Macedonian",
+    Kosovo: "Kosovar",
+    Estonia: "Estonian",
+    Latvia: "Latvian",
+    Lithuania: "Lithuanian",
+    Ukraine: "Ukrainian",
+    Belarus: "Belarusian",
+    Russia: "Russian",
+    Moldova: "Moldovan",
+    Georgia: "Georgian",
+    Armenia: "Armenian",
+    Azerbaijan: "Azerbaijani",
+    Turkey: "Turkish",
+    Cyprus: "Cypriot",
+    Malta: "Maltese",
+    Luxembourg: "Luxembourgish",
+    Liechtenstein: "Liechtensteiner",
+    Monaco: "Monegasque",
+    "San Marino": "Sammarinese",
+    "Vatican City": "Vatican",
+    Andorra: "Andorran",
 
     // Asia
-    'China': 'Chinese',
-    'Japan': 'Japanese',
-    'South Korea': 'Korean',
-    'North Korea': 'Korean',
-    'India': 'Indian',
-    'Pakistan': 'Pakistani',
-    'Bangladesh': 'Bangladeshi',
-    'Sri Lanka': 'Sri Lankan',
-    'Nepal': 'Nepali',
-    'Bhutan': 'Bhutanese',
-    'Maldives': 'Maldivian',
-    'Afghanistan': 'Afghan',
-    'Iran': 'Iranian',
-    'Iraq': 'Iraqi',
-    'Syria': 'Syrian',
-    'Lebanon': 'Lebanese',
-    'Jordan': 'Jordanian',
-    'Israel': 'Israeli',
-    'Palestine': 'Palestinian',
-    'Saudi Arabia': 'Saudi',
-    'Yemen': 'Yemeni',
-    'Oman': 'Omani',
-    'United Arab Emirates': 'Emirati',
-    'Qatar': 'Qatari',
-    'Bahrain': 'Bahraini',
-    'Kuwait': 'Kuwaiti',
-    'Vietnam': 'Vietnamese',
-    'Laos': 'Lao',
-    'Cambodia': 'Cambodian',
-    'Thailand': 'Thai',
-    'Myanmar': 'Burmese',
-    'Malaysia': 'Malaysian',
-    'Singapore': 'Singaporean',
-    'Indonesia': 'Indonesian',
-    'Philippines': 'Filipino',
-    'Brunei': 'Bruneian',
-    'East Timor': 'Timorese',
-    'Mongolia': 'Mongolian',
-    'Taiwan': 'Taiwanese',
-    'Hong Kong': 'Hong Konger',
-    'Macau': 'Macanese',
+    China: "Chinese",
+    Japan: "Japanese",
+    "South Korea": "Korean",
+    "North Korea": "Korean",
+    India: "Indian",
+    Pakistan: "Pakistani",
+    Bangladesh: "Bangladeshi",
+    "Sri Lanka": "Sri Lankan",
+    Nepal: "Nepali",
+    Bhutan: "Bhutanese",
+    Maldives: "Maldivian",
+    Afghanistan: "Afghan",
+    Iran: "Iranian",
+    Iraq: "Iraqi",
+    Syria: "Syrian",
+    Lebanon: "Lebanese",
+    Jordan: "Jordanian",
+    Israel: "Israeli",
+    Palestine: "Palestinian",
+    "Saudi Arabia": "Saudi",
+    Yemen: "Yemeni",
+    Oman: "Omani",
+    "United Arab Emirates": "Emirati",
+    Qatar: "Qatari",
+    Bahrain: "Bahraini",
+    Kuwait: "Kuwaiti",
+    Vietnam: "Vietnamese",
+    Laos: "Lao",
+    Cambodia: "Cambodian",
+    Thailand: "Thai",
+    Myanmar: "Burmese",
+    Malaysia: "Malaysian",
+    Singapore: "Singaporean",
+    Indonesia: "Indonesian",
+    Philippines: "Filipino",
+    Brunei: "Bruneian",
+    "East Timor": "Timorese",
+    Mongolia: "Mongolian",
+    Taiwan: "Taiwanese",
+    "Hong Kong": "Hong Konger",
+    Macau: "Macanese",
 
     // Oceania
-    'Australia': 'Australian',
-    'New Zealand': 'New Zealand',
-    'Fiji': 'Fijian',
-    'Papua New Guinea': 'Papua New Guinean',
-    'Solomon Islands': 'Solomon Islander',
-    'Vanuatu': 'Ni-Vanuatu',
-    'Samoa': 'Samoan',
-    'Tonga': 'Tongan',
-    'Tuvalu': 'Tuvaluan',
-    'Kiribati': 'I-Kiribati',
-    'Marshall Islands': 'Marshallese',
-    'Micronesia': 'Micronesian',
-    'Palau': 'Palauan',
-    'Nauru': 'Nauruan',
-    'Cook Islands': 'Cook Islander',
-    'Niue': 'Niuean',
-    'Tokelau': 'Tokelauan',
-    'American Samoa': 'American Samoan',
-    'Guam': 'Guamanian',
-    'Northern Mariana Islands': 'Northern Mariana Islander',
-    'French Polynesia': 'French Polynesian',
-    'New Caledonia': 'New Caledonian',
-    'Wallis and Futuna': 'Wallis and Futunan',
-    'Pitcairn Islands': 'Pitcairn Islander',
-    'Norfolk Island': 'Norfolk Islander',
-    'Christmas Island': 'Christmas Islander',
-    'Cocos (Keeling) Islands': 'Cocos Islander'
-  }
+    Australia: "Australian",
+    "New Zealand": "New Zealand",
+    Fiji: "Fijian",
+    "Papua New Guinea": "Papua New Guinean",
+    "Solomon Islands": "Solomon Islander",
+    Vanuatu: "Ni-Vanuatu",
+    Samoa: "Samoan",
+    Tonga: "Tongan",
+    Tuvalu: "Tuvaluan",
+    Kiribati: "I-Kiribati",
+    "Marshall Islands": "Marshallese",
+    Micronesia: "Micronesian",
+    Palau: "Palauan",
+    Nauru: "Nauruan",
+    "Cook Islands": "Cook Islander",
+    Niue: "Niuean",
+    Tokelau: "Tokelauan",
+    "American Samoa": "American Samoan",
+    Guam: "Guamanian",
+    "Northern Mariana Islands": "Northern Mariana Islander",
+    "French Polynesia": "French Polynesian",
+    "New Caledonia": "New Caledonian",
+    "Wallis and Futuna": "Wallis and Futunan",
+    "Pitcairn Islands": "Pitcairn Islander",
+    "Norfolk Island": "Norfolk Islander",
+    "Christmas Island": "Christmas Islander",
+    "Cocos (Keeling) Islands": "Cocos Islander",
+  };
 
   // If the country is in our mapping, return its adjective
   if (countryAdjectives[country]) {
-    return countryAdjectives[country]
+    return countryAdjectives[country];
   }
 
   // If not found, return the country name with 'n' appended
-  return country + 'n'
+  return country + "n";
 }
 
-function getRelatedExperiences(currentExperience: Experience, allExperiences: Experience[]) {
+function getRelatedExperiences(
+  currentExperience: Experience,
+  allExperiences: Experience[]
+) {
   // Get the country from the current experience's location
-  const currentCountry = currentExperience.defaultContent.location.split(', ').pop() || ''
-  
+  const currentCountry =
+    currentExperience.defaultContent.location.split(", ").pop() || "";
+
   // Filter experiences from the same country, excluding the current experience
-  return allExperiences.filter(exp => 
-    exp.defaultContent.location.split(', ').pop() === currentCountry && 
-    exp.id !== currentExperience.id
-  ).slice(0, 4) // Limit to 4 related experiences
+  return allExperiences
+    .filter(
+      (exp) =>
+        exp.defaultContent.location.split(", ").pop() === currentCountry &&
+        exp.id !== currentExperience.id
+    )
+    .slice(0, 4); // Limit to 4 related experiences
 }
 
 export default function BookExperiencePage() {
-  const { slug } = useParams()
-  const searchParams = useSearchParams()
-  const isMobile = useMobile()
-  const sessionId = searchParams.get('session_id')
-  console.log('URL slug:', slug)
-  
+  const { slug } = useParams();
+  const searchParams = useSearchParams();
+  const isMobile = useMobile();
+  const sessionId = searchParams.get("session_id");
+  console.log("URL slug:", slug);
+
   // Import experiences from the data file
   const experience = experiences.find(
-    exp => exp.id === parseInt(slug as string) || exp.slug === slug
-  )
-  console.log('Available experiences:', experiences.map(e => ({ id: e.id, title: e.defaultContent.title })))
-  console.log('Looking for ID:', parseInt(slug as string))
-  console.log('Found experience:', experience)
+    (exp) => exp.id === parseInt(slug as string) || exp.slug === slug
+  );
+  console.log(
+    "Available experiences:",
+    experiences.map((e) => ({ id: e.id, title: e.defaultContent.title }))
+  );
+  console.log("Looking for ID:", parseInt(slug as string));
+  console.log("Found experience:", experience);
 
-  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false)
-  const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false)
-  const [showConfirmation, setShowConfirmation] = useState(false)
-  const [bookingDetails, setBookingDetails] = useState<any>(null)
-  const [isSticky, setIsSticky] = useState(false)
-  const [isMastercardModalOpen, setIsMastercardModalOpen] = useState(false)
-  const buttonRef = useRef<HTMLDivElement>(null)
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [bookingDetails, setBookingDetails] = useState<any>(null);
+  const [isSticky, setIsSticky] = useState(false);
+  const [isMastercardModalOpen, setIsMastercardModalOpen] = useState(false);
+  const buttonRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (sessionId) {
       // Fetch booking/payment details from backend using sessionId
       fetch(`/api/booking-details?session_id=${sessionId}`)
-        .then(res => res.json())
-        .then(data => {
-          setBookingDetails(data)
-          setIsBookingModalOpen(true)
-          setShowConfirmation(true)
+        .then((res) => res.json())
+        .then((data) => {
+          setBookingDetails(data);
+          setIsBookingModalOpen(true);
+          setShowConfirmation(true);
         })
         .catch(() => {
-          setIsBookingModalOpen(true)
-          setShowConfirmation(false)
-        })
+          setIsBookingModalOpen(true);
+          setShowConfirmation(false);
+        });
     } else if (searchParams.get("cancel")) {
-      const experience = experiences.find(exp => exp.slug === slug)
+      const experience = experiences.find((exp) => exp.slug === slug);
       if (experience && experience.tags.includes("Priceless")) {
-        setIsMastercardModalOpen(true)
+        setIsMastercardModalOpen(true);
       }
     } else if (searchParams.get("mastercard-bounce")) {
-      setIsMastercardModalOpen(true)
+      setIsMastercardModalOpen(true);
     }
-  }, [sessionId, slug, searchParams])
+  }, [sessionId, slug, searchParams]);
 
   useEffect(() => {
     const handleScroll = () => {
       if (buttonRef.current) {
-        const buttonTop = buttonRef.current.getBoundingClientRect().top
-        const shouldBeSticky = buttonTop > window.innerHeight
+        const buttonTop = buttonRef.current.getBoundingClientRect().top;
+        const shouldBeSticky = buttonTop > window.innerHeight;
         if (shouldBeSticky !== isSticky) {
-          setIsSticky(shouldBeSticky)
+          setIsSticky(shouldBeSticky);
         }
       }
-    }
+    };
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [isSticky])
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isSticky]);
 
   if (!experience) {
     return (
@@ -353,16 +386,20 @@ export default function BookExperiencePage() {
         <div className="flex-1 flex items-center justify-center">
           <h1 className="text-2xl font-sans">Experience not found</h1>
           <p className="text-gray-500">ID: {slug}</p>
-          <p className="text-gray-500">Available IDs: {experiences.map(e => e.id).join(', ')}</p>
+          <p className="text-gray-500">
+            Available IDs: {experiences.map((e) => e.id).join(", ")}
+          </p>
         </div>
         <SiteFooter />
       </div>
-    )
+    );
   }
-  const { bookingContent } = experience
+  const { bookingContent } = experience;
 
-  const relatedExperiences = getRelatedExperiences(experience, experiences)
-  const countryName = getCountryAdjective(experience.defaultContent.location.split(', ').pop() || 'Ghanaian')
+  const relatedExperiences = getRelatedExperiences(experience, experiences);
+  const countryName = getCountryAdjective(
+    experience.defaultContent.location.split(", ").pop() || "Ghanaian"
+  );
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -376,7 +413,7 @@ export default function BookExperiencePage() {
             alt={bookingContent.title}
             fill
             className="object-cover"
-            style={{ filter: "blur(0.25px)" }} 
+            style={{ filter: "blur(0.25px)" }}
             priority
           />
           <div className="absolute inset-0 bg-black/40" />
@@ -384,24 +421,33 @@ export default function BookExperiencePage() {
           <div
             className="hidden sm:block absolute inset-0 pointer-events-none"
             style={{
-              background: "linear-gradient(to bottom, rgba(255,255,255,0) 90%, #fff 100%)"
+              background:
+                "linear-gradient(to bottom, rgba(255,255,255,0) 90%, #fff 100%)",
             }}
           />
         </div>
         <div className="relative w-full max-w-5xl mx-auto px-6 text-center z-10">
-          <h1 className="font-serif font-normal text-white mb-2 drop-shadow-md text-[clamp(2rem,6vw,4rem)]"
-           style={{
-            // textShadow: `
-            //   0 4px 24px rgba(0,0,0,0.55), 
-            //   0 2px 8px rgba(0,0,0,0.45), 
-            //   0 1px 0 #fff
-            // `
-          }}>
+          <h1
+            className="font-serif font-normal text-white mb-2 drop-shadow-md text-[clamp(2rem,6vw,4rem)]"
+            style={
+              {
+                // textShadow: `
+                //   0 4px 24px rgba(0,0,0,0.55),
+                //   0 2px 8px rgba(0,0,0,0.45),
+                //   0 1px 0 #fff
+                // `
+              }
+            }
+          >
             {bookingContent.title}
           </h1>
           {experience.tags.includes("Priceless") && (
             <div className="inline-flex uppercase items-center gap-2 bg-black/30 backdrop-blur-sm text-white px-4 py-2 rounded-full font-sans text-xs mt-1 border border-white/20">
-              <img src="/images/mastercard.svg" alt="Mastercard" className="w-5 h-5" />
+              <img
+                src="/images/mastercard.svg"
+                alt="Mastercard"
+                className="w-5 h-5"
+              />
               <span className="tracking-widest">Mastercard holders only</span>
             </div>
           )}
@@ -455,7 +501,9 @@ export default function BookExperiencePage() {
                 {isMobile && (
                   <div className="relative h-60 sm:h-72 my-6 rounded-lg overflow-hidden">
                     <Image
-                      src={bookingContent.galleryImages[0] || "/placeholder.svg"}
+                      src={
+                        bookingContent.galleryImages[0] || "/placeholder.svg"
+                      }
                       alt={bookingContent.title}
                       fill
                       className="object-cover"
@@ -474,13 +522,15 @@ export default function BookExperiencePage() {
 
               {/* Highlights */}
               <div>
-              <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800 border-b border-black pb-2">
+                <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800 border-b border-black pb-2">
                   Highlights
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4">
-
                   {bookingContent.highlights.map((highlight, index) => (
-                    <div key={index} className="flex items-start gap-3 border-b border-black pb-3 sm:pb-4">
+                    <div
+                      key={index}
+                      className="flex items-start gap-3 border-b border-black pb-3 sm:pb-4"
+                    >
                       <Sparkle className="w-4 h-4 text-slate-600 mt-1 flex-shrink-0" />
                       <p className="text-slate-700 font-sans leading-relaxed text-sm sm:text-base">
                         {highlight}
@@ -491,26 +541,41 @@ export default function BookExperiencePage() {
               </div>
 
               {/* Pricing and Booking */}
-              <div className="border-t border-gray-200 pt-8 md:pt-12 px-6">
+              <div className="pt-4 md:pt-4">
                 {/* Mobile Layout */}
                 <div className="flex sm:hidden items-center justify-between gap-4">
                   <div>
-                    <h3 className="text-xs uppercase tracking-widest text-slate-600">Starting Price</h3>
-                    <p className="text-xs uppercase tracking-widest text-slate-600 mt-1">Minimum of {bookingContent.minimumGuests} {bookingContent.minimumGuests === 1 ? 'person' : 'people'}</p>
+                    <h3 className="text-xs uppercase tracking-widest font-sans text-slate-600">
+                      Starting Price
+                    </h3>
+                    <p className="text-xs uppercase tracking-widest text-slate-600 mt-1">
+                      Minimum of {bookingContent.minimumGuests}{" "}
+                      {bookingContent.minimumGuests === 1 ? "person" : "people"}
+                    </p>
                   </div>
                   <div className="relative">
-                    <span className="text-4xl font-sans font-normal text-slate-800">${bookingContent.startingPrice}</span>
+                    <span className="text-3xl font-sans font-normal text-slate-800">
+                      ${bookingContent.startingPrice}
+                    </span>
                     {/* <span className="absolute -top-1 right-[-1.2rem] text-sm text-slate-600 font-sans">.00</span> */}
                   </div>
                 </div>
-                <div ref={buttonRef} className="sm:hidden mt-6 flex flex-col gap-3 -mx-6">
+                <div
+                  ref={buttonRef}
+                  className="sm:hidden mt-6 flex flex-col gap-3 px-0.5"
+                >
                   <Button
-                    className="w-full bg-[#F7E7CE] hover:bg-[#EAD7BC] text-slate-900 font-sans px-6 py-8 rounded-sm"
+                    className="w-full bg-[#F7E7CE] hover:bg-[#EAD7BC] text-slate-900 font-sans px-6 py-6 rounded-sm"
                     onClick={() => setIsBookingModalOpen(true)}
                   >
                     Book this experience
                   </Button>
-                  <Link href={`/customize-experience?experience=${encodeURIComponent(bookingContent.title)}`} className="w-full">
+                  <Link
+                    href={`/customize-experience?experience=${encodeURIComponent(
+                      bookingContent.title
+                    )}`}
+                    className="w-full"
+                  >
                     <Button
                       variant="outline"
                       className="w-full border-slate-900 text-slate-900 bg-white font-sans px-6 py-4 rounded-sm"
@@ -519,34 +584,43 @@ export default function BookExperiencePage() {
                     </Button>
                   </Link>
                 </div>
-                <div className="hidden sm:flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6">
+                <div className="hidden sm:flex items-center justify-between gap-6">
                   <div>
-                    <h3 className="text-lg font-sans uppercase tracking-[0.2em] text-slate-600 mb-3 md:mb-2">
+                    <h3 className="text-lg sm:text-sm font-sans uppercase tracking-[0.2em] text-slate-600">
                       Starting Price
                     </h3>
-                    <div className="relative">
-                      <span className="mt-2 text-4xl sm:text-5xl font-sans font-normal text-slate-800">
-                        ${bookingContent.startingPrice}
-                      </span>
-                      {/* <span className="absolute -top-1 right-[-2rem] text-xl text-slate-600 font-sans">.00</span> */}
-                    </div>
-                    <p className="text-xs uppercase tracking-widest text-slate-600 mt-1">Minimum of {bookingContent.minimumGuests} {bookingContent.minimumGuests === 1 ? 'person' : 'people'}</p>
+                    <p className="text-xs sm:text-xs uppercase tracking-widest text-slate-600 mt-1">
+                      Minimum of {bookingContent.minimumGuests}{" "}
+                      {bookingContent.minimumGuests === 1 ? "person" : "people"}
+                    </p>
                   </div>
-                  <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-3">
-                    <Button
-                      className="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-sans px-6 sm:px-8 py-5 sm:py-3 rounded-sm"
-                      onClick={() => setIsBookingModalOpen(true)}
-                    >
-                      Book this experience
-                    </Button>
-                    <Link href={`/customize-experience?experience=${encodeURIComponent(bookingContent.title)}`} className="w-full sm:w-auto">
+
+                  {/* Price and Buttons */}
+                  <div className="flex items-center gap-8">
+                    <span className="text-3xl sm:text-4xl font-sans font-normal text-slate-800">
+                      ${bookingContent.startingPrice}
+                    </span>
+                    <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-3">
                       <Button
-                        variant="outline"
-                        className="w-full border-slate-900 text-slate-900 bg-white  font-sans px-6 sm:px-8 py-5 sm:py-3 rounded-sm"
+                        className="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-sans px-6 sm:px-8 py-5 sm:py-3 rounded-sm"
+                        onClick={() => setIsBookingModalOpen(true)}
                       >
-                        Customize my experience
+                        Book this experience
                       </Button>
-                    </Link>
+                      <Link
+                        href={`/customize-experience?experience=${encodeURIComponent(
+                          bookingContent.title
+                        )}`}
+                        className="w-full sm:w-auto"
+                      >
+                        <Button
+                          variant="outline"
+                          className="w-full border-slate-900 text-slate-900 bg-white font-sans px-6 sm:px-8 py-5 sm:py-3 rounded-sm"
+                        >
+                          Customize my experience
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -558,15 +632,24 @@ export default function BookExperiencePage() {
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4">
                   {bookingContent.included.map((item, index) => {
-                    const Icon = includedIcons[item] || Check
+                    const Icon = includedIcons[item] || Check;
                     return (
-                      <div key={index} className={`flex items-center gap-3 border-b border-black pb-3 ${index === 0 ? 'border-t border-black pt-3' : ''} ${index === 1 ? 'sm:border-t sm:border-black sm:pt-3' : ''}`}>
+                      <div
+                        key={index}
+                        className={`flex items-center gap-3 border-b border-black pb-3 ${
+                          index === 0 ? "border-t border-black pt-3" : ""
+                        } ${
+                          index === 1
+                            ? "sm:border-t sm:border-black sm:pt-3"
+                            : ""
+                        }`}
+                      >
                         <Icon className="w-4 h-4 text-slate-600 flex-shrink-0" />
                         <span className="text-slate-700 font-sans text-sm sm:text-base">
                           {item}
                         </span>
                       </div>
-                    )
+                    );
                   })}
                 </div>
               </div>
@@ -578,7 +661,9 @@ export default function BookExperiencePage() {
                 <div className="relative">
                   <div className="relative h-96 rounded-lg overflow-hidden mb-4">
                     <Image
-                      src={bookingContent.galleryImages[0] || "/placeholder.svg"}
+                      src={
+                        bookingContent.galleryImages[0] || "/placeholder.svg"
+                      }
                       alt="Experience gallery"
                       fill
                       className="object-cover"
@@ -611,15 +696,17 @@ export default function BookExperiencePage() {
             </div>
           </div>
 
-           {/* Mobile Carousel */}
+          {/* Mobile Carousel */}
           <div className="sm:hidden">
-            <Carousel opts={{ align: 'start', loop: false }} className="pl-2">
+            <Carousel opts={{ align: "start", loop: false }} className="pl-2">
               <CarouselContent className="-ml-4">
                 {relatedExperiences.map((experience) => (
                   <CarouselItem key={experience.id} className="pl-4 basis-5/6">
                     <div className="relative rounded-lg overflow-hidden group h-[400px] sm:h-[470px]">
                       <Image
-                        src={experience.defaultContent.image || '/placeholder.svg'}
+                        src={
+                          experience.defaultContent.image || "/placeholder.svg"
+                        }
                         alt={experience.defaultContent.title}
                         fill
                         className="object-cover"
@@ -627,14 +714,17 @@ export default function BookExperiencePage() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                       <div className="absolute bottom-0 left-0 right-0 p-6">
                         {/* <span className="text-white/80 uppercase text-sm tracking-wider font-sans">{experience.defaultContent.location}</span> */}
-                        <h3 className="text-2xl font-serif font-normal text-white mt-2 mb-3">{experience.defaultContent.title}</h3>
+                        <h3 className="text-2xl font-serif font-normal text-white mt-2 mb-3">
+                          {experience.defaultContent.title}
+                        </h3>
                         <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
                           {experience.defaultContent.shortDescription}
                         </p>
                         <Link href={`/book-experience/${experience.slug}`}>
                           <Button
                             variant="glass"
-                            className="font-sans px-12 py-7 rounded-3xl w-full">
+                            className="font-sans px-12 py-7 rounded-3xl w-full"
+                          >
                             Book Experience
                           </Button>
                         </Link>
@@ -646,9 +736,12 @@ export default function BookExperiencePage() {
                   <Link href="/experiences">
                     <div className="relative rounded-lg overflow-hidden group h-[400px] sm:h-[470px] bg-gray-900 flex flex-col justify-center items-center text-center p-6">
                       <TbBinoculars className="text-white mb-4" size={40} />
-                      <h3 className="text-3xl font-serif font-normal text-white mt-2 mb-3">Explore Experiences</h3>
+                      <h3 className="text-3xl font-serif font-normal text-white mt-2 mb-3">
+                        Explore Experiences
+                      </h3>
                       <p className="text-white/90 mb-4 max-w-md font-sans leading-relaxed">
-                        Browse our catalog of experiences curated with you in mind.
+                        Browse our catalog of experiences curated with you in
+                        mind.
                       </p>
                     </div>
                   </Link>
@@ -676,7 +769,11 @@ export default function BookExperiencePage() {
                       {experience.defaultContent.shortDescription}
                     </p>
                     <Link href={`/book-experience/${experience.slug}`}>
-                      <Button size="sm" variant="glass" className="font-sans px-8 py-3 rounded-full">
+                      <Button
+                        size="sm"
+                        variant="glass"
+                        className="font-sans px-8 py-3 rounded-full"
+                      >
                         Book Experience
                       </Button>
                     </Link>
@@ -730,5 +827,5 @@ export default function BookExperiencePage() {
 
       <SiteFooter />
     </div>
-  )
+  );
 }

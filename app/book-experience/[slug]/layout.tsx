@@ -3,11 +3,14 @@ import { experiences } from "@/lib/experiences-data"
 
 type LayoutProps = {
   children: React.ReactNode
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
-export async function generateMetadata({ params }: LayoutProps): Promise<Metadata> {
-  const { slug } = params
+export async function generateMetadata({
+  params,
+}: LayoutProps): Promise<Metadata> {
+  const { slug } = await params // ✅ await
+
   const experience = experiences.find(
     (e) => e.slug === slug || e.id.toString() === slug
   )
@@ -49,14 +52,22 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
   }
 }
 
-export default function ExperienceLayout({ children, params }: LayoutProps) {
+export default async function ExperienceLayout({
+  children,
+  params,
+}: LayoutProps) {
+  const { slug } = await params // ✅ await
+
   const experience = experiences.find(
-    (e) => e.slug === params.slug || e.id.toString() === params.slug
+    (e) => e.slug === slug || e.id.toString() === slug
   )
 
   if (!experience) return children
 
-  const pageUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://experiencesbybeyond.com") + `/book-experience/${experience.slug}`
+  const pageUrl =
+    (process.env.NEXT_PUBLIC_SITE_URL || "https://experiencesbybeyond.com") +
+    `/book-experience/${experience.slug}`
+
   const images = [
     experience.bookingContent.heroImage,
     ...experience.bookingContent.galleryImages,
@@ -94,5 +105,3 @@ export default function ExperienceLayout({ children, params }: LayoutProps) {
     </>
   )
 }
-
-

@@ -131,7 +131,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <p className="text-gray-700 mt-6 md:mt-0 mb-6 font-sans leading-tight">
+              <p className="text-gray-700 mt-6 md:mt-0 mb-6 font-sans leading-tight md:max-w-[80%]">
                 Our journeys aren’t just about where you go, but how deep your experience is. Every moment is crafted to weave culture, adventure, and memory into experiences that linger long after the trip ends.
               </p>
               
@@ -139,7 +139,7 @@ export default function Home() {
 
             {/* Image Column (Right on Desktop, Hidden on Mobile) */}
             <div className="order-1 md:order-2 grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 hidden md:grid">
-              <div className="relative h-80 md:h-96 md:w-[130%] md:-ml-[15%]">
+              <div className="relative h-80 md:h-96 md:w-[130%] md:-ml-[45%]">
                 <Image
                   src="/images/Ce2.jpg?height=320&width=240&text=Tropical+Resort"
                   alt="Tropical beach resort"
@@ -147,7 +147,7 @@ export default function Home() {
                   className="object-cover rounded-lg"
                 />
               </div>
-              <Link href="/experiences" className="relative h-80 md:h-96 md:w-full w-full block group">
+              <Link href="/experiences" className="relative h-80 md:h-96 md:w-[130%] md:-ml-[30%] w-full block group">
                 <Image
                   src="/images/hotair.jpg?height=320&width=240&text=Hot+Air+Balloon"
                   alt="Hot air balloon over landscape"

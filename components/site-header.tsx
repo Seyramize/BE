@@ -148,7 +148,7 @@ export function SiteHeader() {
             <Link
               href="https://www.beyondaccra.com/blog"
               className={`relative text-sm transition-all duration-300 font-sans group px-3 py-1.5 ${
-                pathname === "/journal" ? "text-blue-950 font-medium" : "text-white hover:text-blue-900"
+                pathname === "https://www.beyondaccra.com/blog" ? "text-blue-950 font-medium" : "text-white hover:text-blue-900"
               }`}
             >
               <span className="relative z-10">{`The Journal`}</span>
@@ -191,7 +191,7 @@ export function SiteHeader() {
               <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-amber-400 transition">Home</Link>
               <Link href="/experiences" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-amber-400 transition">Experiences</Link>
               <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-amber-400 transition">About Us</Link>
-              <Link href="/journal" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-amber-400 transition">The Journal</Link>
+              <Link href="https://www.beyondaccra.com/blog" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-amber-400 transition">The Journal</Link>
             </nav>
 
             {/* Social Links */}
