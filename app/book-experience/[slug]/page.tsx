@@ -545,16 +545,16 @@ export default function BookExperiencePage() {
                 {/* Mobile Layout */}
                 <div className="flex sm:hidden items-center justify-between gap-4">
                   <div>
-                    <h3 className="text-xs uppercase tracking-widest font-sans text-slate-600">
+                    <h3 className="text-xs uppercase tracking-widest font-sans text-black">
                       Starting Price
                     </h3>
-                    <p className="text-xs uppercase tracking-widest text-slate-600 mt-1">
+                    <p className="text-xs uppercase tracking-widest text-black mt-1">
                       Minimum of {bookingContent.minimumGuests}{" "}
                       {bookingContent.minimumGuests === 1 ? "person" : "people"}
                     </p>
                   </div>
                   <div className="relative">
-                    <span className="text-3xl font-sans font-normal text-slate-800">
+                    <span className="text-3xl font-sans font-normal text-black">
                       ${bookingContent.startingPrice}
                     </span>
                     {/* <span className="absolute -top-1 right-[-1.2rem] text-sm text-slate-600 font-sans">.00</span> */}
