@@ -870,7 +870,7 @@ export default function BookExperiencePage() {
       {isMobile && isSticky && (
         <div className="sm:hidden fixed bottom-4 left-0 right-0 px-4 z-20">
           <Button
-            className="w-full bg-[#F7E7CE] hover:bg-[#EAD7BC] text-slate-900 font-sans px-6 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"
+            className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"
             onClick={() => setIsBookingModalOpen(true)}
           >
             Book this experience
