@@ -51,7 +51,7 @@ const includedIcons: Record<string, any> = {
   "Private transportation including fuel": Car,
   "Dedicated chaperone and access to resident guides": Users,
   "Professional massage at a waterfall": BedDouble,
-  "On-the-go internet access": Wifi,
+  "Complimentary bites and drinks": Utensils,
   "Lunch and dinner": Utensils,
   "Lunch and refreshments": Salad,
   "Lunch at a local restaurant": Utensils,

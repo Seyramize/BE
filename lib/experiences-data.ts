@@ -1,5 +1,3 @@
-// lib/experiences-data.ts
-
 export type Experience = {
     id: number
     slug: string
@@ -85,7 +83,7 @@ export type Experience = {
         included: [
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
-          "On-the-go internet access",
+          "Complimentary bites and drinks",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
@@ -149,7 +147,7 @@ export type Experience = {
         included: [
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
-          "On-the-go internet access",
+          "Complimentary bites and drinks",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
@@ -199,7 +197,7 @@ export type Experience = {
         included: [
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
-          "On-the-go internet access",
+          "Complimentary bites and drinks",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
@@ -256,7 +254,7 @@ export type Experience = {
         included: [
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
-          "On-the-go internet access",
+          "Complimentary bites and drinks",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
@@ -305,7 +303,7 @@ export type Experience = {
         included: [
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
-          "On-the-go internet access",
+          "Complimentary bites and drinks",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
@@ -351,7 +349,7 @@ export type Experience = {
         included: [
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
-          "On-the-go internet access",
+          "Complimentary bites and drinks",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
@@ -411,7 +409,7 @@ export type Experience = {
         included: [
          "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
-          "On-the-go internet access",
+          "Complimentary bites and drinks",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
@@ -456,7 +454,7 @@ export type Experience = {
         included: [
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
-          "On-the-go internet access",
+          "Complimentary bites and drinks",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
@@ -521,7 +519,7 @@ export type Experience = {
         included: [
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
-          "On-the-go internet access",
+          "Complimentary bites and drinks",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
@@ -566,7 +564,7 @@ export type Experience = {
         included: [
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
-          "On-the-go internet access",
+          "Complimentary bites and drinks",
           "Beyond Experiences Essentials™ Bag",
         ]
       },
