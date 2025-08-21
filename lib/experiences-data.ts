@@ -106,7 +106,7 @@ export type Experience = {
         image: "/placeholder.svg?height=500&width=400&text=Cape+Coast+Castle+Historical",
       },
       bookingContent: {
-        title: "Journey Through Time: Cape Coast Castle",
+        title: "Cape Coast Castle",
         subtitle: "Embark on a profound journey through Ghana's rich history, from the sacred grounds of Assin Manso to the imposing castles of Cape Coast and Elmina. Experience the breathtaking canopy walk at Kakum National Park, where history and nature intertwine in a truly unforgettable way.",
         duration: "1 DAY",
         destinations: "3 DESTINATIONS",
@@ -165,7 +165,7 @@ export type Experience = {
         location: "Central Region, Ghana"
       },
       expandedContent: {
-        title: "Coastlines & Memory: The Cape Coast Experience",
+        title: "Cape Coast Castle by Candlelight",
         fullDescription: "A powerful journey through Ghana’s past — from Assin Manso and the castles of Cape Coast and Elmina, to the rainforest canopy walk at Kakum. History, reflection, and breathtaking views.",
         image: "/placeholder.svg?height=500&width=400&text=Cape+Coast+Castle+Historical",
       },
@@ -215,7 +215,7 @@ export type Experience = {
         location: "Greater Accra, Ghana",
       },
       expandedContent: {
-        title: "City Pulse: Accra in a Day",
+        title: "Accra City Tour",
         fullDescription: "Explore Ghana’s capital through its history, culture, and daily life — from monuments and markets to museums and makers. A full immersion into the rhythm of the city.",
         image: "/placeholder.svg?height=500&width=400&text=Accra+Skyline+Modern",
       },
@@ -272,7 +272,7 @@ export type Experience = {
         location: "Greater Accra, Ghana",
       },
       expandedContent: {
-        title: "City Pulse: Accra in a Day",
+        title: "Kente and Rhythm",
         fullDescription: "Explore Ghana’s capital through its history, culture, and daily life — from monuments and markets to museums and makers. A full immersion into the rhythm of the city.",
         image: "/placeholder.svg?height=500&width=400&text=Accra+Skyline+Modern",
       },
@@ -321,7 +321,7 @@ export type Experience = {
         location: "Greater Accra, Ghana",
       },
       expandedContent: {
-        title: "Woven Stories: Kente & Rhythm Workshop",
+        title: "Dine on a Mat",
         fullDescription: "Spend the day learning from Ghanaian artisans and performers — weave your own kente, then feel the beat in a high-energy drumming and traditional dance session.",
         image: "/placeholder.svg?height=500&width=400&text=Western+Ghana+Canopy+Beach",
       },
@@ -367,7 +367,7 @@ export type Experience = {
         location: "Greater Accra, Ghana",
       },
       expandedContent: {
-        title: "Woven Stories: Kente & Rhythm Workshop",
+        title: "A Date with Fashion",
         fullDescription: "Spend the day learning from Ghanaian artisans and performers — weave your own kente, then feel the beat in a high-energy drumming and traditional dance session.",
         image: "/placeholder.svg?height=500&width=400&text=Western+Ghana+Canopy+Beach",
       },
@@ -427,7 +427,7 @@ export type Experience = {
         location: "Greater Accra, Ghana",
       },
       expandedContent: {
-        title: "Woven Stories: Kente & Rhythm Workshop",
+        title: "Afrofuture",
         fullDescription: "Spend the day learning from Ghanaian artisans and performers — weave your own kente, then feel the beat in a high-energy drumming and traditional dance session.",
         image: "/placeholder.svg?height=500&width=400&text=Western+Ghana+Canopy+Beach",
       },
@@ -472,7 +472,7 @@ export type Experience = {
         location: "Greater Accra, Ghana",
       },
       expandedContent: {
-        title: "Melt & Unwind: Chocolate + Spa with Mansa Gold",
+        title: "Gardens, Trails, and Cacao",
         fullDescription: "Craft your own artisanal chocolate with Ghana’s finest cocoa, then relax into a massage at Resense Spa. A luxurious blend of indulgence and calm.",
         image: "/placeholder.svg?height=500&width=400&text=Ashanti+Palace+Golden",
       },
@@ -537,7 +537,7 @@ export type Experience = {
         location: "Volta Region, Ghana",
       },
       expandedContent: {
-        title: "Water & Wind: The Trident Experience",
+        title: "Abseiling in Akosombo",
         fullDescription: "Adventure and calm meet on Volta Lake. Abseil from rocky cliffs, kayak through quiet waters, and end the day with a golden-hour boat cruise under the open sky.",
         image: "/placeholder.svg?height=500&width=400&text=Lake+Volta+Dam+Sunset",
       },
