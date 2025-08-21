@@ -625,15 +625,15 @@ export default function BookExperiencePage() {
                 </div>
                 <div className="hidden sm:flex items-center justify-between gap-6">
                   <div>
-                    <h3 className="text-lg sm:text-sm font-sans uppercase tracking-widest text-slate-600">
+                    <h3 className="text-lg sm:text-xs font-sans uppercase tracking-widest text-slate-600">
                       No. of Pax
                     </h3>
-                    <div className="flex items-center gap-2 mt-1">
+                    <div className="flex items-center gap-2 mt-0.5">
                       <Select
                         onValueChange={handleGuestsChange}
                         defaultValue="1"
                       >
-                        <SelectTrigger className="w-24 h-6 rounded-lg bg-slate-900 text-white border-slate-900">
+                        <SelectTrigger className="w-24 h-7 rounded-lg bg-slate-900 text-white border-slate-900">
                           <SelectValue placeholder="1" />
                         </SelectTrigger>
                         <SelectContent>
@@ -654,7 +654,7 @@ export default function BookExperiencePage() {
                     </span>
                     <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-3">
                       <Button
-                        className="w-full sm:w-auto bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-5 sm:py-3 rounded-sm"
+                        className="w-full sm:w-auto bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
                         onClick={() => setIsBookingModalOpen(true)}
                       >
                         Book this experience
