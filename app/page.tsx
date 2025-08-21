@@ -462,7 +462,7 @@ export default function Home() {
                 <p className="text-gray-700 mb-6 font-sans leading-tight">
                   Whether it’s a custom itinerary, a quick question, or something unique you’d like to add, we’re here to help.
                 </p>
-                <div className="relative h-[300px] lg:h-[422px] rounded-lg overflow-hidden">
+                <div className="relative h-[300px] lg:h-[449px] rounded-lg overflow-hidden">
                   <Image
                     src="/images/home/enquiry.jpg?height=500&width=800&text=Wooden+Boat+Lake"
                     alt="Wooden boat on a crystal clear lake"

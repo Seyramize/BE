@@ -39,6 +39,13 @@ import {
 import { useMobile } from "@/hooks/use-mobile";
 import { TbBinoculars } from "react-icons/tb";
 import { MastercardPaymentBounceModal } from "@/components/mastercard-payment-bounce-modal";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const includedIcons: Record<string, any> = {
   "Private transportation including fuel": Car,
@@ -396,6 +403,26 @@ export default function BookExperiencePage() {
   }
   const { bookingContent } = experience;
 
+  const [numberOfGuests, setNumberOfGuests] = useState(1);
+  const [totalPrice, setTotalPrice] = useState(bookingContent.startingPrice);
+
+  const calculateDiscount = (guestCount: number) => {
+    if (guestCount >= 6) return 0.15; // 15% off for 6 or more
+    if (guestCount >= 4) return 0.10; // 10% off for 4-5 guests
+    if (guestCount >= 2) return 0.05; // 5% off for 2-3 guests
+    return 0; // no discount for 1 guest
+  };
+
+  const handleGuestsChange = (value: string) => {
+    const guests = parseInt(value, 10);
+    const discount = calculateDiscount(guests);
+    const pricePerGuest = bookingContent.startingPrice * (1 - discount);
+    const newTotalPrice = pricePerGuest * guests;
+
+    setNumberOfGuests(guests);
+    setTotalPrice(parseFloat(newTotalPrice.toFixed(2)));
+  };
+
   const relatedExperiences = getRelatedExperiences(experience, experiences);
   const countryName = getCountryAdjective(
     experience.defaultContent.location.split(", ").pop() || "Ghanaian"
@@ -541,23 +568,35 @@ export default function BookExperiencePage() {
               </div>
 
               {/* Pricing and Booking */}
-              <div className="pt-4 md:pt-4">
+              <div className="pt-2 md:pt-4">
                 {/* Mobile Layout */}
                 <div className="flex sm:hidden items-center justify-between gap-4">
                   <div>
                     <h3 className="text-xs uppercase tracking-widest font-sans text-black">
-                      Starting Price
+                      No. of Pax
                     </h3>
-                    <p className="text-xs uppercase tracking-widest text-black mt-1">
-                      Minimum of {bookingContent.minimumGuests}{" "}
-                      {bookingContent.minimumGuests === 1 ? "person" : "people"}
-                    </p>
+                    <div className="flex items-center gap-2 mt-1">
+                      <Select
+                        onValueChange={handleGuestsChange}
+                        defaultValue="1"
+                      >
+                        <SelectTrigger className="w-20 h-8 rounded-lg bg-slate-900 text-white border-slate-900 px-2">
+                          <SelectValue placeholder="1" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {[...Array(6)].map((_, i) => (
+                            <SelectItem key={i + 1} value={`${i + 1}`}>
+                              {i + 1}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
                   <div className="relative">
                     <span className="text-3xl font-sans font-normal text-black">
-                      ${bookingContent.startingPrice}
+                      ${totalPrice}
                     </span>
-                    {/* <span className="absolute -top-1 right-[-1.2rem] text-sm text-slate-600 font-sans">.00</span> */}
                   </div>
                 </div>
                 <div
@@ -565,7 +604,7 @@ export default function BookExperiencePage() {
                   className="sm:hidden mt-6 flex flex-col gap-3 px-0.5"
                 >
                   <Button
-                    className="w-full bg-[#F7E7CE] hover:bg-[#EAD7BC] text-slate-900 font-sans px-6 py-6 rounded-sm"
+                    className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
                     onClick={() => setIsBookingModalOpen(true)}
                   >
                     Book this experience
@@ -578,31 +617,44 @@ export default function BookExperiencePage() {
                   >
                     <Button
                       variant="outline"
-                      className="w-full border-slate-900 text-slate-900 bg-white font-sans px-6 py-4 rounded-sm"
+                      className="w-full border-slate-900 text-slate-900 bg-white font-sans px-6 py-4 rounded-lg"
                     >
-                      Customize my experience
+                      More than 6 guests?
                     </Button>
                   </Link>
                 </div>
                 <div className="hidden sm:flex items-center justify-between gap-6">
                   <div>
-                    <h3 className="text-lg sm:text-sm font-sans uppercase tracking-[0.2em] text-slate-600">
-                      Starting Price
+                    <h3 className="text-lg sm:text-sm font-sans uppercase tracking-widest text-slate-600">
+                      No. of Pax
                     </h3>
-                    <p className="text-xs sm:text-xs uppercase tracking-widest text-slate-600 mt-1">
-                      Minimum of {bookingContent.minimumGuests}{" "}
-                      {bookingContent.minimumGuests === 1 ? "person" : "people"}
-                    </p>
+                    <div className="flex items-center gap-2 mt-1">
+                      <Select
+                        onValueChange={handleGuestsChange}
+                        defaultValue="1"
+                      >
+                        <SelectTrigger className="w-24 h-6 rounded-lg bg-slate-900 text-white border-slate-900">
+                          <SelectValue placeholder="1" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {[...Array(6)].map((_, i) => (
+                            <SelectItem key={i + 1} value={`${i + 1}`}>
+                              {i + 1}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
 
                   {/* Price and Buttons */}
                   <div className="flex items-center gap-8">
                     <span className="text-3xl sm:text-4xl font-sans font-normal text-slate-800">
-                      ${bookingContent.startingPrice}
+                      ${totalPrice}
                     </span>
                     <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-3">
                       <Button
-                        className="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-sans px-6 sm:px-8 py-5 sm:py-3 rounded-sm"
+                        className="w-full sm:w-auto bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-5 sm:py-3 rounded-sm"
                         onClick={() => setIsBookingModalOpen(true)}
                       >
                         Book this experience
@@ -617,7 +669,7 @@ export default function BookExperiencePage() {
                           variant="outline"
                           className="w-full border-slate-900 text-slate-900 bg-white font-sans px-6 sm:px-8 py-5 sm:py-3 rounded-sm"
                         >
-                          Customize my experience
+                          More than 6 guests?
                         </Button>
                       </Link>
                     </div>
@@ -691,9 +743,9 @@ export default function BookExperiencePage() {
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-normal text-slate-800">
               More {countryName} adventures
             </h2>
-            <div className="w-6 h-6 rounded-full border border-slate-400 flex items-center justify-center">
-              <span className="text-slate-600 text-sm">?</span>
-            </div>
+            {/* <div className="w-6 h-6 rounded-full border border-slate-400 flex items-center justify-center">
+              <span className="text-slate-600 text-sm">∨</span>
+            </div> */}
           </div>
 
           {/* Mobile Carousel */}
@@ -792,10 +844,11 @@ export default function BookExperiencePage() {
         experience={{
           id: experience.id.toString(),
           title: bookingContent.title,
-          startingPrice: bookingContent.startingPrice,
+          startingPrice: totalPrice,
           minimumGuests: bookingContent.minimumGuests,
           heroImage: bookingContent.heroImage,
           slug: experience.slug, // <-- Add this line
+          numberOfGuests: numberOfGuests,
         }}
         showConfirmation={showConfirmation}
         bookingDetails={bookingDetails}

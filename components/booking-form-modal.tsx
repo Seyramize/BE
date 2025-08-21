@@ -19,6 +19,7 @@ interface ExperienceData {
   heroImage: string
   id: string
   slug: string // <-- Add this line
+  numberOfGuests?: number
 }
 
 interface BookingFormModalProps {
@@ -60,6 +61,16 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
     customGuestCount: 0,
   })
 
+  useEffect(() => {
+    if (experience.numberOfGuests) {
+      const guestLabel = guestOptions.find(opt => opt.value === experience.numberOfGuests)?.label;
+      if (guestLabel) {
+        handleGuestSelection(guestLabel);
+      }
+    }
+  }, [experience.numberOfGuests]);
+
+
   // Close modal with ESC key
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
@@ -96,23 +107,13 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
     { label: "Six", value: 6 }
   ]
 
-  // Calculate discount based on number of guests
-  const calculateDiscount = (guestCount: number) => {
-    if (guestCount >= 6) return 0.15 // 15% off for 6 or more
-    if (guestCount >= 4) return 0.10 // 10% off for 4-5 guests
-    if (guestCount >= 2) return 0.05 // 5% off for 2-3 guests
-    return 0 // no discount for 1 guest
-  }
-
   const getGuestCount = (guestOption: string): number => {
     const option = guestOptions.find(opt => opt.label === guestOption)
     return option ? option.value : 0
   }
 
   const selectedGuestCount = formData.guests.length > 0 ? getGuestCount(formData.guests[0]) : formData.customGuestCount
-  const discount = calculateDiscount(selectedGuestCount)
-  const discountedPrice = experience.startingPrice * (1 - discount)
-  const totalCost = selectedGuestCount * discountedPrice
+  const totalCost = experience.startingPrice
 
   const handleInputChange = (field: keyof FormData, value: string | string[] | number) => {
     setFormData((prev) => ({
@@ -492,7 +493,6 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
                               <div className="text-slate-800 font-sans text-sm">Total Cost</div>
                               <div className="text-2xl sm:text-3xl font-sans text-slate-800">${totalCost}</div>
                             </div>
-                            <div>Price: ${discountedPrice.toFixed(2)}/person</div>
                           </div>
                         </div>
                         <div className="border-b border-black mb-4"></div>
