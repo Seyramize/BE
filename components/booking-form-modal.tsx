@@ -14,11 +14,16 @@ import { BookingConfirmation } from "@/components/booking-confirmation"
 
 interface ExperienceData {
   title: string
-  startingPrice: number
+  totalPrice: number
   minimumGuests: number
   heroImage: string
   id: string
-  slug: string // <-- Add this line
+  slug: string
+  pricing: {
+    oneGuest: number
+    twoGuests: number
+    threeOrMoreGuests: number
+  }
   numberOfGuests?: number
 }
 
@@ -112,8 +117,30 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
     return option ? option.value : 0
   }
 
-  const selectedGuestCount = formData.guests.length > 0 ? getGuestCount(formData.guests[0]) : formData.customGuestCount
-  const totalCost = experience.startingPrice
+  const [totalCost, setTotalCost] = useState(experience.totalPrice)
+
+  useEffect(() => {
+    const guestCount =
+      formData.guests.length > 0
+        ? getGuestCount(formData.guests[0])
+        : formData.customGuestCount
+
+    if (guestCount > 0) {
+      let pricePerGuest
+      if (guestCount === 1) {
+        pricePerGuest = experience.pricing.oneGuest
+      } else if (guestCount === 2) {
+        pricePerGuest = experience.pricing.twoGuests
+      } else {
+        pricePerGuest = experience.pricing.threeOrMoreGuests
+      }
+      const newTotalCost = pricePerGuest * guestCount
+      setTotalCost(parseFloat(newTotalCost.toFixed(2)))
+    } else {
+      // If no guests are selected yet, use the initial total price from the prop
+      setTotalCost(experience.totalPrice);
+    }
+  }, [formData.guests, formData.customGuestCount, experience.pricing, experience.totalPrice])
 
   const handleInputChange = (field: keyof FormData, value: string | string[] | number) => {
     setFormData((prev) => ({
@@ -190,7 +217,7 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
         bookingDetails={{
           experienceName: experience.title,
           experienceImage: experience.heroImage,
-          guests: selectedGuestCount,
+          guests: getGuestCount(formData.guests[0]) || formData.customGuestCount,
           preferredDate: formData.preferredDate,
           alternateDate: formData.alternateDate,
           totalAmount: totalCost,

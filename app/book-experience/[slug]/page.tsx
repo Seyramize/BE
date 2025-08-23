@@ -404,19 +404,20 @@ export default function BookExperiencePage() {
   const { bookingContent } = experience;
 
   const [numberOfGuests, setNumberOfGuests] = useState(1);
-  const [totalPrice, setTotalPrice] = useState(bookingContent.startingPrice);
-
-  const calculateDiscount = (guestCount: number) => {
-    if (guestCount >= 6) return 0.15; // 15% off for 6 or more
-    if (guestCount >= 4) return 0.10; // 10% off for 4-5 guests
-    if (guestCount >= 2) return 0.05; // 5% off for 2-3 guests
-    return 0; // no discount for 1 guest
-  };
+  const [totalPrice, setTotalPrice] = useState(bookingContent.pricing.oneGuest);
 
   const handleGuestsChange = (value: string) => {
     const guests = parseInt(value, 10);
-    const discount = calculateDiscount(guests);
-    const pricePerGuest = bookingContent.startingPrice * (1 - discount);
+    let pricePerGuest;
+
+    if (guests === 1) {
+      pricePerGuest = bookingContent.pricing.oneGuest;
+    } else if (guests === 2) {
+      pricePerGuest = bookingContent.pricing.twoGuests;
+    } else {
+      pricePerGuest = bookingContent.pricing.threeOrMoreGuests;
+    }
+
     const newTotalPrice = pricePerGuest * guests;
 
     setNumberOfGuests(guests);
@@ -844,10 +845,11 @@ export default function BookExperiencePage() {
         experience={{
           id: experience.id.toString(),
           title: bookingContent.title,
-          startingPrice: totalPrice,
+          totalPrice: totalPrice,
           minimumGuests: bookingContent.minimumGuests,
           heroImage: bookingContent.heroImage,
-          slug: experience.slug, // <-- Add this line
+          slug: experience.slug,
+          pricing: bookingContent.pricing,
           numberOfGuests: numberOfGuests,
         }}
         showConfirmation={showConfirmation}

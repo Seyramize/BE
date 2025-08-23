@@ -23,6 +23,11 @@ export type Experience = {
       overview: string
       highlights: string[]
       startingPrice: number
+      pricing: {
+        oneGuest: number
+        twoGuests: number
+        threeOrMoreGuests: number
+      }
       minimumGuests: number
       included: string[]
       whatsPriceless?: string
@@ -78,7 +83,12 @@ export type Experience = {
           "Interactive Wildlife and Heritage Museum tour",
           "Quad biking through forest trails.",
         ],
-        startingPrice: 400,
+        startingPrice: 450,
+        pricing: {
+          oneGuest: 450,
+          twoGuests: 330,
+          threeOrMoreGuests: 250,
+        },
         minimumGuests: 2,
         included: [
           "Private transportation including fuel",
@@ -143,6 +153,11 @@ export type Experience = {
           "Walk the canopy bridge at Kakum National Park",
         ],
         startingPrice: 380,
+        pricing: {
+          oneGuest: 380,
+          twoGuests: 361,
+          threeOrMoreGuests: 361,
+        },
         minimumGuests: 1,
         included: [
           "Private transportation including fuel",
@@ -193,6 +208,11 @@ export type Experience = {
           "Private guide with intimate storytelling",
         ],
         startingPrice: 380,
+        pricing: {
+          oneGuest: 380,
+          twoGuests: 361,
+          threeOrMoreGuests: 361,
+        },
         minimumGuests: 1,
         included: [
           "Private transportation including fuel",
@@ -249,7 +269,12 @@ export type Experience = {
           "Engage with artisans at the Arts Centre",
           "Capture stunning photos at Independence Square",
         ],
-        startingPrice: 300,
+        startingPrice: 350,
+        pricing: {
+          oneGuest: 350,
+          twoGuests: 332.5,
+          threeOrMoreGuests: 332.5,
+        },
         minimumGuests: 1,
         included: [
           "Private transportation including fuel",
@@ -298,7 +323,12 @@ export type Experience = {
           "Traditional dance lesson with local performers",
           
         ],
-        startingPrice: 300,
+        startingPrice: 250,
+        pricing: {
+          oneGuest: 250,
+          twoGuests: 237.5,
+          threeOrMoreGuests: 237.5,
+        },
         minimumGuests: 1,
         included: [
           "Private transportation including fuel",
@@ -345,6 +375,11 @@ export type Experience = {
           "Tea ceremony and storytelling",
         ],
         startingPrice: 235,
+        pricing: {
+          oneGuest: 235,
+          twoGuests: 223.25,
+          threeOrMoreGuests: 223.25,
+        },
         minimumGuests: 2,
         included: [
           "Private transportation including fuel",
@@ -405,6 +440,11 @@ export type Experience = {
           "Access to unisex fashion suitable for all",
         ],
         startingPrice: 235,
+        pricing: {
+          oneGuest: 235,
+          twoGuests: 223.25,
+          threeOrMoreGuests: 223.25,
+        },
         minimumGuests: 2,
         included: [
          "Private transportation including fuel",
@@ -450,6 +490,11 @@ export type Experience = {
           "Attend as part of the founders’ entourage",
         ],
         startingPrice: 235,
+        pricing: {
+          oneGuest: 235,
+          twoGuests: 223.25,
+          threeOrMoreGuests: 223.25,
+        },
         minimumGuests: 2,
         included: [
           "Private transportation including fuel",
@@ -515,6 +560,11 @@ export type Experience = {
           "Relax at Oboadaka Waterfall",
         ],
         startingPrice: 255,
+        pricing: {
+          oneGuest: 255,
+          twoGuests: 242.25,
+          threeOrMoreGuests: 242.25,
+        },
         minimumGuests: 1,
         included: [
           "Private transportation including fuel",
@@ -559,7 +609,12 @@ export type Experience = {
           "Sunset boat cruise.",
           "Perfect mix of adrenaline and serenity",
         ],
-        startingPrice: 350,
+        startingPrice: 560,
+        pricing: {
+          oneGuest: 560,
+          twoGuests: 532,
+          threeOrMoreGuests: 532,
+        },
         minimumGuests: 1,
         included: [
           "Private transportation including fuel",
