@@ -220,7 +220,6 @@ export type Experience = {
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
           "Complimentary bites and drinks",
-          "Beyond Experiences Essentials™ Bag",
         ]
       },
       tags: ["Priceless", "2 PAX"]
@@ -443,7 +442,7 @@ export type Experience = {
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
           "Complimentary bites and drinks",
-          "Beyond Experiences Essentials™ Bag",
+          
         ]
       },
       tags: ["Priceless", "2 PAX"]
@@ -508,7 +507,6 @@ export type Experience = {
          "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
           "Complimentary bites and drinks",
-          "Beyond Experiences Essentials™ Bag",
         ]
       },
       tags: ["Priceless", "2 PAX"]
@@ -558,7 +556,6 @@ export type Experience = {
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
           "Complimentary bites and drinks",
-          "Beyond Experiences Essentials™ Bag",
         ]
       },
       tags: ["Priceless", "2 PAX"]
