@@ -11,6 +11,7 @@ interface MastercardWelcomeModalProps {
   onClose: () => void
   onExplore?: () => void
   backgroundImageSrc?: string
+  ctaHref?: string
 }
 
 /**
@@ -22,6 +23,7 @@ export function MastercardWelcomeModal({
   onClose,
   onExplore,
   backgroundImageSrc = "/images/travelplanner.jpg",
+  ctaHref = "/experiences?filter=Priceless",
 }: MastercardWelcomeModalProps) {
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
@@ -104,7 +106,7 @@ export function MastercardWelcomeModal({
                 </button>
               ) : (
                 <Link
-                  href="/experiences?filter=Priceless"
+                  href={ctaHref}
                   onClick={onClose}
                   className="flex sm:inline-flex items-center justify-center mx-auto sm:mx-0 gap-2 bg-white text-black hover:bg-white/90 transition-colors rounded-xl px-5 py-3 text-sm sm:text-base shadow-sm"
                 >

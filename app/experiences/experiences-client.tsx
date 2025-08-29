@@ -12,7 +12,7 @@ import { experiences, Experience } from "@/lib/experiences-data"
 import { TravelPlannerModal } from "@/components/travel-planner-modal-clean"
 import { useSearchParams } from "next/navigation"
 
-const filterOptions = ["Ghana", "Priceless"]
+const filterOptions = ["Ghana"]
 
 export default function ExperiencesClientPage() {
 	const searchParams = useSearchParams()
@@ -26,9 +26,10 @@ export default function ExperiencesClientPage() {
 
 	const filteredExperiences = experiences.filter(experience => {
 		const matchesFilter =
-			!activeFilter ||
-			(activeFilter === "Priceless" && experience.tags.includes("Priceless")) ||
-			(activeFilter === "Ghana" && experience.defaultContent.location.includes("Ghana"))
+			(!activeFilter ||
+				(activeFilter === "Priceless" && experience.tags.includes("Priceless")) ||
+				(activeFilter === "Ghana" && experience.defaultContent.location.includes("Ghana"))) &&
+			!experience.tags.includes("Priceless")
 
 		const matchesSearch =
 			!searchQuery ||
