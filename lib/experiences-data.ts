@@ -736,7 +736,7 @@ export type Experience = {
       slug: "art-after-dark",
       defaultContent: {
         title: "Art After Dark",
-        shortDescription: "Art After Dark (AAD), hosted by TRANCE, redefines how audiences engage with contemporary art",
+        shortDescription: "Art After Dark (AAD), redefines how audiences engage with contemporary art",
         image: "/images/experiences/art-after-dark/cover.jpg?height=400&width=300&text=Akosombo+Lake+Adventure",
         location: "Greater Accra, Ghana",
       },
@@ -764,7 +764,7 @@ export type Experience = {
           "/images/experiences/art-after-dark/Gallery/9.jpg?height=400&width=300&text=Abseiling+Cliffs",
           "/images/experiences/art-after-dark/Gallery/10.jpg?height=400&width=300&text=Abseiling+Cliffs",
         ],
-        overview: "Art After Dark (AAD), hosted by TRANCE, redefines how audiences engage with contemporary art. Instead of traditional gallery spaces, AAD unfolds in lounges, bars, and intimate venues, creating a relaxed yet vibrant atmosphere where art, performance, and community meet. Each edition is curated as either a group exhibition or a focused solo presentation, often interwoven with performance, music, food, and drink. The result is a cultural happening that encourages dialogue, discovery, and deeper connection between artists and audiences.",
+        overview: "Art After Dark (AAD), redefines how audiences engage with contemporary art. Instead of traditional gallery spaces, AAD unfolds in lounges, bars, and intimate venues, creating a relaxed yet vibrant atmosphere where art, performance, and community meet. Each edition is curated as either a group exhibition or a focused solo presentation, often interwoven with performance, music, food, and drink. The result is a cultural happening that encourages dialogue, discovery, and deeper connection between artists and audiences.",
         highlights: [
           "Immersive exhibitions reimagined in unconventional spaces",
           "Occasional live performance elements, such as spoken word or movement art",
