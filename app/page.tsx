@@ -295,7 +295,7 @@ export default function Home() {
 
               {/* Second and third featured experiences - Smaller cards */}
               <div className="grid grid-cols-1 gap-8">
-                {experiences.slice(1, 3).map((experience) => (
+                {[experiences[1], experiences[3]].map((experience) => (
                   <div key={experience.id} className="relative rounded-lg overflow-hidden group">
                     <div className="relative h-72">
                       <Image
