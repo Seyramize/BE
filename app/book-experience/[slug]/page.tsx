@@ -28,6 +28,14 @@ import {
   Gift,
   GlassWater,
   Bus,
+  IceCream,
+  Banknote,
+  Coffee,
+  Plane,
+  Martini,
+  LifeBuoy,
+  Palette,
+  Bike,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
@@ -37,7 +45,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { useMobile } from "@/hooks/use-mobile";
-import { TbBinoculars } from "react-icons/tb";
+import { TbAirBalloon, TbBinoculars, TbCertificate2, TbHelmet } from "react-icons/tb";
 import { MastercardPaymentBounceModal } from "@/components/mastercard-payment-bounce-modal";
 import {
   Select,
@@ -49,10 +57,28 @@ import {
 
 const includedIcons: Record<string, any> = {
   "Private transportation including fuel": Car,
+  "Private transportation, including fuel.": Car,
   "Dedicated chaperone and access to resident guides": Users,
+  "Local experienced guide": Users,
+  "4x4 Transport and fuel": Car,
+  "Quad bike/per person": Bike,
+  "Riding guide": TbHelmet,
+  "Water and Fruit": Salad,
+  "Water and complimentary snacks": GlassWater,
+  "All visit and fee expenses": Banknote,
+  "Exotic Ice Cream (or pastry)": IceCream,
+  "Lunch at Roca Monte Forte": Salad,
+  "Coffee or tea at Diogo Vaz": Coffee,
   "Professional massage at a waterfall": BedDouble,
   "Complimentary bites and drinks": Utensils,
+  "Complimentary bites and drinks.": Utensils,
+  "1-hour flight": TbAirBalloon,
+  "Champagne breakfast": Martini,
+  "Life jackets": LifeBuoy,
+  "Full Snorkel Gear": Hammer,
+  "Water and fruit": Salad,
   "Lunch and dinner": Utensils,
+  "Guided art lesson by resident artist": Palette,
   "Lunch and refreshments": Salad,
   "Lunch at a local restaurant": Utensils,
   "Professional city guide": User,
@@ -63,11 +89,13 @@ const includedIcons: Record<string, any> = {
   "Professional instructors": User,
   "Professional chocolatier": User,
   "Luxury Bus": Bus,
+  "Flight certificate": TbCertificate2,
   "Spa treatment": Gift,
   "Cultural performance": Drum,
   "Boat cruise": Sailboat,
   "Bottled water": GlassWater,
   "Beyond Experiences Essentials™ Bag": Gift,
+  "Beyond Essentials Bag": Gift,
 };
 
 function getCountryAdjective(country: string): string {
