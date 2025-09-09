@@ -65,6 +65,20 @@ export default function Home() {
 
   const isMobile = useMobile();
 
+  // Selected featured experiences by slug (edit this list to change selection)
+  const selectedFeaturedSlugs = [
+    "shai-hills-experience",
+    "hot-air-ballooning-over-the-desert",
+    "cacao-and-coffee-farm-tour",
+    
+  ];
+  const selectedFeaturedRaw = selectedFeaturedSlugs
+    .map(slug => experiences.find(e => e.slug === slug))
+    .filter((e): e is (typeof experiences)[0] => Boolean(e));
+  const selectedFeatured = selectedFeaturedRaw.length >= 3
+    ? selectedFeaturedRaw
+    : experiences.slice(0, 3);
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Auto-hiding Navigation */}
@@ -178,7 +192,7 @@ export default function Home() {
               {/* Top carousel (original logic) */}
               <Carousel opts={{ align: "start", loop: false }} className="pl-6">
                 <CarouselContent className="-ml-4">
-                  {experiences.slice(0, 3).map((experience, index) => (
+                  {selectedFeatured.map((experience, index) => (
                     <CarouselItem key={`top-${experience.id}`} className="pl-4 basis-5/6">
                       <div className="relative rounded-xl overflow-hidden group h-[470px]">
                         <Image
@@ -270,8 +284,8 @@ export default function Home() {
               <div className="relative rounded-lg overflow-hidden group">
                 <div className="relative h-[610px]">
                   <Image
-                    src={experiences[0].defaultContent.image}
-                    alt={experiences[0].defaultContent.title}
+                    src={selectedFeatured[0].defaultContent.image}
+                    alt={selectedFeatured[0].defaultContent.title}
                     fill
                     className="object-cover"
                   />
@@ -279,11 +293,11 @@ export default function Home() {
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   {/* <span className="text-white/80 uppercase text-sm tracking-wider font-sans">{experiences[0].defaultContent.location}</span> */}
-                  <h3 className="text-3xl font-serif font-normal text-white mt-2 mb-3">{experiences[0].defaultContent.title}</h3>
+                  <h3 className="text-3xl font-serif font-normal text-white mt-2 mb-3">{selectedFeatured[0].defaultContent.title}</h3>
                   <p className="text-white/90 mb-4 max-w-md font-sans leading-tight">
-                    {experiences[0].defaultContent.shortDescription}
+                    {selectedFeatured[0].defaultContent.shortDescription}
                   </p>
-                  <Link href={`/book-experience/${experiences[0].slug}`}>
+                  <Link href={`/book-experience/${selectedFeatured[0].slug}`}>
                     <Button
                       variant="glass"
                       className="font-sans px-12 py-3 rounded-xl w-full">
@@ -295,7 +309,7 @@ export default function Home() {
 
               {/* Second and third featured experiences - Smaller cards */}
               <div className="grid grid-cols-1 gap-8">
-                {[experiences[1], experiences[3]].map((experience) => (
+                {[selectedFeatured[1], selectedFeatured[2]].map((experience) => (
                   <div key={experience.id} className="relative rounded-lg overflow-hidden group">
                     <div className="relative h-72">
                       <Image

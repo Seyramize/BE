@@ -326,10 +326,10 @@ export default function ExperiencesClientPage() {
 										key={filter}
 										variant="outline"
 										onClick={() => setActiveFilter(activeFilter === filter ? null : filter)}
-                    className={`rounded-3xl px-4 sm:px-6 py-1 sm:py-1.5 border-gray-300 font-sans whitespace-nowrap text-[10px] sm:text-xs ${
+                    className={`rounded-3xl px-4 sm:px-6 py-1 sm:py-1.5 border-gray-900 font-sans whitespace-nowrap text-[10px] sm:text-xs ${
                       activeFilter === filter
-                        ? "bg-[#F7E7CE] text-black"
-                        : "text-gray-700 hover:bg-gray-100"
+                        ? "bg-gray-900 text-white"
+                        : "text-gray-900 hover:bg-gray-100"
                     }`}
 									>
 										{filter === "Priceless" ? (
@@ -359,10 +359,10 @@ export default function ExperiencesClientPage() {
 								Sort
 							</Button>
 							<div className={`relative transition-all duration-300 ${isSearchFocused ? 'w-full' : 'w-40 sm:w-46 md:w-48 lg:w-46'}`}>
-								<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-2 h-4" />
+								<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-900 w-2 h-4" />
 								<Input
 									placeholder="Search experiences"
-									className="pl-10 rounded-full border-gray-300 font-sans w-full text-xs sm:text-sm"
+									className="pl-10 rounded-full border-gray-900 font-sans w-full text-xs sm:text-sm"
 									value={searchQuery}
 									onChange={e => setSearchQuery(e.target.value)}
 									onFocus={() => setIsSearchFocused(true)}
