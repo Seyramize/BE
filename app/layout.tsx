@@ -83,7 +83,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <DynamicFavicon />
           {/* Show Mastercard welcome on initial site load */}
-          <MastercardGate />
+          {/* <MastercardGate /> */}
           {children}
           <Toaster />
           <SpeedInsights />
