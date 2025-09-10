@@ -189,58 +189,16 @@ export default function Home() {
           <h2 className="text-2xl md:text-4xl font-argent font-normal mb-3 md:mb-12 px-6 md:px-0">Featured Experiences</h2>
           {isMobile ? (
             <>
-              {/* Top carousel (original logic) */}
-              {/* <Carousel opts={{ align: "start", loop: false }} className="pl-6">
-                <CarouselContent className="-ml-4">
-                  {selectedFeatured.map((experience, index) => (
-                    <CarouselItem key={`top-${experience.id}`} className="pl-4 basis-5/6">
-                      <div className="relative rounded-xl overflow-hidden group h-[470px]">
-                        <Image
-                          src={experience.defaultContent.image}
-                          alt={experience.defaultContent.title}
-                          fill
-                          className="object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                        <div className="absolute bottom-0 left-0 right-0 p-6">
-                          <h3 className={`${index === 0 ? 'text-3xl' : 'text-2xl'} font-serif font-normal text-white mt-2 mb-3`}>{experience.defaultContent.title}</h3>
-                          <p className="text-white/90 mb-4 max-w-md font-sans leading-tight">
-                            {experience.defaultContent.shortDescription}
-                          </p>
-                          <Link href={`/book-experience/${experience.slug}`}>
-                            <Button
-                              variant="glass"
-                              className="font-sans px-12 py-7 rounded-xl w-full">
-                              Book Experience
-                            </Button>
-                          </Link>
-                        </div>
-                      </div>
-                    </CarouselItem>
-                  ))}
-                  <CarouselItem className="pl-4 basis-5/6">
-                    <Link href="/experiences">
-                      <div className="relative rounded-lg overflow-hidden group h-[470px] bg-gray-900 flex flex-col justify-center items-center text-center p-6">
-                        <TbBinoculars className="text-white mb-4" size={40} />
-                        <h3 className="text-4xl font-serif font-normal text-white mt-2 mb-3">Explore Experiences</h3>
-                        <p className="text-white/90 mb-4 max-w-md font-sans leading-tight">
-                          Browse our catalog of experiences curated with you in mind.
-                        </p>
-                      </div>
-                    </Link>
-                  </CarouselItem>
-                </CarouselContent>
-              </Carousel> */}
-
-              {/* Additional country carousels (mobile only) */}
-              {["Ghana", "Namibia", "Sao Tome"].map((country) => {
-                // Filter experiences by country
+              {/* Mobile: Country carousels */}
+              {["Ghana", "Namibia", "São Tomé"].map((country) => {
+                // Filter experiences by country and exclude Priceless experiences
                 const countryExperiences = experiences.filter(experience => {
                   const location = experience.defaultContent.location.toLowerCase();
-                  if (country === "Sao Tome") {
-                    return location.includes("são tomé") || location.includes("sao tome");
-                  }
-                  return location.includes(country.toLowerCase());
+                  const isCountryMatch = country === "São Tomé" 
+                    ? location.includes("são tomé") || location.includes("sao tome")
+                    : location.includes(country.toLowerCase());
+                  
+                  return isCountryMatch && !experience.tags.includes("Priceless");
                 });
                 
                 return (
@@ -273,7 +231,7 @@ export default function Home() {
                         </CarouselItem>
                       ))}
                       <CarouselItem className="pl-4 basis-5/6">
-                        <Link href={`/experiences?filter=${encodeURIComponent(country === "Sao Tome" ? "São Tomé" : country)}`}>
+                        <Link href={`/experiences?filter=${encodeURIComponent(country === "São Tomé" ? "São Tomé" : country)}`}>
                           <div className="relative rounded-lg overflow-hidden group h-[420px] bg-gray-900 flex flex-col justify-center items-center text-center p-6">
                             <TbBinoculars className="text-white mb-4" size={40} />
                             <h4 className="text-3xl font-serif font-normal text-white mt-2 mb-3">Explore <br /> {country}</h4>
@@ -290,63 +248,124 @@ export default function Home() {
               })}
             </>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* First featured experience - Large card */}
-              <div className="relative rounded-lg overflow-hidden group">
-                <div className="relative h-[610px]">
-                  <Image
-                    src={selectedFeatured[0].defaultContent.image}
-                    alt={selectedFeatured[0].defaultContent.title}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+            <>
+              {/* Original Featured Experiences for Desktop/Tablet */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                {/* First featured experience - Large card */}
+                <div className="relative rounded-lg overflow-hidden group">
+                  <div className="relative h-[610px]">
+                    <Image
+                      src={selectedFeatured[0].defaultContent.image}
+                      alt={selectedFeatured[0].defaultContent.title}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <h3 className="text-3xl font-serif font-normal text-white mt-2 mb-3">{selectedFeatured[0].defaultContent.title}</h3>
+                    <p className="text-white/90 mb-4 max-w-md font-sans leading-tight">
+                      {selectedFeatured[0].defaultContent.shortDescription}
+                    </p>
+                    <Link href={`/book-experience/${selectedFeatured[0].slug}`}>
+                      <Button
+                        variant="glass"
+                        className="font-sans px-12 py-3 rounded-xl w-full">
+                        Book Experience
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  {/* <span className="text-white/80 uppercase text-sm tracking-wider font-sans">{experiences[0].defaultContent.location}</span> */}
-                  <h3 className="text-3xl font-serif font-normal text-white mt-2 mb-3">{selectedFeatured[0].defaultContent.title}</h3>
-                  <p className="text-white/90 mb-4 max-w-md font-sans leading-tight">
-                    {selectedFeatured[0].defaultContent.shortDescription}
-                  </p>
-                  <Link href={`/book-experience/${selectedFeatured[0].slug}`}>
-                    <Button
-                      variant="glass"
-                      className="font-sans px-12 py-3 rounded-xl w-full">
-                      Book Experience
-                    </Button>
-                  </Link>
+
+                {/* Second and third featured experiences - Smaller cards */}
+                <div className="grid grid-cols-1 gap-8">
+                  {[selectedFeatured[1], selectedFeatured[2]].map((experience) => (
+                    <div key={experience.id} className="relative rounded-lg overflow-hidden group">
+                      <div className="relative h-72">
+                        <Image
+                          src={experience.defaultContent.image}
+                          alt={experience.defaultContent.title}
+                          fill
+                          className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 p-6">
+                        <h3 className="text-2xl font-serif font-normal text-white mb-2">{experience.defaultContent.title}</h3>
+                        <p className="text-white/90 mb-3 text-sm font-sans leading-tight">
+                          {experience.defaultContent.shortDescription}
+                        </p>
+                        <Link href={`/book-experience/${experience.slug}`}>
+                          <Button size="sm" variant="glass" className="font-sans px-8 py-3 rounded-xl">
+                            Book Experience
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              {/* Second and third featured experiences - Smaller cards */}
-              <div className="grid grid-cols-1 gap-8">
-                {[selectedFeatured[1], selectedFeatured[2]].map((experience) => (
-                  <div key={experience.id} className="relative rounded-lg overflow-hidden group">
-                    <div className="relative h-72">
-                      <Image
-                        src={experience.defaultContent.image}
-                        alt={experience.defaultContent.title}
-                        fill
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                    {/* <span className="text-white/80 uppercase text-sm tracking-wider font-sans">{experience.defaultContent.location}</span> */}
-                      <h3 className="text-2xl font-serif font-normal text-white mb-2">{experience.defaultContent.title}</h3>
-                      <p className="text-white/90 mb-3 text-sm font-sans leading-tight">
-                        {experience.defaultContent.shortDescription}
-                      </p>
-                      <Link href={`/book-experience/${experience.slug}`}>
-                        <Button size="sm" variant="glass" className="font-sans px-8 py-3 rounded-xl">
-                          Book Experience
-                        </Button>
-                      </Link>
+              {/* Country sections with 4 cards each */}
+              {["Ghana", "Namibia", "São Tomé"].map((country) => {
+                // Filter experiences by country and exclude Priceless experiences
+                const countryExperiences = experiences.filter(experience => {
+                  const location = experience.defaultContent.location.toLowerCase();
+                  const isCountryMatch = country === "São Tomé" 
+                    ? location.includes("são tomé") || location.includes("sao tome")
+                    : location.includes(country.toLowerCase());
+                  
+                  return isCountryMatch && !experience.tags.includes("Priceless");
+                });
+                
+                return (
+                  <div key={`desktop-country-${country}`} className="mb-8">
+                    <h3 className="text-3xl font-argent font-normal mb-6 text-left">{country}</h3>
+                    <div className="grid grid-cols-4 gap-6">
+                      {/* First 3 experience cards */}
+                      {countryExperiences.slice(0, 3).map((experience) => (
+                        <div key={`desktop-${country}-${experience.id}`} className="relative rounded-lg overflow-hidden group">
+                          <div className="relative h-[320px]">
+                            <Image
+                              src={experience.defaultContent.image}
+                              alt={experience.defaultContent.title}
+                              fill
+                              className="object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                          </div>
+                          <div className="absolute bottom-0 left-0 right-0 p-6">
+                            <h4 className="text-2xl font-serif font-normal text-white mt-2 mb-3">{experience.defaultContent.title}</h4>
+                            <p className="text-white/90 mb-4 max-w-md font-sans leading-tight">
+                              {experience.defaultContent.shortDescription}
+                            </p>
+                            <Link href={`/book-experience/${experience.slug}`}>
+                              <Button variant="glass" className="font-sans px-8 py-3 rounded-xl w-full">
+                                Book Experience
+                              </Button>
+                            </Link>
+                          </div>
+                        </div>
+                      ))}
+                      
+                      {/* 4th card - Explore more with solid blue-black background */}
+                      <div className="relative rounded-lg overflow-hidden group">
+                        <div className="relative h-[320px] bg-slate-900">
+                          <Link href={`/experiences?filter=${encodeURIComponent(country === "São Tomé" ? "São Tomé" : country)}`}>
+                            <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6">
+                              <TbBinoculars className="text-white mb-4" size={48} />
+                              <h4 className="text-3xl font-serif font-normal text-white mt-2 mb-3">
+                                Explore more {country === "São Tomé" ? "São Toméan" : country === "Namibia" ? "Namib" : country === "Ghana" ? "Ghanaian" : "Ghanaian"} experiences
+                              </h4>
+                            </div>
+                          </Link>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
+                );
+              })}
+            </>
           )}
         </div>
       </section>
