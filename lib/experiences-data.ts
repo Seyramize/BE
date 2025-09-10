@@ -1000,7 +1000,7 @@ export type Experience = {
       slug: "cacao-and-coffee-farm-tour",
       defaultContent: {
         title: "Cocoa and Coffee Farm Tour",
-        shortDescription: "At sunrise, the desert becomes alive with light and shadow.",
+        shortDescription: "This is São Tomé’s story — told through its farms, flavors, and landscapes.",
         image: "/images/experiences/cocoa-tour/cover.jpg?height=400&width=300&text=Akosombo+Lake+Adventure",
         location: "São Tomé",
       },

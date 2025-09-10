@@ -190,7 +190,7 @@ export default function Home() {
           {isMobile ? (
             <>
               {/* Top carousel (original logic) */}
-              <Carousel opts={{ align: "start", loop: false }} className="pl-6">
+              {/* <Carousel opts={{ align: "start", loop: false }} className="pl-6">
                 <CarouselContent className="-ml-4">
                   {selectedFeatured.map((experience, index) => (
                     <CarouselItem key={`top-${experience.id}`} className="pl-4 basis-5/6">
@@ -230,15 +230,25 @@ export default function Home() {
                     </Link>
                   </CarouselItem>
                 </CarouselContent>
-              </Carousel>
+              </Carousel> */}
 
               {/* Additional country carousels (mobile only) */}
-              {/* {["Ghana", "Namibia", "Sao Tome", "Nigeria"].map((country) => (
+              {["Ghana", "Namibia", "Sao Tome"].map((country) => {
+                // Filter experiences by country
+                const countryExperiences = experiences.filter(experience => {
+                  const location = experience.defaultContent.location.toLowerCase();
+                  if (country === "Sao Tome") {
+                    return location.includes("são tomé") || location.includes("sao tome");
+                  }
+                  return location.includes(country.toLowerCase());
+                });
+                
+                return (
                 <div key={`country-${country}`} className="mt-4">
                   <h3 className="text-xl font-argent font-normal mb-2 px-6">{country}</h3>
                   <Carousel opts={{ align: "start", loop: false }} className="pl-6">
                     <CarouselContent className="-ml-4">
-                      {experiences.slice(0, 3).map((experience) => (
+                      {countryExperiences.slice(0, 3).map((experience) => (
                         <CarouselItem key={`${country}-${experience.id}`} className="pl-4 basis-5/6">
                           <div className="relative rounded-xl overflow-hidden group h-[420px]">
                             <Image
@@ -276,7 +286,8 @@ export default function Home() {
                     </CarouselContent>
                   </Carousel>
                 </div>
-              ))} */}
+                );
+              })}
             </>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
