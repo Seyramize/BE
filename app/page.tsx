@@ -273,7 +273,7 @@ export default function Home() {
                         </CarouselItem>
                       ))}
                       <CarouselItem className="pl-4 basis-5/6">
-                        <Link href="/experiences">
+                        <Link href={`/experiences?filter=${encodeURIComponent(country === "Sao Tome" ? "São Tomé" : country)}`}>
                           <div className="relative rounded-lg overflow-hidden group h-[420px] bg-gray-900 flex flex-col justify-center items-center text-center p-6">
                             <TbBinoculars className="text-white mb-4" size={40} />
                             <h4 className="text-3xl font-serif font-normal text-white mt-2 mb-3">Explore <br /> {country}</h4>
