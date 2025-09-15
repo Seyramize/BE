@@ -95,7 +95,7 @@ export default function ExperiencesClientPage() {
 											: "bg-black/40"
 									} ${tag === "2 PAX" ? "ml-auto" : ""}`}
 								>
-									{tag === "2 PAX" ? (
+									{tag === "2 PAX" || tag === "1 PAX" || tag === "3 PAX" ? (
 										<div className="flex items-center gap-1">
 											<svg 
 												xmlns="http://www.w3.org/2000/svg" 
@@ -110,7 +110,7 @@ export default function ExperiencesClientPage() {
 												<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
 												<circle cx="12" cy="7" r="4" />
 											</svg>
-											<span>2</span>
+											<span>{tag.split(" ")[0]}</span>
 										</div>
 									) : tag === "Priceless" ? (
 										<div className="flex items-center gap-1">
