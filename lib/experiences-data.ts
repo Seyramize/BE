@@ -168,7 +168,7 @@ export type Experience = {
           "Beyond Experiences Essentials™ Bag",
         ]
       },
-      tags: ["Travel Planner's Choice", "2 PAX"]
+      tags: ["Travel Planner's Choice", "1 PAX"]
     },
     {
       id: 3,
@@ -222,7 +222,7 @@ export type Experience = {
           "Complimentary bites and drinks",
         ]
       },
-      tags: ["Priceless", "2 PAX"]
+      tags: ["Priceless", "1 PAX"]
     },
     {
       id: 4,
@@ -284,7 +284,7 @@ export type Experience = {
           "Beyond Experiences Essentials™ Bag",
         ]
       },
-      tags: ["Travel Planner's Choice", "2 PAX"]
+      tags: ["Travel Planner's Choice", "1 PAX"]
     },
     {
       id: 5,
@@ -338,7 +338,7 @@ export type Experience = {
           "Beyond Experiences Essentials™ Bag",
         ]
       },
-      tags: ["Travel Planner's Choice", "2 PAX"]
+      tags: ["Travel Planner's Choice", "1 PAX"]
     },
     // {
     //   id: 6,
@@ -628,7 +628,7 @@ export type Experience = {
           "Beyond Experiences Essentials™ Bag",
         ]
       },
-      tags: ["Travel Planner's Choice", "2 PAX"]
+      tags: ["Travel Planner's Choice", "1 PAX"]
     },
     {
       id: 10,
@@ -679,7 +679,7 @@ export type Experience = {
           "Beyond Experiences Essentials™ Bag",
         ]
       },
-      tags: ["Travel Planner's Choice", "2 PAX"]
+      tags: ["Travel Planner's Choice", "1 PAX"]
     },
     {
       id: 11,
@@ -729,7 +729,7 @@ export type Experience = {
           "Beyond Experiences Essentials™ Bag",
         ]
       },
-      tags: ["Travel Planner's Choice", "2 PAX"]
+      tags: ["Travel Planner's Choice", "1 PAX"]
     },
     {
       id: 12,
@@ -787,7 +787,7 @@ export type Experience = {
           "Beyond Experiences Essentials™ Bag",
         ]
       },
-      tags: ["Priceless", "2 PAX"]
+      tags: ["Priceless", "1 PAX"]
     },
     {
       id: 13,
@@ -843,7 +843,7 @@ export type Experience = {
           "Beyond Experiences Essentials™ Bag",
         ]
       },
-      tags: ["Travel Planner's Choice", "2 PAX"]
+      tags: ["Travel Planner's Choice", "3 PAX"]
     },
     {
       id: 14,
@@ -893,7 +893,7 @@ export type Experience = {
           "Riding guide",
         ]
       },
-      tags: ["Travel Planner's Choice", "2 PAX"]
+      tags: ["Travel Planner's Choice", "1 PAX"]
     },
     {
       id: 15,
@@ -942,7 +942,7 @@ export type Experience = {
           "Flight certificate",
         ]
       },
-      tags: ["Travel Planner's Choice", "2 PAX"]
+      tags: ["Travel Planner's Choice", "1 PAX"]
     },
     {
       id: 16,
@@ -993,7 +993,7 @@ export type Experience = {
           "Water and Fruit",
         ]
       },
-      tags: ["Travel Planner's Choice", "2 PAX"]
+      tags: ["Travel Planner's Choice", "3 PAX"]
     },
     {
       id: 17,
@@ -1138,12 +1138,11 @@ export type Experience = {
           "/images/experiences/canvas-and-soul/Gallery/6.jpg?height=400&width=300&text=Abseiling+Cliffs",
       
         ],
-        overview: "Canvas and Soul is an intimate art and storytelling journey where every guest becomes a creator. It begins with a resident artist sharing their story, a tapestry of life, culture, and inspiration, as wine is poured and the space fills with quiet reflection. Guests are then invited to pick up a brush, painting their own canvas inspired by the artist’s journey. Guided by the artist’s presence, the evening unfolds as a shared act of creativity and connection. At the end, each canvas is personally signed by the artist, leaving guests with a keepsake that captures both memory and emotion.",
+        overview: "Canvas and Soul is an intimate art and storytelling journey where every guest becomes a creator. It begins with a resident artist sharing their story, a tapestry of life, culture, and inspiration, as wine is poured and the space fills with quiet reflection. Guests are then invited to pick up a brush, painting their own canvas inspired by the artist’s journey. Guided by the artist’s presence, the evening unfolds as a shared act of creativity and connection.",
         highlights: [
           "Storytelling session with a resident artist",
           "Wine and art-filled atmosphere in an intimate setting",
           "Guided painting experience with your own blank canvas",
-          "Artist-signed canvas to take home, alongside photo memories",
         ],
         startingPrice: 120,
         pricing: {
