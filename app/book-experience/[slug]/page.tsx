@@ -613,7 +613,7 @@ export default function BookExperiencePage() {
                           <SelectValue placeholder="1" />
                         </SelectTrigger>
                         <SelectContent>
-                          {[...Array(6)].map((_, i) => (
+                          {[...Array(experience.slug === "a-date-with-fashion" || experience.slug === "afrofuture" ? 10 : 6)].map((_, i) => (
                             <SelectItem key={i + 1} value={`${i + 1}`}>
                               {i + 1}
                             </SelectItem>
@@ -666,7 +666,7 @@ export default function BookExperiencePage() {
                           <SelectValue placeholder="1" />
                         </SelectTrigger>
                         <SelectContent>
-                          {[...Array(6)].map((_, i) => (
+                          {[...Array(experience.slug === "a-date-with-fashion" || experience.slug === "afrofuture" ? 10 : 6)].map((_, i) => (
                             <SelectItem key={i + 1} value={`${i + 1}`}>
                               {i + 1}
                             </SelectItem>

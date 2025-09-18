@@ -103,14 +103,14 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
     }
   }, [isOpen])
 
-  const guestOptions = [
-    { label: "One", value: 1 },
-    { label: "Two", value: 2 },
-    { label: "Three", value: 3 },
-    { label: "Four", value: 4 },
-    { label: "Five", value: 5 },
-    { label: "Six", value: 6 }
-  ]
+  // Check if this is one of the special experiences that allows up to 10 guests
+  const isSpecialExperience = experience.slug === "a-date-with-fashion" || experience.slug === "afrofuture";
+  const maxGuests = isSpecialExperience ? 10 : 6;
+  
+  const guestOptions = Array.from({ length: maxGuests }, (_, i) => ({
+    label: ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"][i],
+    value: i + 1
+  }))
 
   const getGuestCount = (guestOption: string): number => {
     const option = guestOptions.find(opt => opt.label === guestOption)
