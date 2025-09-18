@@ -45,6 +45,11 @@ model Experience {
   minGuests        Int // From bookingContent.minimumGuests
   maxGuests        Int // From bookingContent.maxGuests (we need to parse the number out)
 
+  // Capacity management (for special experiences)
+  totalSlots       Int      @default(0) // Total available slots (0 = unlimited)
+  availableSlots   Int      @default(0) // Currently available slots
+  hasCapacityLimit Boolean  @default(false) // Whether this experience has slot limits
+
   // Media
   heroImage        String // From bookingContent.heroImage
   galleryImages    String[] // From bookingContent.galleryImages

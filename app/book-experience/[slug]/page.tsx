@@ -8,6 +8,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { BookingFormModal } from "@/components/booking-form-modal";
 import { GalleryModal } from "@/components/gallery-modal";
+import { EnquireAvailabilityModal } from "@/components/enquire-availability-modal";
 import { experiences, type Experience } from "@/lib/experiences-data";
 import {
   Check,
@@ -371,6 +372,7 @@ export default function BookExperiencePage() {
   const [bookingDetails, setBookingDetails] = useState<any>(null);
   const [isSticky, setIsSticky] = useState(false);
   const [isMastercardModalOpen, setIsMastercardModalOpen] = useState(false);
+  const [isEnquireModalOpen, setIsEnquireModalOpen] = useState(false);
   const buttonRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -632,32 +634,43 @@ export default function BookExperiencePage() {
                   ref={buttonRef}
                   className="sm:hidden mt-6 flex flex-col gap-3 px-0.5"
                 >
-                  <Button
-                    className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
-                    onClick={() => setIsBookingModalOpen(true)}
-                  >
-                    Book this experience
-                  </Button>
-                  <Link
-                    href={`/customize-experience?experience=${encodeURIComponent(
-                      bookingContent.title
-                    )}`}
-                    className="w-full"
-                  >
+                  {experience.slug === "a-date-with-fashion" ? (
                     <Button
-                      variant="outline"
-                      className="w-full border-slate-900 text-slate-900 bg-white font-sans px-6 py-4 rounded-lg"
+                      className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
+                      onClick={() => setIsEnquireModalOpen(true)}
                     >
-                      More than 6 guests?
+                      Enquire for Availability
                     </Button>
-                  </Link>
+                  ) : (
+                    <>
+                      <Button
+                        className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
+                        onClick={() => setIsBookingModalOpen(true)}
+                      >
+                        Book this experience
+                      </Button>
+                      <Link
+                        href={`/customize-experience?experience=${encodeURIComponent(
+                          bookingContent.title
+                        )}`}
+                        className="w-full"
+                      >
+                        <Button
+                          variant="outline"
+                          className="w-full border-slate-900 text-slate-900 bg-white font-sans px-6 py-4 rounded-lg"
+                        >
+                          More than 6 guests?
+                        </Button>
+                      </Link>
+                    </>
+                  )}
                 </div>
                 <div className="hidden sm:flex items-center justify-between gap-6">
                   <div>
                     <h3 className="text-lg sm:text-xs font-sans uppercase tracking-widest text-slate-600">
                       No. of Pax
                     </h3>
-                    <div className="flex items-center gap-2 mt-0.5">
+                    <div className="flex items-center gap-8 mt-0.5">
                       <Select
                         onValueChange={handleGuestsChange}
                         defaultValue="1"
@@ -673,34 +686,45 @@ export default function BookExperiencePage() {
                           ))}
                         </SelectContent>
                       </Select>
+                      <span className="text-3xl sm:text-4xl font-sans font-normal text-slate-800">
+                        ${totalPrice}
+                      </span>
                     </div>
                   </div>
 
                   {/* Price and Buttons */}
                   <div className="flex items-center gap-8">
-                    <span className="text-3xl sm:text-4xl font-sans font-normal text-slate-800">
-                      ${totalPrice}
-                    </span>
                     <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-3">
-                      <Button
-                        className="w-full sm:w-auto bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
-                        onClick={() => setIsBookingModalOpen(true)}
-                      >
-                        Book this experience
-                      </Button>
-                      <Link
-                        href={`/customize-experience?experience=${encodeURIComponent(
-                          bookingContent.title
-                        )}`}
-                        className="w-full sm:w-auto"
-                      >
+                      {experience.slug === "a-date-with-fashion" ? (
                         <Button
-                          variant="outline"
-                          className="w-full border-slate-900 text-slate-900 bg-white font-sans px-6 sm:px-8 py-5 sm:py-3 rounded-sm"
+                          className="w-full sm:w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
+                          onClick={() => setIsEnquireModalOpen(true)}
                         >
-                          More than 6 guests?
+                          Enquire for Availability
                         </Button>
-                      </Link>
+                      ) : (
+                        <>
+                          <Button
+                            className="w-full sm:w-auto bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
+                            onClick={() => setIsBookingModalOpen(true)}
+                          >
+                            Book this experience
+                          </Button>
+                          <Link
+                            href={`/customize-experience?experience=${encodeURIComponent(
+                              bookingContent.title
+                            )}`}
+                            className="w-full sm:w-auto"
+                          >
+                            <Button
+                              variant="outline"
+                              className="w-full border-slate-900 text-slate-900 bg-white font-sans px-6 sm:px-8 py-5 sm:py-3 rounded-sm"
+                            >
+                              More than 6 guests?
+                            </Button>
+                          </Link>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -897,16 +921,37 @@ export default function BookExperiencePage() {
         onClose={() => setIsMastercardModalOpen(false)}
       />
 
+      {/* Sticky CTA on mobile */}
       {isMobile && isSticky && (
         <div className="sm:hidden fixed bottom-4 left-0 right-0 px-4 z-20">
-          <Button
-            className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"
-            onClick={() => setIsBookingModalOpen(true)}
-          >
-            Book this experience
-          </Button>
+          {experience.slug === "a-date-with-fashion" ? (
+            <Button
+              className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"
+              onClick={() => setIsEnquireModalOpen(true)}
+            >
+              Enquire for Availability
+            </Button>
+          ) : (
+            <Button
+              className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"
+              onClick={() => setIsBookingModalOpen(true)}
+            >
+              Book this experience
+            </Button>
+          )}
         </div>
       )}
+
+      {/* Enquire Modal (only used for A Date with Fashion) */}
+      <EnquireAvailabilityModal
+        isOpen={isEnquireModalOpen}
+        onClose={() => setIsEnquireModalOpen(false)}
+        experience={{
+          title: experience.defaultContent.title,
+          heroImage: experience.bookingContent.heroImage,
+          slug: experience.slug,
+        }}
+      />
 
       <SiteFooter />
     </div>

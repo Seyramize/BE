@@ -24,18 +24,19 @@ export function LocationSelector({
       {/* Country Selection */}
       <CountrySelector
         value={selectedCountry}
-        onChange={onCountryChange}
-        className="w-40"
+        onChange={(country) => onCountryChange(country.code)}
+        className="w-24 sm:w-32"
         hideDialCode={true}
-        showCountryName={true}
+        showCountryName={false}
         hideFlag={true}
+        displayMode="responsive-code-mobile"
       />
 
       {/* Location Input */}
       <div className="relative flex-1">
         <Input
           type="text"
-          placeholder="Enter city or location"
+          placeholder="Enter city or town"
           value={location}
           onChange={(e) => onLocationChange(e.target.value)}
           className={`w-full bg-white border-slate-200 pl-9 h-11 ${error ? "border-red-500" : ""}`}

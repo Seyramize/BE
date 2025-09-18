@@ -11,9 +11,10 @@ interface CountrySelectorProps {
   hideDialCode?: boolean
   showCountryName?: boolean
   hideFlag?: boolean
+  displayMode?: "dial" | "name" | "code" | "responsive-code-mobile"
 }
 
-export function CountrySelector({ value, onChange, className = "", hideDialCode = false, showCountryName = false, hideFlag = false }: CountrySelectorProps) {
+export function CountrySelector({ value, onChange, className = "", hideDialCode = false, showCountryName = false, hideFlag = false, displayMode }: CountrySelectorProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -92,10 +93,28 @@ export function CountrySelector({ value, onChange, className = "", hideDialCode 
               {getFlagEmoji(selectedCountry?.code || "US")}
             </span>
           )}
-          {showCountryName ? (
+          {/* Display selection per displayMode */}
+          {displayMode === "name" && (
             <span className="flex-1 truncate">{selectedCountry?.name}</span>
-          ) : (
-            !hideDialCode && <span className="mr-1">{selectedCountry?.dialCode}</span>
+          )}
+          {displayMode === "dial" && (
+            <span className="mr-1">{selectedCountry?.dialCode}</span>
+          )}
+          {displayMode === "code" && (
+            <span className="mr-1">{selectedCountry?.code}</span>
+          )}
+          {displayMode === "responsive-code-mobile" && (
+            <>
+              <span className="mr-1 sm:hidden">{selectedCountry?.code}</span>
+              <span className="hidden sm:inline truncate">{selectedCountry?.name}</span>
+            </>
+          )}
+          {!displayMode && (
+            showCountryName ? (
+              <span className="flex-1 truncate">{selectedCountry?.name}</span>
+            ) : (
+              !hideDialCode && <span className="mr-1">{selectedCountry?.dialCode}</span>
+            )
           )}
         </div>
         <ChevronDown className="w-4 h-4 text-slate-400" />
