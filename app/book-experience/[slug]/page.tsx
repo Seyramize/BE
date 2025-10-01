@@ -668,7 +668,7 @@ export default function BookExperiencePage() {
                           No. of Pax
                         </h3>
                         <Select onValueChange={handleGuestsChange} defaultValue="1">
-                          <SelectTrigger className="w-32 h-10 rounded-full bg-slate-900 text-white border-slate-900 px-3 text-sm">
+                          <SelectTrigger className="w-20 h-8 rounded-full bg-slate-900 text-white border-slate-900 px-3 text-sm">
                             <SelectValue placeholder="1" />
                           </SelectTrigger>
                           <SelectContent className="w-32">
