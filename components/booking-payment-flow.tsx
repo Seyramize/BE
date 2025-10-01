@@ -7,6 +7,7 @@ import { BookingConfirmation } from "@/components/booking-confirmation"
 interface BookingPaymentFlowProps {
   isOpen: boolean
   onClose: () => void
+  onBookingConfirmed?: (guests: number) => void // Callback for group experiences
   bookingDetails: {
     experienceName: string
     experienceImage?: string
@@ -24,13 +25,17 @@ interface BookingPaymentFlowProps {
   }
 }
 
-export function BookingPaymentFlow({ isOpen, onClose, bookingDetails }: BookingPaymentFlowProps) {
+export function BookingPaymentFlow({ isOpen, onClose, onBookingConfirmed, bookingDetails }: BookingPaymentFlowProps) {
   const [currentStep, setCurrentStep] = useState<"payment" | "confirmation">("payment")
   const [paymentData, setPaymentData] = useState<any>(null)
 
   const handlePaymentSuccess = (data: any) => {
     setPaymentData(data)
     setCurrentStep("confirmation")
+    // Call the booking confirmed callback for group experiences
+    if (onBookingConfirmed) {
+      onBookingConfirmed(bookingDetails.guests)
+    }
   }
 
   const handleClose = () => {

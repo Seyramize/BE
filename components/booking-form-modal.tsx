@@ -33,6 +33,7 @@ interface BookingFormModalProps {
   experience: ExperienceData
   showConfirmation?: boolean
   bookingDetails?: any
+  onBookingConfirmed?: (guests: number) => void // Callback for group experiences
 }
 
 interface FormData {
@@ -49,7 +50,7 @@ interface FormData {
   customGuestCount: number
 }
 
-export function BookingFormModal({ isOpen, onClose, experience, showConfirmation = false, bookingDetails }: BookingFormModalProps) {
+export function BookingFormModal({ isOpen, onClose, experience, showConfirmation = false, bookingDetails, onBookingConfirmed }: BookingFormModalProps) {
   const [showPaymentFlow, setShowPaymentFlow] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [formData, setFormData] = useState<FormData>({
@@ -206,6 +207,12 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
     onClose()
   }
 
+  const handleBookingConfirmed = (guests: number) => {
+    if (onBookingConfirmed) {
+      onBookingConfirmed(guests)
+    }
+  }
+
   if (!isOpen) return null
 
   // Show payment flow if form is submitted
@@ -214,6 +221,7 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
       <BookingPaymentFlow
         isOpen={true}
         onClose={handlePaymentFlowClose}
+        {...(onBookingConfirmed && { onBookingConfirmed: handleBookingConfirmed })}
         bookingDetails={{
           experienceName: experience.title,
           experienceImage: experience.heroImage,

@@ -31,6 +31,17 @@ export type Experience = {
       minimumGuests: number
       included: string[]
       whatsPriceless?: string
+      // Group experience specific fields
+      isGroupExperience?: boolean
+      totalSlots?: number
+      availableSlots?: number
+      groupPricing?: {
+        fullPrice: number
+        paymentPlanPrice: number
+        paymentPlanInstallments: number
+      }
+      notIncluded?: string[]
+      important?: string
     }
     tags: string[]
   }
@@ -1146,6 +1157,74 @@ export type Experience = {
           "Beyond Essentials Bag",
           "Complimentary bites and drinks.",
         ]
+      },
+      tags: ["Travel Planner's Choice", "2 PAX"]
+    },
+    {
+      id: 20,
+      slug: "december-in-ghana-castles-to-coastlines",
+      defaultContent: {
+        title: "December in Ghana: Castles to Coastlines",
+        shortDescription: "A group journey through Ghana's December magic - from AfroFuture Festival to Cape Coast Castle, ATV rides, and New Year's Eve celebration.",
+        image: "/images/experiences/december-ghana/cover.jpg?height=400&width=300&text=December+Ghana+Group+Experience",
+        location: "Ghana"
+      },
+      expandedContent: {
+        title: "December in Ghana: Castles to Coastlines",
+        fullDescription: "Join a curated group journey through Ghana's December magic. Experience AfroFuture Festival, explore Cape Coast Castle, enjoy ATV rides at Shai Hills, cruise Volta Lake, and celebrate New Year's Eve in style.",
+        image: "/placeholder.svg?height=500&width=400&text=December+Ghana+Group+Experience"
+      },
+      bookingContent: {
+        title: "December in Ghana: Castles to Coastlines",
+        subtitle: "28TH DEC 2025 - 2ND JAN 2026",
+        duration: "7 DAYS",
+        destinations: "MULTIPLE DESTINATIONS",
+        maxGuests: "20 GUESTS (12 SPOTS OPEN)",
+        heroImage: "/images/experiences/december-ghana/hero.jpg?height=800&width=1200&text=Luxury+Pool+Beach+Resort",
+        galleryImages: [
+          "/images/experiences/december-ghana/gallery/1.jpg?height=400&width=300&text=AfroFuture+Festival",
+          "/images/experiences/december-ghana/gallery/2.jpg?height=400&width=300&text=Cape+Coast+Castle",
+          "/images/experiences/december-ghana/gallery/3.jpg?height=400&width=300&text=ATV+Rides+Shai+Hills",
+          "/images/experiences/december-ghana/gallery/4.jpg?height=400&width=300&text=Volta+Lake+Cruise",
+          "/images/experiences/december-ghana/gallery/5.jpg?height=400&width=300&text=New+Years+Eve+Celebration",
+          "/images/experiences/december-ghana/gallery/6.jpg?height=400&width=300&text=Accra+City+Tour",
+          "/images/experiences/december-ghana/gallery/7.jpg?height=400&width=300&text=Beach+Club+Escape",
+          "/images/experiences/december-ghana/gallery/8.jpg?height=400&width=300&text=Welcome+Dinner",
+        ],
+        overview: "Join a curated group journey through Ghana's December magic. This shared experience blends culture, adventure, and celebration as you explore AfroFuture Festival, Cape Coast Castle, ATV rides at Shai Hills, Volta Lake sunset cruise, and a curated New Year's Eve celebration. From long-table welcome dinners to private beach club escapes, this is a shared experience of Ghana's December magic.",
+        highlights: [
+          "Adventures in Nature - ATV rides at Shai Hills, Volta Lake sunset cruise, and Kakum Canopy Walk.",
+          "Culture & Heritage - AfroFuture Festival, Cape Coast Castle, and Accra city tour (Jamestown & Black Star landmarks).",
+          "Luxury & Lifestyle - Long-table welcome dinner, private beach club escape, and curated New Year's Eve celebration."
+        ],
+        startingPrice: 3000,
+        pricing: {
+          oneGuest: 3000,
+          twoGuests: 3000,
+          threeOrMoreGuests: 3000,
+        },
+        minimumGuests: 1,
+        included: [
+          "Private transportation including fuel",
+          "All scheduled experiences and tours",
+          "Dedicated chaperone and access to resident guides",
+          "5-star accommodations",
+          "Beyond Experiences Essentials™ Bag"
+        ],
+        notIncluded: [
+          "International flights to and from Accra",
+          "Personal expenses (shopping, unscheduled meals, extras)",
+          "Travel insurance (recommended and available on request)"
+        ],
+        important: "Spaces are limited and joining the trip means traveling with a set group, sharing experiences, and enjoying Ghana's December magic together.",
+        isGroupExperience: true,
+        totalSlots: 20,
+        availableSlots: 12,
+        groupPricing: {
+          fullPrice: 3000,
+          paymentPlanPrice: 1000,
+          paymentPlanInstallments: 3
+        }
       },
       tags: ["Travel Planner's Choice", "2 PAX"]
     },
