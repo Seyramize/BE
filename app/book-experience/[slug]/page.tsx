@@ -448,6 +448,12 @@ export default function BookExperiencePage() {
     bookingContent.availableSlots || 0
   );
 
+  // Dynamic per-installment price for group experiences based on current totalPrice and installments
+  const groupInstallments = bookingContent.groupPricing?.paymentPlanInstallments || 1;
+  const groupPerInstallment = isGroupExperience
+    ? parseFloat(((totalPrice || 0) / groupInstallments).toFixed(2))
+    : 0;
+
   const handleGuestsChange = (value: string) => {
     const guests = parseInt(value, 10);
     let pricePerGuest;
@@ -537,7 +543,7 @@ export default function BookExperiencePage() {
           {/* Group Experience Details - Below Title */}
           {isGroupExperience && (
             <div className="mt-4">
-              <div className="inline-flex items-center justify-center gap-3 px-6 py-2 rounded-full bg-slate-900 shadow-sm text-sm uppercase tracking-widest font-sans text-amber-100">
+              <div className="inline-flex items-center justify-center gap-3 px-6 py-2 rounded-full bg-slate-900 shadow-sm text-sm uppercase tracking-widest font-sans text-white">
                 <span>{bookingContent.duration}</span>
                 <span>|</span>
                 <span>${bookingContent.groupPricing?.fullPrice}</span>
@@ -545,7 +551,7 @@ export default function BookExperiencePage() {
                 <ActiveCounter
                   totalSlots={activeCounter.totalSlots}
                   availableSlots={activeCounter.availableSlots}
-                  className="text-amber-100"
+                  className="text-white"
                 />
               </div>
             </div>
@@ -693,7 +699,7 @@ export default function BookExperiencePage() {
                         {/* Payment Plan */}
                         <div className="flex flex-col justify-center items-start tracking-widest leading-none space-y-0 mt-1">
                           <div className="text-base font-sans font-semibold text-slate-900">
-                            OR ${bookingContent.groupPricing?.paymentPlanPrice}
+                            OR ${groupPerInstallment}
                           </div>
                           <div className="text-xs font-sans text-slate-600">
                             IN {bookingContent.groupPricing?.paymentPlanInstallments} PAYMENTS
@@ -702,7 +708,7 @@ export default function BookExperiencePage() {
 
                         {/* Button */}
                         <Button
-                          className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-60 py-3 rounded-lg text-sm font-sans"
+                          className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
                           onClick={() => setIsBookingModalOpen(true)}
                         >
                           Book your spot
