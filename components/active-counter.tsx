@@ -7,9 +7,10 @@ interface ActiveCounterProps {
   totalSlots: number
   availableSlots: number
   className?: string
+  textSize?: string
 }
 
-export function ActiveCounter({ totalSlots, availableSlots, className = "" }: ActiveCounterProps) {
+export function ActiveCounter({ totalSlots, availableSlots, className = "", textSize = "text-sm" }: ActiveCounterProps) {
   const [currentAvailable, setCurrentAvailable] = useState(availableSlots)
   const [isAnimating, setIsAnimating] = useState(false)
 
@@ -35,7 +36,7 @@ export function ActiveCounter({ totalSlots, availableSlots, className = "" }: Ac
   return (
     <div className={`flex items-center gap-2 ${className}`}>
       <Users className="w-4 h-4" />
-      <span className="text-sm font-sans">
+      <span className={`${textSize} font-sans`}>
         {totalSlots} GUESTS ({spotsOpen} SPOTS OPEN)
       </span>
       {isAnimating && (

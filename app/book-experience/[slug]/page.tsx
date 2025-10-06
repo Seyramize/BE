@@ -488,7 +488,7 @@ export default function BookExperiencePage() {
       <SiteHeader />
 
       {/* Hero Section */}
-      <section className="relative min-h-[55vh] md:min-h-[95vh] flex items-center justify-center pt-28 md:pt-20 pb-16">
+      <section className="relative min-h-[60vh] sm:min-h-[55vh] md:min-h-[95vh] flex items-center justify-center pt-20 sm:pt-28 md:pt-20 pb-0 sm:pb-16">
         <div className="absolute inset-0">
           <Image
             src={bookingContent.heroImage}
@@ -499,7 +499,7 @@ export default function BookExperiencePage() {
             priority
           />
           <div className="absolute inset-0 bg-black/40" />
-          {/* Glassmorphism gradient */}
+          {/* Glassmorphism gradient - hidden on mobile */}
           <div
             className="hidden sm:block absolute inset-0 pointer-events-none"
             style={{
@@ -509,41 +509,30 @@ export default function BookExperiencePage() {
           />
         </div>
         <div className="relative w-full max-w-5xl mx-auto px-6 text-center z-10">
-          {/* Group Experience Text - Above Title */}
+          {/* Group Experience Text - Above Title (Mobile Only) */}
           {isGroupExperience && (
-            <div className="mb-2">
+            <div className="mb-2 sm:hidden">
               <span className="text-white font-sans text-xs uppercase tracking-widest">GROUP EXPERIENCE</span>
             </div>
           )}
 
-          {/* Group Experience Date - Above Title */}
-          {isGroupExperience && (
-            <p className="text-white/90 font-sans text-sm uppercase tracking-widest mb-2">
-              {bookingContent.subtitle}
-            </p>
-          )}
-
-          <h1
-            className="font-serif font-normal text-white mb-2 drop-shadow-md"
-            style={
-              {
-                // textShadow: `
-                //   0 4px 24px rgba(0,0,0,0.55),
-                //   0 2px 8px rgba(0,0,0,0.45),
-                //   0 1px 0 #fff
-                // `
-              }
-            }
-          >
+          <h1 className="font-serif sm:font-serif font-normal text-white mb-2 drop-shadow-md">
             <div className="text-[clamp(2rem,6vw,4rem)] leading-none">
               {bookingContent.title}
             </div>
           </h1>
 
-          {/* Group Experience Details - Below Title */}
+          {/* Group Experience Subtitle - Below Title (Mobile Only) */}
           {isGroupExperience && (
-            <div className="mt-4">
-              <div className="inline-flex items-center justify-center gap-3 px-6 py-2 rounded-full bg-slate-900 shadow-sm text-sm uppercase tracking-widest font-sans text-white">
+            <p className="text-white font-sans text-xs uppercase tracking-widest mb-6 sm:hidden">
+              {bookingContent.subtitle}
+            </p>
+          )}
+
+          {/* Group Experience Details - Below Title (Desktop Only) */}
+          {isGroupExperience && (
+            <div className="hidden sm:block mt-4">
+              <div className="inline-flex items-center justify-center gap-3 px-6 py-2 rounded-full bg-slate-900 shadow-sm text-xs uppercase tracking-widest font-sans text-white">
                 <span>{bookingContent.duration}</span>
                 <span>|</span>
                 <span>${bookingContent.groupPricing?.fullPrice}</span>
@@ -567,28 +556,26 @@ export default function BookExperiencePage() {
               <span className="tracking-widest">Mastercard holders only</span>
             </div>
           )}
-          {/* <p className="hidden sm:block text-3xl sm:text-lg md:text-xl text-white/90 mb-6 md:mb-8 max-w-3xl mx-auto font-sans leading-relaxed"
-           style={{
-            // textShadow: `
-            //   0 4px 24px rgba(0,0,0,0.55), 
-            //   0 2px 8px rgba(0,0,0,0.45), 
-            //   0 1px 0 #fff
-            // `
-          }}>
-            {bookingContent.subtitle}
-          </p> */}
-          {/* <div className="hidden sm:inline-flex items-center justify-center gap-3 sm:gap-2 px-2 sm:px-8 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-sm text-[clamp(0.55rem,2vw,0.95rem)] uppercase tracking-widest font-sans text-white whitespace-nowrap"
-           style={{
-            // textShadow: "0 2px 8px rgba(0,0,0,0.10), 0 1px 0 #fff"
-          }}>
-            <span>{bookingContent.duration}</span>
-            <span>•</span>
-            <span>{bookingContent.destinations}</span>
-            <span>•</span>
-            <span>{bookingContent.maxGuests}</span>
-          </div> */}
         </div>
       </section>
+
+      {/* Key Stats Bar - Mobile Only for Group Experiences */}
+      {isGroupExperience && (
+        <div className="sm:hidden bg-gray-800 py-4 px-6">
+          <div className="flex items-center justify-center gap-2 text-white font-sans text-[10px] uppercase tracking-widest whitespace-nowrap">
+            <span>{bookingContent.duration}</span>
+            <span>|</span>
+            <span>${bookingContent.groupPricing?.fullPrice}</span>
+            <span>|</span>
+            <ActiveCounter
+              totalSlots={activeCounter.totalSlots}
+              availableSlots={activeCounter.availableSlots}
+              className="text-white"
+              textSize="text-[10px]"
+            />
+          </div>
+        </div>
+      )}
 
       {/* Main Content (starts immediately after the faded hero image) */}
       <section className="relative z-10 bg-white pt-4 sm:pt-0 pb-12">
@@ -661,58 +648,101 @@ export default function BookExperiencePage() {
                 {isGroupExperience ? (
                   /* Group Experience Pricing */
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      {/* Pax Selector */}
-                      <div>
-                        <h3 className="text-[11px] uppercase tracking-widest font-sans text-slate-600 mb-1">
-                          No. of Pax
-                        </h3>
-                        <Select onValueChange={handleGuestsChange} defaultValue="1">
-                          <SelectTrigger className="w-20 h-8 rounded-full bg-slate-900 text-white border-slate-900 px-3 text-sm">
-                            <SelectValue placeholder="1" />
-                          </SelectTrigger>
-                          <SelectContent className="w-32">
-                            {[...Array(20)].map((_, i) => (
-                              <SelectItem key={i + 1} value={`${i + 1}`}>
-                                {i + 1}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      {/* Divider */}
-                      <div className="h-12 w-px bg-slate-900 mx-6" />
-
-                      {/* Pricing + Button */}
-                      <div className="flex items-center gap-12 flex-1">
-                        {/* Full Price */}
-                        <div className="text-left">
-                          <h3 className="text-[11px] uppercase tracking-widest gap-4 font-sans text-slate-600 mb-1">
-                            Starting
+                    {/* Mobile Layout */}
+                    <div className="sm:hidden space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="text-[11px] uppercase tracking-widest font-sans text-black mb-1">
+                            NO. OF PAX
+                          </h3>
+                          <Select onValueChange={handleGuestsChange} defaultValue="1">
+                            <SelectTrigger className="w-20 h-8 rounded-full bg-gray-800 text-white border-gray-800 px-3 text-sm">
+                              <SelectValue placeholder="1" />
+                            </SelectTrigger>
+                            <SelectContent className="w-32">
+                              {[...Array(20)].map((_, i) => (
+                                <SelectItem key={i + 1} value={`${i + 1}`}>
+                                  {i + 1}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="text-right">
+                          <h3 className="text-[11px] uppercase tracking-widest font-sans text-black mb-1">
+                            STARTING AT
                           </h3>
                           <div className="text-3xl font-sans font-normal text-black leading-none">
                             ${totalPrice}
                           </div>
-                        </div>
-
-                        {/* Payment Plan */}
-                        <div className="flex flex-col justify-center items-start tracking-widest leading-none space-y-0 mt-1">
-                          <div className="text-base font-sans font-semibold text-slate-900">
-                            OR ${groupPerInstallment}
-                          </div>
-                          <div className="text-xs font-sans text-slate-600">
-                            IN {bookingContent.groupPricing?.paymentPlanInstallments} PAYMENTS
+                          <div className="text-sm font-sans text-black mt-1">
+                            or ${groupPerInstallment} in {bookingContent.groupPricing?.paymentPlanInstallments} payments
                           </div>
                         </div>
+                      </div>
+                      <Button
+                        className="w-full bg-gray-800 hover:bg-gray-700 text-white py-6 rounded-lg text-sm font-sans"
+                        onClick={() => setIsBookingModalOpen(true)}
+                      >
+                        Book your spot
+                      </Button>
+                    </div>
 
-                        {/* Button */}
-                        <Button
-                          className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
-                          onClick={() => setIsBookingModalOpen(true)}
-                        >
-                          Book your spot
-                        </Button>
+                    {/* Desktop Layout */}
+                    <div className="hidden sm:block">
+                      <div className="flex items-center justify-between">
+                        {/* Pax Selector */}
+                        <div>
+                          <h3 className="text-[11px] uppercase tracking-widest font-sans text-slate-600 mb-1">
+                            No. of Pax
+                          </h3>
+                          <Select onValueChange={handleGuestsChange} defaultValue="1">
+                            <SelectTrigger className="w-20 h-8 rounded-full bg-slate-900 text-white border-slate-900 px-3 text-sm">
+                              <SelectValue placeholder="1" />
+                            </SelectTrigger>
+                            <SelectContent className="w-32">
+                              {[...Array(20)].map((_, i) => (
+                                <SelectItem key={i + 1} value={`${i + 1}`}>
+                                  {i + 1}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        {/* Divider */}
+                        <div className="h-12 w-px bg-slate-900 mx-6" />
+
+                        {/* Pricing + Button */}
+                        <div className="flex items-center gap-12 flex-1">
+                          {/* Full Price */}
+                          <div className="text-left">
+                            <h3 className="text-[11px] uppercase tracking-widest gap-4 font-sans text-slate-600 mb-1">
+                              Starting
+                            </h3>
+                            <div className="text-3xl font-sans font-normal text-black leading-none">
+                              ${totalPrice}
+                            </div>
+                          </div>
+
+                          {/* Payment Plan */}
+                          <div className="flex flex-col justify-center items-start tracking-widest leading-none space-y-0 mt-1">
+                            <div className="text-base font-sans font-semibold text-slate-900">
+                              OR ${groupPerInstallment}
+                            </div>
+                            <div className="text-xs font-sans text-slate-600">
+                              IN {bookingContent.groupPricing?.paymentPlanInstallments} PAYMENTS
+                            </div>
+                          </div>
+
+                          {/* Button */}
+                          <Button
+                            className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
+                            onClick={() => setIsBookingModalOpen(true)}
+                          >
+                            Book your spot
+                          </Button>
+                        </div>
                       </div>
                     </div>
                   </div>
