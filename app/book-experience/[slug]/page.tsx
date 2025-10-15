@@ -9,6 +9,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { BookingFormModal } from "@/components/booking-form-modal";
 import { GalleryModal } from "@/components/gallery-modal";
 import { EnquireAvailabilityModal } from "@/components/enquire-availability-modal";
+import { BookingConfirmationGroup } from "@/components/booking-confirmation-group";
 import { experiences, type Experience } from "@/lib/experiences-data";
 import {
   Check,
@@ -378,6 +379,7 @@ export default function BookExperiencePage() {
   const [isSticky, setIsSticky] = useState(false);
   const [isMastercardModalOpen, setIsMastercardModalOpen] = useState(false);
   const [isEnquireModalOpen, setIsEnquireModalOpen] = useState(false);
+  const [isGroupConfirmationOpen, setIsGroupConfirmationOpen] = useState(false);
   const buttonRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -682,7 +684,7 @@ export default function BookExperiencePage() {
                       </div>
                       <Button
                         className="w-full bg-gray-800 hover:bg-gray-700 text-white py-6 rounded-lg text-sm font-sans"
-                        onClick={() => setIsBookingModalOpen(true)}
+                        onClick={() => setIsGroupConfirmationOpen(true)}
                       >
                         Book your spot
                       </Button>
@@ -738,7 +740,7 @@ export default function BookExperiencePage() {
                           {/* Button */}
                           <Button
                             className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
-                            onClick={() => setIsBookingModalOpen(true)}
+                            onClick={() => setIsGroupConfirmationOpen(true)}
                           >
                             Book your spot
                           </Button>
@@ -1143,6 +1145,33 @@ export default function BookExperiencePage() {
           slug: experience.slug,
         }}
       />
+
+      {/* Group Experience Booking Confirmation Modal */}
+      {isGroupExperience && (
+        <BookingConfirmationGroup
+          isOpen={isGroupConfirmationOpen}
+          onClose={() => setIsGroupConfirmationOpen(false)}
+          experience={{
+            id: experience.id.toString(),
+            title: bookingContent.title,
+            totalPrice: totalPrice,
+            heroImage: bookingContent.heroImage,
+            slug: experience.slug,
+            groupPricing: bookingContent.groupPricing,
+          }}
+          numberOfGuests={numberOfGuests}
+          onBookingConfirmed={(guests: number) => {
+            activeCounter.bookSpots(guests);
+            setIsGroupConfirmationOpen(false);
+          }}
+          activeCounter={{
+            totalSlots: activeCounter.totalSlots,
+            availableSlots: activeCounter.availableSlots,
+            spotsOpen: activeCounter.spotsOpen,
+            spotsTaken: activeCounter.spotsTaken,
+          }}
+        />
+      )}
 
       <SiteFooter />
     </div>

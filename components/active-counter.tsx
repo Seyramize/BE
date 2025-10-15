@@ -11,27 +11,19 @@ interface ActiveCounterProps {
 }
 
 export function ActiveCounter({ totalSlots, availableSlots, className = "", textSize = "text-sm" }: ActiveCounterProps) {
-  const [currentAvailable, setCurrentAvailable] = useState(availableSlots)
   const [isAnimating, setIsAnimating] = useState(false)
 
-  // Simulate real-time updates (mock behavior)
+  // Update local state when availableSlots prop changes (from real bookings)
   useEffect(() => {
-    const interval = setInterval(() => {
-      // Randomly simulate someone booking (5% chance every 10 seconds)
-      if (Math.random() < 0.05 && currentAvailable > 0) {
-        setIsAnimating(true)
-        setCurrentAvailable(prev => Math.max(0, prev - 1))
-        
-        // Reset animation after 2 seconds
-        setTimeout(() => setIsAnimating(false), 2000)
-      }
-    }, 10000) // Check every 10 seconds
+    if (availableSlots < totalSlots) {
+      setIsAnimating(true)
+      // Reset animation after 2 seconds
+      setTimeout(() => setIsAnimating(false), 2000)
+    }
+  }, [availableSlots, totalSlots])
 
-    return () => clearInterval(interval)
-  }, [currentAvailable])
-
-  const spotsOpen = currentAvailable
-  const spotsTaken = totalSlots - currentAvailable
+  const spotsOpen = availableSlots
+  const spotsTaken = totalSlots - availableSlots
 
   return (
     <div className={`flex items-center gap-2 ${className}`}>

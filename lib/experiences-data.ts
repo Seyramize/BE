@@ -1179,7 +1179,7 @@ export type Experience = {
         subtitle: "28TH DEC 2025 - 2ND JAN 2026",
         duration: "7 DAYS",
         destinations: "MULTIPLE DESTINATIONS",
-        maxGuests: "20 GUESTS (12 SPOTS OPEN)",
+        maxGuests: "20 GUESTS (20 SPOTS OPEN)",
         heroImage: "/images/experiences/december-ghana/hero.jpg?height=800&width=1200&text=Luxury+Pool+Beach+Resort",
         galleryImages: [
           "/images/experiences/december-ghana/gallery/1.jpg?height=400&width=300&text=AfroFuture+Festival",
@@ -1219,7 +1219,7 @@ export type Experience = {
         important: "Spaces are limited and joining the trip means traveling with a set group, sharing experiences, and enjoying Ghana's December magic together.",
         isGroupExperience: true,
         totalSlots: 20,
-        availableSlots: 12,
+        availableSlots: 20,
         groupPricing: {
           fullPrice: 3000,
           paymentPlanPrice: 1000,

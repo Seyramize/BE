@@ -78,12 +78,50 @@ model Booking {
   totalPrice       Float
   status           String   @default("PENDING") // PENDING, CONFIRMED, CANCELLED
   stripeCheckoutId String   @unique // The session ID from Stripe
+  
+  // Installment payment fields
+  isInstallmentPayment Boolean @default(false)
+  installmentTotal     Float?  // Total amount for installment plan
+  installmentCount     Int?    // Number of installments (e.g., 3)
+  installmentInterval   Int?    // Days between installments (e.g., 30)
+  
+  // Customer details for installment notifications
+  customerEmail        String?
+  customerName         String?
+  customerPhone        String?
 
   userId String
   user   User     @relation(fields: [userId], references: [id])
 
   experienceId String
   experience   Experience @relation(fields: [experienceId], references: [id])
+  
+  // Relations
+  installmentPayments InstallmentPayment[]
+}
+
+// Model for tracking individual installment payments
+model InstallmentPayment {
+  id                String   @id @default(cuid())
+  createdAt         DateTime @default(now())
+  scheduledDate     DateTime // When this payment should be charged
+  amount            Float    // Amount for this installment
+  status            String   @default("PENDING") // PENDING, PAID, FAILED, CANCELLED
+  installmentNumber Int      // Which installment this is (1, 2, 3, etc.)
+  
+  // Stripe payment details
+  stripePaymentIntentId String? // Stripe Payment Intent ID
+  stripeSessionId        String? // Stripe Checkout Session ID for this installment
+  paymentMethodId        String? // Saved payment method ID
+  
+  // Payment attempt tracking
+  lastAttemptedAt   DateTime?
+  attemptCount      Int      @default(0)
+  failureReason     String?
+  
+  // Relations
+  bookingId String
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 }
 
 // Model for user reviews
