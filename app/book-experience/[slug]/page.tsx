@@ -446,6 +446,7 @@ export default function BookExperiencePage() {
   // Active counter for group experiences
   const isGroupExperience = bookingContent.isGroupExperience;
   const activeCounter = useActiveCounter(
+    experience.id.toString(),
     bookingContent.totalSlots || 0,
     bookingContent.availableSlots || 0
   );
@@ -540,6 +541,7 @@ export default function BookExperiencePage() {
                 <span>${bookingContent.groupPricing?.fullPrice}</span>
                 <span>|</span>
                 <ActiveCounter
+                  experienceId={experience.id.toString()}
                   totalSlots={activeCounter.totalSlots}
                   availableSlots={activeCounter.availableSlots}
                   className="text-white"
@@ -570,6 +572,7 @@ export default function BookExperiencePage() {
             <span>${bookingContent.groupPricing?.fullPrice}</span>
             <span>|</span>
             <ActiveCounter
+              experienceId={experience.id.toString()}
               totalSlots={activeCounter.totalSlots}
               availableSlots={activeCounter.availableSlots}
               className="text-white"
@@ -1157,6 +1160,9 @@ export default function BookExperiencePage() {
             totalPrice: totalPrice,
             heroImage: bookingContent.heroImage,
             slug: experience.slug,
+            duration: bookingContent.duration,
+            startDate: (bookingContent as any).startDate,
+            endDate: (bookingContent as any).endDate,
             groupPricing: bookingContent.groupPricing,
           }}
           numberOfGuests={numberOfGuests}

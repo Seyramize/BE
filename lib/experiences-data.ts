@@ -1,3 +1,5 @@
+import { initializeSlots } from './slot-manager'
+
 export type Experience = {
     id: number
     slug: string
@@ -42,6 +44,8 @@ export type Experience = {
       }
       notIncluded?: string[]
       important?: string
+      startDate?: string
+      endDate?: string
     }
     tags: string[]
   }
@@ -87,7 +91,7 @@ export type Experience = {
           "/images/experiences/shai-hills/Gallery/16.jpg?height=400&width=300&text=Nature+Activities",
           "/images/experiences/shai-hills/Gallery/17.jpg?height=400&width=300&text=Nature+Activities",
         ],
-        overview: "Discover the perfect blend of nature, culture, and adventure at Shai Hills. Begin with a scenic hike up Mogo Hills, exploring ancient caves and enjoying panoramic views of the Volta plains. Step into heritage at the Wildlife & Heritage Museum, where culture and history meet. Then, kick up the dust on an adrenaline-filled quad biking ride through the forest reserve. A day of discovery, adventure, and moments you’ll never forget.",
+        overview: "Discover the perfect blend of nature, culture, and adventure at Shai Hills. Begin with a scenic hike up Mogo Hills, exploring ancient caves and enjoying panoramic views of the Volta plains. Step into heritage at the Wildlife & Heritage Museum, where culture and history meet. Then, kick up the dust on an adrenaline-filled quad biking ride through the forest reserve. A day of discovery, adventure, and moments you'll never forget.",
         highlights: [
           "Guided hike up Mogo Hills.",
           "Panoramic hilltop views and photo opportunities",
@@ -115,13 +119,13 @@ export type Experience = {
       slug: "cape-coast-tour",
       defaultContent: {
         title: "Cape Coast Tour",
-        shortDescription: "Trace Ghana’s history and natural beauty in one journey.",
+        shortDescription: "Trace Ghana's history and natural beauty in one journey.",
         image: "/images/experiences/cape-coast-castle/cover.jpg?height=400&width=300&text=Cape+Coast+Discovery",
         location: "Central Region, Ghana"
       },
       expandedContent: {
         title: "Cape Coast Tour",
-        fullDescription: "A powerful journey through Ghana’s past — from Assin Manso and the castles of Cape Coast and Elmina, to the rainforest canopy walk at Kakum. History, reflection, and breathtaking views.",
+        fullDescription: "A powerful journey through Ghana's past — from Assin Manso and the castles of Cape Coast and Elmina, to the rainforest canopy walk at Kakum. History, reflection, and breathtaking views.",
         image: "/placeholder.svg?height=500&width=400&text=Cape+Coast+Castle+Historical",
       },
       bookingContent: {
@@ -157,12 +161,12 @@ export type Experience = {
           "/images/experiences/cape-coast-castle/Gallery/23.jpg?height=400&width=300&text=Cape+Coast+Castle+2",
           "/images/experiences/cape-coast-castle/Gallery/24.jpg?height=400&width=300&text=Cape+Coast+Castle+2",
         ],
-        overview: "Trace Ghana’s history and natural beauty in one journey. Begin at Assin Manso Slave River, where enslaved people took their last bath. Continue to Cape Coast Castle and Elmina Castle, two of West Africa’s most significant historical sites. End at Kakum National Park, where the canopy walkway offers a breathtaking view above the forest.",
+        overview: "Trace Ghana's history and natural beauty in one journey. Begin at Assin Manso Slave River, where enslaved people took their last bath. Continue to Cape Coast Castle and Elmina Castle, two of West Africa's most significant historical sites. End at Kakum National Park, where the canopy walkway offers a breathtaking view above the forest.",
         highlights: [
-          "Learn about Ghana’s role in the transatlantic slave trade at Cape Coast and Elmina Castles.",
+          "Learn about Ghana's role in the transatlantic slave trade at Cape Coast and Elmina Castles.",
           "Stand at the Door of No Return, where enslaved Africans were shipped away.",
           "Visit Assin Manso and reflect on the journey of the enslaved.",
-          "Experience the rainforest from above on Kakum’s canopy walkway.",
+          "Experience the rainforest from above on Kakum's canopy walkway.",
           "Enjoy breathtaking coastal landscapes and countryside views.",
         ],
         startingPrice: 380,
@@ -192,7 +196,7 @@ export type Experience = {
       },
       expandedContent: {
         title: "Cape Coast Castle by Candlelight",
-        fullDescription: "A powerful journey through Ghana’s past — from Assin Manso and the castles of Cape Coast and Elmina, to the rainforest canopy walk at Kakum. History, reflection, and breathtaking views.",
+        fullDescription: "A powerful journey through Ghana's past — from Assin Manso and the castles of Cape Coast and Elmina, to the rainforest canopy walk at Kakum. History, reflection, and breathtaking views.",
         image: "/placeholder.svg?height=500&width=400&text=Cape+Coast+Castle+Historical",
       },
       bookingContent: {
@@ -213,7 +217,7 @@ export type Experience = {
           "/images/experiences/cape-coast-by-candelight/Gallery/8.jpg?height=400&width=300&text=Cape+Coast+Castle+2",
           "/images/experiences/cape-coast-by-candelight/Gallery/9.jpg?height=400&width=300&text=Cape+Coast+Castle+2",
         ],
-        overview: "Step into history under the cover of night with an exclusive after-dark tour of Cape Coast Castle. By lantern light, wander the dungeons, the governor’s quarters, and the Door of No Return. Haunting silence and the crash of Atlantic waves bring the past into sharp focus. Guided storytelling reveals resilience and memory, culminating in a candlelit reflection in the courtyard",
+        overview: "Step into history under the cover of night with an exclusive after-dark tour of Cape Coast Castle. By lantern light, wander the dungeons, the governor's quarters, and the Door of No Return. Haunting silence and the crash of Atlantic waves bring the past into sharp focus. Guided storytelling reveals resilience and memory, culminating in a candlelit reflection in the courtyard",
         whatsPriceless: "A deeply personal, hauntingly immersive journey through history, walking in the footsteps of the past in a way daylight cannot convey.",
         highlights: [
           "Exclusive access after regular hours",
@@ -246,12 +250,12 @@ export type Experience = {
       },
       expandedContent: {
         title: "Accra City Tour",
-        fullDescription: "Explore Ghana’s capital through its history, culture, and daily life — from monuments and markets to museums and makers. A full immersion into the rhythm of the city.",
+        fullDescription: "Explore Ghana's capital through its history, culture, and daily life — from monuments and markets to museums and makers. A full immersion into the rhythm of the city.",
         image: "/placeholder.svg?height=500&width=400&text=Accra+Skyline+Modern",
       },
       bookingContent: {
         title: "Accra City Tour",
-        subtitle: "Dive into the heart of Ghana’s bustling capital, exploring its vibrant markets, rich museums, and iconic cultural sites—all in one unforgettable day.",
+        subtitle: "Dive into the heart of Ghana's bustling capital, exploring its vibrant markets, rich museums, and iconic cultural sites—all in one unforgettable day.",
         duration: "1 DAY",
         destinations: "5 DESTINATIONS",
         maxGuests: "20 GUESTS (MAX)",
@@ -274,10 +278,10 @@ export type Experience = {
           "/images/experiences/accra-city-tour/Gallery/15.jpg?height=400&width=300&text=Accra+City+Tour",
           "/images/experiences/accra-city-tour/Gallery/16.jpg?height=400&width=300&text=Accra+City+Tour",
         ],
-        overview: "Accra is a city alive with history, rhythm, and everyday energy. Begin at the Kwame Nkrumah Mausoleum, dedicated to Ghana’s first president, then step into the Ghana National Museum to explore centuries of heritage. At Independence Square, feel the spirit of Ghana’s freedom, before diving into the color and chaos of Makola Market. Finish with handmade crafts and art at the Arts Centre, where you meet artisans shaping Ghana’s creative future.",
+        overview: "Accra is a city alive with history, rhythm, and everyday energy. Begin at the Kwame Nkrumah Mausoleum, dedicated to Ghana's first president, then step into the Ghana National Museum to explore centuries of heritage. At Independence Square, feel the spirit of Ghana's freedom, before diving into the color and chaos of Makola Market. Finish with handmade crafts and art at the Arts Centre, where you meet artisans shaping Ghana's creative future.",
         highlights: [
-          "Learn about Ghana’s independence and heritage",
-          "Experience Makola’s vibrant, sensory overload",
+          "Learn about Ghana's independence and heritage",
+          "Experience Makola's vibrant, sensory overload",
           "Engage with artisans at the Arts Centre",
           "Capture stunning photos at Independence Square",
         ],
@@ -302,18 +306,18 @@ export type Experience = {
       slug: "kente-and-rhythm",
       defaultContent: {
         title: "Kente and Rhythm",
-        shortDescription: "Dive into Ghana’s cultural heartbeat at the Accra Arts Centre.",
+        shortDescription: "Dive into Ghana's cultural heartbeat at the Accra Arts Centre.",
         image: "/images/experiences/kente/cover.jpg?height=400&width=300&text=Accra+City+Tour",
         location: "Greater Accra, Ghana",
       },
       expandedContent: {
         title: "Kente and Rhythm",
-        fullDescription: "Explore Ghana’s capital through its history, culture, and daily life — from monuments and markets to museums and makers. A full immersion into the rhythm of the city.",
+        fullDescription: "Explore Ghana's capital through its history, culture, and daily life — from monuments and markets to museums and makers. A full immersion into the rhythm of the city.",
         image: "/placeholder.svg?height=500&width=400&text=Accra+Skyline+Modern",
       },
       bookingContent: {
         title: "Kente and Rhythm",
-        subtitle: "Dive into the heart of Ghana’s bustling capital, exploring its vibrant markets, rich museums, and iconic cultural sites—all in one unforgettable day.",
+        subtitle: "Dive into the heart of Ghana's bustling capital, exploring its vibrant markets, rich museums, and iconic cultural sites—all in one unforgettable day.",
         duration: "1 DAY",
         destinations: "5 DESTINATIONS",
         maxGuests: "20 GUESTS (MAX)",
@@ -328,7 +332,7 @@ export type Experience = {
           "/images/experiences/kente/Gallery/7.jpg?height=400&width=300&text=Kente+Weaving",
           "/images/experiences/kente/Gallery/8.jpg?height=400&width=300&text=Kente+Weaving",
         ],
-        overview: "Dive into Ghana’s cultural heartbeat at the Accra Arts Centre. Begin with a private kente weaving workshop, where skilled artisans guide you in creating your own piece and share the meanings behind each pattern. Then, join in the pulse of West Africa through drumming and traditional dance — immersive, hands-on, and unforgettable.",
+        overview: "Dive into Ghana's cultural heartbeat at the Accra Arts Centre. Begin with a private kente weaving workshop, where skilled artisans guide you in creating your own piece and share the meanings behind each pattern. Then, join in the pulse of West Africa through drumming and traditional dance — immersive, hands-on, and unforgettable.",
         highlights: [
           "Exclusive Kente weaving workshop with local master weavers",
           "Interactive traditional drumming session",
@@ -367,7 +371,7 @@ export type Experience = {
     //   },
     //   bookingContent: {
     //     title: "Dine on a Mat",
-    //     subtitle: "Immerse yourself in Ghana’s living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
+    //     subtitle: "Immerse yourself in Ghana's living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
     //     duration: "1 DAY",
     //     destinations: "2 DESTINATIONS",
     //     maxGuests: "10 GUESTS (MAX)",
@@ -379,8 +383,8 @@ export type Experience = {
     //       "/images/experiences/dine-on-a-mat/Gallery/4.jpg?height=400&width=300&text=Kente+Weaving",
     //       "/images/experiences/dine-on-a-mat/Gallery/5.jpg?height=400&width=300&text=Kente+Weaving",
     //     ],
-    //     overview: "Step into Fulani culture with Chef Fatmata Binta, winner of the Basque Culinary World Prize and UN Ambassador for Responsible Tourism. Born in Sierra Leone, Chef Binta reimagines Fulani traditions through food, with an exclusive five-course meal curated for your group. Accompanied by traditional drinks, a tea ceremony, and stories about African gastronomy, the experience is intimate, cultural, and deeply flavorful.Dive into Ghana’s cultural heartbeat at the Accra Arts Centre. Begin with a private kente weaving workshop, where skilled artisans guide you in creating your own piece and share the meanings behind each pattern. Then, join in the pulse of West Africa through drumming and traditional dance — immersive, hands-on, and unforgettable.",
-    //     whatsPriceless: "Exclusive access to one of Africa’s most celebrated culinary voices and a chance to explore Fulani cuisine in a way few ever do.",
+    //     overview: "Step into Fulani culture with Chef Fatmata Binta, winner of the Basque Culinary World Prize and UN Ambassador for Responsible Tourism. Born in Sierra Leone, Chef Binta reimagines Fulani traditions through food, with an exclusive five-course meal curated for your group. Accompanied by traditional drinks, a tea ceremony, and stories about African gastronomy, the experience is intimate, cultural, and deeply flavorful.Dive into Ghana's cultural heartbeat at the Accra Arts Centre. Begin with a private kente weaving workshop, where skilled artisans guide you in creating your own piece and share the meanings behind each pattern. Then, join in the pulse of West Africa through drumming and traditional dance — immersive, hands-on, and unforgettable.",
+    //     whatsPriceless: "Exclusive access to one of Africa's most celebrated culinary voices and a chance to explore Fulani cuisine in a way few ever do.",
     //     highlights: [
     //       "Five-course private dining experience with Chef Binta",
     //       "Introduction to Fulani cuisine and culture",
@@ -418,7 +422,7 @@ export type Experience = {
       },
       bookingContent: {
         title: "Wojutei",
-        subtitle: "Immerse yourself in Ghana’s living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
+        subtitle: "Immerse yourself in Ghana's living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
         duration: "1 DAY",
         destinations: "2 DESTINATIONS",
         maxGuests: "10 GUESTS (MAX)",
@@ -434,8 +438,8 @@ export type Experience = {
           "/images/experiences/wojutei/Gallery/8.jpg?height=400&width=300&text=Kente+Weaving",
           "/images/experiences/wojutei/Gallery/9.jpg?height=400&width=300&text=Kente+Weaving",
         ],
-        overview: "Begin your journey at the lush Aburi Botanical Gardens, where a guided walk introduces you to native spices and plants steeped in tradition. From there, ascend to a stunning mountaintop home with sweeping views, where Chef Fiifi welcomes you into an intimate, storied dining experience. Drawing inspiration from the spices discovered in the gardens, Chef Fiifi weaves his personal journey and heritage into a curated multi-course meal that is as much storytelling as it is fine dining. The evening concludes with an interactive dessert session, where you’re invited to join him in the kitchen for a hands-on finale. This is not just dining - it’s discovery, connection, and memory, all set against the backdrop of Aburi’s serene landscape.",
-        whatsPriceless: "Exclusive access to Chef Fiifi’s culinary journey, blending nature, storytelling, and gastronomy into an intimate dining experience few will ever encounter.",
+        overview: "Begin your journey at the lush Aburi Botanical Gardens, where a guided walk introduces you to native spices and plants steeped in tradition. From there, ascend to a stunning mountaintop home with sweeping views, where Chef Fiifi welcomes you into an intimate, storied dining experience. Drawing inspiration from the spices discovered in the gardens, Chef Fiifi weaves his personal journey and heritage into a curated multi-course meal that is as much storytelling as it is fine dining. The evening concludes with an interactive dessert session, where you're invited to join him in the kitchen for a hands-on finale. This is not just dining - it's discovery, connection, and memory, all set against the backdrop of Aburi's serene landscape.",
+        whatsPriceless: "Exclusive access to Chef Fiifi's culinary journey, blending nature, storytelling, and gastronomy into an intimate dining experience few will ever encounter.",
         highlights: [
           "Guided spice walk through Aburi Botanical Gardens",
           "Intimate multi-course dining with Chef Fiifi",
@@ -463,7 +467,7 @@ export type Experience = {
       slug: "a-date-with-fashion",
       defaultContent: {
         title: "A Date with Fashion",
-        shortDescription: "Step into Ghana’s fashion scene with three pioneering designers whose work has graced the likes of Beyoncé, Cardi B, and Angelique Kidjo.",
+        shortDescription: "Step into Ghana's fashion scene with three pioneering designers whose work has graced the likes of Beyoncé, Cardi B, and Angelique Kidjo.",
         image: "/images/experiences/a-date-with-fashion/cover.jpg?height=400&width=300&text=Kente+Weaving+Workshop",
         location: "Greater Accra, Ghana",
       },
@@ -474,7 +478,7 @@ export type Experience = {
       },
       bookingContent: {
         title: "A Date with Fashion",
-        subtitle: "Immerse yourself in Ghana’s living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
+        subtitle: "Immerse yourself in Ghana's living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
         duration: "1 DAY",
         destinations: "2 DESTINATIONS",
         maxGuests: "10 GUESTS (MAX)",
@@ -489,8 +493,8 @@ export type Experience = {
           "/images/experiences/a-date-with-fashion/Gallery/16.jpg?height=400&width=300&text=Kente+Weaving",
          
         ],
-        overview: "Step into Ghana’s fashion scene with three pioneering designers whose work has graced the likes of Beyoncé, Cardi B, and Angelique Kidjo. Tour their studios, learn about their creative process, and collaborate to design a one-of-a-kind piece to take home. This is more than fashion — it’s artistry, identity, and culture.",
-        whatsPriceless: "Personal interaction with Ghana’s leading designers and the opportunity to co-create a custom piece.",
+        overview: "Step into Ghana's fashion scene with three pioneering designers whose work has graced the likes of Beyoncé, Cardi B, and Angelique Kidjo. Tour their studios, learn about their creative process, and collaborate to design a one-of-a-kind piece to take home. This is more than fashion — it's artistry, identity, and culture.",
+        whatsPriceless: "Personal interaction with Ghana's leading designers and the opportunity to co-create a custom piece.",
         highlights: [
           "Guided showroom tours with top designers",
           "Hands-on design session for a custom piece",
@@ -516,7 +520,7 @@ export type Experience = {
       slug: "afrofuture",
       defaultContent: {
         title: "Afrofuture",
-        shortDescription: "Time with the founders and access to headliners in one of Africa’s biggest music stages",
+        shortDescription: "Time with the founders and access to headliners in one of Africa's biggest music stages",
         image: "/images/experiences/afrofuture/cover.jpg?height=400&width=300&text=Kente+Weaving+Workshop",
         location: "Greater Accra, Ghana",
       },
@@ -527,7 +531,7 @@ export type Experience = {
       },
       bookingContent: {
         title: "Afrofuture",
-        subtitle: "Immerse yourself in Ghana’s living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
+        subtitle: "Immerse yourself in Ghana's living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
         duration: "1 DAY",
         destinations: "2 DESTINATIONS",
         maxGuests: "10 GUESTS (MAX)",
@@ -538,12 +542,12 @@ export type Experience = {
           "/images/experiences/afrofuture/Gallery/3.jpg?height=400&width=300&text=Kente+Weaving",
           "/images/experiences/afrofuture/Gallery/4.jpg?height=400&width=300&text=Kente+Weaving",
         ],
-        overview: "Accra is home to Afrofuture, one of the world’s most electrifying African music festivals. Past headliners include Burna Boy, Davido, Black Sherif, and Asake. With this experience, you join the founders’ inner circle. Go backstage, meet the artists, and live the festival from a perspective reserved for only a few.",
-        whatsPriceless: "Time with the founders and access to headliners in one of Africa’s biggest music stages",
+        overview: "Accra is home to Afrofuture, one of the world's most electrifying African music festivals. Past headliners include Burna Boy, Davido, Black Sherif, and Asake. With this experience, you join the founders' inner circle. Go backstage, meet the artists, and live the festival from a perspective reserved for only a few.",
+        whatsPriceless: "Time with the founders and access to headliners in one of Africa's biggest music stages",
         highlights: [
           "All-access festival entry",
           "Backstage experiences and introductions",
-          "Attend as part of the founders’ entourage",
+          "Attend as part of the founders' entourage",
         ],
         startingPrice: 3499,
         pricing: {
@@ -571,7 +575,7 @@ export type Experience = {
       },
       expandedContent: {
         title: "Gardens, Trails, and Cacao",
-        fullDescription: "Craft your own artisanal chocolate with Ghana’s finest cocoa, then relax into a massage at Resense Spa. A luxurious blend of indulgence and calm.",
+        fullDescription: "Craft your own artisanal chocolate with Ghana's finest cocoa, then relax into a massage at Resense Spa. A luxurious blend of indulgence and calm.",
         image: "/placeholder.svg?height=500&width=400&text=Ashanti+Palace+Golden",
       },
       bookingContent: {
@@ -607,9 +611,9 @@ export type Experience = {
           "/images/experiences/gtc/Gallery/23.jpg?height=400&width=300&text=Chocolate+Workshop",
           "/images/experiences/gtc/Gallery/24.jpg?height=400&width=300&text=Chocolate+Workshop",
         ],
-        overview: "Aburi is a perfect blend of history, greenery, and adventure. Begin at the Tetteh Quarshie Cocoa Farm, birthplace of Ghana’s cocoa story. Continue to Aburi Botanical Gardens, a serene landscape of exotic trees and curated paths. Then switch pace with quad biking across the Aburi Hills, riding winding trails with panoramic views. End the day at Oboadaka Waterfall, a hidden escape where you can cool off in nature’s calm.",
+        overview: "Aburi is a perfect blend of history, greenery, and adventure. Begin at the Tetteh Quarshie Cocoa Farm, birthplace of Ghana's cocoa story. Continue to Aburi Botanical Gardens, a serene landscape of exotic trees and curated paths. Then switch pace with quad biking across the Aburi Hills, riding winding trails with panoramic views. End the day at Oboadaka Waterfall, a hidden escape where you can cool off in nature's calm.",
         highlights: [
-          "Explore Ghana’s cocoa heritage at Tetteh Quarshie Farm",
+          "Explore Ghana's cocoa heritage at Tetteh Quarshie Farm",
           "Stroll through Aburi Botanical Gardens",
           "Quad biking adventure on Aburi Hills",
           "Relax at Oboadaka Waterfall",
@@ -635,13 +639,13 @@ export type Experience = {
       slug: "fairafric-farm-to-chocolate-tour",
       defaultContent: {
         title: "FairAfric Farm to Chocolate Tour",
-        shortDescription: "Located in Suhum in Ghana’s Eastern Region, Fairafric offers a unique bean-to-bar chocolate-making experience that blends education, sustainability, and delicious indulgence.",
+        shortDescription: "Located in Suhum in Ghana's Eastern Region, Fairafric offers a unique bean-to-bar chocolate-making experience that blends education, sustainability, and delicious indulgence.",
         image: "/images/experiences/fair-afric/cover.jpg?height=400&width=300&text=Ashanti+Cultural+Tour",
         location: "Greater Accra, Ghana",
       },
       expandedContent: {
         title: "FairAfric Farm to Chocolate Tour",
-        fullDescription: "Craft your own artisanal chocolate with Ghana’s finest cocoa, then relax into a massage at Resense Spa. A luxurious blend of indulgence and calm.",
+        fullDescription: "Craft your own artisanal chocolate with Ghana's finest cocoa, then relax into a massage at Resense Spa. A luxurious blend of indulgence and calm.",
         image: "/placeholder.svg?height=500&width=400&text=Ashanti+Palace+Golden",
       },
       bookingContent: {
@@ -659,7 +663,7 @@ export type Experience = {
           "/images/experiences/fair-afric/Gallery/5.jpg?height=400&width=300&text=Chocolate+Workshop",
           "/images/experiences/fair-afric/Gallery/6.jpg?height=400&width=300&text=Chocolate+Workshop",
         ],
-        overview: "Located in Suhum in Ghana’s Eastern Region, Fairafric offers a unique bean-to-bar chocolate-making experience that blends education, sustainability, and delicious indulgence. Guests are guided through the factory where they see each step of the chocolate-making process from sorting and roasting cocoa beans to tempering and packaging bars. Participants get the chance to make their chocolate bars, selecting ingredients like nuts, dried fruits, or spices to customize their creations. Visitors also get to enjoy a tasting flight of different chocolate varieties from creamy milk chocolate to intense dark options. This experience also includes lunch.",
+        overview: "Located in Suhum in Ghana's Eastern Region, Fairafric offers a unique bean-to-bar chocolate-making experience that blends education, sustainability, and delicious indulgence. Guests are guided through the factory where they see each step of the chocolate-making process from sorting and roasting cocoa beans to tempering and packaging bars. Participants get the chance to make their chocolate bars, selecting ingredients like nuts, dried fruits, or spices to customize their creations. Visitors also get to enjoy a tasting flight of different chocolate varieties from creamy milk chocolate to intense dark options. This experience also includes lunch.",
         highlights: [
           "Authentic, farm-to-factory experience",
           "Interactive and educational",
@@ -765,7 +769,7 @@ export type Experience = {
           "/images/experiences/art-after-dark/Gallery/10.jpg?height=400&width=300&text=Abseiling+Cliffs",
         ],
         overview: "Art After Dark (AAD), redefines how audiences engage with contemporary art. Instead of traditional gallery spaces, AAD unfolds in lounges, bars, and intimate venues, creating a relaxed yet vibrant atmosphere where art, performance, and community meet. Each edition is curated as either a group exhibition or a focused solo presentation, often interwoven with performance, music, food, and drink. The result is a cultural happening that encourages dialogue, discovery, and deeper connection between artists and audiences.",
-        whatsPriceless: "Sharing spaces, stories, and moments with the artists themselves. An intimate connection to art you won’t find anywhere else.",
+        whatsPriceless: "Sharing spaces, stories, and moments with the artists themselves. An intimate connection to art you won't find anywhere else.",
         highlights: [
           "Immersive exhibitions reimagined in unconventional spaces",
           "Occasional live performance elements, such as spoken word or movement art",
@@ -819,7 +823,7 @@ export type Experience = {
           "/images/experiences/sandwich-harbour/Gallery/6.jpg?height=400&width=300&text=Abseiling+Cliffs",
           "/images/experiences/sandwich-harbour/Gallery/7.jpg?height=400&width=300&text=Abseiling+Cliffs",
         ],
-        overview: "Where rolling dunes meet the Atlantic, Sandwich Harbour - part of the Namib Naukluft Park - feels otherworldly. Ride in 4x4s across steep sand faces and along untouched beaches. Wildlife thrives in this fragile space: flamingos, jackals, and countless seabirds. It’s a rare corner of the earth where extremes collide.",
+        overview: "Where rolling dunes meet the Atlantic, Sandwich Harbour - part of the Namib Naukluft Park - feels otherworldly. Ride in 4x4s across steep sand faces and along untouched beaches. Wildlife thrives in this fragile space: flamingos, jackals, and countless seabirds. It's a rare corner of the earth where extremes collide.",
         highlights: [
           "4x4 dune drive where desert meets ocean",
           "Panoramic views of sand and sea",
@@ -877,7 +881,7 @@ export type Experience = {
         ],
         overview: "Dune 7 rises higher than any other dune in Namibia, and conquering it is half the thrill. With a quad bike roaring beneath you, climb its ridges, cut across slopes, and feel the desert open endlessly ahead.",
         highlights: [
-          "1 hour Quad biking on Namibia’s tallest dune",
+          "1 hour Quad biking on Namibia's tallest dune",
           "Exhilarating climbs and turns",
           "Panoramic desert views",
         ],
@@ -923,7 +927,7 @@ export type Experience = {
           "/images/experiences/hot-air/Gallery/4.jpg?height=400&width=300&text=Abseiling+Cliffs",
           "/images/experiences/hot-air/Gallery/5.jpg?height=400&width=300&text=Abseiling+Cliffs",
         ],
-        overview: "At sunrise, the desert becomes alive with light and shadow. You rise with the winds, floating for nearly an hour above rolling dunes and rugged mountains — endless horizons in every direction. On landing, the experience continues with a Champagne breakfast set right in the desert, before a gentle drive back through its quiet majesty. This is Namibia at its most cinematic, and you’re at the heart of it.",
+        overview: "At sunrise, the desert becomes alive with light and shadow. You rise with the winds, floating for nearly an hour above rolling dunes and rugged mountains — endless horizons in every direction. On landing, the experience continues with a Champagne breakfast set right in the desert, before a gentle drive back through its quiet majesty. This is Namibia at its most cinematic, and you're at the heart of it.",
         highlights: [
           "Sunrise hot air balloon ride over the Namib Desert",
           "Stunning aerial views of dunes and wildlife",
@@ -973,7 +977,7 @@ export type Experience = {
           "/images/experiences/dws/Gallery/5.jpg?height=400&width=300&text=Abseiling+Cliffs",
           "/images/experiences/dws/Gallery/6.jpg?height=400&width=300&text=Abseiling+Cliffs",
         ],
-        overview: "The waters off São Tomé are alive with life. At dawn, pods of bottlenose and spotted dolphins skim close to shore — playful, curious, and in their hundreds. Slip into the sea with snorkeling gear, listen to their underwater calls, and swim alongside them in their element. After, dive deeper into São Tomé’s waters, discovering reefs, marine life, and the island’s vibrant undersea world.",
+        overview: "The waters off São Tomé are alive with life. At dawn, pods of bottlenose and spotted dolphins skim close to shore — playful, curious, and in their hundreds. Slip into the sea with snorkeling gear, listen to their underwater calls, and swim alongside them in their element. After, dive deeper into São Tomé's waters, discovering reefs, marine life, and the island's vibrant undersea world.",
         highlights: [
           "Early-morning dolphin encounter with bottlenose and spotted dolphins",
           "Snorkeling with dolphins in their natural habitat",
@@ -1000,7 +1004,7 @@ export type Experience = {
       slug: "cacao-and-coffee-farm-tour",
       defaultContent: {
         title: "Cocoa and Coffee Farm Tour",
-        shortDescription: "This is São Tomé’s story — told through its farms, flavors, and landscapes.",
+        shortDescription: "This is São Tomé's story — told through its farms, flavors, and landscapes.",
         image: "/images/experiences/cocoa-tour/cover.jpg?height=400&width=300&text=Akosombo+Lake+Adventure",
         location: "São Tomé",
       },
@@ -1025,7 +1029,7 @@ export type Experience = {
           "/images/experiences/cocoa-tour/Gallery/6.jpg?height=400&width=300&text=Abseiling+Cliffs",
           "/images/experiences/cocoa-tour/Gallery/7.jpg?height=400&width=300&text=Abseiling+Cliffs",
         ],
-        overview: "This is São Tomé’s story — told through its farms, flavors, and landscapes. Walk through historic plantations like Agostinho Neto and Bela Vista, exploring the journey of cocoa from nursery to fermentation to drying. Pause for a traditional lunch with sweeping sea views, cool off at Blue Lagoon, and end with tastings at Diogo Vaz — rich chocolates and fresh coffee made on the island itself.",
+        overview: "This is São Tomé's story — told through its farms, flavors, and landscapes. Walk through historic plantations like Agostinho Neto and Bela Vista, exploring the journey of cocoa from nursery to fermentation to drying. Pause for a traditional lunch with sweeping sea views, cool off at Blue Lagoon, and end with tastings at Diogo Vaz — rich chocolates and fresh coffee made on the island itself.",
         highlights: [
           "Guided tours of historic cocoa and coffee plantations",
           "Hands-on look at the cocoa-making process from bean to bar",
@@ -1057,7 +1061,7 @@ export type Experience = {
       slug: "sao-tome-city-tour",
       defaultContent: {
         title: "São Tomé City Tour",
-        shortDescription: "São Tomé’s capital is small but full of life. Begin in Bobo Forro’s lively markets — fruit, fish, color, and noise.",
+        shortDescription: "São Tomé's capital is small but full of life. Begin in Bobo Forro's lively markets — fruit, fish, color, and noise.",
         image: "/images/experiences/sao-tome-tour/cover.jpg?height=400&width=300&text=Akosombo+Lake+Adventure",
         location: "São Tomé",
       },
@@ -1084,11 +1088,11 @@ export type Experience = {
           "/images/experiences/sao-tome-tour/Gallery/8.jpg?height=400&width=300&text=Abseiling+Cliffs",
           "/images/experiences/sao-tome-tour/Gallery/9.jpg?height=400&width=300&text=Abseiling+Cliffs",
         ],
-        overview: "São Tomé’s capital is small but full of life. Begin in Bobo Forro’s lively markets — fruit, fish, color, and noise. Wander through colonial streets, past the azulejo-covered Cathedral, the Presidential Palace, and Independence Square. Visit the National Museum to uncover the island’s layered history, then end with flavors: grilled fish, tropical fruits, or Santomean ice cream in exotic island varieties.",
+        overview: "São Tomé's capital is small but full of life. Begin in Bobo Forro's lively markets — fruit, fish, color, and noise. Wander through colonial streets, past the azulejo-covered Cathedral, the Presidential Palace, and Independence Square. Visit the National Museum to uncover the island's layered history, then end with flavors: grilled fish, tropical fruits, or Santomean ice cream in exotic island varieties.",
         highlights: [
-          "Explore São Tomé’s bustling markets and colonial architecture",
+          "Explore São Tomé's bustling markets and colonial architecture",
           "Visit Independence Square, Cathedral, and Presidential Palace",
-          "Discover the island’s past at the National Museum",
+          "Discover the island's past at the National Museum",
           "Taste local cuisine and Santomean ice cream",
         ],
         startingPrice: 120,
@@ -1138,7 +1142,7 @@ export type Experience = {
           "/images/experiences/canvas-and-soul/Gallery/6.jpg?height=400&width=300&text=Abseiling+Cliffs",
       
         ],
-        overview: "Canvas and Soul is an intimate art and storytelling journey where every guest becomes a creator. It begins with a resident artist sharing their story, a tapestry of life, culture, and inspiration, as wine is poured and the space fills with quiet reflection. Guests are then invited to pick up a brush, painting their own canvas inspired by the artist’s journey. Guided by the artist’s presence, the evening unfolds as a shared act of creativity and connection.",
+        overview: "Canvas and Soul is an intimate art and storytelling journey where every guest becomes a creator. It begins with a resident artist sharing their story, a tapestry of life, culture, and inspiration, as wine is poured and the space fills with quiet reflection. Guests are then invited to pick up a brush, painting their own canvas inspired by the artist's journey. Guided by the artist's presence, the evening unfolds as a shared act of creativity and connection.",
         highlights: [
           "Storytelling session with a resident artist",
           "Wine and art-filled atmosphere in an intimate setting",
@@ -1166,7 +1170,7 @@ export type Experience = {
       defaultContent: {
         title: "December in Ghana: Castles to Coastlines",
         shortDescription: "A group journey through Ghana's December magic - from AfroFuture Festival to Cape Coast Castle, ATV rides, and New Year's Eve celebration.",
-        image: "/images/experiences/december-ghana/cover.jpg?height=400&width=300&text=December+Ghana+Group+Experience",
+        image: "/images/experiences/dec-in-gh/cover.jpg?height=400&width=300&text=December+Ghana+Group+Experience",
         location: "Ghana"
       },
       expandedContent: {
@@ -1180,16 +1184,15 @@ export type Experience = {
         duration: "7 DAYS",
         destinations: "MULTIPLE DESTINATIONS",
         maxGuests: "20 GUESTS (20 SPOTS OPEN)",
-        heroImage: "/images/experiences/december-ghana/hero.jpg?height=800&width=1200&text=Luxury+Pool+Beach+Resort",
+        heroImage: "/images/experiences/dec-in-gh/cover.jpg?height=800&width=1200&text=Luxury+Pool+Beach+Resort",
         galleryImages: [
-          "/images/experiences/december-ghana/gallery/1.jpg?height=400&width=300&text=AfroFuture+Festival",
-          "/images/experiences/december-ghana/gallery/2.jpg?height=400&width=300&text=Cape+Coast+Castle",
-          "/images/experiences/december-ghana/gallery/3.jpg?height=400&width=300&text=ATV+Rides+Shai+Hills",
-          "/images/experiences/december-ghana/gallery/4.jpg?height=400&width=300&text=Volta+Lake+Cruise",
-          "/images/experiences/december-ghana/gallery/5.jpg?height=400&width=300&text=New+Years+Eve+Celebration",
-          "/images/experiences/december-ghana/gallery/6.jpg?height=400&width=300&text=Accra+City+Tour",
-          "/images/experiences/december-ghana/gallery/7.jpg?height=400&width=300&text=Beach+Club+Escape",
-          "/images/experiences/december-ghana/gallery/8.jpg?height=400&width=300&text=Welcome+Dinner",
+          "/images/experiences/dec-in-gh/Gallery/1.jpg?height=400&width=300&text=AfroFuture+Festival",
+          "/images/experiences/dec-in-gh/Gallery/2.jpg?height=400&width=300&text=Cape+Coast+Castle",
+          "/images/experiences/dec-in-gh/Gallery/3.jpg?height=400&width=300&text=ATV+Rides+Shai+Hills",
+          "/images/experiences/dec-in-gh/Gallery/4.jpg?height=400&width=300&text=Volta+Lake+Cruise",
+          "/images/experiences/dec-in-gh/Gallery/5.jpg?height=400&width=300&text=New+Years+Eve+Celebration",
+          "/images/experiences/dec-in-gh/Gallery/6.jpg?height=400&width=300&text=Accra+City+Tour",
+          "/images/experiences/dec-in-gh/Gallery/7.jpg?height=400&width=300&text=Beach+Club+Escape",
         ],
         overview: "Join a curated group journey through Ghana's December magic. This shared experience blends culture, adventure, and celebration as you explore AfroFuture Festival, Cape Coast Castle, ATV rides at Shai Hills, Volta Lake sunset cruise, and a curated New Year's Eve celebration. From long-table welcome dinners to private beach club escapes, this is a shared experience of Ghana's December magic.",
         highlights: [
@@ -1220,6 +1223,8 @@ export type Experience = {
         isGroupExperience: true,
         totalSlots: 20,
         availableSlots: 20,
+        startDate: "2025-12-28",
+        endDate: "2026-01-02",
         groupPricing: {
           fullPrice: 3000,
           paymentPlanPrice: 1000,
@@ -1227,5 +1232,12 @@ export type Experience = {
         }
       },
       tags: ["Travel Planner's Choice", "2 PAX"]
-    },
-  ]
+  },
+]
+
+// Initialize slots for group experiences
+experiences.forEach(experience => {
+  if (experience.bookingContent.isGroupExperience && experience.bookingContent.totalSlots) {
+    initializeSlots(experience.id.toString(), experience.bookingContent.totalSlots)
+  }
+})

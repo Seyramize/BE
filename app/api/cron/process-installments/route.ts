@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { processAllPendingInstallments } from "@/lib/payment-scheduler"
+import { processAllPendingInstallments } from "../../../../lib/payment-scheduler"
 
 export async function GET(req: NextRequest) {
   // Verify this is a legitimate cron request (you should add proper authentication)

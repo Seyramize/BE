@@ -15,6 +15,9 @@ interface PaymentConfirmationGroupModalProps {
   bookingDetails: {
     experienceName: string
     experienceImage?: string
+    experienceDuration?: string
+    experienceStartDate?: string
+    experienceEndDate?: string
     totalAmount: number
     guests: number
     email: string
@@ -37,6 +40,42 @@ export function PaymentConfirmationGroupModal({
 }: PaymentConfirmationGroupModalProps) {
   const [isProcessing, setIsProcessing] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
+
+  const formatDateRange = (start?: string, end?: string) => {
+    if (!start || !end) {
+      return "Dates to be confirmed";
+    }
+  
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+  
+    const startDay = startDate.getDate();
+    const endDay = endDate.getDate();
+    const startMonth = startDate.toLocaleString('default', { month: 'short' });
+    const endMonth = endDate.toLocaleString('default', { month: 'short' });
+    const startYear = startDate.getFullYear();
+    const endYear = endDate.getFullYear();
+  
+    const nth = (d: number) => {
+      if (d > 3 && d < 21) return 'th';
+      switch (d % 10) {
+        case 1:  return "st";
+        case 2:  return "nd";
+        case 3:  return "rd";
+        default: return "th";
+      }
+    };
+
+    if (startYear !== endYear) {
+      return `${startDay}${nth(startDay)} ${startMonth} ${startYear} - ${endDay}${nth(endDay)} ${endMonth} ${endYear}`;
+    }
+  
+    if (startMonth !== endMonth) {
+      return `${startDay}${nth(startDay)} ${startMonth} - ${endDay}${nth(endDay)} ${endMonth} ${endYear}`;
+    }
+  
+    return `${startDay}${nth(startDay)} - ${endDay}${nth(endDay)} ${endMonth} ${endYear}`;
+  };
 
   // Close modal with ESC key
   useEffect(() => {
@@ -202,8 +241,14 @@ export function PaymentConfirmationGroupModal({
                     </div>
                     <div className="flex flex-col sm:flex-row sm:justify-between">
                       <span className="text-slate-600">Experience Dates:</span>
-                      <span className="text-slate-800">28th Dec 2025 - 2nd Jan 2026</span>
+                      <span className="text-slate-800">{formatDateRange(bookingDetails.experienceStartDate, bookingDetails.experienceEndDate)}</span>
                     </div>
+                    {bookingDetails.experienceDuration && (
+                      <div className="flex flex-col sm:flex-row sm:justify-between">
+                        <span className="text-slate-600">Duration:</span>
+                        <span className="text-slate-800">{bookingDetails.experienceDuration}</span>
+                      </div>
+                    )}
                     <div className="flex flex-col sm:flex-row sm:justify-between">
                       <span className="text-slate-600">Payment Style:</span>
                       <span className="text-slate-800">{bookingDetails.paymentStyle}</span>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Booking Confirmation - Beyond Experiences</title>
+    <link href="https://fonts.cdnfonts.com/css/argent-cf" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/helvetica-now-display" rel="stylesheet">
+    <style>
+        @media screen and (max-width: 600px) {
+            /* Container adjustments */
+            .main-container {
+                padding: 16px !important;
+            }
+            
+            /* Card adjustments */
+            .card-content {
+                padding: 24px 32px 8px 32px !important; /* top right bottom left */
+            }
+            
+            /* Typography adjustments */
+            .header-text {
+                font-size: 28px !important;
+                padding-left: 0 !important; /* Ensure no additional padding is added */
+            }
+            
+            .section-title {
+                font-size: 24px !important;
+            }
+            
+            /* Column layout adjustments */
+            .column {
+                display: block !important;
+                width: 100% !important;
+                padding: 0 !important;
+                margin-bottom: 16px !important;
+            }
+            
+            /* Contact buttons adjustments */
+            .contact-button {
+                display: block !important;
+                width: 100% !important;
+                margin-bottom: 8px !important;
+                padding: 0 !important;
+            }
+            
+            /* Spacing adjustments */
+            .booking-summary {
+                padding: 20px !important;
+                margin: 0 -16px !important;
+            }
+            
+            .contact-section {
+                padding: 24px !important;
+                margin: -16px -16px -16px -16px !important;
+            }
+        }
+    </style>
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+</head>
+<body style="margin: 0; padding: 0; background: #ffffff; font-family: 'Helvetica Now Display', sans-serif; line-height: 1.6; color: #334155;">
+    
+    <!-- Main Container -->
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="main-container">
+        <tr>
+            <td align="center" style="padding: 0;">
+                
+                <!-- Content Wrapper -->
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                    
+                    
+                    <!-- Main Card -->
+                    <tr>
+                        <td>
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background: #ffffff;">
+                                
+                                <!-- Logo Image -->
+                                <tr>
+                                    <td align="center" style="padding: 0;">
+                                        <img src="http://cdn.mcauto-images-production.sendgrid.net/5d2c1c3dad421113/fef08b33-0d61-491a-9b05-cb31080f4af3/600x281.png" alt="Beyond Experiences Logo" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                                    </td>
+                                </tr>
+
+                                <!-- Card Header -->
+                                <tr>
+                                    <td align="left" class="card-content" style="background: #ffffff; padding: 32px 32px 8px 32px;">
+                                        <h2 class="header-text" style="margin: 0; font-size: 36px; font-weight: 500; color: #1e293b; font-family: 'Argent CF', serif;">Hi {{firstName}}!</h2>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Card Content -->
+                                <tr>
+                                    <td style="padding: 8px 32px 32px;">
+                                        
+                                        <!-- Thank You Message -->
+                                        <div style="margin-bottom: 32px;">
+                                            <p style="margin: 0 0 16px 0; font-size: 16px; color: #000000; line-height: 1.6; font-family: 'Helvetica Now Display', sans-serif;">
+                                                Thank you for booking with Beyond Experiences - your journey toward something extraordinary has officially begun.
+                                            </p>
+                                            <p style="margin: 0; color: #000000; line-height: 1.6; font-size: 16px; font-family: 'Helvetica Now Display', sans-serif;">
+                                                We've received your installment payment and are currently finalizing all the details to ensure everything flows seamlessly. One of our travel planners will be in touch within 24 hours to confirm any specifics and help with final touches.
+                                            </p>
+                                        </div>
+                                        
+                                        <!-- Add separator before Booking Summary -->
+                                        <div style="height: 2px; background: #000000; margin: 32px 0;"></div>
+
+                                        <!-- Booking Summary -->
+                                        <div style="margin-bottom: 32px;">
+                                            <!-- Booking Summary Card - Remove blue gradient -->
+                                            <div style="color: #000000; padding: 24px 32px; margin: 0 -32px;">
+                                                
+                                                <!-- Summary Title -->
+                                                <h3 style="margin: 0 0 24px 0; font-size: 32px; font-weight: 500; color: #000000; font-family: 'Argent CF', serif;">Group Booking Summary</h3>
+                                                
+                                                <!-- Update text colors in the two-column layout -->
+                                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                                    <tr>
+                                                        <!-- Left Column -->
+                                                        <td class="column" width="50%" style="vertical-align: top; padding-right: 16px;">
+                                                            
+                                                            <!-- Experience -->
+                                                            <div style="margin-bottom: 16px;">
+                                                                <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.05em;">EXPERIENCE</p>
+                                                                <p style="margin: 0; color: #000000; font-weight: 500; font-size: 16px;">{{experienceName}}</p>
+                                                            </div>
+
+                                                            <!-- Experience Dates -->
+                                                            <div style="margin-bottom: 16px;">
+                                                                <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.05em;">DATES</p>
+                                                                <p style="margin: 0; color: #000000; font-weight: 500; font-size: 16px;">{{experienceDates}}</p>
+                                                            </div>
+                                                            
+                                                            <!-- Booking ID -->
+                                                            <div style="margin-bottom: 16px;">
+                                                                <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.05em;">BOOKING ID</p>
+                                                                <p style="margin: 0; color: #000000; font-family: 'Courier New', monospace; font-size: 16px;">{{bookingId}}</p>
+                                                            </div>
+
+                                                            <!-- Total Experience Cost -->
+                                                            <div style="margin-bottom: 16px;">
+                                                                <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.05em;">TOTAL COST</p>
+                                                                <p style="margin: 0; color: #000000; font-weight: 600; font-size: 20px;">${{installmentTotal}}</p>
+                                                            </div>
+                                                        </td>
+                                                        
+                                                        <!-- Right Column -->
+                                                        <td class="column" width="50%" style="vertical-align: top; padding-left: 16px;">
+                                                            
+                                                            <!-- Payment Plan -->
+                                                            <div style="margin-bottom: 16px;">
+                                                                <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.05em;">PAYMENT PLAN</p>
+                                                                <p style="margin: 0; color: #000000; font-weight: 500; font-size: 16px;">{{installmentCount}} installments</p>
+                                                            </div>
+
+                                                            <!-- First Payment -->
+                                                            <div style="margin-bottom: 16px;">
+                                                                <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.05em;">FIRST PAYMENT</p>
+                                                                <p style="margin: 0; color: #000000; font-weight: 600; font-size: 20px;">${{firstPaymentAmount}}</p>
+                                                            </div>
+
+                                                            <!-- Remaining Payments -->
+                                                            <div style="margin-bottom: 16px;">
+                                                                <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.05em;">REMAINING</p>
+                                                                <p style="margin: 0; color: #000000; font-weight: 500; font-size: 16px;">{{remainingInstallments}} payments</p>
+                                                            </div>
+
+                                                            <!-- Next Payment Date -->
+                                                            <div style="margin-bottom: 16px;">
+                                                                <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.05em;">NEXT PAYMENT</p>
+                                                                <p style="margin: 0; color: #000000; font-weight: 500; font-size: 16px;">{{nextPaymentDate}}</p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Add separator before What Happens Next -->
+                                        <div style="height: 2px; background: #000000; margin: 32px 0;"></div>
+
+                                        <!-- What Happens Next -->
+                                        <div style="margin-bottom: 24px;">
+                                            <h3 style="margin: 0 0 16px 0; font-size: 28px; font-weight: 500; color: #000000; font-family: 'Argent CF', serif;">What Happens Next?</h3>
+                                            <p style="margin: 0 0 12px 0; color: #000000; font-size: 16px; font-family: 'Helvetica Now Display', sans-serif;">Within the next 24 hours, we'll reach out to:</p>
+                                            
+                                            <!-- Bullet Points -->
+                                            <div style="margin-bottom: 16px;">
+                                                <div style="display: flex; align-items: flex-start; margin-bottom: 8px;">
+                                                    <div style="width: 8px; height: 8px; background: #000000; border-radius: 50%; margin-top: 8px; margin-right: 12px; flex-shrink: 0;"></div>
+                                                    <p style="margin: 0; color: #000000; font-size: 16px; font-family: 'Helvetica Now Display', sans-serif;">Confirm pickup or meet-up times (if applicable).</p>
+                                                </div>
+                                                <div style="display: flex; align-items: flex-start; margin-bottom: 8px;">
+                                                    <div style="width: 8px; height: 8px; background: #000000; border-radius: 50%; margin-top: 8px; margin-right: 12px; flex-shrink: 0;"></div>
+                                                    <p style="margin: 0; color: #000000; font-size: 16px; font-family: 'Helvetica Now Display', sans-serif;">Share your itinerary, any prep tips or packing suggestions.</p>
+                                                </div>
+                                                <div style="display: flex; align-items: flex-start; margin-bottom: 8px;">
+                                                    <div style="width: 8px; height: 8px; background: #000000; border-radius: 50%; margin-top: 8px; margin-right: 12px; flex-shrink: 0;"></div>
+                                                    <p style="margin: 0; color: #000000; font-size: 16px; font-family: 'Helvetica Now Display', sans-serif;">Set up automatic payments for your remaining installments.</p>
+                                                </div>
+                                                <div style="display: flex; align-items: flex-start;">
+                                                    <div style="width: 8px; height: 8px; background: #000000; border-radius: 50%; margin-top: 8px; margin-right: 12px; flex-shrink: 0;"></div>
+                                                    <p style="margin: 0; color: #000000; font-size: 16px; font-family: 'Helvetica Now Display', sans-serif;">Answer questions and offer upgrades, if desired.</p>
+                                                </div>
+                                            </div>
+                                            
+                                            <p style="margin: 0; color: #000000; font-size: 16px; font-family: 'Helvetica Now Display', sans-serif;">
+                                                Your journey is in excellent hands - just bring your curiosity, and we'll handle the rest.
+                                            </p>
+                                        </div>
+                                        
+                                        <!-- Add separator before Need to make a change -->
+                                        <div style="height: 2px; background: #000000; margin: 32px 0;"></div>
+
+                                        <!-- Contact Information - Remove green background -->
+                                        <div style="padding: 32px; border-radius: 0 0 8px 8px; margin: -32px -32px -32px -32px;" class="contact-section">
+                                            <h3 style="margin: 0 0 16px 0; font-size: 28px; font-weight: 500; color: #000000; font-family: 'Argent CF', serif;">Need to make a change?</h3>
+                                            <p style="margin: 0 0 24px 0; color: #000000; font-size: 16px; line-height: 1.6;">
+                                                If you'd like to modify or cancel your booking (or if this wasn't you) simply reply to this email or contact us directly via:
+                                            </p>
+                                            
+                                            <!-- Contact Buttons with outlines -->
+                                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                                <tr>
+                                                    <td class="contact-button" width="33.33%" style="padding-right: 8px;">
+                                                        <a href="mailto:{{supportEmail}}" style="display: block; background: transparent; border: 2px solid #000000; color: #000000; text-decoration: none; padding: 12px; border-radius: 6px; text-align: center; font-weight: 500; transition: all 0.2s; font-family: 'Helvetica Now Display', sans-serif;">
+                                                            <span style="font-size: 16px;">EMAIL</span>
+                                                        </a>
+                                                    </td>
+                                                    <td class="contact-button" width="33.33%" style="padding: 0 4px;">
+                                                        <a href="tel:{{supportPhone}}" style="display: block; background: transparent; border: 2px solid #000000; color: #000000; text-decoration: none; padding: 12px; border-radius: 6px; text-align: center; font-weight: 500; transition: all 0.2s; font-family: 'Helvetica Now Display', sans-serif;">
+                                                            <span style="font-size: 16px;">PHONE</span>
+                                                        </a>
+                                                    </td>
+                                                    <td class="contact-button" width="33.33%" style="padding-left: 8px;">
+                                                        <a href="https://wa.me/233546506220" style="display: block; background: transparent; border: 2px solid #000000; color: #000000; text-decoration: none; padding: 12px; border-radius: 6px; text-align: center; font-weight: 500; transition: all 0.2s; font-family: 'Helvetica Now Display', sans-serif;">
+                                                            <span style="font-size: 16px;">💬 WHATSAPP</span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td align="center" style="padding-top: 32px;">
+                            <p style="margin: 0; color: #64748b; font-size: 14px;">© 2025 Beyond Experiences. All rights reserved.</p>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    
+</body>
+</html>

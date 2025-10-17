@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Failed - {{experienceName}}</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #e8e8e8;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .tagline {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        .content {
+            margin-bottom: 30px;
+        }
+        .greeting {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .alert-box {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .alert-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #721c24;
+            margin-bottom: 10px;
+        }
+        .payment-details {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 5px 0;
+        }
+        .detail-label {
+            font-weight: bold;
+            color: #495057;
+        }
+        .detail-value {
+            color: #6c757d;
+        }
+        .amount {
+            font-size: 24px;
+            font-weight: bold;
+            color: #dc3545;
+        }
+        .retry-date {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fd7e14;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #dc3545;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .cta-button:hover {
+            background-color: #c82333;
+        }
+        .support-info {
+            background-color: #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .footer {
+            text-align: center;
+            border-top: 1px solid #e8e8e8;
+            padding-top: 20px;
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .urgent {
+            background-color: #f8d7da;
+            padding: 2px 4px;
+            border-radius: 3px;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">Beyond Experiences</div>
+            <div class="tagline">Luxury Travel & Adventure</div>
+        </div>
+
+        <div class="content">
+            <div class="greeting">
+                Hi {{customerName}},
+            </div>
+
+            <div class="alert-box">
+                <div class="alert-title">⚠️ Payment Failed</div>
+                <p>We were unable to process your installment payment for your <strong>{{experienceName}}</strong> experience. Don't worry - your booking is still secure, but we need to resolve this payment issue.</p>
+            </div>
+
+            <div class="payment-details">
+                <h3 style="margin-top: 0; color: #495057;">Payment Details</h3>
+                <div class="detail-row">
+                    <span class="detail-label">Experience:</span>
+                    <span class="detail-value">{{experienceName}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Failed Payment:</span>
+                    <span class="detail-value">${{amount}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Installment #{{installmentNumber}}:</span>
+                    <span class="detail-value">Failed</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Failure Reason:</span>
+                    <span class="detail-value">{{failureReason}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Next Retry:</span>
+                    <span class="detail-value">{{nextRetryDate}}</span>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <div style="font-size: 18px; margin-bottom: 10px;">Failed Amount:</div>
+                <div class="amount">${{amount}}</div>
+            </div>
+
+            <p><strong>What you need to do:</strong></p>
+            <ul>
+                <li><span class="urgent">Update your payment method</span> to ensure future payments succeed</li>
+                <li>Check that your card has sufficient funds</li>
+                <li>Verify your billing address matches your card</li>
+                <li>Contact your bank if there are any restrictions on your card</li>
+            </ul>
+
+            <p><strong>What happens next?</strong></p>
+            <ul>
+                <li>We'll automatically retry your payment on <span class="highlight">{{nextRetryDate}}</span></li>
+                <li>If the retry fails, we'll contact you directly</li>
+                <li>Your booking remains confirmed while we resolve this</li>
+                <li>No additional fees will be charged for failed payment attempts</li>
+            </ul>
+
+            <div class="support-info">
+                <h4 style="margin-top: 0; color: #495057;">Need Immediate Help?</h4>
+                <p>Our team is here to help you resolve this payment issue quickly:</p>
+                <p>
+                    <strong>Phone:</strong> {{supportPhone}}<br>
+                    <strong>Email:</strong> {{supportEmail}}
+                </p>
+                <p><em>Please mention "Payment Failed" when contacting us for faster assistance.</em></p>
+            </div>
+
+            <p>Don't worry - this is a common issue that we can resolve quickly. Your <strong>{{experienceName}}</strong> experience is still confirmed and we'll make sure everything is sorted out.</p>
+
+            <p>Best regards,<br>
+            <strong>The Beyond Experiences Team</strong></p>
+        </div>
+
+        <div class="footer">
+            <p>Beyond Experiences | Luxury Travel & Adventure</p>
+            <p>This email was sent regarding a failed payment attempt. Please take action to update your payment method.</p>
+        </div>
+    </div>
+</body>
+</html>

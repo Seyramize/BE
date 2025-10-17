@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installment Payment Alert - Beyond Experiences</title>
+    <link href="https://fonts.cdnfonts.com/css/argent-cf" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/helvetica-now-display" rel="stylesheet">
+    <style>
+        @media screen and (max-width: 600px) {
+            /* Container adjustments */
+            .main-container {
+                padding: 16px !important;
+            }
+            
+            /* Card adjustments */
+            .card-content {
+                padding: 24px 32px 8px 32px !important; /* top right bottom left */
+            }
+            
+            /* Typography adjustments */
+            .header-text {
+                font-size: 28px !important;
+                padding-left: 0 !important; /* Ensure no additional padding is added */
+            }
+            
+            .section-title {
+                font-size: 24px !important;
+            }
+            
+            /* Column layout adjustments */
+            .column {
+                display: block !important;
+                width: 100% !important;
+                padding: 0 !important;
+                margin-bottom: 16px !important;
+            }
+            
+            /* Contact buttons adjustments */
+            .contact-button {
+                display: block !important;
+                width: 100% !important;
+                margin-bottom: 8px !important;
+                padding: 0 !important;
+            }
+            
+            /* Spacing adjustments */
+            .booking-summary {
+                padding: 20px !important;
+                margin: 0 -16px !important;
+            }
+            
+            .contact-section {
+                padding: 24px !important;
+                margin: -16px -16px -16px -16px !important;
+            }
+        }
+    </style>
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+</head>
+<body style="margin: 0; padding: 0; background: #ffffff; font-family: 'Helvetica Now Display', sans-serif; line-height: 1.6; color: #334155;">
+    
+    <!-- Main Container -->
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="main-container">
+        <tr>
+            <td align="center" style="padding: 0;">
+                
+                <!-- Content Wrapper -->
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                    
+                    
+                    <!-- Main Card -->
+                    <tr>
+                        <td>
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background: #ffffff;">
+                                
+                                <!-- Logo Image -->
+                                <tr>
+                                    <td align="center" style="padding: 0;">
+                                        <img src="http://cdn.mcauto-images-production.sendgrid.net/5d2c1c3dad421113/aad5234b-205c-4dd6-83c2-d2ae1ad139e5/600x281.png" alt="Beyond Experiences Logo" style="width: 100%; height: auto; display: block; object-fit: cover;">
+                                    </td>
+                                </tr>
+
+                                <!-- Card Header -->
+                                <tr>
+                                    <td align="left" class="card-content" style="background: #ffffff; padding: 32px 32px 8px 32px;">
+                                        <h2 class="header-text" style="margin: 0; font-size: 36px; font-weight: 500; color: #1e293b; font-family: 'Argent CF', serif;">Hi Team,</h2>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Card Content -->
+                                <tr>
+                                    <td style="padding: 8px 32px 32px;">
+                                        
+                                        <!-- New Installment Payment Message -->
+                                        <div style="margin-bottom: 32px;">
+                                            <p style="margin: 0 0 16px 0; font-size: 16px; color: #000000; line-height: 1.6; font-family: 'Helvetica Now Display', sans-serif;">
+                                                A new installment payment has been processed for a group booking. Please review the details below and prepare to follow up within 24 hours.
+                                            </p>
+                                        </div>
+                                        
+                                        <!-- Add separator before Booking Summary -->
+                                        <div style="height: 2px; background: #000000; margin: 32px 0;"></div>
+                                        
+                                        <!-- Booking Summary -->
+                                        <div style="margin-bottom: 32px;">
+                                            <h3 style="margin: 0 0 24px 0; font-size: 32px; font-weight: 500; color: #000000; font-family: 'Argent CF', serif;">Installment Payment Details</h3>
+                                            
+                                            <!-- Two Column Layout -->
+                                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                                <tr>
+                                                    <!-- Left Column -->
+                                                    <td class="column" width="50%" style="vertical-align: top; padding-right: 32px;">
+                                                        
+                                                        <!-- Customer Name -->
+                                                        <div style="margin-bottom: 16px;">
+                                                            <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.05em;">CUSTOMER NAME</p>
+                                                            <p style="margin: 0; color: #000000; font-weight: 500; font-size: 16px;">{{customerName}}</p>
+                                                        </div>
+                                                        
+                                                        <!-- Customer Email -->
+                                                        <div style="margin-bottom: 16px;">
+                                                            <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.05em;">EMAIL</p>
+                                                            <p style="margin: 0; color: #000000; font-weight: 500; font-size: 16px;">{{customerEmail}}</p>
+                                                        </div>
+
+                                                        <!-- Experience -->
+                                                        <div style="margin-bottom: 16px;">
+                                                            <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.05em;">EXPERIENCE</p>
+                                                            <p style="margin: 0; color: #000000; font-weight: 500; font-size: 16px;">{{experienceName}}</p>
+                                                        </div>
+                                                        
+                                                        <!-- Booking ID -->
+                                                        <div style="margin-bottom: 16px;">
+                                                            <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.05em;">BOOKING ID</p>
+                                                            <p style="margin: 0; color: #000000; font-family: 'Courier New', monospace; font-size: 16px;">{{bookingId}}</p>
+                                                        </div>
+
+                                                        <!-- Installment Number -->
+                                                        <div style="margin-bottom: 16px;">
+                                                            <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.05em;">INSTALLMENT</p>
+                                                            <p style="margin: 0; color: #000000; font-weight: 500; font-size: 16px;">Payment {{installmentNumber}} of {{installmentCount}}</p>
+                                                        </div>
+                                                    </td>
+                                                    
+                                                    <!-- Right Column -->
+                                                    <td class="column" width="50%" style="vertical-align: top; padding-left: 32px;">
+                                                        
+                                                        <!-- Total Experience Cost -->
+                                                        <div style="margin-bottom: 16px;">
+                                                            <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.05em;">TOTAL COST</p>
+                                                            <p style="margin: 0; color: #000000; font-weight: 600; font-size: 20px;">${{installmentTotal}}</p>
+                                                        </div>
+
+                                                        <!-- Amount Paid -->
+                                                        <div style="margin-bottom: 16px;">
+                                                            <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.05em;">AMOUNT PAID</p>
+                                                            <p style="margin: 0; color: #000000; font-weight: 600; font-size: 20px;">${{amount}}</p>
+                                                        </div>
+
+                                                        <!-- Payment Plan -->
+                                                        <div style="margin-bottom: 16px;">
+                                                            <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.05em;">PAYMENT PLAN</p>
+                                                            <p style="margin: 0; color: #000000; font-weight: 500; font-size: 16px;">{{installmentCount}} installments</p>
+                                                        </div>
+
+                                                        <!-- Payment Interval -->
+                                                        <div style="margin-bottom: 16px;">
+                                                            <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.05em;">INTERVAL</p>
+                                                            <p style="margin: 0; color: #000000; font-weight: 500; font-size: 16px;">Every {{installmentInterval}} days</p>
+                                                        </div>
+
+                                                        <!-- Remaining Payments -->
+                                                        <div style="margin-bottom: 16px;">
+                                                            <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.05em;">REMAINING</p>
+                                                            <p style="margin: 0; color: #000000; font-weight: 500; font-size: 16px;">{{remainingInstallments}} payments</p>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        
+                                        <!-- Add separator before Actions Required -->
+                                        <div style="height: 2px; background: #000000; margin: 32px 0;"></div>
+                                        
+                                        <!-- Actions Required -->
+                                        <div style="margin-bottom: 24px;">
+                                            <h3 style="margin: 0 0 16px 0; font-size: 28px; font-weight: 500; color: #000000; font-family: 'Argent CF', serif;">Actions Required</h3>
+                                            
+                                            <!-- Bullet Points -->
+                                            <div style="margin-bottom: 16px;">
+                                                <div style="display: flex; align-items: flex-start; margin-bottom: 8px;">
+                                                    <div style="width: 8px; height: 8px; background: #000000; border-radius: 50%; margin-top: 8px; margin-right: 12px; flex-shrink: 0;"></div>
+                                                    <p style="margin: 0; color: #000000; font-size: 16px; font-family: 'Helvetica Now Display', sans-serif;">Assign an Experience Coordinator</p>
+                                                </div>
+                                                <div style="display: flex; align-items: flex-start; margin-bottom: 8px;">
+                                                    <div style="width: 8px; height: 8px; background: #000000; border-radius: 50%; margin-top: 8px; margin-right: 12px; flex-shrink: 0;"></div>
+                                                    <p style="margin: 0; color: #000000; font-size: 16px; font-family: 'Helvetica Now Display', sans-serif;">Confirm installment payment schedule is set up correctly</p>
+                                                </div>
+                                                <div style="display: flex; align-items: flex-start; margin-bottom: 8px;">
+                                                    <div style="width: 8px; height: 8px; background: #000000; border-radius: 50%; margin-top: 8px; margin-right: 12px; flex-shrink: 0;"></div>
+                                                    <p style="margin: 0; color: #000000; font-size: 16px; font-family: 'Helvetica Now Display', sans-serif;">Contact client within 24 hours to finalize logistics</p>
+                                                </div>
+                                                <div style="display: flex; align-items: flex-start; margin-bottom: 8px;">
+                                                    <div style="width: 8px; height: 8px; background: #000000; border-radius: 50%; margin-top: 8px; margin-right: 12px; flex-shrink: 0;"></div>
+                                                    <p style="margin: 0; color: #000000; font-size: 16px; font-family: 'Helvetica Now Display', sans-serif;">Update CRM with installment payment details</p>
+                                                </div>
+                                                <div style="display: flex; align-items: flex-start;">
+                                                    <div style="width: 8px; height: 8px; background: #000000; border-radius: 50%; margin-top: 8px; margin-right: 12px; flex-shrink: 0;"></div>
+                                                    <p style="margin: 0; color: #000000; font-size: 16px; font-family: 'Helvetica Now Display', sans-serif;">Monitor future installment payments</p>
+                                                </div>
+                                            </div>
+                                            
+                                            <p style="margin: 0; color: #000000; font-size: 16px; font-family: 'Helvetica Now Display', sans-serif;">
+                                                Please log this installment payment in the system and ensure the client experience remains seamless throughout their payment journey.
+                                            </p>
+                                            <p style="margin: 12px 0 0 0; color: #000000; font-size: 16px; font-family: 'Helvetica Now Display', sans-serif;">
+                                                Thanks, <br> Beyond Experiences Website
+                                            </p>
+                                        </div>
+                                        
+                                        <!-- Separator -->
+                                        <div style="height: 2px; background: #000000; margin: 32px 0;"></div>
+                                        
+                                        
+                                        
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td align="center" style="padding-top: 32px;">
+                            <p style="margin: 0; color: #64748b; font-size: 14px;">© 2025 Beyond Experiences. All rights reserved.</p>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    
+</body>
+</html>

@@ -27,6 +27,9 @@ interface BookingConfirmationGroupProps {
     totalPrice: number;
     heroImage: string;
     slug: string;
+    duration?: string;
+    startDate?: string;
+    endDate?: string;
     groupPricing?: {
       fullPrice: number;
       paymentPlanInstallments: number;
@@ -227,6 +230,7 @@ export function BookingConfirmationGroup({
                 {activeCounter && (
                   <div className="mt-4">
                     <ActiveCounter
+                      experienceId={experience.id}
                       totalSlots={activeCounter.totalSlots}
                       availableSlots={activeCounter.availableSlots}
                       className="text-white"
@@ -528,6 +532,9 @@ export function BookingConfirmationGroup({
         bookingDetails={{
           experienceName: experience.title,
           experienceImage: experience.heroImage,
+          experienceDuration: experience.duration,
+          experienceStartDate: experience.startDate,
+          experienceEndDate: experience.endDate,
           totalAmount: totalPrice,
           guests: parseInt(formData.guests),
           email: formData.email,
