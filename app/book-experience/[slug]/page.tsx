@@ -51,7 +51,7 @@ import {
 import { useMobile } from "@/hooks/use-mobile";
 import { TbAirBalloon, TbBinoculars, TbCertificate2, TbHelmet } from "react-icons/tb";
 import { MastercardPaymentBounceModal } from "@/components/mastercard-payment-bounce-modal";
-import { ActiveCounter, useActiveCounter } from "@/components/active-counter";
+// import { ActiveCounter, useActiveCounter } from "@/components/active-counter";
 import {
   Select,
   SelectContent,
@@ -445,11 +445,11 @@ export default function BookExperiencePage() {
 
   // Active counter for group experiences
   const isGroupExperience = bookingContent.isGroupExperience;
-  const activeCounter = useActiveCounter(
-    experience.id.toString(),
-    bookingContent.totalSlots || 0,
-    bookingContent.availableSlots || 0
-  );
+  // const activeCounter = useActiveCounter(
+  //   experience.id.toString(),
+  //   bookingContent.totalSlots || 0,
+  //   bookingContent.availableSlots || 0
+  // );
 
   // Dynamic per-installment price for group experiences based on current totalPrice and installments
   const groupInstallments = bookingContent.groupPricing?.paymentPlanInstallments || 1;
@@ -539,13 +539,19 @@ export default function BookExperiencePage() {
                 <span>{bookingContent.duration}</span>
                 <span>|</span>
                 <span>${bookingContent.groupPricing?.fullPrice}</span>
-                <span>|</span>
-                <ActiveCounter
+                {bookingContent.startDate && bookingContent.endDate && (
+                  <>
+                    <span>|</span>
+                    <span>{new Date(bookingContent.startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })} - {new Date(bookingContent.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</span>
+                  </>
+                )}
+                {/* <span>|</span> */}
+                {/* <ActiveCounter
                   experienceId={experience.id.toString()}
                   totalSlots={activeCounter.totalSlots}
                   availableSlots={activeCounter.availableSlots}
                   className="text-white"
-                />
+                /> */}
               </div>
             </div>
           )}
@@ -570,14 +576,14 @@ export default function BookExperiencePage() {
             <span>{bookingContent.duration}</span>
             <span>|</span>
             <span>${bookingContent.groupPricing?.fullPrice}</span>
-            <span>|</span>
-            <ActiveCounter
+            {/* <span>|</span> */}
+            {/* <ActiveCounter
               experienceId={experience.id.toString()}
               totalSlots={activeCounter.totalSlots}
               availableSlots={activeCounter.availableSlots}
               className="text-white"
               textSize="text-[10px]"
-            />
+            /> */}
           </div>
         </div>
       )}
@@ -680,17 +686,28 @@ export default function BookExperiencePage() {
                           <div className="text-3xl font-sans font-normal text-black leading-none">
                             ${totalPrice}
                           </div>
+                          {experience.slug !== "december-in-ghana-castles-to-coastlines" && (
                           <div className="text-sm font-sans text-black mt-1">
                             or ${groupPerInstallment} in {bookingContent.groupPricing?.paymentPlanInstallments} payments
                           </div>
+                          )}
                         </div>
                       </div>
+                      {experience.slug === "december-in-ghana-castles-to-coastlines" ? (
+                        <Button
+                          className="w-full bg-gray-800 hover:bg-gray-700 text-white py-6 rounded-lg text-sm font-sans"
+                          onClick={() => setIsEnquireModalOpen(true)}
+                        >
+                          Enquire for Availability
+                        </Button>
+                      ) : (
                       <Button
                         className="w-full bg-gray-800 hover:bg-gray-700 text-white py-6 rounded-lg text-sm font-sans"
                         onClick={() => setIsGroupConfirmationOpen(true)}
                       >
                         Book your spot
                       </Button>
+                      )}
                     </div>
 
                     {/* Desktop Layout */}
@@ -731,6 +748,7 @@ export default function BookExperiencePage() {
                           </div>
 
                           {/* Payment Plan */}
+                          {experience.slug !== "december-in-ghana-castles-to-coastlines" && (
                           <div className="flex flex-col justify-center items-start tracking-widest leading-none space-y-0 mt-1">
                             <div className="text-base font-sans font-semibold text-slate-900">
                               OR ${groupPerInstallment}
@@ -739,14 +757,24 @@ export default function BookExperiencePage() {
                               IN {bookingContent.groupPricing?.paymentPlanInstallments} PAYMENTS
                             </div>
                           </div>
+                          )}
 
                           {/* Button */}
+                          {experience.slug === "december-in-ghana-castles-to-coastlines" ? (
+                          <Button
+                            className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
+                            onClick={() => setIsEnquireModalOpen(true)}
+                          >
+                            Enquire for Availability
+                          </Button>
+                          ) : (
                           <Button
                             className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
                             onClick={() => setIsGroupConfirmationOpen(true)}
                           >
                             Book your spot
                           </Button>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -1100,7 +1128,7 @@ export default function BookExperiencePage() {
         showConfirmation={showConfirmation}
         bookingDetails={bookingDetails}
         onBookingConfirmed={isGroupExperience ? (guests: number) => {
-          activeCounter.bookSpots(guests)
+          // activeCounter.bookSpots(guests)
         } : undefined}
       />
 
@@ -1167,15 +1195,15 @@ export default function BookExperiencePage() {
           }}
           numberOfGuests={numberOfGuests}
           onBookingConfirmed={(guests: number) => {
-            activeCounter.bookSpots(guests);
+            // activeCounter.bookSpots(guests);
             setIsGroupConfirmationOpen(false);
           }}
-          activeCounter={{
-            totalSlots: activeCounter.totalSlots,
-            availableSlots: activeCounter.availableSlots,
-            spotsOpen: activeCounter.spotsOpen,
-            spotsTaken: activeCounter.spotsTaken,
-          }}
+          // activeCounter={{
+          //   totalSlots: activeCounter.totalSlots,
+          //   availableSlots: activeCounter.availableSlots,
+          //   spotsOpen: activeCounter.spotsOpen,
+          //   spotsTaken: activeCounter.spotsTaken,
+          // }}
         />
       )}
 

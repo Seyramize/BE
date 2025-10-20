@@ -1,4 +1,4 @@
-import { initializeSlots } from './slot-manager'
+// import { initializeSlots } from './slot-manager'
 
 export type Experience = {
     id: number
@@ -1200,23 +1200,23 @@ export type Experience = {
           "Culture & Heritage - AfroFuture Festival, Cape Coast Castle, and Accra city tour (Jamestown & Black Star landmarks).",
           "Luxury & Lifestyle - Long-table welcome dinner, private beach club escape, and curated New Year's Eve celebration."
         ],
-        startingPrice: 3000,
+        startingPrice: 600,
         pricing: {
-          oneGuest: 3000,
-          twoGuests: 3000,
-          threeOrMoreGuests: 3000,
+          oneGuest: 600,
+          twoGuests: 600,
+          threeOrMoreGuests: 600,
         },
         minimumGuests: 1,
         included: [
           "Private transportation including fuel",
           "All scheduled experiences and tours",
           "Dedicated chaperone and access to resident guides",
-          "5-star accommodations",
           "Beyond Experiences Essentials™ Bag"
         ],
         notIncluded: [
           "International flights to and from Accra",
           "Personal expenses (shopping, unscheduled meals, extras)",
+          "Accommodations",
           "Travel insurance (recommended and available on request)"
         ],
         important: "Spaces are limited and joining the trip means traveling with a set group, sharing experiences, and enjoying Ghana's December magic together.",
@@ -1226,7 +1226,7 @@ export type Experience = {
         startDate: "2025-12-28",
         endDate: "2026-01-02",
         groupPricing: {
-          fullPrice: 3000,
+          fullPrice: 600,
           paymentPlanPrice: 1000,
           paymentPlanInstallments: 3
         }
@@ -1236,8 +1236,8 @@ export type Experience = {
 ]
 
 // Initialize slots for group experiences
-experiences.forEach(experience => {
-  if (experience.bookingContent.isGroupExperience && experience.bookingContent.totalSlots) {
-    initializeSlots(experience.id.toString(), experience.bookingContent.totalSlots)
-  }
-})
+// experiences.forEach(experience => {
+//   if (experience.bookingContent.isGroupExperience && experience.bookingContent.totalSlots) {
+//     initializeSlots(experience.id.toString(), experience.bookingContent.totalSlots)
+//   }
+// })

@@ -1,3 +1,4 @@
+/*
 "use client"
 
 import { useState, useEffect } from "react"
@@ -76,3 +77,4 @@ export function useActiveCounter(experienceId: string, initialTotal: number, ini
     isLowAvailability: availableSlots <= 3
   }
 }
+*/

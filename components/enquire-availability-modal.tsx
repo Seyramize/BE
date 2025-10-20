@@ -5,6 +5,13 @@ import { useState, useEffect } from "react"
 import { X, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { CountrySelector } from "@/components/country-selector"
 import { LocationSelector } from "@/components/location-selector"
 
@@ -30,6 +37,7 @@ interface FormData {
   locationCountry: string
   preferredDate: string
   message: string
+  numberOfGuests: number;
 }
 
 export function EnquireAvailabilityModal({ isOpen, onClose, experience }: EnquireAvailabilityModalProps) {
@@ -47,6 +55,7 @@ export function EnquireAvailabilityModal({ isOpen, onClose, experience }: Enquir
     locationCountry: "GH",
     preferredDate: "",
     message: "",
+    numberOfGuests: 1,
   })
 
   // Close modal with ESC key
@@ -97,7 +106,9 @@ export function EnquireAvailabilityModal({ isOpen, onClose, experience }: Enquir
     if (!formData.email.trim()) newErrors.email = "Email is required"
     if (!formData.phoneNumber.trim()) newErrors.phoneNumber = "Phone number is required"
     if (!formData.location.trim()) newErrors.location = "Location is required"
-    if (!formData.preferredDate) newErrors.preferredDate = "Preferred date is required"
+    if (experience.slug !== "december-in-ghana-castles-to-coastlines" && !formData.preferredDate) {
+      newErrors.preferredDate = "Preferred date is required";
+    }
 
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -114,6 +125,7 @@ export function EnquireAvailabilityModal({ isOpen, onClose, experience }: Enquir
       locationCountry: "GH",
       preferredDate: "",
       message: "",
+      numberOfGuests: 1,
     })
     setErrors({})
     setSubmitSuccess(false)
@@ -227,6 +239,29 @@ export function EnquireAvailabilityModal({ isOpen, onClose, experience }: Enquir
 
                   <div>
                     <label className="block text-slate-800 font-sans text-sm font-medium mb-2">
+                      Number of Guests *
+                    </label>
+                    <Select
+                      value={formData.numberOfGuests.toString()}
+                      onValueChange={(value) => setFormData(prev => ({ ...prev, numberOfGuests: parseInt(value, 10) }))}
+                    >
+                      <SelectTrigger className="w-full border-slate-300 focus:border-slate-900 focus:ring-slate-900">
+                        <SelectValue placeholder="Select number of guests" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {[...Array(20)].map((_, i) => (
+                          <SelectItem key={i + 1} value={(i + 1).toString()}>
+                            {i + 1}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                  <div>
+                    <label className="block text-slate-800 font-sans text-sm font-medium mb-2">
                       Email Address *
                     </label>
                     <Input
@@ -238,9 +273,7 @@ export function EnquireAvailabilityModal({ isOpen, onClose, experience }: Enquir
                     />
                     {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
                   </div>
-                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                   <div>
                     <label className="block text-slate-800 font-sans text-sm font-medium mb-2">
                       Phone Number *
@@ -283,6 +316,7 @@ export function EnquireAvailabilityModal({ isOpen, onClose, experience }: Enquir
               </div>
 
               {/* Preferred Date */}
+              {experience.slug !== "december-in-ghana-castles-to-coastlines" && (
               <div>
                 <div className="flex items-center gap-2 mb-4">
                   <h4 className="text-lg font-sans font-normal text-slate-800">Preferred Date</h4>
@@ -302,6 +336,7 @@ export function EnquireAvailabilityModal({ isOpen, onClose, experience }: Enquir
                   {errors.preferredDate && <p className="text-red-500 text-xs mt-1">{errors.preferredDate}</p>}
                 </div>
               </div>
+              )}
 
               {/* Additional Message */}
               <div>

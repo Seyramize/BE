@@ -1,3 +1,4 @@
+/*
 // Simple in-memory slot management for group experiences
 // In production, this should be replaced with a database
 
@@ -85,3 +86,4 @@ export function resetSlots(experienceId: string, totalSlots: number): void {
   })
   console.log(`Reset slots for experience ${experienceId} to ${totalSlots}`)
 }
+*/

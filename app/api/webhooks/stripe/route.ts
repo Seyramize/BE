@@ -7,7 +7,7 @@ import {
   updateInstallmentPaymentStatus,
   getInstallmentPaymentStatus 
 } from "@/lib/payment-scheduler"
-import { bookSlots, getSlotData } from "@/lib/slot-manager"
+// import { bookSlots, getSlotData } from "@/lib/slot-manager"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!
@@ -94,7 +94,7 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
   const isInstallmentPayment = metadata.isInstallmentPayment === "true"
   
   // Book slots for group experiences
-  await handleSlotBooking(session)
+  // await handleSlotBooking(session)
   
   if (isInstallmentPayment) {
     // Handle installment payment setup
@@ -135,6 +135,7 @@ async function handleRegularPayment(session: Stripe.Checkout.Session) {
   console.log("Handling regular payment for session:", session.id)
 }
 
+/*
 async function handleSlotBooking(session: Stripe.Checkout.Session) {
   console.log("Handling slot booking for session:", session.id)
   
@@ -165,7 +166,7 @@ async function handleSlotBooking(session: Stripe.Checkout.Session) {
     console.log("No experience ID or guests count found in metadata - skipping slot booking")
   }
 }
-
+*/
 async function findInstallmentPaymentByPaymentIntent(paymentIntentId: string) {
   // Find installment payment record by Stripe Payment Intent ID
   for (const installment of getInstallmentPaymentStatus("").installmentPayments) {
