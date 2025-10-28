@@ -19,7 +19,7 @@ interface ExperienceData {
   heroImage: string
   id: string
   slug: string
-  pricing: {
+  pricing?: {
     oneGuest: number
     twoGuests: number
     threeOrMoreGuests: number
@@ -129,11 +129,11 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
     if (guestCount > 0) {
       let pricePerGuest
       if (guestCount === 1) {
-        pricePerGuest = experience.pricing.oneGuest
+        pricePerGuest = experience.pricing?.oneGuest || 0; // Use optional chaining
       } else if (guestCount === 2) {
-        pricePerGuest = experience.pricing.twoGuests
+        pricePerGuest = experience.pricing?.twoGuests || 0; // Use optional chaining
       } else {
-        pricePerGuest = experience.pricing.threeOrMoreGuests
+        pricePerGuest = experience.pricing?.threeOrMoreGuests || 0; // Use optional chaining
       }
       const newTotalCost = pricePerGuest * guestCount
       setTotalCost(parseFloat(newTotalCost.toFixed(2)))

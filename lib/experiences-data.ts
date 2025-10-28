@@ -25,7 +25,7 @@ export type Experience = {
       overview: string
       highlights: string[]
       startingPrice: number
-      pricing: {
+      pricing?: {
         oneGuest: number
         twoGuests: number
         threeOrMoreGuests: number
@@ -46,8 +46,17 @@ export type Experience = {
       important?: string
       startDate?: string
       endDate?: string
+      variants?: ExperienceVariant[]
     }
     tags: string[]
+  }
+  
+  export type ExperienceVariant = {
+    id: string
+    title: string
+    price: number
+    overview: string
+    highlights: string[]
   }
   
   export const experiences: Experience[] = [
@@ -354,57 +363,6 @@ export type Experience = {
       },
       tags: ["Travel Planner's Choice", "1 PAX"]
     },
-    // {
-    //   id: 6,
-    //   slug: "dine-on-a-mat",
-    //   defaultContent: {
-    //     title: "Dine on a Mat",
-    //     shortDescription: "Step into Fulani culture with Chef Fatmata Binta, winner of the Basque Culinary World Prize and UN Ambassador for Responsible Tourism.",
-    //     image: "/images/experiences/dine-on-a-mat/cover.jpg?height=400&width=300&text=Kente+Weaving+Workshop",
-    //     location: "Greater Accra, Ghana",
-    //   },
-    //   expandedContent: {
-    //     title: "Dine on a Mat",
-    //     fullDescription: "Spend the day learning from Ghanaian artisans and performers — weave your own kente, then feel the beat in a high-energy drumming and traditional dance session.",
-    //     image: "/placeholder.svg?height=500&width=400&text=Western+Ghana+Canopy+Beach",
-    //   },
-    //   bookingContent: {
-    //     title: "Dine on a Mat",
-    //     subtitle: "Immerse yourself in Ghana's living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
-    //     duration: "1 DAY",
-    //     destinations: "2 DESTINATIONS",
-    //     maxGuests: "10 GUESTS (MAX)",
-    //     heroImage: "/images/experiences/dine-on-a-mat/cover.jpg?height=800&width=1200&text=Kente+Workshop",
-    //     galleryImages: [
-    //       "/images/experiences/dine-on-a-mat/Gallery/1.jpg?height=400&width=300&text=Kente+Weaving",
-    //       "/images/experiences/dine-on-a-mat/Gallery/2.jpg?height=400&width=300&text=Kente+Weaving",
-    //       "/images/experiences/dine-on-a-mat/Gallery/3.jpg?height=400&width=300&text=Kente+Weaving",
-    //       "/images/experiences/dine-on-a-mat/Gallery/4.jpg?height=400&width=300&text=Kente+Weaving",
-    //       "/images/experiences/dine-on-a-mat/Gallery/5.jpg?height=400&width=300&text=Kente+Weaving",
-    //     ],
-    //     overview: "Step into Fulani culture with Chef Fatmata Binta, winner of the Basque Culinary World Prize and UN Ambassador for Responsible Tourism. Born in Sierra Leone, Chef Binta reimagines Fulani traditions through food, with an exclusive five-course meal curated for your group. Accompanied by traditional drinks, a tea ceremony, and stories about African gastronomy, the experience is intimate, cultural, and deeply flavorful.Dive into Ghana's cultural heartbeat at the Accra Arts Centre. Begin with a private kente weaving workshop, where skilled artisans guide you in creating your own piece and share the meanings behind each pattern. Then, join in the pulse of West Africa through drumming and traditional dance — immersive, hands-on, and unforgettable.",
-    //     whatsPriceless: "Exclusive access to one of Africa's most celebrated culinary voices and a chance to explore Fulani cuisine in a way few ever do.",
-    //     highlights: [
-    //       "Five-course private dining experience with Chef Binta",
-    //       "Introduction to Fulani cuisine and culture",
-    //       "Tea ceremony and storytelling",
-    //     ],
-    //     startingPrice: 235,
-    //     pricing: {
-    //       oneGuest: 235,
-    //       twoGuests: 223.25,
-    //       threeOrMoreGuests: 223.25,
-    //     },
-    //     minimumGuests: 2,
-    //     included: [
-    //       "Private transportation including fuel",
-    //       "Dedicated chaperone and access to resident guides",
-    //       "Complimentary bites and drinks",
-    //       "Beyond Experiences Essentials™ Bag",
-    //     ]
-    //   },
-    //   tags: ["Priceless", "2 PAX"]
-    // },
     {
       id: 6,
       slug: "wojutei",
@@ -466,53 +424,92 @@ export type Experience = {
       slug: "a-date-with-fashion",
       defaultContent: {
         title: "A Date with Fashion",
-        shortDescription: "Step into Ghana's fashion scene with three pioneering designers whose work has graced the likes of Beyoncé, Cardi B, and Angelique Kidjo.",
-        image: "/images/experiences/a-date-with-fashion/cover.jpg?height=400&width=300&text=Kente+Weaving+Workshop",
+        shortDescription:
+          "Step into Ghana's fashion scene with three pioneering designers whose work has graced the likes of Beyoncé, Cardi B, and Angelique Kidjo.",
+        image:
+          "/images/experiences/a-date-with-fashion/cover.jpg?height=400&width=300&text=Kente+Weaving+Workshop",
         location: "Greater Accra, Ghana",
       },
       expandedContent: {
         title: "A Date with Fashion",
-        fullDescription: "Spend the day learning from Ghanaian artisans and performers — weave your own kente, then feel the beat in a high-energy drumming and traditional dance session.",
-        image: "/placeholder.svg?height=500&width=400&text=Western+Ghana+Canopy+Beach",
+        fullDescription:
+          "Spend the day learning from Ghanaian artisans and performers — weave your own kente, then feel the beat in a high-energy drumming and traditional dance session.",
+        image:
+          "/placeholder.svg?height=500&width=400&text=Western+Ghana+Canopy+Beach",
       },
       bookingContent: {
         title: "A Date with Fashion",
-        subtitle: "Immerse yourself in Ghana's living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
+        subtitle:
+          "Immerse yourself in Ghana's living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
         duration: "1 DAY",
         destinations: "2 DESTINATIONS",
         maxGuests: "10 GUESTS (MAX)",
-        heroImage: "/images/experiences/a-date-with-fashion/cover.jpg?height=800&width=1200&text=Kente+Workshop",
+        heroImage:
+          "/images/experiences/a-date-with-fashion/cover.jpg?height=800&width=1200&text=Kente+Workshop",
         galleryImages: [
-          
           "/images/experiences/a-date-with-fashion/Gallery/2.jpg?height=400&width=300&text=Kente+Weaving",
           "/images/experiences/a-date-with-fashion/Gallery/5.jpg?height=400&width=300&text=Kente+Weaving",
           "/images/experiences/a-date-with-fashion/Gallery/6.jpg?height=400&width=300&text=Kente+Weaving",
           "/images/experiences/a-date-with-fashion/Gallery/11.jpg?height=400&width=300&text=Kente+Weaving",
           "/images/experiences/a-date-with-fashion/Gallery/15.jpg?height=400&width=300&text=Kente+Weaving",
           "/images/experiences/a-date-with-fashion/Gallery/16.jpg?height=400&width=300&text=Kente+Weaving",
-         
         ],
-        overview: "Step into Ghana's fashion scene with three pioneering designers whose work has graced the likes of Beyoncé, Cardi B, and Angelique Kidjo. Tour their studios, learn about their creative process, and collaborate to design a one-of-a-kind piece to take home. This is more than fashion — it's artistry, identity, and culture.",
-        whatsPriceless: "Personal interaction with Ghana's leading designers and the opportunity to co-create a custom piece.",
+        overview:
+          "Step into Ghana's fashion scene with three pioneering designers whose work has graced the likes of Beyoncé, Cardi B, and Angelique Kidjo. Tour their studios, learn about their creative process, and collaborate to design a one-of-a-kind piece to take home. This is more than fashion — it's artistry, identity, and culture.",
+        whatsPriceless:
+          "Personal interaction with Ghana's leading designers and the opportunity to co-create a custom piece.",
         highlights: [
           "Guided showroom tours with top designers",
           "Hands-on design session for a custom piece",
           "Access to unisex fashion suitable for all",
         ],
-        startingPrice: 899,
-        pricing: {
-          oneGuest: 899,
-          twoGuests: 899,
-          threeOrMoreGuests: 899,
-        },
+        startingPrice: 350,
         minimumGuests: 2,
         included: [
-         "Private transportation including fuel",
+          "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
           "Complimentary bites and drinks",
-        ]
+        ],
+        variants: [
+          {
+            id: "chocolate",
+            title: "A Date with Chocolate",
+            price: 350,
+            overview:
+              "Spend a day with pioneering designer Chocolate, whose work has graced the likes of Beyoncé and Cardi B. Tour the studio, learn about the creative process, and collaborate to design a one-of-a-kind piece to take home.",
+            highlights: [
+              "Guided showroom tour with a top designer",
+              "Hands-on design session for a custom piece",
+              "Access to unisex fashion suitable for all",
+            ],
+          },
+          {
+            id: "phil-and-joe",
+            title: "A Date with Phil & Joe",
+            price: 350,
+            overview:
+              "Spend a day with pioneering designers Phil & Joe, whose work has graced the likes of Angelique Kidjo. Tour their studio, learn about their creative process, and collaborate to design a one-of-a-kind piece to take home.",
+            highlights: [
+              "Guided showroom tours with top designers",
+              "Hands-on design session for a custom piece",
+              "Access to unisex fashion suitable for all",
+            ],
+          },
+          {
+            id: "full-experience",
+            title: "A Date with Fashion: The Full Experience",
+            price: 749,
+            overview:
+              "Step into Ghana's fashion scene with a full day experience featuring pioneering designers Chocolate, and Phil & Joe. Their work has graced the likes of Beyoncé, Cardi B, and Angelique Kidjo. Tour their studios, learn about their creative process, and collaborate to design a one-of-a-kind piece to take home. This is more than fashion — it's artistry, identity, and culture.",
+            highlights: [
+              "Guided showroom tours with top designers",
+              "Hands-on design session for a custom piece",
+              "Access to unisex fashion suitable for all",
+            ],
+          },
+        ],
       },
-      tags: ["Priceless", "2 PAX"]
+      tags: ["Priceless", "2 PAX"],
     },
     {
       id: 8,
@@ -1231,8 +1228,120 @@ export type Experience = {
         }
       },
       tags: ["Travel Planner's Choice", "2 PAX"]
-  },
-]
+    },
+    {
+      id: 21,
+      slug: "a-date-with-chocolate",
+      defaultContent: {
+        title: "A Date with Chocolate",
+        shortDescription:
+          "Step into the world of Chocolate, a pioneering Ghanaian designer whose work has been worn by global icons.",
+        image:
+          "/images/experiences/a-date-with-fashion/cover.jpg?height=400&width=300&text=Kente+Weaving+Workshop",
+        location: "Greater Accra, Ghana",
+      },
+      expandedContent: {
+        title: "A Date with Chocolate",
+        fullDescription:
+          "Spend the day with pioneering designer Chocolate, whose work has graced the likes of Beyoncé and Cardi B. Tour the studio, learn about the creative process, and collaborate to design a one-of-a-kind piece to take home.",
+        image:
+          "/placeholder.svg?height=500&width=400&text=Western+Ghana+Canopy+Beach",
+      },
+      bookingContent: {
+        title: "A Date with Chocolate",
+        subtitle:
+          "Immerse yourself in Ghana's living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
+        duration: "1 DAY",
+        destinations: "1 DESTINATION",
+        maxGuests: "10 GUESTS (MAX)",
+        heroImage:
+          "/images/experiences/a-date-with-fashion/cover.jpg?height=800&width=1200&text=Kente+Workshop",
+        galleryImages: [
+          "/images/experiences/a-date-with-fashion/Gallery/2.jpg?height=400&width=300&text=Kente+Weaving",
+          "/images/experiences/a-date-with-fashion/Gallery/5.jpg?height=400&width=300&text=Kente+Weaving",
+          "/images/experiences/a-date-with-fashion/Gallery/6.jpg?height=400&width=300&text=Kente+Weaving",
+        ],
+        overview:
+          "Spend a day with pioneering designer Chocolate, whose work has graced the likes of Beyoncé and Cardi B. Tour the studio, learn about the creative process, and collaborate to design a one-of-a-kind piece to take home.",
+        whatsPriceless:
+          "Personal interaction with one of Ghana's leading designers and the opportunity to co-create a custom piece.",
+        highlights: [
+          "Guided showroom tour with a top designer",
+          "Hands-on design session for a custom piece",
+          "Access to unisex fashion suitable for all",
+        ],
+        startingPrice: 350,
+        pricing: {
+          oneGuest: 350,
+          twoGuests: 350,
+          threeOrMoreGuests: 350,
+        },
+        minimumGuests: 2,
+        included: [
+          "Private transportation including fuel",
+          "Dedicated chaperone and access to resident guides",
+          "Complimentary bites and drinks",
+        ],
+      },
+      tags: ["Priceless", "2 PAX"],
+    },
+    {
+      id: 22,
+      slug: "a-date-with-phil-and-joe",
+      defaultContent: {
+        title: "A Date with Phil & Joe",
+        shortDescription:
+          "Meet Phil & Joe, pioneering Ghanaian designers whose work has been worn by global icons.",
+        image:
+          "/images/experiences/a-date-with-fashion/cover.jpg?height=400&width=300&text=Kente+Weaving+Workshop",
+        location: "Greater Accra, Ghana",
+      },
+      expandedContent: {
+        title: "A Date with Phil & Joe",
+        fullDescription:
+          "Spend a day with pioneering designers Phil & Joe, whose work has graced the likes of Angelique Kidjo. Tour their studio, learn about their creative process, and collaborate to design a one-of-a-kind piece to take home.",
+        image:
+          "/placeholder.svg?height=500&width=400&text=Western+Ghana+Canopy+Beach",
+      },
+      bookingContent: {
+        title: "A Date with Phil & Joe",
+        subtitle:
+          "Immerse yourself in Ghana's living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
+        duration: "1 DAY",
+        destinations: "1 DESTINATION",
+        maxGuests: "10 GUESTS (MAX)",
+        heroImage:
+          "/images/experiences/a-date-with-fashion/cover.jpg?height=800&width=1200&text=Kente+Workshop",
+        galleryImages: [
+          "/images/experiences/a-date-with-fashion/Gallery/11.jpg?height=400&width=300&text=Kente+Weaving",
+          "/images/experiences/a-date-with-fashion/Gallery/15.jpg?height=400&width=300&text=Kente+Weaving",
+          "/images/experiences/a-date-with-fashion/Gallery/16.jpg?height=400&width=300&text=Kente+Weaving",
+        ],
+        overview:
+          "Spend a day with pioneering designers Phil & Joe, whose work has graced the likes of Angelique Kidjo. Tour their studio, learn about their creative process, and collaborate to design a one-of-a-kind piece to take home.",
+        whatsPriceless:
+          "Personal interaction with Ghana's leading designers and the opportunity to co-create a custom piece.",
+        highlights: [
+          "Guided showroom tours with top designers",
+          "Hands-on design session for a custom piece",
+          "Access to unisex fashion suitable for all",
+        ],
+        startingPrice: 350,
+        pricing: {
+          oneGuest: 350,
+          twoGuests: 350,
+          threeOrMoreGuests: 350,
+        },
+        minimumGuests: 2,
+        included: [
+          "Private transportation including fuel",
+          "Dedicated chaperone and access to resident guides",
+          "Complimentary bites and drinks",
+        ],
+      },
+      tags: ["Priceless", "2 PAX"],
+    },
+  ]
 
 // Initialize slots for group experiences
 // experiences.forEach(experience => {

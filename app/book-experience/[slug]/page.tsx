@@ -10,7 +10,7 @@ import { BookingFormModal } from "@/components/booking-form-modal";
 import { GalleryModal } from "@/components/gallery-modal";
 import { EnquireAvailabilityModal } from "@/components/enquire-availability-modal";
 import { BookingConfirmationGroup } from "@/components/booking-confirmation-group";
-import { experiences, type Experience } from "@/lib/experiences-data";
+import { experiences, type Experience, type ExperienceVariant } from "@/lib/experiences-data";
 import {
   Check,
   Hotel,
@@ -372,6 +372,10 @@ export default function BookExperiencePage() {
   console.log("Looking for ID:", parseInt(slug as string));
   console.log("Found experience:", experience);
 
+  const [selectedVariant, setSelectedVariant] = useState<
+    ExperienceVariant | undefined
+  >(experience?.bookingContent.variants?.[0]);
+
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -440,8 +444,15 @@ export default function BookExperiencePage() {
   }
   const { bookingContent } = experience;
 
+  const currentBookingContent = selectedVariant || bookingContent;
+
   const [numberOfGuests, setNumberOfGuests] = useState(1);
-  const [totalPrice, setTotalPrice] = useState(bookingContent.pricing.oneGuest);
+
+  const [totalPrice, setTotalPrice] = useState(
+    "price" in currentBookingContent
+      ? currentBookingContent.price
+      : bookingContent.pricing?.oneGuest || 0
+  );
 
   // Active counter for group experiences
   const isGroupExperience = bookingContent.isGroupExperience;
@@ -459,13 +470,17 @@ export default function BookExperiencePage() {
 
   const handleGuestsChange = (value: string) => {
     const guests = parseInt(value, 10);
-    let pricePerGuest;
+    let newTotalPrice;
 
-    if (isGroupExperience) {
+    if (selectedVariant) {
+      newTotalPrice = selectedVariant.price * guests;
+    } else if (isGroupExperience) {
       // For group experiences, use the fixed group pricing
-      pricePerGuest = bookingContent.groupPricing?.fullPrice || 0;
-    } else {
+      const pricePerGuest = bookingContent.groupPricing?.fullPrice || 0;
+      newTotalPrice = pricePerGuest * guests;
+    } else if (bookingContent.pricing) {
       // For regular experiences, use the tiered pricing
+      let pricePerGuest;
       if (guests === 1) {
         pricePerGuest = bookingContent.pricing.oneGuest;
       } else if (guests === 2) {
@@ -473,12 +488,43 @@ export default function BookExperiencePage() {
       } else {
         pricePerGuest = bookingContent.pricing.threeOrMoreGuests;
       }
+      newTotalPrice = pricePerGuest * guests;
+    } else {
+      newTotalPrice = 0; // or some default value
     }
-
-    const newTotalPrice = pricePerGuest * guests;
 
     setNumberOfGuests(guests);
     setTotalPrice(parseFloat(newTotalPrice.toFixed(2)));
+  };
+
+  useEffect(() => {
+    const guests = numberOfGuests;
+    let newTotalPrice;
+
+    if (selectedVariant) {
+      newTotalPrice = selectedVariant.price * guests;
+    } else if (isGroupExperience) {
+      const pricePerGuest = bookingContent.groupPricing?.fullPrice || 0;
+      newTotalPrice = pricePerGuest * guests;
+    } else if (bookingContent.pricing) {
+      let pricePerGuest;
+      if (guests === 1) {
+        pricePerGuest = bookingContent.pricing.oneGuest;
+      } else if (guests === 2) {
+        pricePerGuest = bookingContent.pricing.twoGuests;
+      } else {
+        pricePerGuest = bookingContent.pricing.threeOrMoreGuests;
+      }
+      newTotalPrice = pricePerGuest * guests;
+    } else {
+      newTotalPrice = 0; // or some default value
+    }
+    setTotalPrice(parseFloat(newTotalPrice.toFixed(2)));
+  }, [selectedVariant, numberOfGuests, bookingContent, isGroupExperience]);
+
+  const handleVariantChange = (variantId: string) => {
+    const variant = bookingContent.variants?.find((v) => v.id === variantId);
+    setSelectedVariant(variant);
   };
 
   const relatedExperiences = getRelatedExperiences(experience, experiences);
@@ -600,7 +646,7 @@ export default function BookExperiencePage() {
                   Overview
                 </h2>
                 <p className="text-slate-700 font-sans font-normal leading-relaxed text-base sm:text-xl">
-                  {bookingContent.overview}
+                  {currentBookingContent.overview}
                 </p>
                 {bookingContent.whatsPriceless && (
                   <div className="mt-8">
@@ -640,7 +686,7 @@ export default function BookExperiencePage() {
                   Highlights
                 </h2>
                 <div className="space-y-4">
-                  {bookingContent.highlights.map((highlight, index) => (
+                  {currentBookingContent.highlights.map((highlight, index) => (
                     <div
                       key={index}
                       className="flex items-start gap-3 border-b border-black pb-3"
@@ -806,7 +852,7 @@ export default function BookExperiencePage() {
                         </Select>
                       </div>
                     </div>
-                    <div className="relative">
+                    <div className="relative text-right">
                       <span className="text-3xl font-sans font-normal text-black">
                         ${totalPrice}
                       </span>
@@ -836,7 +882,9 @@ export default function BookExperiencePage() {
                         </Button>
                         <Link
                           href={`/customize-experience?experience=${encodeURIComponent(
-                            bookingContent.title
+                            selectedVariant
+                              ? selectedVariant.title
+                              : bookingContent.title
                           )}`}
                           className="w-full"
                         >
@@ -884,12 +932,38 @@ export default function BookExperiencePage() {
                     <div className="flex items-center gap-8">
                       <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-3">
                         {experience.slug === "a-date-with-fashion" ? (
-                          <Button
-                            className="w-full sm:w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
-                            onClick={() => setIsEnquireModalOpen(true)}
-                          >
-                            Enquire for Availability
-                          </Button>
+                          <div className="flex items-center gap-2">
+                            {bookingContent.variants && (
+                              <Select
+                                onValueChange={handleVariantChange}
+                                defaultValue={
+                                  bookingContent.variants[0]?.id
+                                }
+                              >
+                                <SelectTrigger className="w-auto h-auto bg-slate-900 text-white border-slate-900 rounded-sm px-4 py-3 text-sm">
+                                  <SelectValue placeholder="Select an option" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {bookingContent.variants.map(
+                                    (variant) => (
+                                      <SelectItem
+                                        key={variant.id}
+                                        value={variant.id}
+                                      >
+                                        {variant.title}
+                                      </SelectItem>
+                                    )
+                                  )}
+                                </SelectContent>
+                              </Select>
+                            )}
+                            <Button
+                              className="w-full sm:w-auto bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
+                              onClick={() => setIsEnquireModalOpen(true)}
+                            >
+                              Enquire for Availability
+                            </Button>
+                          </div>
                         ) : (
                           <>
                             <Button
@@ -900,7 +974,9 @@ export default function BookExperiencePage() {
                             </Button>
                             <Link
                               href={`/customize-experience?experience=${encodeURIComponent(
-                                bookingContent.title
+                                selectedVariant
+                                  ? selectedVariant.title
+                                  : bookingContent.title
                               )}`}
                               className="w-full sm:w-auto"
                             >
@@ -1117,7 +1193,7 @@ export default function BookExperiencePage() {
         onClose={() => setIsBookingModalOpen(false)}
         experience={{
           id: experience.id.toString(),
-          title: bookingContent.title,
+          title: selectedVariant ? selectedVariant.title : bookingContent.title,
           totalPrice: totalPrice,
           minimumGuests: bookingContent.minimumGuests,
           heroImage: bookingContent.heroImage,
