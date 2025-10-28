@@ -1,7 +1,6 @@
 import { MailtrapClient } from "mailtrap";
 
 const TOKEN = process.env.MAILTRAP_API_KEY!;
-const client = new MailtrapClient({ token: TOKEN });
 
 interface SendEmailParams {
   to: string;
@@ -18,6 +17,7 @@ export async function sendEmail({
   templateUuid,
   templateVariables,
 }: SendEmailParams) {
+  const client = new MailtrapClient({ token: TOKEN });
   try {
     await client.send({
       from,
