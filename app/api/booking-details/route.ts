@@ -1,16 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { experiences } from '@/lib/experiences-data';
-import sgMail from "@sendgrid/mail";
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
+import { sendEmail } from '@/lib/mailtrap';
 
 // In-memory set to track which session IDs have had emails sent (demo only)
 const sentEmailSessions = new Set<string>();
 
-// SendGrid template IDs
-const USER_CONFIRMATION_TEMPLATE_ID = "d-830cac9ed61344ac90a5390c896d6400";
-const INTERNAL_TEAM_TEMPLATE_ID = "d-3a09c71153994bc7b5217425747763be";
+// Mailtrap template UUIDs
+const USER_CONFIRMATION_TEMPLATE_ID = "27ffbc93-4c12-4664-9ddc-494bbc77e155";
+const INTERNAL_TEAM_TEMPLATE_ID = "40519514-3eb4-402f-acfa-a438de284abc";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
@@ -73,7 +71,7 @@ export async function GET(req: NextRequest) {
         : (typeof session.payment_intent === 'string' ? session.payment_intent : ''),
       includedItems: experience?.bookingContent.included || [],
       supportEmail: "concierge@experiencesbybeyond.com",
-      supportPhone: "+233546506220",
+      supportPhone: "+233504513123",
       paymentMethod: (() => {
         // Try to get payment method details from the session
         if (session.payment_intent && typeof session.payment_intent === 'object') {
@@ -93,28 +91,28 @@ export async function GET(req: NextRequest) {
 
     // Idempotency: Only send emails if not already sent for this session
     if (bookingDetails.email && !sentEmailSessions.has(sessionId)) {
-      // Email to internal team using SendGrid template
-      const internalMsg = {
-        to: "concierge@experiencesbybeyond.com", // TODO: Replace with your team's email
-        from: "concierge@experiencesbybeyond.com",    // must be a verified sender in SendGrid
-        templateId: INTERNAL_TEAM_TEMPLATE_ID,
-        dynamic_template_data: {
+      // Email to internal team
+      const sendInternalEmail = sendEmail({
+        to: "concierge@experiencesbybeyond.com",
+        templateUuid: INTERNAL_TEAM_TEMPLATE_ID,
+        templateVariables: {
           ...bookingDetails,
         },
-      };
-      // Confirmation email to client using SendGrid template
-      const userMsg = {
+      });
+
+      // Confirmation email to client
+      const sendUserEmail = sendEmail({
         to: bookingDetails.email,
-        from: "concierge@experiencesbybeyond.com", // must be a verified sender in SendGrid
-        templateId: USER_CONFIRMATION_TEMPLATE_ID,
-        dynamic_template_data: {
+        templateUuid: USER_CONFIRMATION_TEMPLATE_ID,
+        templateVariables: {
           ...bookingDetails,
         },
-      };
+      });
+
       try {
         await Promise.all([
-          sgMail.send(internalMsg),
-          sgMail.send(userMsg)
+          sendInternalEmail,
+          sendUserEmail
         ]);
         sentEmailSessions.add(sessionId); // Mark as sent
       } catch (emailErr) {

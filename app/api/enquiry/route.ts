@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import sgMail from "@sendgrid/mail";
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
+import { sendEmail } from "@/lib/mailtrap";
 
 export async function POST(req: NextRequest) {
   try {
@@ -9,30 +7,29 @@ export async function POST(req: NextRequest) {
     const fullName = `${firstName} ${lastName}`;
 
     // Email to internal team
-    const internalMsg = {
-      to: "concierge@experiencesbybeyond.com", // change to your team email
-      from: "concierge@experiencesbybeyond.com", // must be a verified sender in SendGrid
-      templateId: "d-81252be20f1d4916a28e595c0df9a32f",
-      dynamicTemplateData: {
+    const sendInternalEmail = sendEmail({
+      to: "concierge@experiencesbybeyond.com",
+      templateUuid: "fd85b484-1f44-42d5-bbef-f980ea42188f", // TODO: Replace with Mailtrap template UUID
+      templateVariables: {
         fullName,
         email,
         phone,
         message,
       },
-    };
+    });
 
     // Confirmation email to user
-    const userMsg = {
+    const sendUserEmail = sendEmail({
       to: email,
-      from: "concierge@experiencesbybeyond.com", // must be a verified sender in SendGrid
-      templateId: "d-512264a7453742259196cb8b625458df",
-      dynamicTemplateData: {
+      templateUuid: "667eb95f-34d1-47bd-879f-79183de68d72", // TODO: Replace with Mailtrap template UUID
+      templateVariables: {
         firstName,
         message,
       },
-    };
+    });
 
-    await Promise.all([sgMail.send(internalMsg), sgMail.send(userMsg)]);
+    await sendInternalEmail;
+    await sendUserEmail;
 
     return NextResponse.json({ success: true });
   } catch (error) {

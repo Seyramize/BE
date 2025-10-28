@@ -224,15 +224,14 @@ export type Experience = {
           "A rare nighttime perspective of the castle",
           "Private guide with intimate storytelling",
         ],
-        startingPrice: 649,
+        startingPrice: 100,
         pricing: {
-          oneGuest: 649,
-          twoGuests: 649,
-          threeOrMoreGuests: 649,
+          oneGuest: 100,
+          twoGuests: 100,
+          threeOrMoreGuests: 100,
         },
         minimumGuests: 1,
         included: [
-          "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
           "Complimentary bites and drinks",
         ]
@@ -549,11 +548,11 @@ export type Experience = {
           "Backstage experiences and introductions",
           "Attend as part of the founders' entourage",
         ],
-        startingPrice: 3499,
+        startingPrice: 1500,
         pricing: {
-          oneGuest: 3499,
-          twoGuests: 3499,
-          threeOrMoreGuests: 3499,
+          oneGuest: 1500,
+          twoGuests: 1500,
+          threeOrMoreGuests: 1500,
         },
         minimumGuests: 2,
         included: [

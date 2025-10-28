@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import Stripe from "stripe"
-import sgMail from "@sendgrid/mail"
+import { sendEmail } from "@/lib/mailtrap";
 import { 
   scheduleInstallmentPayments, 
   getInstallmentPaymentById, 
@@ -12,13 +12,11 @@ import {
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY!)
-
 // Email template IDs for installment notifications
-const INSTALLMENT_PAYMENT_TEMPLATE_ID = "d-installment-payment-template" // You'll need to create this
-const INSTALLMENT_COMPLETION_TEMPLATE_ID = "d-installment-completion-template" // You'll need to create this
-const INTERNAL_INSTALLMENT_TEMPLATE_ID = "d-795bb536371048f4af9b10662df83198" // You'll need to create this
-const GROUP_BOOKING_INSTALLMENT_TEMPLATE_ID = "d-6b66a3b2928a4b81bec750aed1fe040f" // Your new dynamic group booking template
+const INSTALLMENT_PAYMENT_TEMPLATE_ID = "YOUR_INSTALLMENT_PAYMENT_TEMPLATE_UUID" 
+const INSTALLMENT_COMPLETION_TEMPLATE_ID = "YOUR_INSTALLMENT_COMPLETION_TEMPLATE_UUID" 
+const INTERNAL_INSTALLMENT_TEMPLATE_ID = "YOUR_INTERNAL_INSTALLMENT_TEMPLATE_UUID" 
+const GROUP_BOOKING_INSTALLMENT_TEMPLATE_ID = "YOUR_GROUP_BOOKING_INSTALLMENT_TEMPLATE_UUID"
 
 export async function POST(req: NextRequest) {
   const body = await req.text()
@@ -184,11 +182,10 @@ async function sendInstallmentPaymentNotification(
   try {
     if (type === "success") {
       // Send success notification to customer
-      const customerMsg = {
+      const sendCustomerEmail = sendEmail({
         to: installmentPayment.customerEmail,
-        from: "concierge@experiencesbybeyond.com",
-        templateId: INSTALLMENT_PAYMENT_TEMPLATE_ID,
-        dynamic_template_data: {
+        templateUuid: INSTALLMENT_PAYMENT_TEMPLATE_ID,
+        templateVariables: {
           customerName: installmentPayment.customerName,
           installmentNumber: installmentPayment.installmentNumber,
           amount: installmentPayment.amount,
@@ -196,14 +193,13 @@ async function sendInstallmentPaymentNotification(
           remainingInstallments: installmentPayment.installmentCount - installmentPayment.installmentNumber,
           experienceName: installmentPayment.experienceName,
         },
-      }
+      });
       
       // Send internal notification
-      const internalMsg = {
+      const sendInternalEmail = sendEmail({
         to: "concierge@experiencesbybeyond.com",
-        from: "concierge@experiencesbybeyond.com",
-        templateId: INTERNAL_INSTALLMENT_TEMPLATE_ID,
-        dynamic_template_data: {
+        templateUuid: INTERNAL_INSTALLMENT_TEMPLATE_ID,
+        templateVariables: {
           customerName: installmentPayment.customerName,
           customerEmail: installmentPayment.customerEmail,
           installmentNumber: installmentPayment.installmentNumber,
@@ -211,28 +207,25 @@ async function sendInstallmentPaymentNotification(
           experienceName: installmentPayment.experienceName,
           bookingId: installmentPayment.bookingId,
         },
-      }
+      });
       
       await Promise.all([
-        sgMail.send(customerMsg),
-        sgMail.send(internalMsg)
-      ])
+        sendCustomerEmail,
+        sendInternalEmail
+      ]);
     } else {
       // Send failure notification
-      const failureMsg = {
+      await sendEmail({
         to: installmentPayment.customerEmail,
-        from: "concierge@experiencesbybeyond.com",
-        templateId: "d-payment-failure-template", // You'll need to create this
-        dynamic_template_data: {
+        templateUuid: "YOUR_PAYMENT_FAILURE_TEMPLATE_UUID",
+        templateVariables: {
           customerName: installmentPayment.customerName,
           installmentNumber: installmentPayment.installmentNumber,
           amount: installmentPayment.amount,
           failureReason: installmentPayment.failureReason,
           experienceName: installmentPayment.experienceName,
         },
-      }
-      
-      await sgMail.send(failureMsg)
+      });
     }
   } catch (error) {
     console.error("Error sending installment notification:", error)
@@ -247,24 +240,22 @@ async function checkInstallmentCompletion(bookingId: string) {
 
     if (status.isComplete) {
       // Send completion notification to client
-      const completionMsg = {
+      const sendCompletionEmail = sendEmail({
         to: status.installmentPayments[0]?.customerEmail,
-        from: "concierge@experiencesbybeyond.com",
-        templateId: INSTALLMENT_COMPLETION_TEMPLATE_ID,
-        dynamic_template_data: {
+        templateUuid: INSTALLMENT_COMPLETION_TEMPLATE_ID,
+        templateVariables: {
           customerName: status.installmentPayments[0]?.customerName,
           experienceName: status.installmentPayments[0]?.experienceName,
           totalAmount: status.installmentPayments.reduce((sum, ip) => sum + ip.amount, 0),
           bookingId: bookingId,
         },
-      }
+      });
       
       // Send internal team completion notification
-      const internalCompletionMsg = {
+      const sendInternalCompletionEmail = sendEmail({
         to: "concierge@experiencesbybeyond.com",
-        from: "concierge@experiencesbybeyond.com",
-        templateId: "d-internal-installment-completion-template", // Your internal completion template ID
-        dynamic_template_data: {
+        templateUuid: "YOUR_INTERNAL_COMPLETION_TEMPLATE_UUID",
+        templateVariables: {
           customerName: status.installmentPayments[0]?.customerName,
           customerEmail: status.installmentPayments[0]?.customerEmail,
           experienceName: status.installmentPayments[0]?.experienceName,
@@ -277,13 +268,13 @@ async function checkInstallmentCompletion(bookingId: string) {
             day: 'numeric'
           }),
         },
-      }
+      });
       
       // Send both emails
       await Promise.all([
-        sgMail.send(completionMsg),
-        sgMail.send(internalCompletionMsg)
-      ])
+        sendCompletionEmail,
+        sendInternalCompletionEmail
+      ]);
       
       console.log(`All installments completed for booking ${bookingId} - emails sent to client and team`)
     }
@@ -343,11 +334,10 @@ async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
           console.log(`Final installment completed for ${metadata.experienceName} - sending completion email`)
           
           // Send completion notification to client
-          const completionMsg = {
+          const sendCompletionEmail = sendEmail({
             to: invoice.customer_email,
-            from: "concierge@experiencesbybeyond.com",
-            templateId: INSTALLMENT_COMPLETION_TEMPLATE_ID,
-            dynamic_template_data: {
+            templateUuid: INSTALLMENT_COMPLETION_TEMPLATE_ID,
+            templateVariables: {
               customerName: metadata.fullName || "Valued Customer",
               experienceName: metadata.experienceName || "Experience",
               totalAmount: metadata.installmentTotal || "0",
@@ -359,14 +349,13 @@ async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
                 day: 'numeric'
               }),
             },
-          }
+          });
           
           // Send internal team completion notification
-          const internalCompletionMsg = {
+          const sendInternalCompletionEmail = sendEmail({
             to: "concierge@experiencesbybeyond.com",
-            from: "concierge@experiencesbybeyond.com",
-            templateId: "d-internal-installment-completion-template",
-            dynamic_template_data: {
+            templateUuid: "YOUR_INTERNAL_COMPLETION_TEMPLATE_UUID",
+            templateVariables: {
               customerName: metadata.fullName || "Valued Customer",
               customerEmail: invoice.customer_email,
               experienceName: metadata.experienceName || "Experience",
@@ -379,13 +368,13 @@ async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
                 day: 'numeric'
               }),
             },
-          }
+          });
           
           // Send both emails
           await Promise.all([
-            sgMail.send(completionMsg),
-            sgMail.send(internalCompletionMsg)
-          ])
+            sendCompletionEmail,
+            sendInternalCompletionEmail
+          ]);
           
           console.log(`Completion emails sent for final installment of ${metadata.experienceName}`)
         } else {
@@ -464,29 +453,26 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
       const customer = await stripe.customers.retrieve(subscription.customer as string)
       
       if ('email' in customer) {
-        const confirmationMsg = {
+        await sendEmail({
           to: customer.email || "",
-        from: "concierge@experiencesbybeyond.com",
-        templateId: GROUP_BOOKING_INSTALLMENT_TEMPLATE_ID,
-        dynamic_template_data: {
-          firstName: subscription.metadata.fullName?.split(' ')[0] || "Valued Customer",
-          experienceName: subscription.metadata.experienceName || "Experience",
-          totalAmount: subscription.metadata.installmentTotal || "0",
-          installmentCount: subscription.metadata.installmentCount || "3",
-          installmentAmount: (parseInt(subscription.metadata.installmentTotal || "0") / parseInt(subscription.metadata.installmentCount || "3")).toFixed(2),
-          nextPaymentDate: 'current_period_end' in subscription && subscription.current_period_end ? new Date(Number(subscription.current_period_end) * 1000).toLocaleDateString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          }) : "TBD",
-          experienceDates: "TBD - You will be contacted with specific dates",
-          supportPhone: "+1 (555) 123-4567",
-          supportEmail: "concierge@experiencesbybeyond.com",
-        },
-      }
-      
-        await sgMail.send(confirmationMsg)
+          templateUuid: GROUP_BOOKING_INSTALLMENT_TEMPLATE_ID,
+          templateVariables: {
+            firstName: subscription.metadata.fullName?.split(' ')[0] || "Valued Customer",
+            experienceName: subscription.metadata.experienceName || "Experience",
+            totalAmount: subscription.metadata.installmentTotal || "0",
+            installmentCount: subscription.metadata.installmentCount || "3",
+            installmentAmount: (parseInt(subscription.metadata.installmentTotal || "0") / parseInt(subscription.metadata.installmentCount || "3")).toFixed(2),
+            nextPaymentDate: 'current_period_end' in subscription && subscription.current_period_end ? new Date(Number(subscription.current_period_end) * 1000).toLocaleDateString('en-US', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            }) : "TBD",
+            experienceDates: "TBD - You will be contacted with specific dates",
+            supportPhone: "+1 (555) 123-4567",
+            supportEmail: "concierge@experiencesbybeyond.com",
+          },
+        });
         console.log(`Subscription confirmation sent for subscription ${subscription.id}`)
       }
     } catch (error) {
@@ -504,11 +490,10 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
       const customer = await stripe.customers.retrieve(subscription.customer as string)
       
       if (subscription.status === "paused" && 'email' in customer) {
-        const pauseMsg = {
+        await sendEmail({
           to: customer.email || "",
-          from: "concierge@experiencesbybeyond.com",
-          templateId: "d-subscription-paused-template", // You'll need to create this
-          dynamic_template_data: {
+          templateUuid: "YOUR_SUBSCRIPTION_PAUSED_TEMPLATE_UUID",
+          templateVariables: {
             customerName: subscription.metadata.fullName || "Valued Customer",
             experienceName: subscription.metadata.experienceName || "Experience",
             pauseDate: new Date().toLocaleDateString('en-US', {
@@ -520,9 +505,7 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
             supportPhone: "+1 (555) 123-4567",
             supportEmail: "concierge@experiencesbybeyond.com",
           },
-        }
-        
-        await sgMail.send(pauseMsg)
+        });
         console.log(`Subscription pause notification sent for subscription ${subscription.id}`)
       }
     } catch (error) {
@@ -540,25 +523,22 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
       const customer = await stripe.customers.retrieve(subscription.customer as string)
       
       if ('email' in customer) {
-        const cancellationMsg = {
+        await sendEmail({
           to: customer.email || "",
-        from: "concierge@experiencesbybeyond.com",
-        templateId: "d-subscription-cancelled-template", // You'll need to create this
-        dynamic_template_data: {
-          customerName: subscription.metadata.fullName || "Valued Customer",
-          experienceName: subscription.metadata.experienceName || "Experience",
-          cancellationDate: new Date().toLocaleDateString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          }),
-          supportPhone: "+1 (555) 123-4567",
-          supportEmail: "concierge@experiencesbybeyond.com",
-        },
-      }
-      
-        await sgMail.send(cancellationMsg)
+          templateUuid: "YOUR_SUBSCRIPTION_CANCELLED_TEMPLATE_UUID",
+          templateVariables: {
+            customerName: subscription.metadata.fullName || "Valued Customer",
+            experienceName: subscription.metadata.experienceName || "Experience",
+            cancellationDate: new Date().toLocaleDateString('en-US', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            }),
+            supportPhone: "+1 (555) 123-4567",
+            supportEmail: "concierge@experiencesbybeyond.com",
+          },
+        });
         console.log(`Subscription cancellation notification sent for subscription ${subscription.id}`)
       }
     } catch (error) {
@@ -573,11 +553,10 @@ async function sendGroupBookingInstallmentEmail(schedule: any) {
     console.log("Sending group booking installment emails for:", schedule.bookingId)
 
     // Internal notification
-    const internalMsg = {
+    const sendInternalEmail = sendEmail({
       to: "concierge@experiencesbybeyond.com",
-      from: "concierge@experiencesbybeyond.com",
-      templateId: INTERNAL_INSTALLMENT_TEMPLATE_ID, // Use the more specific internal template
-      dynamic_template_data: {
+      templateUuid: INTERNAL_INSTALLMENT_TEMPLATE_ID,
+      templateVariables: {
         customerName: schedule.customerName,
         customerEmail: schedule.customerEmail,
         experienceName: schedule.experienceName,
@@ -589,17 +568,16 @@ async function sendGroupBookingInstallmentEmail(schedule: any) {
         installmentInterval: schedule.installmentInterval,
         remainingInstallments: schedule.installmentCount - 1,
       },
-    }
+    });
 
     // Customer confirmation
     const nextPaymentDate = new Date()
     nextPaymentDate.setDate(nextPaymentDate.getDate() + schedule.installmentInterval)
 
-    const customerMsg = {
+    const sendCustomerEmail = sendEmail({
       to: schedule.customerEmail,
-      from: "concierge@experiencesbybeyond.com",
-      templateId: GROUP_BOOKING_INSTALLMENT_TEMPLATE_ID,
-      dynamic_template_data: {
+      templateUuid: GROUP_BOOKING_INSTALLMENT_TEMPLATE_ID,
+      templateVariables: {
         firstName: schedule.customerName?.split(' ')[0] || "Valued Customer",
         experienceName: schedule.experienceName,
         totalAmount: schedule.installmentTotal,
@@ -615,13 +593,13 @@ async function sendGroupBookingInstallmentEmail(schedule: any) {
         supportPhone: "+1 (555) 123-4567",
         supportEmail: "concierge@experiencesbybeyond.com",
       },
-    }
+    });
 
     // Send both emails
     await Promise.all([
-      sgMail.send(internalMsg),
-      sgMail.send(customerMsg)
-    ])
+      sendInternalEmail,
+      sendCustomerEmail
+    ]);
 
     console.log(`Group booking installment emails sent for booking ${schedule.bookingId} to ${schedule.customerEmail} and internal team.`)
   } catch (error) {

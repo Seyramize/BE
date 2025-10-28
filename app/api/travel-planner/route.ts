@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import sgMail from "@sendgrid/mail";
+import { sendEmail } from "@/lib/mailtrap";
 
 // Add this type definition if not already present
 type FormData = {
@@ -26,8 +26,6 @@ function getFirstName(fullName: string) {
   return fullName.trim().split(" ")[0];
 }
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
-
 export async function POST(req: Request) {
   const data = await req.json();
 
@@ -48,39 +46,36 @@ export async function POST(req: Request) {
   const firstName = getFirstName(data.fullName);
 
   // Email to internal team using template
-  const internalMsg = {
+  const sendInternalEmail = sendEmail({
     to: "concierge@experiencesbybeyond.com",
-    from: "concierge@experiencesbybeyond.com",
-    templateId: "d-6939718cc86c4dd481d6e7db57416ef5",
-    dynamicTemplateData: {
+    templateUuid: "a5f33c2e-fbb0-4617-9c1a-a053fff15c4e",
+    templateVariables: {
       fullName: data.fullName,
       email: data.email,
       phone: `${data.countryCode} ${data.phoneNumber}`,
       date: formattedDate,
-      flexible: data.isFlexible ? "Yes" : "No", // <-- Add this line
+      flexible: data.isFlexible ? "Yes" : "No",
       message: data.helpMessage
     }
-  };
+  });
 
   // Email to client using template
-  const clientMsg = {
+  const sendClientEmail = sendEmail({
     to: data.email,
-    from: "concierge@experiencesbybeyond.com",
-    templateId: "d-8f55f56a6e6343a0bf6e58947f964170",
-    dynamicTemplateData: {
+    templateUuid: "6b3626ee-91a7-432b-8f64-362d71053dff",
+    templateVariables: {
       fullName: data.fullName,
       firstName,
       date: formattedDate,
-      flexible: data.isFlexible ? "Yes" : "No" // <-- Add if needed
+      flexible: data.isFlexible ? "Yes" : "No"
     }
-  };
+  });
 
   try {
-    await sgMail.send(internalMsg);
-    await sgMail.send(clientMsg);
+    await Promise.all([sendInternalEmail, sendClientEmail]);
     return NextResponse.json({ success: true });
   } catch (error: unknown) {
-    console.error('SendGrid error:', error);
+    console.error('MailerSend error:', error);
     let message = 'Unknown error';
     if (error instanceof Error) {
       message = error.message;
