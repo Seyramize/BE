@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation - Beyond Experiences</title>
+    <link href="https://fonts.cdnfonts.com/css/argent-cf" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/helvetica-now-display" rel="stylesheet">
+    <style>
+        /* Base styles for mobile responsiveness */
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            font-family: 'Helvetica Now Display', sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+        }
+        
+        .main-container {
+            background: #ffffff;
+            width: 100%;
+        }
+        
+        .content-wrapper {
+            max-width: 672px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .card {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .card-content {
+            background: #ffffff;
+            padding: 24px 32px 8px 32px !important;;
+        }
+        
+        .logo-container {
+            margin-bottom: 24px;
+            width: 100%;
+            display: block;
+        }
+        
+        .logo-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            object-fit: cover;
+        }
+        
+        .header-text {
+            margin: 0;
+            font-size: 36px;
+            font-weight: 600;
+            color: #1e293b;
+            font-family: 'Argent CF', serif;
+        }
+        
+        .content-section {
+            padding: 8px 32px 32px;
+        }
+        
+        .text-content {
+            margin-bottom: 32px;
+        }
+        
+        .text-content p {
+            margin: 0 0 16px 0;
+            font-size: 16px;
+            color: #000000;
+            line-height: 1.6;
+            font-family: 'Helvetica Now Display', sans-serif;
+        }
+        
+        .separator {
+            height: 2px;
+            background: #000000;
+            margin: 32px 0;
+        }
+        
+        .contact-section {
+            padding: 32px;
+            border-radius: 0 0 8px 8px;
+            margin: -32px -32px -32px -32px;
+        }
+        
+        .contact-title {
+            margin: 0 0 16px 0;
+            font-size: 28px;
+            font-weight: 500;
+            color: #000000;
+            font-family: 'Argent CF', serif;
+            line-height: 1.2;
+        }
+        
+        .contact-buttons {
+            width: 100%;
+        }
+        
+        .contact-button {
+            width: 50%;
+            padding-right: 8px;
+        }
+        
+        .contact-button a {
+            display: block;
+            background: transparent;
+            border: 2px solid #000000;
+            color: #000000;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.2s;
+            font-family: 'Helvetica Now Display', sans-serif;
+        }
+        
+        .contact-button span {
+            font-size: 16px;
+        }
+        
+        .social-links {
+            width: 50%;
+            text-align: right;
+        }
+        
+        .social-links table {
+            display: inline-block;
+        }
+        
+        .social-links td {
+            padding: 0 16px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+        }
+        
+        .social-links img {
+            width: 32px;
+            height: 32px;
+            display: block;
+        }
+        
+        .footer {
+            padding-top: 32px;
+            text-align: center;
+        }
+        
+        .footer p {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+        
+        /* Mobile responsive styles */
+        @media screen and (max-width: 600px) {
+            .main-container {
+                padding: 16px !important;
+            }
+            
+            .card-content {
+                padding: 24px 32px 8px 32px !important; /* top right bottom left */
+            }
+            
+            .header-text {
+                font-size: 28px !important;
+                padding-left: 0 !important; /* Ensure no additional padding is added */
+            }
+            
+            .content-section {
+                padding: 8px 20px 24px;
+            }
+            
+            .text-content p {
+                font-size: 15px;
+            }
+            
+            .contact-section {
+                padding: 24px 20px;
+                margin: -24px -20px -24px -20px;
+            }
+            
+            .contact-title {
+                font-size: 24px;
+            }
+            
+            .contact-buttons {
+                display: block;
+            }
+            
+            .contact-button {
+                display: block;
+                width: 100%;
+                padding-right: 0;
+                margin-bottom: 16px;
+            }
+            
+            .social-links {
+                width: 100%;
+                text-align: center;
+                margin-top: 16px;
+            }
+            
+            .social-links table {
+                display: block;
+                width: 100%;
+            }
+            
+            .social-links td {
+                padding: 0 12px;
+            }
+            
+            .social-links img {
+                width: 28px;
+                height: 28px;
+            }
+            
+            /* Minimize gap above and below logo image */
+            .logo-row td {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .logo-image {
+                margin: 0 !important;
+                padding: 0 !important;
+                display: block;
+            }
+        }
+        
+      
+        
+        /* Ensure images are responsive */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Table responsive behavior */
+        table {
+            width: 100%;
+        }
+        
+        
+        
+        /* Ensure proper spacing on all devices */
+        @media screen and (max-width: 600px) {
+            .main-container {
+                padding: 16px !important;
+            }
+            
+            .card-content {
+                padding: 24px 32px 8px 32px !important;
+            }
+            
+            .header-text {
+                font-size: 24px !important;
+            }
+            
+            .content-section {
+                padding: 8px 16px 20px !important;
+            }
+            
+            .contact-section {
+                padding: 20px 16px !important;
+                margin: -20px -16px -20px -16px !important;
+            }
+            
+            .contact-title {
+                font-size: 20px !important;
+            }
+            
+            .contact-button {
+                display: block !important;
+                width: 100% !important;
+                margin-bottom: 4px !important;
+                padding-right: 0 !important;
+            }
+            
+            .contact-button a {
+                padding: 4px !important;
+                font-size: 10px !important;
+            }
+            
+            .contact-button span {
+                font-size: 10px !important;
+            }
+            
+            .social-links {
+                width: 100% !important;
+                text-align: center !important;
+                margin-top: 4px !important;
+            }
+            
+            .social-links table {
+                display: block !important;
+                width: 100% !important;
+            }
+            
+            .social-links td {
+                padding: 0 4px !important;
+            }
+            
+            .social-links img {
+                width: 28px !important;
+                height: 28px !important;
+            }
+        }
+    </style>
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+</head>
+<body style="margin: 0; padding: 0; background: #ffffff; font-family: 'Helvetica Now Display', sans-serif; line-height: 1.6; color: #334155;">
+    
+    <!-- Main Container -->
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="main-container">
+        <tr>
+            <td align="center" style="padding: 0;">
+                
+                <!-- Content Wrapper -->
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                    
+                    
+                    <!-- Main Card -->
+                    <tr>
+                        <td>
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background: #ffffff;">
+                                
+                                <!-- Logo Image -->
+                               <!-- Logo Image -->
+                                <tr>
+                                    <td align="center" style="padding: 0;">
+                                        <img src="http://cdn.mcauto-images-production.sendgrid.net/5d2c1c3dad421113/d0ab2e53-3028-4f5c-8750-c1cf9a674909/600x281.png" alt="Beyond Experiences Logo" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                                    </td>
+                                </tr>
+
+                                <!-- Card Header -->
+                                <tr>
+                                    <td align="left" class="card-content" style="background: #ffffff; padding: 32px 32px 8px 32px;">
+                                        <h2 class="header-text" style="margin: 0; font-size: 36px; font-weight: 500; color: #1e293b; font-family: 'Argent CF', serif;">Hi {{firstName}}!</h2>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Card Content -->
+                                <tr>
+                                    <td style="padding: 8px 32px 32px;">
+                                        
+                                        <!-- Thank You Message -->
+                                       <div class="text-content">
+                                            <p>
+                                                Thanks for reaching out to Beyond Experiences.
+                                            </p>
+                                            <p>
+                                                We've received your enquiry and a member of our team will be in touch within 24 hours. Whether you're seeking inspiration, clarity, or specifics, we're here to help you find the experience that's right for you.
+                                            </p>
+                                            <p>
+                                                In the meantime, feel free to <a href="https://beyondexperience.vercel.app/experiences" style="color: #000000; text-decoration: underline;">browse our curated journeys</a> or <a href="https://www.instagram.com/beyondaccra/" style="color: #000000; text-decoration: underline;">follow us on Instagram</a> for a taste of what's possible.
+                                            </p>
+                                        </div>
+                                        
+                                        
+                                        
+                                        <!-- Add separator before Need to make a change -->
+                                        <div class="separator"></div>
+
+                                        <!-- Contact Information -->
+                                        <div class="contact-section">
+                                            <h3 class="contact-title">Warmly, <br> The Beyond Experiences team</h3>
+                                            
+                                            <!-- Contact Buttons with outlines -->
+                                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="contact-buttons">
+                                                <tr>
+                                                    <td class="contact-button">
+                                                        <a href="https://beyondexperience.vercel.app/experiences">
+                                                            <span>EXPLORE EXPERIENCES</span>
+                                                        </a>
+                                                    </td>
+                                                    <td class="social-links">
+                                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="https://api.whatsapp.com/send?phone=233504513123&text=Hi%20beyond%20team%2C%20">
+                                                                        <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp">
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="https://www.instagram.com/beyondaccra/">
+                                                                        <img src="https://cdn-icons-png.flaticon.com/512/3955/3955024.png" alt="Instagram">
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="https://www.facebook.com/p/Beyond-Accra-100090689846628/">
+                                                                        <img src="https://cdn-icons-png.flaticon.com/512/4494/4494475.png" alt="Facebook">
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="https://beyondexperience.vercel.app/">
+                                                                        <img src="https://cdn-icons-png.flaticon.com/512/1927/1927656.png" alt="Website">
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td align="center" style="padding-top: 32px;">
+                            <p style="margin: 0; color: #64748b; font-size: 14px;">© 2025 Beyond Experiences. All rights reserved.</p>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    
+</body>
+</html>
