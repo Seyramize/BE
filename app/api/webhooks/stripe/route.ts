@@ -9,16 +9,12 @@ import {
 } from "@/lib/payment-scheduler"
 // import { bookSlots, getSlotData } from "@/lib/slot-manager"
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!
-
-// Email template IDs for installment notifications
-const INSTALLMENT_PAYMENT_TEMPLATE_ID = "YOUR_INSTALLMENT_PAYMENT_TEMPLATE_UUID" 
-const INSTALLMENT_COMPLETION_TEMPLATE_ID = "YOUR_INSTALLMENT_COMPLETION_TEMPLATE_UUID" 
 const INTERNAL_INSTALLMENT_TEMPLATE_ID = "YOUR_INTERNAL_INSTALLMENT_TEMPLATE_UUID" 
-const GROUP_BOOKING_INSTALLMENT_TEMPLATE_ID = "YOUR_GROUP_BOOKING_INSTALLMENT_TEMPLATE_UUID"
+const GROUP_BOOKING_INSTALLMENT_TEMPLATE_ID = "YOUR_GROUP_BOOKING_INSTALLMENT_TEMPLATE_ID"
 
 export async function POST(req: NextRequest) {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!
   const body = await req.text()
   const signature = req.headers.get("stripe-signature")!
 
@@ -184,7 +180,7 @@ async function sendInstallmentPaymentNotification(
       // Send success notification to customer
       const sendCustomerEmail = sendEmail({
         to: installmentPayment.customerEmail,
-        templateUuid: INSTALLMENT_PAYMENT_TEMPLATE_ID,
+        templateUuid: "YOUR_INSTALLMENT_PAYMENT_TEMPLATE_UUID",
         templateVariables: {
           customerName: installmentPayment.customerName,
           installmentNumber: installmentPayment.installmentNumber,
@@ -242,7 +238,7 @@ async function checkInstallmentCompletion(bookingId: string) {
       // Send completion notification to client
       const sendCompletionEmail = sendEmail({
         to: status.installmentPayments[0]?.customerEmail,
-        templateUuid: INSTALLMENT_COMPLETION_TEMPLATE_ID,
+        templateUuid: "YOUR_INSTALLMENT_COMPLETION_TEMPLATE_UUID",
         templateVariables: {
           customerName: status.installmentPayments[0]?.customerName,
           experienceName: status.installmentPayments[0]?.experienceName,
@@ -315,6 +311,7 @@ async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
   // Check if this is the final installment payment
   if (invoice.customer_email && 'subscription' in invoice && invoice.subscription) {
     try {
+      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
       const subscription = await stripe.subscriptions.retrieve(invoice.subscription as string)
       const metadata = subscription.metadata
       
@@ -336,7 +333,7 @@ async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
           // Send completion notification to client
           const sendCompletionEmail = sendEmail({
             to: invoice.customer_email,
-            templateUuid: INSTALLMENT_COMPLETION_TEMPLATE_ID,
+            templateUuid: "YOUR_INSTALLMENT_COMPLETION_TEMPLATE_UUID",
             templateVariables: {
               customerName: metadata.fullName || "Valued Customer",
               experienceName: metadata.experienceName || "Experience",
@@ -394,6 +391,7 @@ async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
   // No custom email needed - Stripe will send their built-in failure notifications
   if (invoice.customer_email && 'subscription' in invoice && invoice.subscription) {
     try {
+      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
       const subscription = await stripe.subscriptions.retrieve(invoice.subscription as string)
       const metadata = subscription.metadata
       
@@ -413,6 +411,7 @@ async function handleInvoiceUpcoming(invoice: Stripe.Invoice) {
   // No custom email needed - Stripe will send their built-in reminders
   if (invoice.customer_email && 'subscription' in invoice && invoice.subscription) {
     try {
+      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
       const subscription = await stripe.subscriptions.retrieve(invoice.subscription as string)
       const metadata = subscription.metadata
       
@@ -432,6 +431,7 @@ async function handleInvoiceCreated(invoice: Stripe.Invoice) {
   // No custom email needed - Stripe will send their built-in invoice emails
   if (invoice.customer_email && 'subscription' in invoice && invoice.subscription) {
     try {
+      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
       const subscription = await stripe.subscriptions.retrieve(invoice.subscription as string)
       const metadata = subscription.metadata
       
@@ -450,6 +450,7 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
   // Send subscription confirmation to customer
   if (subscription.metadata.isInstallmentPayment === "true") {
     try {
+      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
       const customer = await stripe.customers.retrieve(subscription.customer as string)
       
       if ('email' in customer) {
@@ -487,6 +488,7 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
   // Handle subscription changes (paused, resumed, etc.)
   if (subscription.metadata.isInstallmentPayment === "true") {
     try {
+      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
       const customer = await stripe.customers.retrieve(subscription.customer as string)
       
       if (subscription.status === "paused" && 'email' in customer) {
@@ -520,6 +522,7 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
   // Send subscription cancellation notification
   if (subscription.metadata.isInstallmentPayment === "true") {
     try {
+      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
       const customer = await stripe.customers.retrieve(subscription.customer as string)
       
       if ('email' in customer) {

@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server"
 import Stripe from "stripe"
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
+export const dynamic = "force-dynamic"
 
 export async function POST(req: NextRequest) {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
   const {
     amount,
     email,
@@ -93,6 +94,7 @@ async function createInstallmentCheckoutSession({
   success_url: string
   cancel_url: string
 }) {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
   try {
     // Create or retrieve customer
     let customer: Stripe.Customer
@@ -249,6 +251,7 @@ async function createRegularCheckoutSession({
   success_url: string
   cancel_url: string
 }) {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
   // Create regular one-time payment session
   const sessionOptions: Stripe.Checkout.SessionCreateParams = {
     payment_method_types: ["card"],

@@ -12,9 +12,8 @@ const sentEmailSessions = new Set<string>();
 const USER_CONFIRMATION_TEMPLATE_ID = "27ffbc93-4c12-4664-9ddc-494bbc77e155";
 const INTERNAL_TEAM_TEMPLATE_ID = "40519514-3eb4-402f-acfa-a438de284abc";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-
 export async function GET(req: NextRequest) {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
   const { searchParams } = new URL(req.url);
   const sessionId = searchParams.get('session_id');
   if (!sessionId) {
