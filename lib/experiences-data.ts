@@ -1166,7 +1166,7 @@ export type Experience = {
       id: 20,
       slug: "december-in-ghana-castles-to-coastlines",
       hidden: true,
-      accessCode: ["bxchloe", "bxnoah"],
+      accessCode: ["travelsocial", "bxnoah"],
       defaultContent: {
         title: "December in Ghana: Castles to Coastlines",
         shortDescription: "A group journey through Ghana's December magic - from AfroFuture Festival to Cape Coast Castle, ATV rides, and New Year's Eve celebration.",
@@ -1180,7 +1180,7 @@ export type Experience = {
       },
       bookingContent: {
         title: "December in Ghana: Castles to Coastlines",
-        subtitle: "28TH DEC 2025 - 2ND JAN 2026",
+        subtitle: "26TH DEC 2025 - 2ND JAN 2026",
         duration: "7 DAYS",
         destinations: "MULTIPLE DESTINATIONS",
         maxGuests: "20 GUESTS (20 SPOTS OPEN)",
