@@ -1,11 +1,5 @@
 import { MailtrapClient } from "mailtrap";
 
-const TOKEN = process.env.MAILTRAP_API_KEY;
-
-if (!TOKEN) {
-  console.warn("⚠️ MAILTRAP_API_KEY not found — emails will be skipped.");
-}
-
 interface SendEmailParams {
   to: string;
   from?: { email: string; name: string };
@@ -21,12 +15,15 @@ export async function sendEmail({
   templateUuid,
   templateVariables,
 }: SendEmailParams) {
-  if (!TOKEN) {
-    console.warn("Skipping email — MAILTRAP_API_KEY not set");
+  const token = process.env.MAILTRAP_API_KEY;
+
+  if (!token) {
+    console.warn("⚠️ MAILTRAP_API_KEY is missing — skipping email send.");
     return { success: false, error: "Missing Mailtrap API key" };
   }
 
-  const client = new MailtrapClient({ token: TOKEN }); // ✅ v3+ uses `token`
+  // ✅ Initialize client only when sending email (not at import time)
+  const client = new MailtrapClient({ token });
 
   try {
     await client.send({
@@ -36,7 +33,7 @@ export async function sendEmail({
       template_variables: templateVariables,
       subject,
     });
-    console.log("✅ Email sent successfully to:", to);
+    console.log(`✅ Email sent to ${to}`);
     return { success: true };
   } catch (error) {
     console.error("❌ Error sending email:", error);
