@@ -11,7 +11,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
   ]
 
-  const experienceRoutes: MetadataRoute.Sitemap = experiences.map((e) => ({
+  const experienceRoutes: MetadataRoute.Sitemap = experiences
+    .filter((e) => !e.hidden)
+    .map((e) => ({
     url: `${baseUrl}/book-experience/${e.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly",

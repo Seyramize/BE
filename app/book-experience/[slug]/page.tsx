@@ -427,7 +427,7 @@ export default function BookExperiencePage() {
     };
   }, [isSticky]);
 
-  if (!experience) {
+  if (!experience || (experience.hidden && (!experience.accessCode || (Array.isArray(experience.accessCode) ? !experience.accessCode.includes(searchParams.get('code') || '') : experience.accessCode !== searchParams.get('code'))))) {
     return (
       <div className="flex flex-col min-h-screen">
         <SiteHeader />

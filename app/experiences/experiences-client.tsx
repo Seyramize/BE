@@ -14,6 +14,8 @@ import { useSearchParams } from "next/navigation"
 
 const filterOptions = ["Ghana", "Namibia", "São Tomé"]
 
+const visibleExperiences = experiences.filter(e => !e.hidden);
+
 export default function ExperiencesClientPage() {
 	const searchParams = useSearchParams()
 	const [hoveredCard, setHoveredCard] = useState<number | null>(null)
@@ -24,7 +26,7 @@ export default function ExperiencesClientPage() {
 	)
 	const [searchQuery, setSearchQuery] = useState("")
 
-	const filteredExperiences = experiences.filter(experience => {
+	const filteredExperiences = visibleExperiences.filter(experience => {
 		const matchesFilter =
 			(!activeFilter ||
 				(activeFilter === "Priceless" && experience.tags.includes("Priceless")) ||

@@ -3,6 +3,8 @@
 export type Experience = {
     id: number
     slug: string
+    hidden?: boolean
+    accessCode?: string | string[]
     defaultContent: {
       title: string
       shortDescription: string
@@ -1163,6 +1165,8 @@ export type Experience = {
     {
       id: 20,
       slug: "december-in-ghana-castles-to-coastlines",
+      hidden: true,
+      accessCode: ["bxchloe", "bxnoah"],
       defaultContent: {
         title: "December in Ghana: Castles to Coastlines",
         shortDescription: "A group journey through Ghana's December magic - from AfroFuture Festival to Cape Coast Castle, ATV rides, and New Year's Eve celebration.",
@@ -1196,11 +1200,11 @@ export type Experience = {
           "Culture & Heritage - AfroFuture Festival, Cape Coast Castle, and Accra city tour (Jamestown & Black Star landmarks).",
           "Luxury & Lifestyle - Long-table welcome dinner, private beach club escape, and curated New Year's Eve celebration."
         ],
-        startingPrice: 600,
+        startingPrice: 500,
         pricing: {
-          oneGuest: 600,
-          twoGuests: 600,
-          threeOrMoreGuests: 600,
+          oneGuest: 500,
+          twoGuests: 500,
+          threeOrMoreGuests: 500,
         },
         minimumGuests: 1,
         included: [
@@ -1222,7 +1226,7 @@ export type Experience = {
         startDate: "2025-12-28",
         endDate: "2026-01-02",
         groupPricing: {
-          fullPrice: 600,
+          fullPrice: 500,
           paymentPlanPrice: 1000,
           paymentPlanInstallments: 3
         }

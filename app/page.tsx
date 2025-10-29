@@ -16,6 +16,8 @@ import { useMobile } from "@/hooks/use-mobile";
 import { FaRegMap } from "react-icons/fa";
 import { TbBinoculars } from "react-icons/tb";
 
+const visibleExperiences = experiences.filter(e => !e.hidden);
+
 export default function Home() {
   const [form, setForm] = useState({
     firstName: "",
@@ -73,11 +75,11 @@ export default function Home() {
     
   ];
   const selectedFeaturedRaw = selectedFeaturedSlugs
-    .map(slug => experiences.find(e => e.slug === slug))
+    .map(slug => visibleExperiences.find(e => e.slug === slug))
     .filter((e): e is (typeof experiences)[0] => Boolean(e));
   const selectedFeatured = selectedFeaturedRaw.length >= 3
     ? selectedFeaturedRaw
-    : experiences.slice(0, 3);
+    : visibleExperiences.slice(0, 3);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -192,7 +194,7 @@ export default function Home() {
               {/* Mobile: Country carousels */}
               {["Ghana", "Namibia", "São Tomé"].map((country) => {
                 // Filter experiences by country and exclude Priceless experiences
-                const countryExperiences = experiences.filter(experience => {
+                const countryExperiences = visibleExperiences.filter(experience => {
                   const location = experience.defaultContent.location.toLowerCase();
                   const isCountryMatch = country === "São Tomé" 
                     ? location.includes("são tomé") || location.includes("sao tome")
@@ -309,7 +311,7 @@ export default function Home() {
               {/* Country sections with 4 cards each */}
               {["Ghana", "Namibia", "São Tomé"].map((country) => {
                 // Filter experiences by country and exclude Priceless experiences
-                const countryExperiences = experiences.filter(experience => {
+                const countryExperiences = visibleExperiences.filter(experience => {
                   const location = experience.defaultContent.location.toLowerCase();
                   const isCountryMatch = country === "São Tomé" 
                     ? location.includes("são tomé") || location.includes("sao tome")
