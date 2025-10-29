@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { sendEmail } from '@/lib/mailtrap';
 
 // Mailtrap template UUIDs
-const USER_CONFIRMATION_TEMPLATE_ID = "YOUR_USER_CONFIRMATION_TEMPLATE_UUID"; // Reuse existing template
-const INTERNAL_TEAM_TEMPLATE_ID = "YOUR_INTERNAL_TEAM_TEMPLATE_UUID"; // Reuse existing template
+const USER_CONFIRMATION_TEMPLATE_ID = "586ff26b-1d0c-436f-8a3e-e215af2c88a5"; // Reuse existing template
+const INTERNAL_TEAM_TEMPLATE_ID = "1b35b7c1-3fdf-4eae-b2f0-ef0514fe4aba"; // Reuse existing template
 
 export async function POST(req: NextRequest) {
   const data = await req.json();
