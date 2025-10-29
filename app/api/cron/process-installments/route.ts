@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
 import { processAllPendingInstallments } from "../../../../lib/payment-scheduler"
 
+export const dynamic = "force-dynamic"
+
 export async function GET(req: NextRequest) {
   // Verify this is a legitimate cron request (you should add proper authentication)
   const authHeader = req.headers.get("authorization")

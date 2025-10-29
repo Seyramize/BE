@@ -1,7 +1,5 @@
 import Stripe from "stripe"
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
-
 // In-memory storage for installment payments (replace with database later)
 interface InstallmentPayment {
   id: string
@@ -83,6 +81,7 @@ export async function scheduleInstallmentPayments(schedule: InstallmentSchedule)
 }
 
 export async function processScheduledInstallment(installmentId: string) {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
   try {
     const installmentPayment = installmentPayments.get(installmentId)
     
