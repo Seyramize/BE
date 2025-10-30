@@ -474,6 +474,18 @@ export type Experience = {
         ],
         variants: [
           {
+            id: "full-experience",
+            title: "A Date with Fashion: The Full Experience",
+            price: 749,
+            overview:
+              "Step into Ghana's fashion scene with a full day experience featuring pioneering designers Chocolate, and Phil & Joe. Their work has graced the likes of Beyoncé, Cardi B, and Angelique Kidjo. Tour their studios, learn about their creative process, and collaborate to design a one-of-a-kind piece to take home. This is more than fashion — it's artistry, identity, and culture.",
+            highlights: [
+              "Guided showroom tours with top designers",
+              "Hands-on design session for a custom piece",
+              "Access to unisex fashion suitable for all",
+            ],
+          },
+          {
             id: "chocolate",
             title: "A Date with Chocolate",
             price: 350,
@@ -491,18 +503,6 @@ export type Experience = {
             price: 350,
             overview:
               "Spend a day with pioneering designers Phil & Joe, whose work has graced the likes of Angelique Kidjo. Tour their studio, learn about their creative process, and collaborate to design a one-of-a-kind piece to take home.",
-            highlights: [
-              "Guided showroom tours with top designers",
-              "Hands-on design session for a custom piece",
-              "Access to unisex fashion suitable for all",
-            ],
-          },
-          {
-            id: "full-experience",
-            title: "A Date with Fashion: The Full Experience",
-            price: 749,
-            overview:
-              "Step into Ghana's fashion scene with a full day experience featuring pioneering designers Chocolate, and Phil & Joe. Their work has graced the likes of Beyoncé, Cardi B, and Angelique Kidjo. Tour their studios, learn about their creative process, and collaborate to design a one-of-a-kind piece to take home. This is more than fashion — it's artistry, identity, and culture.",
             highlights: [
               "Guided showroom tours with top designers",
               "Hands-on design session for a custom piece",

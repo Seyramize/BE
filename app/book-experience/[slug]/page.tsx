@@ -866,12 +866,34 @@ export default function BookExperiencePage() {
                     className="sm:hidden mt-6 flex flex-col gap-3 px-0.5"
                   >
                     {experience.slug === "a-date-with-fashion" ? (
-                      <Button
-                        className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
-                        onClick={() => setIsEnquireModalOpen(true)}
-                      >
-                        Enquire for Availability
-                      </Button>
+                      <>
+                        {bookingContent.variants && (
+                          <Select
+                            onValueChange={handleVariantChange}
+                            defaultValue={bookingContent.variants[0]?.id}
+                          >
+                            <SelectTrigger className="w-full bg-champagne text-black border-gray-800 rounded-lg px-4 py-3 text-sm justify-between">
+                              <SelectValue placeholder="Select an option" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {bookingContent.variants.map((variant) => (
+                                <SelectItem
+                                  key={variant.id}
+                                  value={variant.id}
+                                >
+                                  {variant.title}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        )}
+                        <Button
+                          className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
+                          onClick={() => setIsEnquireModalOpen(true)}
+                        >
+                          Enquire for Availability
+                        </Button>
+                      </>
                     ) : (
                       <>
                         <Button
@@ -940,7 +962,7 @@ export default function BookExperiencePage() {
                                   bookingContent.variants[0]?.id
                                 }
                               >
-                                <SelectTrigger className="w-auto h-auto bg-slate-900 text-white border-slate-900 rounded-sm px-4 py-3 text-sm">
+                                <SelectTrigger className="w-auto bg-[#EFE6DA] text-black border-gray-800 rounded-sm px-3 py-2 text-sm justify-between gap-x-5">
                                   <SelectValue placeholder="Select an option" />
                                 </SelectTrigger>
                                 <SelectContent>
