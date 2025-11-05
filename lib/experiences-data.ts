@@ -26,13 +26,13 @@ export type Experience = {
       galleryImages: string[]
       overview: string
       highlights: string[]
-      startingPrice: number
+      startingPrice?: number
       pricing?: {
         oneGuest: number
         twoGuests: number
         threeOrMoreGuests: number
       }
-      minimumGuests: number
+      minimumGuests?: number
       included?: string[]
       whatsPriceless?: string
       // Group experience specific fields
@@ -50,8 +50,9 @@ export type Experience = {
       endDate?: string
       variants?: ExperienceVariant[]
       dressCode?: string
-      // ageRestriction?: string
+      ageRestriction?: string
       notes?: string[]
+      eventLocation?: string
     }
     tags: string[]
   }
@@ -330,11 +331,12 @@ export type Experience = {
       },
       bookingContent: {
         title: "Vici Summer Uncorked",
-        subtitle: "There's something timeless about sunshine, sound, and good champagne.",
+        subtitle: "15TH NOV, 2025",
         duration: "1 DAY",
-        destinations: "5 DESTINATIONS",
-        maxGuests: "20 GUESTS (MAX)",
-        heroImage: "/images/experiences/vici-sum-uncork/cover.jpg?height=800&width=1200&text=Accra+City+Tour",
+        destinations: "1 DESTINATION",
+        maxGuests: "100 GUESTS (MAX)",
+        heroImage:
+          "/images/experiences/vici-sum-uncork/cover.jpg?height=800&width=1200&text=Accra+City+Tour",
         galleryImages: [
           "/images/experiences/vici-sum-uncork/Gallery/1.jpg?height=400&width=300&text=Accra+City+Tour",
           "/images/experiences/vici-sum-uncork/Gallery/2.jpg?height=400&width=300&text=Accra+City+Tour",
@@ -355,29 +357,31 @@ export type Experience = {
         ],
         overview: "There's something timeless about sunshine, sound, and good champagne. Vici Summer Uncorked is Accra's signature premium day party, a vibrant celebration of rhythm, taste, and connection. Hosted in collaboration with Beyond Accra, Veuve Clicquot, and Blaqcoffe, this curated daytime experience seamlessly blends music, bubbles, and bold summer energy into one unforgettable experience. From noon till sunset, expect effortless elegance, endless laughter, and moments made golden.",
         highlights: [
-          "Live music and DJ sets curated by Blaqcoffee",
-          "Premium champagne bar by Veuve Clicquo",
-          "Curated menu and shared platters with artisans at the Arts Centre",
+          "Live music and DJ sets",
+          "Premium pours from Veuve Clicquot",
+          "Curated menu and shared platters",
           "Lush lounge setups and shaded social spaces",
           "Games, social activations, and curated photo moments",
         ],
-        dressCode: "Smart casual",
-        // ageRestriction: "18+",
+        dressCode: "Summer Glam, Light, Stylish And Confident",
+        ageRestriction: "18+",
         notes: [
           "A fully charged phone & power bank",
-          "Sunglasses & sunscreen",
-          "Your best smile & energy!",
+          "Your best energy (we'll handle the rest)",
         ],
-        startingPrice: 350,
-        pricing: {
-          oneGuest: 350,
-          twoGuests: 332.5,
-          threeOrMoreGuests: 332.5,
+        isGroupExperience: true,
+        totalSlots: 100,
+        availableSlots: 100,
+        startDate: "2025-11-15",
+        endDate: "2025-11-15",
+        eventLocation: "Vine Restaurant, Labone",
+        groupPricing: {
+          fullPrice: 350,
+          paymentPlanPrice: 400,
+          paymentPlanInstallments: 2,
         },
-        minimumGuests: 1,
-        included: []
       },
-      tags: ["Travel Planner's Choice", "1 PAX"]
+      tags: ["Travel Planner's Choice", "1 PAX"],
     },
     {
       id: 6,

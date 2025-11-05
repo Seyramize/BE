@@ -46,6 +46,9 @@ import {
   Smile,
   Smartphone,
   Sun,
+  MapPin,
+  Calendar,
+  Zap,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
@@ -113,8 +116,26 @@ const includedIcons: Record<string, any> = {
 
 const notesIcons: Record<string, any> = {
   "A fully charged phone & power bank": Smartphone,
-  "Sunglasses & sunscreen": Sun,
-  "Your best smile & energy!": Smile,
+  "Your best energy (we'll handle the rest)": Zap,
+};
+
+const formatDateWithOrdinal = (dateString: string | undefined): string => {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  const day = date.getUTCDate();
+  const month = date.toLocaleString("en-US", { month: "short", timeZone: "UTC" });
+  const year = date.getUTCFullYear();
+
+  let suffix = "th";
+  if (day % 10 === 1 && day !== 11) {
+    suffix = "st";
+  } else if (day % 10 === 2 && day !== 12) {
+    suffix = "nd";
+  } else if (day % 10 === 3 && day !== 13) {
+    suffix = "rd";
+  }
+
+  return `${day}${suffix} ${month}, ${year}`;
 };
 
 function getCountryAdjective(country: string): string {
@@ -585,7 +606,7 @@ export default function BookExperiencePage() {
           </h1>
 
           {/* Group Experience Subtitle - Below Title (Mobile Only) */}
-          {isGroupExperience && (
+          {isGroupExperience && experience.slug !== "vici-summer-uncorked" && (
             <p className="text-white font-sans text-xs uppercase tracking-widest mb-6 sm:hidden">
               {bookingContent.subtitle}
             </p>
@@ -594,24 +615,38 @@ export default function BookExperiencePage() {
           {/* Group Experience Details - Below Title (Desktop Only) */}
           {isGroupExperience && (
             <div className="hidden sm:block mt-4">
-              <div className="inline-flex items-center justify-center gap-3 px-6 py-2 rounded-full bg-slate-900 shadow-sm text-xs uppercase tracking-widest font-sans text-white">
-                <span>{bookingContent.duration}</span>
-                <span>|</span>
-                <span>${bookingContent.groupPricing?.fullPrice}</span>
-                {bookingContent.startDate && bookingContent.endDate && (
-                  <>
-                    <span>|</span>
-                    <span>{new Date(bookingContent.startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })} - {new Date(bookingContent.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</span>
-                  </>
-                )}
-                {/* <span>|</span> */}
-                {/* <ActiveCounter
-                  experienceId={experience.id.toString()}
-                  totalSlots={activeCounter.totalSlots}
-                  availableSlots={activeCounter.availableSlots}
-                  className="text-white"
-                /> */}
-              </div>
+              {experience.slug === "vici-summer-uncorked" ? (
+                <div className="inline-flex items-center justify-center gap-4 px-6 py-2 rounded-full bg-slate-900 shadow-sm text-xs uppercase tracking-widest font-sans text-white">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4" />
+                    <span>{formatDateWithOrdinal(bookingContent.startDate)}</span>
+                  </div>
+                  <span>|</span>
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4" />
+                    <span>{bookingContent.eventLocation}</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="inline-flex items-center justify-center gap-3 px-6 py-2 rounded-full bg-slate-900 shadow-sm text-xs uppercase tracking-widest font-sans text-white">
+                  <span>{bookingContent.duration}</span>
+                  <span>|</span>
+                  <span>${bookingContent.groupPricing?.fullPrice}</span>
+                  {bookingContent.startDate && bookingContent.endDate && (
+                    <>
+                      <span>|</span>
+                      <span>{new Date(bookingContent.startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })} - {new Date(bookingContent.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</span>
+                    </>
+                  )}
+                  {/* <span>|</span> */}
+                  {/* <ActiveCounter
+                    experienceId={experience.id.toString()}
+                    totalSlots={activeCounter.totalSlots}
+                    availableSlots={activeCounter.availableSlots}
+                    className="text-white"
+                  /> */}
+                </div>
+              )}
             </div>
           )}
 
@@ -631,19 +666,33 @@ export default function BookExperiencePage() {
       {/* Key Stats Bar - Mobile Only for Group Experiences */}
       {isGroupExperience && (
         <div className="sm:hidden bg-gray-800 py-4 px-6">
-          <div className="flex items-center justify-center gap-2 text-white font-sans text-[10px] uppercase tracking-widest whitespace-nowrap">
-            <span>{bookingContent.duration}</span>
-            <span>|</span>
-            <span>${bookingContent.groupPricing?.fullPrice}</span>
-            {/* <span>|</span> */}
-            {/* <ActiveCounter
-              experienceId={experience.id.toString()}
-              totalSlots={activeCounter.totalSlots}
-              availableSlots={activeCounter.availableSlots}
-              className="text-white"
-              textSize="text-[10px]"
-            /> */}
-          </div>
+          {experience.slug === "vici-summer-uncorked" ? (
+            <div className="flex items-center justify-center gap-2 text-white font-sans text-[10px] uppercase tracking-widest whitespace-nowrap">
+              <div className="flex items-center gap-1.5">
+                <Calendar className="w-3 h-3" />
+                <span>{formatDateWithOrdinal(bookingContent.startDate)}</span>
+              </div>
+              <span>|</span>
+              <div className="flex items-center gap-1.5">
+                <MapPin className="w-3 h-3" />
+                <span>{bookingContent.eventLocation}</span>
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-center justify-center gap-2 text-white font-sans text-[10px] uppercase tracking-widest whitespace-nowrap">
+              <span>{bookingContent.duration}</span>
+              <span>|</span>
+              <span>${bookingContent.groupPricing?.fullPrice}</span>
+              {/* <span>|</span> */}
+              {/* <ActiveCounter
+                experienceId={experience.id.toString()}
+                totalSlots={activeCounter.totalSlots}
+                availableSlots={activeCounter.availableSlots}
+                className="text-white"
+                textSize="text-[10px]"
+              /> */}
+            </div>
+          )}
         </div>
       )}
 
@@ -720,44 +769,54 @@ export default function BookExperiencePage() {
                   <div className="space-y-4">
                     {/* Mobile Layout */}
                     <div className="sm:hidden space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <h3 className="text-[11px] uppercase tracking-widest font-sans text-black mb-1">
-                            NO. OF PAX
-                          </h3>
-                          <Select onValueChange={handleGuestsChange} defaultValue="1">
-                            <SelectTrigger className="w-20 h-8 rounded-full bg-gray-800 text-white border-gray-800 px-3 text-sm">
-                              <SelectValue placeholder="1" />
-                            </SelectTrigger>
-                            <SelectContent className="w-32">
-                              {[...Array(20)].map((_, i) => (
-                                <SelectItem key={i + 1} value={`${i + 1}`}>
-                                  {i + 1}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        </div>
-                        <div className="text-right">
-                          <h3 className="text-[11px] uppercase tracking-widest font-sans text-black mb-1">
-                            STARTING AT
-                          </h3>
-                          <div className="text-3xl font-sans font-normal text-black leading-none">
-                            ${totalPrice}
+                      {experience.slug !== "vici-summer-uncorked" && (
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h3 className="text-[11px] uppercase tracking-widest font-sans text-black mb-1">
+                              NO. OF PAX
+                            </h3>
+                            <Select onValueChange={handleGuestsChange} defaultValue="1">
+                              <SelectTrigger className="w-20 h-8 rounded-full bg-gray-800 text-white border-gray-800 px-3 text-sm">
+                                <SelectValue placeholder="1" />
+                              </SelectTrigger>
+                              <SelectContent className="w-32">
+                                {[...Array(20)].map((_, i) => (
+                                  <SelectItem key={i + 1} value={`${i + 1}`}>
+                                    {i + 1}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
                           </div>
-                          {experience.slug !== "december-in-ghana-castles-to-coastlines" && (
-                          <div className="text-sm font-sans text-black mt-1">
-                            or ${groupPerInstallment} in {bookingContent.groupPricing?.paymentPlanInstallments} payments
+                          <div className="text-right">
+                            <h3 className="text-[11px] uppercase tracking-widest font-sans text-black mb-1">
+                              STARTING AT
+                            </h3>
+                            <div className="text-3xl font-sans font-normal text-black leading-none">
+                              ${totalPrice}
+                            </div>
+                            {experience.slug !== "december-in-ghana-castles-to-coastlines" && (
+                            <div className="text-sm font-sans text-black mt-1">
+                              or ${groupPerInstallment} in {bookingContent.groupPricing?.paymentPlanInstallments} payments
+                            </div>
+                            )}
                           </div>
-                          )}
                         </div>
-                      </div>
-                      {experience.slug === "december-in-ghana-castles-to-coastlines" ? (
+                      )}
+                      {experience.slug ===
+                      "december-in-ghana-castles-to-coastlines" ? (
                         <Button
                           className="w-full bg-gray-800 hover:bg-gray-700 text-white py-6 rounded-lg text-sm font-sans"
                           onClick={() => setIsEnquireModalOpen(true)}
                         >
                           Enquire for Availability
+                        </Button>
+                      ) : experience.slug === "vici-summer-uncorked" ? (
+                        <Button
+                          className="w-full bg-gray-800 hover:bg-gray-700 text-white py-6 rounded-lg text-sm font-sans"
+                          onClick={() => setIsGuestlistModalOpen(true)}
+                        >
+                          Join the Guestlist
                         </Button>
                       ) : (
                       <Button
@@ -771,77 +830,96 @@ export default function BookExperiencePage() {
 
                     {/* Desktop Layout */}
                     <div className="hidden sm:block">
-                      <div className="flex items-center justify-between">
-                        {/* Pax Selector */}
-                        <div>
-                          <h3 className="text-[11px] uppercase tracking-widest font-sans text-slate-600 mb-1">
-                            No. of Pax
-                          </h3>
-                          <Select onValueChange={handleGuestsChange} defaultValue="1">
-                            <SelectTrigger className="w-20 h-8 rounded-full bg-slate-900 text-white border-slate-900 px-3 text-sm">
-                              <SelectValue placeholder="1" />
-                            </SelectTrigger>
-                            <SelectContent className="w-32">
-                              {[...Array(20)].map((_, i) => (
-                                <SelectItem key={i + 1} value={`${i + 1}`}>
-                                  {i + 1}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
+                      {experience.slug === "vici-summer-uncorked" ? (
+                        <div className="flex justify-end">
+                          <Button
+                            className="bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
+                            onClick={() => setIsGuestlistModalOpen(true)}
+                          >
+                            Join the Guestlist
+                          </Button>
                         </div>
-
-                        {/* Divider */}
-                        <div className="h-12 w-px bg-slate-900 mx-6" />
-
-                        {/* Pricing + Button */}
-                        <div className="flex items-center gap-12 flex-1">
-                          {/* Full Price */}
-                          <div className="text-left">
-                            <h3 className="text-[11px] uppercase tracking-widest gap-4 font-sans text-slate-600 mb-1">
-                              Starting
+                      ) : (
+                        <div className="flex items-center justify-between">
+                          {/* Pax Selector */}
+                          <div>
+                            <h3 className="text-[11px] uppercase tracking-widest font-sans text-slate-600 mb-1">
+                              No. of Pax
                             </h3>
-                            <div className="text-3xl font-sans font-normal text-black leading-none">
-                              ${totalPrice}
-                            </div>
+                            <Select onValueChange={handleGuestsChange} defaultValue="1">
+                              <SelectTrigger className="w-20 h-8 rounded-full bg-slate-900 text-white border-slate-900 px-3 text-sm">
+                                <SelectValue placeholder="1" />
+                              </SelectTrigger>
+                              <SelectContent className="w-32">
+                                {[...Array(20)].map((_, i) => (
+                                  <SelectItem key={i + 1} value={`${i + 1}`}>
+                                    {i + 1}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
                           </div>
 
-                          {/* Payment Plan */}
-                          {experience.slug !== "december-in-ghana-castles-to-coastlines" && (
-                          <div className="flex flex-col justify-center items-start tracking-widest leading-none space-y-0 mt-1">
-                            <div className="text-base font-sans font-semibold text-slate-900">
-                              OR ${groupPerInstallment}
-                            </div>
-                            <div className="text-xs font-sans text-slate-600">
-                              IN {bookingContent.groupPricing?.paymentPlanInstallments} PAYMENTS
-                            </div>
-                          </div>
-                          )}
+                          {/* Divider */}
+                          <div className="h-12 w-px bg-slate-900 mx-6" />
 
-                          {/* Button */}
-                          {experience.slug === "december-in-ghana-castles-to-coastlines" ? (
-                          <Button
-                            className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
-                            onClick={() => setIsEnquireModalOpen(true)}
-                          >
-                            Enquire for Availability
-                          </Button>
-                          ) : (
-                          <Button
-                            className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
-                            onClick={() => setIsGroupConfirmationOpen(true)}
-                          >
-                            Book your spot
-                          </Button>
-                          )}
+                          {/* Pricing + Button */}
+                          <div className="flex items-center gap-12 flex-1">
+                            {/* Full Price */}
+                            <div className="text-left">
+                              <h3 className="text-[11px] uppercase tracking-widest gap-4 font-sans text-slate-600 mb-1">
+                                Starting
+                              </h3>
+                              <div className="text-3xl font-sans font-normal text-black leading-none">
+                                ${totalPrice}
+                              </div>
+                            </div>
+
+                            {/* Payment Plan */}
+                            {experience.slug !== "december-in-ghana-castles-to-coastlines" && (
+                            <div className="flex flex-col justify-center items-start tracking-widest leading-none space-y-0 mt-1">
+                              <div className="text-base font-sans font-semibold text-slate-900">
+                                OR ${groupPerInstallment}
+                              </div>
+                              <div className="text-xs font-sans text-slate-600">
+                                IN {bookingContent.groupPricing?.paymentPlanInstallments} PAYMENTS
+                              </div>
+                            </div>
+                            )}
+
+                            {/* Button */}
+                            {experience.slug === "december-in-ghana-castles-to-coastlines" ? (
+                            <Button
+                              className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
+                              onClick={() => setIsEnquireModalOpen(true)}
+                            >
+                              Enquire for Availability
+                            </Button>
+                            ) : experience.slug === "vici-summer-uncorked" ? (
+                              <Button
+                                className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
+                                onClick={() => setIsGuestlistModalOpen(true)}
+                              >
+                                Join the Guestlist
+                              </Button>
+                            ) : (
+                            <Button
+                              className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
+                              onClick={() => setIsGroupConfirmationOpen(true)}
+                            >
+                              Book your spot
+                            </Button>
+                            )}
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                   </div>
 
 
                 ) : (
                   /* Regular Experience Pricing */
+                  experience.slug !== "vici-summer-uncorked" && (
                   <div className="flex sm:hidden items-center justify-between gap-4">
                     <div>
                       <h3 className="text-xs uppercase tracking-widest font-sans text-black">
@@ -871,6 +949,7 @@ export default function BookExperiencePage() {
                       </span>
                     </div>
                   </div>
+                  )
                 )}
                 {/* Mobile buttons - only for non-group experiences */}
                 {!isGroupExperience && (
@@ -943,7 +1022,8 @@ export default function BookExperiencePage() {
                 )}
                 {/* Desktop buttons - only for non-group experiences */}
                 {!isGroupExperience && (
-                  <div className="hidden sm:flex items-center justify-between gap-6">
+                  <div className={`hidden sm:flex items-center ${experience.slug === 'vici-summer-uncorked' ? 'justify-end' : 'justify-between'} gap-6`}>
+                    {experience.slug !== "vici-summer-uncorked" && (
                     <div>
                       <h3 className="text-lg sm:text-xs font-sans uppercase tracking-widest text-slate-600">
                         No. of Pax
@@ -969,6 +1049,7 @@ export default function BookExperiencePage() {
                         </span>
                       </div>
                     </div>
+                    )}
 
                     {/* Price and Buttons */}
                     <div className="flex items-center gap-8">
@@ -1302,8 +1383,8 @@ export default function BookExperiencePage() {
         experience={{
           id: experience.id.toString(),
           title: selectedVariant ? selectedVariant.title : bookingContent.title,
-          totalPrice: totalPrice,
-          minimumGuests: bookingContent.minimumGuests,
+          totalPrice: totalPrice || 0,
+          minimumGuests: bookingContent.minimumGuests || 1,
           heroImage: bookingContent.heroImage,
           slug: experience.slug,
           pricing: bookingContent.pricing,
@@ -1328,6 +1409,8 @@ export default function BookExperiencePage() {
         isOpen={isGuestlistModalOpen}
         onClose={() => setIsGuestlistModalOpen(false)}
         experienceSlug={experience.slug}
+        heroImage={bookingContent.heroImage}
+        title={bookingContent.title}
       />
 
       <MastercardPaymentBounceModal
@@ -1336,7 +1419,7 @@ export default function BookExperiencePage() {
       />
 
       {/* Sticky CTA on mobile */}
-      {isMobile && isSticky && (
+      {isMobile && isSticky && experience.slug !== "vici-summer-uncorked" && (
         <div className="sm:hidden fixed bottom-4 left-0 right-0 px-4 z-20">
           {experience.slug === "a-date-with-fashion" ? (
             <Button
