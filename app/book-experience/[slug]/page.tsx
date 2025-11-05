@@ -10,6 +10,7 @@ import { BookingFormModal } from "@/components/booking-form-modal";
 import { GalleryModal } from "@/components/gallery-modal";
 import { EnquireAvailabilityModal } from "@/components/enquire-availability-modal";
 import { BookingConfirmationGroup } from "@/components/booking-confirmation-group";
+import { JoinGuestlistModal } from "@/components/join-guestlist-modal";
 import { experiences, type Experience, type ExperienceVariant } from "@/lib/experiences-data";
 import {
   Check,
@@ -40,6 +41,11 @@ import {
   LifeBuoy,
   Palette,
   Bike,
+  Shirt,
+  ShoppingBag,
+  Smile,
+  Smartphone,
+  Sun,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
@@ -103,6 +109,12 @@ const includedIcons: Record<string, any> = {
   "Bottled water": GlassWater,
   "Beyond Experiences Essentials™ Bag": Gift,
   "Beyond Essentials Bag": Gift,
+};
+
+const notesIcons: Record<string, any> = {
+  "A fully charged phone & power bank": Smartphone,
+  "Sunglasses & sunscreen": Sun,
+  "Your best smile & energy!": Smile,
 };
 
 function getCountryAdjective(country: string): string {
@@ -384,6 +396,7 @@ export default function BookExperiencePage() {
   const [isMastercardModalOpen, setIsMastercardModalOpen] = useState(false);
   const [isEnquireModalOpen, setIsEnquireModalOpen] = useState(false);
   const [isGroupConfirmationOpen, setIsGroupConfirmationOpen] = useState(false);
+  const [isGuestlistModalOpen, setIsGuestlistModalOpen] = useState(false);
   const buttonRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -894,6 +907,13 @@ export default function BookExperiencePage() {
                           Enquire for Availability
                         </Button>
                       </>
+                    ) : experience.slug === "vici-summer-uncorked" ? (
+                      <Button
+                        className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
+                        onClick={() => setIsGuestlistModalOpen(true)}
+                      >
+                        Join the Guestlist
+                      </Button>
                     ) : (
                       <>
                         <Button
@@ -986,6 +1006,13 @@ export default function BookExperiencePage() {
                               Enquire for Availability
                             </Button>
                           </div>
+                        ) : experience.slug === "vici-summer-uncorked" ? (
+                          <Button
+                            className="w-full sm:w-auto bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
+                            onClick={() => setIsGuestlistModalOpen(true)}
+                          >
+                            Join the Guestlist
+                          </Button>
                         ) : (
                           <>
                             <Button
@@ -1018,65 +1045,124 @@ export default function BookExperiencePage() {
               </div>
 
               {/* What's Included */}
-              <div>
-                <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
-                  What's Included
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4">
-                  {bookingContent.included.map((item, index) => {
-                    const Icon = includedIcons[item] || Check;
-                    return (
-                      <div
-                        key={index}
-                        className={`flex items-center gap-3 border-b border-black pb-3 ${index === 0 ? "border-t border-black pt-3" : ""
-                          } ${index === 1
-                            ? "sm:border-t sm:border-black sm:pt-3"
-                            : ""
-                          }`}
-                      >
-                        <Icon className="w-4 h-4 text-slate-600 flex-shrink-0" />
-                        <span className="text-slate-700 font-sans text-sm sm:text-base">
-                          {item}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* What's Not Included - Group Experience Only */}
-              {isGroupExperience && bookingContent.notIncluded && (
+              {bookingContent.included && bookingContent.included.length > 0 && (
                 <div>
                   <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
-                    What's Not Included
+                    What's Included
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4">
-                    {bookingContent.notIncluded.map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center gap-3 border-b border-black pb-3"
-                      >
-                        <span className="w-4 h-4 text-slate-600 flex-shrink-0 text-center">×</span>
-                        <span className="text-slate-700 font-sans text-sm sm:text-base">
-                          {item}
-                        </span>
-                      </div>
-                    ))}
+                    {bookingContent.included.map((item, index) => {
+                      const Icon = includedIcons[item] || Check;
+                      return (
+                        <div
+                          key={index}
+                          className={`flex items-center gap-3 border-b border-black pb-3 ${index === 0 ? "border-t border-black pt-3" : ""
+                            } ${index === 1
+                              ? "sm:border-t sm:border-black sm:pt-3"
+                              : ""
+                            }`}
+                        >
+                          <Icon className="w-4 h-4 text-slate-600 flex-shrink-0" />
+                          <span className="text-slate-700 font-sans text-sm sm:text-base">
+                            {item}
+                          </span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
-              )}
+                )}
 
-              {/* Important - Group Experience Only */}
-              {isGroupExperience && bookingContent.important && (
-                <div>
-                  <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
-                    Important
-                  </h2>
-                  <p className="text-slate-700 font-sans font-normal leading-relaxed text-base sm:text-xl">
-                    {bookingContent.important}
-                  </p>
-                </div>
-              )}
+                {/* Dress Code */}
+                {bookingContent.dressCode && (
+                  <div className="mt-8">
+                    <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
+                      Dress Code
+                    </h2>
+                    <div className="flex items-start gap-3 border-b border-t border-black py-3">
+                      <Shirt className="w-4 h-4 text-slate-600 mt-1 flex-shrink-0" />
+                      <p className="text-slate-700 font-sans leading-relaxed text-sm sm:text-base">
+                        {bookingContent.dressCode}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Age Restriction */}
+                {/* {bookingContent.ageRestriction && (
+                  <div className="mt-8">
+                    <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
+                      Age Restriction
+                    </h2>
+                    <div className="flex items-start gap-3 border-b border-t border-black py-3">
+                      <Check className="w-4 h-4 text-slate-600 mt-1 flex-shrink-0" />
+                      <p className="text-slate-700 font-sans leading-relaxed text-sm sm:text-base">
+                        {bookingContent.ageRestriction}
+                      </p>
+                    </div>
+                  </div>
+                )} */}
+
+                {/* Notes */}
+                {bookingContent.notes && bookingContent.notes.length > 0 && (
+                  <div className="mt-8">
+                    <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
+                      What to Bring
+                    </h2>
+                    <div className="space-y-4">
+                      {bookingContent.notes.map((note, index) => {
+                        const Icon = notesIcons[note] || ShoppingBag;
+                        return (
+                          <div
+                            key={index}
+                            className={`flex items-start gap-3 border-b border-black pb-3 ${
+                              index === 0 ? "border-t border-black pt-3" : ""
+                            }`}
+                          >
+                            <Icon className="w-4 h-4 text-slate-600 mt-1 flex-shrink-0" />
+                            <p className="text-slate-700 font-sans leading-relaxed text-sm sm:text-base">
+                              {note}
+                            </p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* What's Not Included - Group Experience Only */}
+                {isGroupExperience && bookingContent.notIncluded && (
+                  <div>
+                    <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
+                      What's Not Included
+                    </h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4">
+                      {bookingContent.notIncluded.map((item, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center gap-3 border-b border-black pb-3"
+                        >
+                          <span className="w-4 h-4 text-slate-600 flex-shrink-0 text-center">×</span>
+                          <span className="text-slate-700 font-sans text-sm sm:text-base">
+                            {item}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Important - Group Experience Only */}
+                {isGroupExperience && bookingContent.important && (
+                  <div>
+                    <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
+                      Important
+                    </h2>
+                    <p className="text-slate-700 font-sans font-normal leading-relaxed text-base sm:text-xl">
+                      {bookingContent.important}
+                    </p>
+                  </div>
+                )}
             </div>
 
             {/* Right Column - Gallery */}
@@ -1236,6 +1322,12 @@ export default function BookExperiencePage() {
         onClose={() => setIsGalleryModalOpen(false)}
         images={bookingContent.galleryImages}
         initialImageIndex={0}
+      />
+
+      <JoinGuestlistModal
+        isOpen={isGuestlistModalOpen}
+        onClose={() => setIsGuestlistModalOpen(false)}
+        experienceSlug={experience.slug}
       />
 
       <MastercardPaymentBounceModal

@@ -33,7 +33,7 @@ export type Experience = {
         threeOrMoreGuests: number
       }
       minimumGuests: number
-      included: string[]
+      included?: string[]
       whatsPriceless?: string
       // Group experience specific fields
       isGroupExperience?: boolean
@@ -49,6 +49,9 @@ export type Experience = {
       startDate?: string
       endDate?: string
       variants?: ExperienceVariant[]
+      dressCode?: string
+      // ageRestriction?: string
+      notes?: string[]
     }
     tags: string[]
   }
@@ -313,6 +316,71 @@ export type Experience = {
     },
     {
       id: 5,
+      slug: "vici-summer-uncorked",
+      defaultContent: {
+        title: "Vici Summer Uncorked",
+        shortDescription: "Vici Summer Uncorked is Accra's signature premium day party, a vibrant celebration of rhythm, taste, and connection.",
+        image: "/images/experiences/vici-sum-uncork/cover.jpg?height=400&width=300&text=Accra+City+Tour",
+        location: "Greater Accra, Ghana",
+      },
+      expandedContent: {
+        title: "Vici Summer Uncorked",
+        fullDescription: "Explore Ghana's capital through its history, culture, and daily life — from monuments and markets to museums and makers. A full immersion into the rhythm of the city.",
+        image: "/placeholder.svg?height=500&width=400&text=Accra+Skyline+Modern",
+      },
+      bookingContent: {
+        title: "Vici Summer Uncorked",
+        subtitle: "There's something timeless about sunshine, sound, and good champagne.",
+        duration: "1 DAY",
+        destinations: "5 DESTINATIONS",
+        maxGuests: "20 GUESTS (MAX)",
+        heroImage: "/images/experiences/vici-sum-uncork/cover.jpg?height=800&width=1200&text=Accra+City+Tour",
+        galleryImages: [
+          "/images/experiences/vici-sum-uncork/Gallery/1.jpg?height=400&width=300&text=Accra+City+Tour",
+          "/images/experiences/vici-sum-uncork/Gallery/2.jpg?height=400&width=300&text=Accra+City+Tour",
+          "/images/experiences/vici-sum-uncork/Gallery/3.jpg?height=400&width=300&text=Accra+City+Tour",
+          "/images/experiences/vici-sum-uncork/Gallery/4.jpg?height=400&width=300&text=Accra+City+Tour",
+          "/images/experiences/vici-sum-uncork/Gallery/5.jpg?height=400&width=300&text=Accra+City+Tour",
+          "/images/experiences/vici-sum-uncork/Gallery/6.jpg?height=400&width=300&text=Accra+City+Tour",
+          "/images/experiences/vici-sum-uncork/Gallery/7.jpg?height=400&width=300&text=Accra+City+Tour",
+          "/images/experiences/vici-sum-uncork/Gallery/8.jpg?height=400&width=300&text=Accra+City+Tour",
+          "/images/experiences/vici-sum-uncork/Gallery/9.jpg?height=400&width=300&text=Accra+City+Tour",
+          "/images/experiences/vici-sum-uncork/Gallery/10.jpg?height=400&width=300&text=Accra+City+Tour",
+          "/images/experiences/vici-sum-uncork/Gallery/11.jpg?height=400&width=300&text=Accra+City+Tour",
+          "/images/experiences/vici-sum-uncork/Gallery/12.jpg?height=400&width=300&text=Accra+City+Tour",
+          "/images/experiences/vici-sum-uncork/Gallery/13.jpg?height=400&width=300&text=Accra+City+Tour",
+          "/images/experiences/vici-sum-uncork/Gallery/14.jpg?height=400&width=300&text=Accra+City+Tour",
+          "/images/experiences/vici-sum-uncork/Gallery/15.jpg?height=400&width=300&text=Accra+City+Tour",
+          "/images/experiences/vici-sum-uncork/Gallery/16.jpg?height=400&width=300&text=Accra+City+Tour",
+        ],
+        overview: "There's something timeless about sunshine, sound, and good champagne. Vici Summer Uncorked is Accra's signature premium day party, a vibrant celebration of rhythm, taste, and connection. Hosted in collaboration with Beyond Accra, Veuve Clicquot, and Blaqcoffe, this curated daytime experience seamlessly blends music, bubbles, and bold summer energy into one unforgettable experience. From noon till sunset, expect effortless elegance, endless laughter, and moments made golden.",
+        highlights: [
+          "Live music and DJ sets curated by Blaqcoffee",
+          "Premium champagne bar by Veuve Clicquo",
+          "Curated menu and shared platters with artisans at the Arts Centre",
+          "Lush lounge setups and shaded social spaces",
+          "Games, social activations, and curated photo moments",
+        ],
+        dressCode: "Smart casual",
+        // ageRestriction: "18+",
+        notes: [
+          "A fully charged phone & power bank",
+          "Sunglasses & sunscreen",
+          "Your best smile & energy!",
+        ],
+        startingPrice: 350,
+        pricing: {
+          oneGuest: 350,
+          twoGuests: 332.5,
+          threeOrMoreGuests: 332.5,
+        },
+        minimumGuests: 1,
+        included: []
+      },
+      tags: ["Travel Planner's Choice", "1 PAX"]
+    },
+    {
+      id: 6,
       slug: "kente-and-rhythm",
       defaultContent: {
         title: "Kente and Rhythm",
@@ -366,7 +434,7 @@ export type Experience = {
       tags: ["Travel Planner's Choice", "1 PAX"]
     },
     {
-      id: 6,
+      id: 7,
       slug: "wojutei",
       defaultContent: {
         title: "Wojutei",
@@ -422,7 +490,7 @@ export type Experience = {
       tags: ["Priceless", "2 PAX"]
     },
     {
-      id: 7,
+      id: 8,
       slug: "a-date-with-fashion",
       defaultContent: {
         title: "A Date with Fashion",
@@ -514,7 +582,7 @@ export type Experience = {
       tags: ["Priceless", "2 PAX"],
     },
     {
-      id: 8,
+      id: 9,
       slug: "afrofuture",
       defaultContent: {
         title: "Afrofuture",
@@ -563,7 +631,7 @@ export type Experience = {
       tags: ["Priceless", "2 PAX"]
     },
     {
-      id: 9,
+      id: 10,
       slug: "gardens-trails-and-cacao",
       defaultContent: {
         title: "Gardens, Trails, and Cacao",
@@ -633,7 +701,7 @@ export type Experience = {
       tags: ["Travel Planner's Choice", "1 PAX"]
     },
     {
-      id: 10,
+      id: 11,
       slug: "fairafric-farm-to-chocolate-tour",
       defaultContent: {
         title: "FairAfric Farm to Chocolate Tour",
@@ -684,7 +752,7 @@ export type Experience = {
       tags: ["Travel Planner's Choice", "1 PAX"]
     },
     {
-      id: 11,
+      id: 12,
       slug: "the-trident-experience",
       defaultContent: {
         title: "The Trident Experience",
@@ -734,7 +802,7 @@ export type Experience = {
       tags: ["Travel Planner's Choice", "1 PAX"]
     },
     {
-      id: 12,
+      id: 13,
       slug: "art-after-dark",
       defaultContent: {
         title: "Art After Dark",
@@ -792,7 +860,7 @@ export type Experience = {
       tags: ["Priceless", "1 PAX"]
     },
     {
-      id: 13,
+      id: 14,
       slug: "sandwich-harbour-exploration",
       defaultContent: {
         title: "Sandwich Harbour Exploration",
@@ -848,7 +916,7 @@ export type Experience = {
       tags: ["Travel Planner's Choice", "3 PAX"]
     },
     {
-      id: 14,
+      id: 15,
       slug: "quad-biking-on-dune-7",
       defaultContent: {
         title: "Quad Biking on Dune 7",
@@ -898,7 +966,7 @@ export type Experience = {
       tags: ["Travel Planner's Choice", "1 PAX"]
     },
     {
-      id: 15,
+      id: 16,
       slug: "hot-air-ballooning-over-the-desert",
       defaultContent: {
         title: "Hot Air Ballooning Over the Desert",
@@ -947,7 +1015,7 @@ export type Experience = {
       tags: ["Travel Planner's Choice", "1 PAX"]
     },
     {
-      id: 16,
+      id: 17,
       slug: "dolphin-watching-and-snorkeling",
       defaultContent: {
         title: "Dolphin Watching and Snorkeling",
@@ -998,7 +1066,7 @@ export type Experience = {
       tags: ["Travel Planner's Choice", "3 PAX"]
     },
     {
-      id: 17,
+      id: 18,
       slug: "cacao-and-coffee-farm-tour",
       defaultContent: {
         title: "Cocoa and Coffee Farm Tour",
@@ -1055,7 +1123,7 @@ export type Experience = {
       tags: ["Travel Planner's Choice", "2 PAX"]
     },
     {
-      id: 18,
+      id: 19,
       slug: "sao-tome-city-tour",
       defaultContent: {
         title: "São Tomé City Tour",
@@ -1111,7 +1179,7 @@ export type Experience = {
       tags: ["Travel Planner's Choice", "2 PAX"]
     },
     {
-      id: 19,
+      id: 20,
       slug: "canvas-and-soul",
       defaultContent: {
         title: "Canvas & Soul",
@@ -1163,7 +1231,7 @@ export type Experience = {
       tags: ["Travel Planner's Choice", "2 PAX"]
     },
     {
-      id: 20,
+      id: 21,
       slug: "december-in-ghana-castles-to-coastlines",
       hidden: true,
       accessCode: ["travelsocial", "bxnoah"],
@@ -1234,7 +1302,7 @@ export type Experience = {
       tags: ["Travel Planner's Choice", "2 PAX"]
     },
     {
-      id: 21,
+      id: 22,
       slug: "a-date-with-chocolate",
       defaultContent: {
         title: "A Date with Chocolate",
@@ -1290,7 +1358,7 @@ export type Experience = {
       tags: ["Priceless", "2 PAX"],
     },
     {
-      id: 22,
+      id: 23,
       slug: "a-date-with-phil-and-joe",
       defaultContent: {
         title: "A Date with Phil & Joe",
