@@ -11,10 +11,9 @@ export async function POST(req: NextRequest) {
       instagramHandle,
       howHeard,
       specialRequests,
-      experienceSlug,
     } = await req.json();
 
-    if (!fullName || !email || !phone || !guests || !experienceSlug) {
+    if (!fullName || !email || !phone || !guests) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
@@ -29,7 +28,7 @@ export async function POST(req: NextRequest) {
     const sheets = google.sheets({ version: 'v4', auth });
 
     const spreadsheetId = process.env.GOOGLE_SHEET_ID;
-    const range = 'Sheet1!A:I'; // Adjust sheet name and range as needed
+    const range = 'Sheet1!A:H'; // Adjust sheet name and range as needed
 
     const newRow = [
       new Date().toISOString(),
@@ -40,7 +39,6 @@ export async function POST(req: NextRequest) {
       instagramHandle || '',
       howHeard || '',
       specialRequests || '',
-      experienceSlug,
     ];
 
     await sheets.spreadsheets.values.append({

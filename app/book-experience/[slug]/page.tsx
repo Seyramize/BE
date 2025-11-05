@@ -768,7 +768,7 @@ export default function BookExperiencePage() {
                   /* Group Experience Pricing */
                   <div className="space-y-4">
                     {/* Mobile Layout */}
-                    <div className="sm:hidden space-y-4">
+                    <div className="sm:hidden space-y-4" ref={experience.slug === "vici-summer-uncorked" ? buttonRef : undefined}>
                       {experience.slug !== "vici-summer-uncorked" && (
                         <div className="flex items-center justify-between">
                           <div>
@@ -1419,9 +1419,16 @@ export default function BookExperiencePage() {
       />
 
       {/* Sticky CTA on mobile */}
-      {isMobile && isSticky && experience.slug !== "vici-summer-uncorked" && (
+      {isMobile && isSticky && (
         <div className="sm:hidden fixed bottom-4 left-0 right-0 px-4 z-20">
-          {experience.slug === "a-date-with-fashion" ? (
+          {experience.slug === "vici-summer-uncorked" ? (
+            <Button
+              className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"
+              onClick={() => setIsGuestlistModalOpen(true)}
+            >
+              Join the Guestlist
+            </Button>
+          ) : experience.slug === "a-date-with-fashion" ? (
             <Button
               className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"
               onClick={() => setIsEnquireModalOpen(true)}
