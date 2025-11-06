@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
+import { sendEmail } from '@/lib/mailtrap';
+
 
 export async function POST(req: NextRequest) {
   try {
@@ -49,6 +51,47 @@ export async function POST(req: NextRequest) {
         values: [newRow],
       },
     });
+
+    try {
+      // Send confirmation email to the client
+      await sendEmail({
+        to: email,
+        templateUuid: '9eec04b7-7793-49f6-8e35-32ac2fd1e9cb',
+        templateVariables: {
+          name: fullName,
+          guests: guests,
+          date: 'Saturday, 15th November',
+          venue: 'Vine Accra',
+        },
+      });
+
+      // Send notification email to the team
+      const teamEmails = [
+        'Noah@beyondaccra.com',
+        'concierge@experiencesbybeyond.com'
+      ];
+
+      for (const teamEmail of teamEmails) {
+        await sendEmail({
+          to: teamEmail,
+          templateUuid: 'a780781f-f8ff-4400-9750-fa5a66e5489a',
+          templateVariables: {
+            name: fullName,
+            email: email,
+            phone: phone,
+            guests: guests,
+            igHandle: instagramHandle || 'N/A',
+            channel: howHeard || 'N/A',
+            notes: specialRequests || '(Empty)',
+          },
+        });
+      }
+
+    } catch (emailError) {
+      console.error('Error sending email:', emailError);
+      // Decide if you want to return an error to the user if email fails
+      // For now, we'll just log it and assume the main operation was successful
+    }
 
     return NextResponse.json({ message: 'Successfully joined the guestlist!' });
   } catch (error) {
