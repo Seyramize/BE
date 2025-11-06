@@ -355,10 +355,10 @@ export type Experience = {
           "/images/experiences/vici-sum-uncork/Gallery/15.jpg?height=400&width=300&text=Accra+City+Tour",
           "/images/experiences/vici-sum-uncork/Gallery/16.jpg?height=400&width=300&text=Accra+City+Tour",
         ],
-        overview: "There's something timeless about sunshine, sound, and good champagne. Vici Summer Uncorked is Accra's signature premium day party, a vibrant celebration of rhythm, taste, and connection. Hosted in collaboration with Beyond Accra, Veuve Clicquot, and Blaqcoffe, this curated daytime experience seamlessly blends music, bubbles, and bold summer energy into one unforgettable experience. From noon till sunset, expect effortless elegance, endless laughter, and moments made golden.",
+        overview: "There's something timeless about sunshine, sound, and good champagne. Vici Summer Uncorked is Accra's signature premium day party, a vibrant celebration of rhythm, taste, and connection. Hosted in collaboration with Beyond Accra, Vine Accra, and Blaqcoffe, this curated daytime experience seamlessly blends music, bubbles, and bold summer energy into one unforgettable experience. From noon till sunset, expect effortless elegance, endless laughter, and moments made golden.",
         highlights: [
           "Live music and DJ sets",
-          "Premium pours from Veuve Clicquot",
+          "Premium pours from Vine Accra",
           "Curated menu and shared platters",
           "Lush lounge setups and shaded social spaces",
           "Games, social activations, and curated photo moments",
@@ -1266,7 +1266,7 @@ export type Experience = {
           "/images/experiences/dec-in-gh/Gallery/6.jpg?height=400&width=300&text=Accra+City+Tour",
           "/images/experiences/dec-in-gh/Gallery/7.jpg?height=400&width=300&text=Beach+Club+Escape",
         ],
-        overview: "Join a curated group journey through Ghana's December magic. This shared experience blends culture, adventure, and celebration as you explore AfroFuture Festival, Cape Coast Castle, ATV rides at Shai Hills, Volta Lake sunset cruise, and a curated New Year's Eve celebration. From long-table welcome dinners to private beach club escapes, this is a shared experience of Ghana's December magic.",
+        overview: "Join a curated group journey through Ghana's December magic. This shared experience blends culture, adventure, and celebration as you explore AfroFuture Festival, Cape Coast Castle, ATV rides at Shai Hills, and a Volta Lake sunset cruise. From long-table welcome dinners to private beach club escapes, this is a shared experience of Ghana's December magic.",
         highlights: [
           "Adventures in Nature - ATV rides at Shai Hills, Volta Lake sunset cruise, and Kakum Canopy Walk.",
           "Culture & Heritage - AfroFuture Festival, Cape Coast Castle, and Accra city tour (Jamestown & Black Star landmarks).",
@@ -1281,13 +1281,14 @@ export type Experience = {
         minimumGuests: 1,
         included: [
           "Private transportation including fuel",
-          "All scheduled experiences and tours",
+          "All scheduled tours",
           "Dedicated chaperone and access to resident guides",
-          "Beyond Experiences Essentials™ Bag"
         ],
         notIncluded: [
           "International flights to and from Accra",
           "Personal expenses (shopping, unscheduled meals, extras)",
+          "AfroFuture festival passes",
+          "Dining, group or solo dining",
           "Accommodations",
           "Travel insurance (recommended and available on request)"
         ],

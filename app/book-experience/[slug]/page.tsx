@@ -593,9 +593,25 @@ export default function BookExperiencePage() {
         </div>
         <div className="relative w-full max-w-5xl mx-auto px-6 text-center z-10">
           {/* Group Experience Text - Above Title (Mobile Only) */}
-          {isGroupExperience && (
+          {isGroupExperience && experience.slug !== "vici-summer-uncorked" && (
             <div className="mb-2 sm:hidden">
-              <span className="text-white font-sans text-xs uppercase tracking-widest">GROUP EXPERIENCE</span>
+              <span className="text-white font-sans text-xs uppercase tracking-widest">
+                GROUP EXPERIENCE
+              </span>
+            </div>
+          )}
+
+          {/* Vici Pill - Desktop */}
+          {experience.slug === "vici-summer-uncorked" && (
+            <div className="hidden sm:inline-flex uppercase items-center gap-2 bg-black/30 backdrop-blur-sm text-white px-4 py-2 rounded-full font-sans text-[10px] mb-4 border border-white/20">
+              <img
+                src="/images/vicilogo.png"
+                alt="Vici"
+                className="w-5 h-5"
+              />
+              <span className="tracking-widest">
+                Table reservations and guestlist only
+              </span>
             </div>
           )}
 
@@ -604,6 +620,20 @@ export default function BookExperiencePage() {
               {bookingContent.title}
             </div>
           </h1>
+
+          {/* Vici Pill - Mobile */}
+          {experience.slug === "vici-summer-uncorked" && (
+            <div className="sm:hidden inline-flex uppercase items-center gap-2 bg-black/30 backdrop-blur-sm text-white px-4 py-2 rounded-full font-sans text-[10px] mt-2 mb-4 border border-white/20">
+              <img
+                src="/images/vicilogo.png"
+                alt="Vici"
+                className="w-5 h-5"
+              />
+              <span className="tracking-widest">
+                Table reservations and guestlist only
+              </span>
+            </div>
+          )}
 
           {/* Group Experience Subtitle - Below Title (Mobile Only) */}
           {isGroupExperience && experience.slug !== "vici-summer-uncorked" && (
