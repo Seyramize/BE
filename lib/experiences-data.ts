@@ -358,7 +358,7 @@ export type Experience = {
         overview: "There's something timeless about sunshine, sound, and good champagne. Vici Summer Uncorked is Accra's signature premium day party, a vibrant celebration of rhythm, taste, and connection. Hosted in collaboration with Beyond Accra, Vine Accra, and Blaqcoffe, this curated daytime experience seamlessly blends music, bubbles, and bold summer energy into one unforgettable experience. From noon till sunset, expect effortless elegance, endless laughter, and moments made golden.",
         highlights: [
           "Live music and DJ sets",
-          "Premium pours from Vine Accra",
+          "Premium pours",
           "Curated menu and shared platters",
           "Lush lounge setups and shaded social spaces",
           "Games, social activations, and curated photo moments",
