@@ -67,7 +67,8 @@ export async function POST(req: NextRequest) {
 
       // Send notification email to the team
       const teamEmails = [
-        'Noah@beyondaccra.com',
+        'noah@beyondaccra.com',
+        'carl@beyondaccra.com',
         'concierge@experiencesbybeyond.com'
       ];
 
