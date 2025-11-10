@@ -687,7 +687,7 @@ export default function BookExperiencePage() {
                 alt="Mastercard"
                 className="w-5 h-5"
               />
-              <span className="tracking-widest">Mastercard holders only</span>
+              <span className="tracking-widest">Mastercard cardholders only</span>
             </div>
           )}
         </div>
