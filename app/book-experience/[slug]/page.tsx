@@ -11,6 +11,7 @@ import { GalleryModal } from "@/components/gallery-modal";
 import { EnquireAvailabilityModal } from "@/components/enquire-availability-modal";
 import { BookingConfirmationGroup } from "@/components/booking-confirmation-group";
 import { JoinGuestlistModal } from "@/components/join-guestlist-modal";
+import { GuestlistClosedModal } from "@/components/guestlist-closed-modal"; // Import the new modal
 import { experiences, type Experience, type ExperienceVariant } from "@/lib/experiences-data";
 import {
   Check,
@@ -418,6 +419,8 @@ export default function BookExperiencePage() {
   const [isEnquireModalOpen, setIsEnquireModalOpen] = useState(false);
   const [isGroupConfirmationOpen, setIsGroupConfirmationOpen] = useState(false);
   const [isGuestlistModalOpen, setIsGuestlistModalOpen] = useState(false);
+  const [isGuestlistClosedModalOpen, setIsGuestlistClosedModalOpen] =
+    useState(false);
   const buttonRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -844,7 +847,7 @@ export default function BookExperiencePage() {
                       ) : experience.slug === "vici-summer-uncorked" ? (
                         <Button
                           className="w-full bg-gray-800 hover:bg-gray-700 text-white py-6 rounded-lg text-sm font-sans"
-                          onClick={() => setIsGuestlistModalOpen(true)}
+                          onClick={() => setIsGuestlistClosedModalOpen(true)}
                         >
                           Join the Guestlist
                         </Button>
@@ -864,7 +867,7 @@ export default function BookExperiencePage() {
                         <div className="flex justify-end">
                           <Button
                             className="bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
-                            onClick={() => setIsGuestlistModalOpen(true)}
+                            onClick={() => setIsGuestlistClosedModalOpen(true)}
                           >
                             Join the Guestlist
                           </Button>
@@ -928,7 +931,7 @@ export default function BookExperiencePage() {
                             ) : experience.slug === "vici-summer-uncorked" ? (
                               <Button
                                 className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
-                                onClick={() => setIsGuestlistModalOpen(true)}
+                                onClick={() => setIsGuestlistClosedModalOpen(true)}
                               >
                                 Join the Guestlist
                               </Button>
@@ -1019,7 +1022,7 @@ export default function BookExperiencePage() {
                     ) : experience.slug === "vici-summer-uncorked" ? (
                       <Button
                         className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
-                        onClick={() => setIsGuestlistModalOpen(true)}
+                        onClick={() => setIsGuestlistClosedModalOpen(true)}
                       >
                         Join the Guestlist
                       </Button>
@@ -1120,7 +1123,7 @@ export default function BookExperiencePage() {
                         ) : experience.slug === "vici-summer-uncorked" ? (
                           <Button
                             className="w-full sm:w-auto bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
-                            onClick={() => setIsGuestlistModalOpen(true)}
+                            onClick={() => setIsGuestlistClosedModalOpen(true)}
                           >
                             Join the Guestlist
                           </Button>
@@ -1442,6 +1445,10 @@ export default function BookExperiencePage() {
         heroImage={bookingContent.heroImage}
         title={bookingContent.title}
       />
+      <GuestlistClosedModal
+        isOpen={isGuestlistClosedModalOpen}
+        onClose={() => setIsGuestlistClosedModalOpen(false)}
+      />
 
       <MastercardPaymentBounceModal
         isOpen={isMastercardModalOpen}
@@ -1454,7 +1461,7 @@ export default function BookExperiencePage() {
           {experience.slug === "vici-summer-uncorked" ? (
             <Button
               className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"
-              onClick={() => setIsGuestlistModalOpen(true)}
+              onClick={() => setIsGuestlistClosedModalOpen(true)}
             >
               Join the Guestlist
             </Button>
