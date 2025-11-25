@@ -813,7 +813,7 @@ export default function BookExperiencePage() {
                                 <SelectValue placeholder="1" />
                               </SelectTrigger>
                               <SelectContent className="w-32">
-                                {[...Array(20)].map((_, i) => (
+                                {[...Array(10)].map((_, i) => (
                                   <SelectItem key={i + 1} value={`${i + 1}`}>
                                     {i + 1}
                                   </SelectItem>
@@ -837,27 +837,29 @@ export default function BookExperiencePage() {
                         </div>
                       )}
                       {experience.slug ===
-                      "december-in-ghana-castles-to-coastlines" ? (
-                        <Button
-                          className="w-full bg-gray-800 hover:bg-gray-700 text-white py-6 rounded-lg text-sm font-sans"
-                          onClick={() => setIsEnquireModalOpen(true)}
-                        >
-                          Enquire for Availability
-                        </Button>
-                      ) : experience.slug === "vici-summer-uncorked" ? (
-                        <Button
-                          className="w-full bg-gray-800 hover:bg-gray-700 text-white py-6 rounded-lg text-sm font-sans"
-                          onClick={() => setIsGuestlistClosedModalOpen(true)}
-                        >
-                          Join the Guestlist
-                        </Button>
-                      ) : (
-                      <Button
-                        className="w-full bg-gray-800 hover:bg-gray-700 text-white py-6 rounded-lg text-sm font-sans"
-                        onClick={() => setIsGroupConfirmationOpen(true)}
-                      >
-                        Book your spot
-                      </Button>
+                      "december-in-ghana-castles-to-coastlines" && (
+                        <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-end gap-4 mb-4">
+                          <a
+                            href="/iternary.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full sm:w-auto"
+                          >
+                            <Button
+                              type="button"
+                              variant="outline"
+                              className="w-full sm:w-auto bg-white border-slate-900 text-slate-900 font-sans px-6 py-4 text-sm flex items-center justify-center gap-2"
+                            >
+                              View Itinerary
+                            </Button>
+                          </a>
+                          <Button
+                            className="w-full sm:w-56 bg-gray-800 hover:bg-gray-700 text-white py-6 rounded-lg text-sm font-sans"
+                            onClick={() => setIsGroupConfirmationOpen(true)}
+                          >
+                            Book Experience
+                          </Button>
+                        </div>
                       )}
                     </div>
 
@@ -884,7 +886,7 @@ export default function BookExperiencePage() {
                                 <SelectValue placeholder="1" />
                               </SelectTrigger>
                               <SelectContent className="w-32">
-                                {[...Array(20)].map((_, i) => (
+                                {[...Array(10)].map((_, i) => (
                                   <SelectItem key={i + 1} value={`${i + 1}`}>
                                     {i + 1}
                                   </SelectItem>
@@ -909,7 +911,7 @@ export default function BookExperiencePage() {
                             </div>
 
                             {/* Payment Plan */}
-                            {experience.slug !== "december-in-ghana-castles-to-coastlines" && (
+                            {experience.slug !== "vici-summer-uncorked" && experience.slug !== "december-in-ghana-castles-to-coastlines" && (
                             <div className="flex flex-col justify-center items-start tracking-widest leading-none space-y-0 mt-1">
                               <div className="text-base font-sans font-semibold text-slate-900">
                                 OR ${groupPerInstallment}
@@ -919,15 +921,30 @@ export default function BookExperiencePage() {
                               </div>
                             </div>
                             )}
-
                             {/* Button */}
                             {experience.slug === "december-in-ghana-castles-to-coastlines" ? (
-                            <Button
-                              className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
-                              onClick={() => setIsEnquireModalOpen(true)}
-                            >
-                              Enquire for Availability
-                            </Button>
+                              <div className="flex gap-4 items-center w-full justify-end">
+                                <Button
+                                  className="bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
+                                  onClick={() => setIsGroupConfirmationOpen(true)}
+                                >
+                                  Book Experience
+                                 </Button>
+                                <a
+                                  href="/iternary.pdf"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="w-auto"
+                                >
+                                  <Button
+                                      type="button"
+                                    variant="outline"
+                                    className="w-auto bg-white border-slate-900 text-slate-900 font-sans px-6 py-4 text-sm flex items-center justify-center gap-2"
+                                  >
+                                    View Itinerary
+                                  </Button>
+                                </a>
+                              </div>
                             ) : experience.slug === "vici-summer-uncorked" ? (
                               <Button
                                 className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
@@ -936,12 +953,12 @@ export default function BookExperiencePage() {
                                 Join the Guestlist
                               </Button>
                             ) : (
-                            <Button
-                              className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
-                              onClick={() => setIsGroupConfirmationOpen(true)}
-                            >
-                              Book your spot
-                            </Button>
+                              <Button
+                                className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
+                                onClick={() => setIsGroupConfirmationOpen(true)}
+                              >
+                                Book your spot
+                              </Button>
                             )}
                           </div>
                         </div>

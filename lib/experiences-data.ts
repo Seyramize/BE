@@ -1237,7 +1237,7 @@ export type Experience = {
     {
       id: 21,
       slug: "december-in-ghana-castles-to-coastlines",
-      hidden: true,
+      hidden: false,
       accessCode: ["travelsocial", "bxnoah"],
       defaultContent: {
         title: "December in Ghana: Castles to Coastlines",
@@ -1280,11 +1280,11 @@ export type Experience = {
           "Culture & Heritage - AfroFuture Festival, Cape Coast Castle, and Accra city tour (Jamestown & Black Star landmarks).",
           "Luxury & Lifestyle - Long-table welcome dinner, private beach club escape, and curated New Year's Eve celebration."
         ],
-        startingPrice: 500,
+        startingPrice: 650,
         pricing: {
-          oneGuest: 500,
-          twoGuests: 500,
-          threeOrMoreGuests: 500,
+          oneGuest: 650,
+          twoGuests: 650,
+          threeOrMoreGuests: 650,
         },
         minimumGuests: 1,
         included: [
@@ -1302,12 +1302,12 @@ export type Experience = {
         ],
         important: "Spaces are limited and joining the trip means traveling with a set group, sharing experiences, and enjoying Ghana's December magic together.",
         isGroupExperience: true,
-        totalSlots: 20,
-        availableSlots: 20,
+        totalSlots: 10,
+        availableSlots: 10,
         startDate: "2025-12-28",
         endDate: "2026-01-02",
         groupPricing: {
-          fullPrice: 500,
+          fullPrice: 650,
           paymentPlanPrice: 1000,
           paymentPlanInstallments: 3
         }

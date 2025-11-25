@@ -9,7 +9,7 @@ import { CountrySelector } from "@/components/country-selector";
 import { LocationSelector } from "@/components/location-selector";
 import { TravelPlannerModal } from "@/components/travel-planner-modal-clean";
 import { PaymentConfirmationGroupModal } from "@/components/payment-confirmation-group-modal";
-import { ActiveCounter } from "@/components/active-counter";
+// import { ActiveCounter } from "@/components/active-counter";
 import {
   Select,
   SelectContent,
@@ -124,7 +124,7 @@ export function BookingConfirmationGroup({
     }
   }, [formData.guests, formData.paymentStyle, experience.groupPricing?.fullPrice]);
 
-  const guestOptions = Array.from({ length: 20 }, (_, i) => ({
+  const guestOptions = Array.from({ length: 10 }, (_, i) => ({
     label: `${i + 1}`,
     value: i + 1
   }));
@@ -227,7 +227,7 @@ export function BookingConfirmationGroup({
                 <h2 className="text-3xl lg:text-6xl xl:text-6xl font-serif font-normal leading-tight" id="booking-modal-title">
                   {experience.title} Experience
                 </h2>
-                {activeCounter && (
+                {/* {activeCounter && (
                   <div className="mt-4">
                     <ActiveCounter
                       experienceId={experience.id}
@@ -237,7 +237,7 @@ export function BookingConfirmationGroup({
                       textSize="text-sm"
                     />
                   </div>
-                )}
+                )} */}
               </div>
             </div>
           </div>
@@ -427,36 +427,38 @@ export function BookingConfirmationGroup({
                           </div>
 
                           {/* Payment Style */}
-                          <div>
-                            <div className="flex items-center gap-2 mb-2">
-                              <Banknote className="w-5 h-5 text-slate-600" />
-                              <label className="block text-slate-800 font-sans text-sm font-medium">
-                                Payment Style
-                              </label>
+                          {experience.slug !== "december-in-ghana-castles-to-coastlines" && (
+                            <div>
+                              <div className="flex items-center gap-2 mb-2">
+                                <Banknote className="w-5 h-5 text-slate-600" />
+                                <label className="block text-slate-800 font-sans text-sm font-medium">
+                                  Payment Style
+                                </label>
+                              </div>
+                              <Select
+                                value={formData.paymentStyle}
+                                onValueChange={(value) => handleInputChange("paymentStyle", value)}
+                              >
+                                <SelectTrigger className="w-full bg-white border-slate-200 text-slate-800 h-11">
+                                  <SelectValue placeholder="Select payment style" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="One Time Payment">One Time Payment</SelectItem>
+                                  <SelectItem value="Installment Payment">Installment Payment</SelectItem>
+                                </SelectContent>
+                              </Select>
                             </div>
-                            <Select
-                              value={formData.paymentStyle}
-                              onValueChange={(value) => handleInputChange("paymentStyle", value)}
-                            >
-                              <SelectTrigger className="w-full bg-white border-slate-200 text-slate-800 h-11">
-                                <SelectValue placeholder="Select payment style" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="One Time Payment">One Time Payment</SelectItem>
-                                <SelectItem value="Installment Payment">Installment Payment</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
+                          )}
 
                           {/* Total Cost */}
                           <div className="flex items-end">
                             <div className="flex flex-col gap-1 text-xs text-slate-600 w-full">
                               <div className="text-right">
                                 <div className="text-slate-800 font-sans text-sm">
-                                  {formData.paymentStyle === "Installment Payment" ? "First Payment" : "Total Cost"}
+                                  Total Cost
                                 </div>
-                                <div className="text-2xl sm:text-3xl font-sans text-slate-800">${totalPrice}</div>
-                                {formData.paymentStyle === "Installment Payment" && (
+                                <div className="text-2xl sm:text-3xl font-sans text-slate-800">${formData.paymentStyle === "Installment Payment" && experience.slug !== "december-in-ghana-castles-to-coastlines" ? totalPrice : (parseInt(formData.guests) * (experience.groupPricing?.fullPrice || 0)).toFixed(2)}</div>
+                                {formData.paymentStyle === "Installment Payment" && experience.slug !== "december-in-ghana-castles-to-coastlines" && (
                                   <div className="text-xs text-slate-500 mt-1">
                                     of ${(totalPrice * 3).toFixed(2)} total
                                   </div>
