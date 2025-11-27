@@ -1304,7 +1304,7 @@ export type Experience = {
         isGroupExperience: true,
         totalSlots: 10,
         availableSlots: 10,
-        startDate: "2025-12-28",
+        startDate: "2025-12-26",
         endDate: "2026-01-02",
         groupPricing: {
           fullPrice: 650,
