@@ -840,10 +840,23 @@ export default function BookExperiencePage() {
                       "december-in-ghana-castles-to-coastlines" && (
                         <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-end gap-4 mb-4">
                           <a
-                            href="/iternary.pdf"
+                            href="https://2zeldbyqxdkdtasm.public.blob.vercel-storage.com/Decemeber%20In%20Ghana%20-%20Group%20Itinerary%20"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="w-full sm:w-auto"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              const url = `https://2zeldbyqxdkdtasm.public.blob.vercel-storage.com/Decemeber%20In%20Ghana%20-%20Group%20Itinerary%20`;
+                              console.log('Opening PDF in new tab:', url);
+                              const a = document.createElement('a');
+                              a.href = url;
+                              a.target = '_blank';
+                              a.rel = 'noopener noreferrer';
+                              a.style.display = 'none';
+                              document.body.appendChild(a);
+                              a.click();
+                              document.body.removeChild(a);
+                            }}
                           >
                             <Button
                               type="button"
@@ -931,10 +944,23 @@ export default function BookExperiencePage() {
                                   Book Experience
                                  </Button>
                                 <a
-                                  href="/iternary.pdf"
+                                  href="https://2zeldbyqxdkdtasm.public.blob.vercel-storage.com/Decemeber%20In%20Ghana%20-%20Group%20Itinerary%20"
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="w-auto"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    const url = `https://2zeldbyqxdkdtasm.public.blob.vercel-storage.com/Decemeber%20In%20Ghana%20-%20Group%20Itinerary%20`;
+                                    console.log('Opening PDF in new tab (desktop):', url);
+                                    const a = document.createElement('a');
+                                    a.href = url;
+                                    a.target = '_blank';
+                                    a.rel = 'noopener noreferrer';
+                                    a.style.display = 'none';
+                                    document.body.appendChild(a);
+                                    a.click();
+                                    document.body.removeChild(a);
+                                  }}
                                 >
                                   <Button
                                       type="button"
