@@ -3,132 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light dark">
-    <meta name="supported-color-schemes" content="light dark">
-    <meta name="x-apple-disable-message-reformatting" />
-    <title>New Guest Sign-Up!</title>
-    
-    <!--[if mso]>
-    <noscript>
-        <xml>
-            <o:OfficeDocumentSettings>
-                <o:PixelsPerInch>96</o:PixelsPerInch>
-            </o:OfficeDocumentSettings>
-        </xml>
-    </noscript>
-    <![endif]-->
+    <title>New Reservation</title>
     <style>
-        @import url('https://fonts.cdnfonts.com/css/argent-cf');
-        :root {
-            color-scheme: light dark;
-            supported-color-schemes: light dark;
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background-color: #f5f5f5;
         }
-        @media (prefers-color-scheme: dark) {
-            .light-mode-text { display: none !important; }
-            .dark-mode-text { display: block !important; max-height: none !important; overflow: visible !important; }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
         }
-        [data-ogsc] .light-mode-text { display: none !important; }
-        [data-ogsc] .dark-mode-text { display: block !important; max-height: none !important; overflow: visible !important; }
+        .header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://mailsend-email-assets.mailtrap.io/rrbp4x61dm4re0imflxpayc6gw6s.jpg') center/cover;
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            background-size: cover;
+            background-position: center;
+        }
+        .logo {
+            width: 60px;
+            height: 60px;
+            background-color: #f5f5dc;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #2d3e50;
+        }
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            margin: 0;
+            font-weight: 400;
+            color: #ffffff;
+        }
+        .content {
+            padding: 40px 30px;
+        }
+        .section-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .info-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+        }
+        .info-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000;
+            margin-top: 5px;
+        }
+        .package-details {
+            background-color: #f9f9f9;
+            padding: 0px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .package-item {
+            font-size: 14px;
+            color: #333;
+            margin: 5px 0;
+        }
+        .payment-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .payment-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .payment-text {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+            flex: 1;
+        }
+        .pay-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background-color: #25D366;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 14px;
+            border: none;
+            white-space: nowrap;
+        }
+        .social-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding-top: 25px;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 25px;
+        }
+        .social-follow {
+            font-size: 12px;
+            color: #333;
+            line-height: 1.5;
+            flex: 1;
+        }
+        .social-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #333;
+            font-size: 13px;
+            white-space: nowrap;
+        }
     </style>
 </head>
-<body style="margin: 0; padding: 0; background-color: #ffffff; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
-    <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #ffffff;" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-            <td align="center" style="padding: 0;">
-                <table role="presentation" style="width: 100%; max-width: 600px; border-collapse: collapse;" cellpadding="0" cellspacing="0" border="0">
-                    <!-- Header -->
-                    <tr>
-                        <td style="padding: 0; text-align: center; color: #ffffff; background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://mailsend-email-assets.mailtrap.io/rrbp4x61dm4re0imflxpayc6gw6s.jpg'); background-size: cover; background-position: center;">
-                            <!--[if gte mso 9]>
-                            <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;height:300px;">
-                                <v:fill type="tile" src="https://mailsend-email-assets.mailtrap.io/rrbp4x61dm4re0imflxpayc6gw6s.jpg" color="#32435f" />
-                                <v:fill type="frame" color="black" opacity="50%" />
-                                <v:textbox inset="0,0,0,0">
-                            <![endif]-->
-                            <div style="padding: 40px 20px;">
-                                <img src="https://mailsend-email-assets.mailtrap.io/rrcgzbfds6l6l6vx92kyft4ijkf6.png" alt="VICI Day Party" style="max-width: 80px; margin-bottom: 20px; border-radius: 50%;">
-                                <h1 class="header-text light-mode-text" style="font-size: 32px; margin: 0; font-family: 'Argent CF', serif; color: #32435f;">New guest signed<br>up for the day party</h1>
+<body>
+    <div class="container">
+        <div class="header">
+            <div style="padding: 40px 20px;">
+                <img src="https://mailsend-email-assets.mailtrap.io/rrcgzbfds6l6l6vx92kyft4ijkf6.png" alt="{{brandName}}" style="max-width: 80px; margin-bottom: 20px; border-radius: 50%; display: block; margin-left: auto; margin-right: auto;">
+                <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; color: #ffffff;">VICI DAY PARTY</div>
+                <h1 style="margin:0;">New Reservation!</h1>
+                <p style="margin:12px 0 0; color:#ffffff; font-size:16px; opacity:0.95;">A new reservation just came in for the Vici Day Party.</p>
+            </div>
+        </div>
 
-                                <!-- Dark mode version -->
-                                <div class="dark-mode-text" style="display: none; max-height: 0; overflow: hidden;">
-                                    <h1 class="header-text" style="font-size: 32px; margin: 0; font-family: 'Argent CF', serif; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; mso-color-alt: #ffffff;">New guest signed<br>up for the day party</h1>
-                                </div>
-                            </div>
-                            <!--[if gte mso 9]>
-                                </v:textbox>
-                            </v:rect>
-                            <![endif]-->
-                        </td>
-                    </tr>
-                    <!-- Content -->
-                    <tr>
-                        <td style="padding: 30px; text-align: center; background-color: #ffffff;">
-                            <h2 style="font-size: 18px; color: #32435f; margin-top: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Here are the sign up details:</h2>
-                            <table role="presentation" style="width: 100%; max-width: 500px; margin: 20px auto; background-color: #f3f4f6; border-radius: 8px; border-collapse: collapse;" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="padding: 20px;">
-                                        <table role="presentation" style="width: 100%; border-collapse: collapse;" cellpadding="0" cellspacing="0" border="0">
-                                            <tr style="border-bottom: 1px solid #e5e7eb;">
-                                                <td style="padding: 10px 0; color: #6b7280; font-size: 14px; text-align: left;">NAME</td>
-                                                <td style="padding: 10px 0; color: #111827; font-size: 16px; font-weight: bold; text-align: right;">{{name}}</td>
-                                            </tr>
-                                            <tr style="border-bottom: 1px solid #e5e7eb;">
-                                                <td style="padding: 10px 0; color: #6b7280; font-size: 14px; text-align: left;">EMAIL</td>
-                                                <td style="padding: 10px 0; color: #111827; font-size: 16px; font-weight: bold; text-align: right;">{{email}}</td>
-                                            </tr>
-                                            <tr style="border-bottom: 1px solid #e5e7eb;">
-                                                <td style="padding: 10px 0; color: #6b7280; font-size: 14px; text-align: left;">PHONE</td>
-                                                <td style="padding: 10px 0; color: #111827; font-size: 16px; font-weight: bold; text-align: right;">{{phone}}</td>
-                                            </tr>
-                                            <tr style="border-bottom: 1px solid #e5e7eb;">
-                                                <td style="padding: 10px 0; color: #6b7280; font-size: 14px; text-align: left;">GUESTS</td>
-                                                <td style="padding: 10px 0; color: #111827; font-size: 16px; font-weight: bold; text-align: right;">{{guests}}</td>
-                                            </tr>
-                                            <tr style="border-bottom: 1px solid #e5e7eb;">
-                                                <td style="padding: 10px 0; color: #6b7280; font-size: 14px; text-align: left;">IG HANDLE</td>
-                                                <td style="padding: 10px 0; color: #111827; font-size: 16px; font-weight: bold; text-align: right;">{{igHandle}}</td>
-                                            </tr>
-                                            <tr style="border-bottom: 1px solid #e5e7eb;">
-                                                <td style="padding: 10px 0; color: #6b7280; font-size: 14px; text-align: left;">CHANNEL</td>
-                                                <td style="padding: 10px 0; color: #111827; font-size: 16px; font-weight: bold; text-align: right;">{{channel}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 10px 0; color: #6b7280; font-size: 14px; text-align: left;">NOTES</td>
-                                                <td style="padding: 10px 0; color: #111827; font-size: 16px; font-weight: bold; text-align: right;">{{notes}}</td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <!-- Footer -->
-                    <tr>
-                        <td style="padding: 0; text-align: center; color: #ffffff; background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://mailsend-email-assets.mailtrap.io/g4kp96jdsm8xsgryzszq2kwmyunf.jpg'); background-size: cover; background-position: center;">
-                            <!--[if gte mso 9]>
-                            <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;height:200px;">
-                                <v:fill type="tile" src="https://mailsend-email-assets.mailtrap.io/g4kp96jdsm8xsgryzszq2kwmyunf.jpg" color="#000000" />
-                                <v:fill type="frame" color="black" opacity="50%" />
-                                <v:textbox inset="0,0,0,0">
-                            <![endif]-->
-                            <div style="padding: 40px 20px;">
-                                <h3 class="footer-text light-mode-text" style="font-size: 28px; margin: 0; font-family: 'Argent CF', serif; color: #32435f;">See you under the sun!</h3>
-                                <p class="footer-hashtag light-mode-text" style="font-size: 16px; margin: 10px 0 0; font-weight: bold; color: #32435f;">#VICISUMMERUNCORKED</p>
+        <div class="content">
+            <div class="section-title">Summary</div>
 
-                                <div class="dark-mode-text" style="display: none; max-height: 0; overflow: hidden;">
-                                    <h3 class="footer-text" style="font-size: 28px; margin: 0; font-family: 'Argent CF', serif; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; mso-color-alt: #ffffff;">See you under the sun!</h3>
-                                    <p class="footer-hashtag" style="font-size: 16px; margin: 10px 0 0; font-weight: bold; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; mso-color-alt: #ffffff;">#VICISUMMERUNCORKED</p>
-                                </div>
-                            </div>
-                            <!--[if gte mso 9]>
-                                </v:textbox>
-                            </v:rect>
-                            <![endif]-->
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+            <div class="info-row">
+                <div class="info-label">NAME</div>
+                <div class="info-value">{{name}}</div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">CONTACT</div>
+                <div class="info-value">
+                    <div style="line-height:1.25; text-align:right;">{{phone}}</div>
+                    <div style="line-height:1.25; text-align:right;">{{email}}</div>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">GUESTS</div>
+                <div class="info-value">{{guests}}</div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">IG HANDLE</div>
+                <div class="info-value">{{igHandle}}</div>
+            </div>
+
+            <div class="package-details">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #666;">TABLE PACKAGE</div>
+                    <div style="font-size: 16px; font-weight: 600; color: #000;">{{selectedPackage}}</div>
+                </div>
+            
+            </div>
+
+            <div class="payment-section">
+                <div class="info-row" style="border-bottom: none; padding: 12px 0 20px 0;">
+                    <div class="info-label">SPECIAL NOTES</div>
+                    <div class="info-value" style="text-align: right; white-space: pre-wrap; font-size: 15px; font-weight: 400; color: #111827;">{{notes}}</div>
+                </div>
+            </div>
+
+            <div style="height:1px; background-color:#d9cdb8; margin:16px 0;"></div>
+
+            <div class="payment-row" style="align-items: center;">
+                <div class="payment-text" style="text-align: left;">Confirm payment with <strong>Vine</strong>.</div>
+                    <a href="{{paymentUrl}}" class="pay-button" target="_blank" rel="noopener noreferrer" style="margin-left: 16px; display:inline-flex; align-items:center;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:8px;">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="currentColor"/>
+                        </svg>
+                            Follow up with Vine
+                        </a>
+                </div>
+        </div>
+    </div>
 </body>
 </html>

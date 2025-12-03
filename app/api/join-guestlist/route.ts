@@ -11,12 +11,12 @@ export async function POST(req: NextRequest) {
       phone,
       guests,
       instagramHandle,
-      howHeard,
+      selectedPackage,
       specialRequests,
     } = await req.json();
 
-    if (!fullName || !email || !phone || !guests) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    if (!fullName || !email || !phone || !guests || !selectedPackage) {
+      return NextResponse.json({ error: 'Missing required fields: fullName, email, phone, guests and selectedPackage are required' }, { status: 400 });
     }
 
     const auth = new google.auth.GoogleAuth({
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
       phone,
       guests,
       instagramHandle || '',
-      howHeard || '',
+      selectedPackage,
       specialRequests || '',
     ];
 
@@ -60,8 +60,9 @@ export async function POST(req: NextRequest) {
         templateVariables: {
           name: fullName,
           guests: guests,
-          date: 'Saturday, 15th November',
+          date: 'Saturday, 20th December',
           venue: 'Vine Accra',
+          selectedPackage: selectedPackage,
         },
       });
 
@@ -81,8 +82,8 @@ export async function POST(req: NextRequest) {
             email: email,
             phone: phone,
             guests: guests,
+            selectedPackage: selectedPackage,
             igHandle: instagramHandle || 'N/A',
-            channel: howHeard || 'N/A',
             notes: specialRequests || '(Empty)',
           },
         });

@@ -613,7 +613,7 @@ export default function BookExperiencePage() {
                 className="w-5 h-5"
               />
               <span className="tracking-widest">
-                Table reservations and guestlist only
+                Table reservations only
               </span>
             </div>
           )}
@@ -633,7 +633,7 @@ export default function BookExperiencePage() {
                 className="w-5 h-5"
               />
               <span className="tracking-widest">
-                Table reservations and guestlist only
+                Table reservations only
               </span>
             </div>
           )}
@@ -836,6 +836,14 @@ export default function BookExperiencePage() {
                           </div>
                         </div>
                       )}
+                      {experience.slug === "vici-summer-uncorked" && (
+                        <Button
+                          className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
+                          onClick={() => setIsGuestlistModalOpen(true)}
+                        >
+                          Reserve a Table
+                        </Button>
+                      )}
                       {experience.slug ===
                       "december-in-ghana-castles-to-coastlines" && (
                         <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-end gap-4 mb-4">
@@ -882,9 +890,9 @@ export default function BookExperiencePage() {
                         <div className="flex justify-end">
                           <Button
                             className="bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
-                            onClick={() => setIsGuestlistClosedModalOpen(true)}
+                            onClick={() => setIsGuestlistModalOpen(true)}
                           >
-                            Join the Guestlist
+                            Reserve a Table
                           </Button>
                         </div>
                       ) : (
@@ -974,9 +982,9 @@ export default function BookExperiencePage() {
                             ) : experience.slug === "vici-summer-uncorked" ? (
                               <Button
                                 className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
-                                onClick={() => setIsGuestlistClosedModalOpen(true)}
+                                onClick={() => setIsGuestlistModalOpen(true)}
                               >
-                                Join the Guestlist
+                                Reserve a Table
                               </Button>
                             ) : (
                               <Button
@@ -1065,9 +1073,9 @@ export default function BookExperiencePage() {
                     ) : experience.slug === "vici-summer-uncorked" ? (
                       <Button
                         className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
-                        onClick={() => setIsGuestlistClosedModalOpen(true)}
+                        onClick={() => setIsGuestlistModalOpen(true)}
                       >
-                        Join the Guestlist
+                        Reserve a Table
                       </Button>
                     ) : (
                       <>
@@ -1166,9 +1174,9 @@ export default function BookExperiencePage() {
                         ) : experience.slug === "vici-summer-uncorked" ? (
                           <Button
                             className="w-full sm:w-auto bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
-                            onClick={() => setIsGuestlistClosedModalOpen(true)}
+                            onClick={() => setIsGuestlistModalOpen(true)}
                           >
-                            Join the Guestlist
+                            Reserve a Table
                           </Button>
                         ) : (
                           <>
@@ -1504,9 +1512,9 @@ export default function BookExperiencePage() {
           {experience.slug === "vici-summer-uncorked" ? (
             <Button
               className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"
-              onClick={() => setIsGuestlistClosedModalOpen(true)}
+              onClick={() => setIsGuestlistModalOpen(true)}
             >
-              Join the Guestlist
+              Reserve a Table
             </Button>
           ) : experience.slug === "a-date-with-fashion" ? (
             <Button
