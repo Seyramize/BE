@@ -53,16 +53,41 @@ export async function POST(req: NextRequest) {
     });
 
     try {
+      // Map selected package to its includes so templates can show details
+      const packageMap: Record<string, string[]> = {
+        '10K': ['Veuve Rich x2', 'Agavita Reposado x1', 'Food Platter x1'],
+        '15K': ['Veuve Rich x3', 'Agavita Reposado x1', 'Food Platter x1', 'Juice Pitcher x1', 'Shisha x1'],
+        '20K': ['Veuve Rich x4', 'Casamigos x1', 'Food Platter x2', 'Juice Pitcher x1', 'Shisha x2'],
+        '30K': ['Ace Of Spades x1', '1942 Tequila x1', 'Veuve Rich x2', 'Food Platter x2', 'Juice Pitcher x2', 'Shisha x3'],
+      };
+
+      // Build a right-aligned block of lines (no bullets) so items align with the package amount
+      const packageItems = (packageMap[selectedPackage] || []);
+      let packageIncludesHtml = '';
+      if (packageItems.length > 0) {
+        packageIncludesHtml = packageItems
+          .map(i => `<div style="text-align:right;margin:6px 0;">${i}</div>`) 
+          .join('');
+        packageIncludesHtml = `<div style="margin-top:8px;">${packageIncludesHtml}</div>`;
+      } else {
+        packageIncludesHtml = '<div style="color:#666;">Not specified</div>';
+      }
+
       // Send confirmation email to the client
       await sendEmail({
         to: email,
         templateUuid: '9eec04b7-7793-49f6-8e35-32ac2fd1e9cb',
         templateVariables: {
-          name: fullName,
-          guests: guests,
+          name: fullName || '(No name)',
+          guests: guests || '(0)',
           date: 'Saturday, 20th December',
           venue: 'Vine Accra',
-          selectedPackage: selectedPackage,
+          selectedPackage: selectedPackage || '(None)',
+          // Provide a pre-encoded version of the package for use in URLs
+          selectedPackageEncoded: encodeURIComponent(selectedPackage || '(None)'),
+          packageIncludes: packageIncludesHtml,
+          brandName: 'VIci Day Party',
+          paymentUrl: process.env.PAYMENT_URL || '#',
         },
       });
 
@@ -78,13 +103,17 @@ export async function POST(req: NextRequest) {
           to: teamEmail,
           templateUuid: 'a780781f-f8ff-4400-9750-fa5a66e5489a',
           templateVariables: {
-            name: fullName,
-            email: email,
-            phone: phone,
-            guests: guests,
-            selectedPackage: selectedPackage,
+            name: fullName || '(No name)',
+            email: email || '(No email)',
+            phone: phone || '(No phone)',
+            guests: guests || '(0)',
+            selectedPackage: selectedPackage || '(None)',
+            selectedPackageEncoded: encodeURIComponent(selectedPackage || '(None)'),
+            packageIncludes: packageIncludesHtml,
             igHandle: instagramHandle || 'N/A',
             notes: specialRequests || '(Empty)',
+            brandName: 'VIci Day Party',
+            paymentUrl: process.env.PAYMENT_URL || '#',
           },
         });
       }

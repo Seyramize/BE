@@ -319,18 +319,18 @@ export type Experience = {
       id: 5,
       slug: "vici-summer-uncorked",
       defaultContent: {
-        title: "Vici Summer Uncorked",
-        shortDescription: "Vici Summer Uncorked is Accra's signature premium day party, a vibrant celebration of rhythm, taste, and connection.",
+        title: "VIci Day Party",
+        shortDescription: "VIci Day Party is Accra's signature premium day party, a vibrant celebration of rhythm, taste, and connection.",
         image: "/images/experiences/vici-sum-uncork/cover.jpg?height=400&width=300&text=Accra+City+Tour",
         location: "Greater Accra, Ghana",
       },
       expandedContent: {
-        title: "Vici Summer Uncorked",
+        title: "VIci Day Party",
         fullDescription: "Explore Ghana's capital through its history, culture, and daily life — from monuments and markets to museums and makers. A full immersion into the rhythm of the city.",
         image: "/placeholder.svg?height=500&width=400&text=Accra+Skyline+Modern",
       },
       bookingContent: {
-        title: "Vici Summer Uncorked",
+        title: "VIci Day Party",
         subtitle: "20TH DEC, 2025",
         duration: "1 DAY",
         destinations: "1 DESTINATION",
@@ -355,7 +355,7 @@ export type Experience = {
           "/images/experiences/vici-sum-uncork/Gallery/15.jpg?height=400&width=300&text=Accra+City+Tour",
           "/images/experiences/vici-sum-uncork/Gallery/16.jpg?height=400&width=300&text=Accra+City+Tour",
         ],
-        overview: "There's something timeless about sunshine, sound, and good champagne. Vici Summer Uncorked is Accra's signature premium day party, a vibrant celebration of rhythm, taste, and connection. Hosted in collaboration with Beyond Accra, Vine Accra, and Blaqcoffe, this curated daytime experience seamlessly blends music, bubbles, and bold summer energy into one unforgettable experience. From noon till sunset, expect effortless elegance, endless laughter, and moments made golden.",
+        overview: "There's something timeless about sunshine, sound, and good champagne. VIci Day Party is Accra's signature premium day party, a vibrant celebration of rhythm, taste, and connection. Hosted in collaboration with Beyond Accra, Vine Accra, and Blaqcoffe, this curated daytime experience seamlessly blends music, bubbles, and bold summer energy into one unforgettable experience. From noon till sunset, expect effortless elegance, endless laughter, and moments made golden.",
         highlights: [
           "Live music and DJ sets",
           "Premium pours",

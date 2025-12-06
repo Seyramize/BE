@@ -18,7 +18,7 @@
             background-color: #ffffff;
         }
         .header {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://mailsend-email-assets.mailtrap.io/rrbp4x61dm4re0imflxpayc6gw6s.jpg') center/cover;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://mailsend-email-assets.mailtrap.io/65qmnwxx8p83bpoqi5e1uwtyw0q3.jpg') center/cover;
             padding: 40px 20px;
             text-align: center;
             color: white;
@@ -54,25 +54,33 @@
             margin-bottom: 20px;
             color: #333;
         }
+        /* Use table-cell layout for info rows to improve email client compatibility */
         .info-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            display: table;
             width: 100%;
             padding: 15px 0;
             border-bottom: 1px solid #e0e0e0;
+            min-height: 48px;
         }
         .info-label {
+            display: table-cell;
+            vertical-align: middle;
             font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #666;
+            width: 35%;
+            padding-right: 12px;
         }
         .info-value {
+            display: table-cell;
+            vertical-align: middle;
             font-size: 16px;
             font-weight: 600;
             color: #000;
-            margin-top: 5px;
+            margin-top: 0;
+            text-align: right;
+            width: 65%;
         }
         .package-details {
             background-color: #f9f9f9;
@@ -119,23 +127,28 @@
             border: none;
             white-space: nowrap;
         }
+        /* Use table layout for the social row to improve email client compatibility */
         .social-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
+            display: table;
+            width: 100%;
             padding-top: 25px;
             border-top: 1px solid #e0e0e0;
             margin-top: 25px;
+        }
+        .social-follow,
+        .social-button-cell {
+            display: table-cell;
+            vertical-align: middle;
+            padding: 6px 0;
         }
         .social-follow {
             font-size: 12px;
             color: #333;
             line-height: 1.5;
-            flex: 1;
+            padding-right: 12px;
         }
         .social-button {
-            display: inline-flex;
+            display: inline-block;
             align-items: center;
             gap: 6px;
             padding: 8px 16px;
@@ -153,7 +166,7 @@
         <div class="header">
             <div style="padding: 40px 20px;">
                 <img src="https://mailsend-email-assets.mailtrap.io/rrcgzbfds6l6l6vx92kyft4ijkf6.png" alt="{{brandName}}" style="max-width: 80px; margin-bottom: 20px; border-radius: 50%; display: block; margin-left: auto; margin-right: auto;">
-                <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; color: #ffffff;">VICI DAY PARTY</div>
+                <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; color: #ffffff;">VIci Day Party</div>
                 <h1 style="margin:0;">Reservation<br>Complete!</h1>
             </div>
         </div>
@@ -163,27 +176,34 @@
 
             <div class="info-row">
                 <div class="info-label">NAME</div>
-                <div class="info-value">{{name}}</div>
+                <div class="info-value"><span style="display:block;min-height:20px;">{{name}}</span></div>
             </div>
 
             <div class="info-row">
                 <div class="info-label">GUESTS</div>
-                <div class="info-value">{{guests}}</div>
+                <div class="info-value"><span style="display:block;min-height:20px;">{{guests}}</span></div>
             </div>
 
             <div class="package-details">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #666;">TABLE PACKAGE</div>
-                    <div style="font-size: 16px; font-weight: 600; color: #000;">{{selectedPackage}}</div>
-                </div>
-            
+                <table role="presentation" width="100%" style="border-collapse:collapse;">
+                    <tr>
+                        <td style="vertical-align:top; padding:6px 10px; font-size:12px; text-transform:uppercase; letter-spacing:1px; color:#666;">TABLE PACKAGE</td>
+                        <td style="vertical-align:top; padding:6px 10px; font-size:16px; font-weight:600; color:#000; text-align:right;">{{selectedPackage}}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:4px 10px;">&nbsp;</td>
+                        <td style="padding:4px 10px; text-align:right; font-size:14px; color:#333; vertical-align:top; min-height:72px;">
+                            {{{packageIncludes}}}
+                        </td>
+                    </tr>
+                </table>
             </div>
 
             <div class="payment-section">
                 <div class="section-title">Payment</div>
                 <div class="payment-row">
                     <div class="payment-text">Payments are processed by <strong>Vine</strong>. Kindly tap the button to make payment.</div>
-                    <a href="{{paymentUrl}}" class="pay-button" target="_blank" rel="noopener noreferrer">
+                    <a href="https://wa.me/233558450253?text=Hi%2C%20I%20have%20reserved%20a%20{{selectedPackageEncoded}}%20table%20for%20the%20Vici%20Day%20Party.%20I%20want%20to%20make%20payment" class="pay-button" target="_blank" rel="noopener noreferrer">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="currentColor"/>
                         </svg>
@@ -195,14 +215,16 @@
                     <div class="social-follow">
                         Follow Vici to stay on top of the party
                     </div>
-                    <a href="https://www.instagram.com/vicidayparty?igsh=MXB1aThreDVmc3o4Zg==" class="social-button" target="_blank" rel="noopener noreferrer">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/>
-                            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
-                            <circle cx="18" cy="6" r="1" fill="currentColor"/>
-                        </svg>
-                        vicidayparty
-                    </a>
+                    <div class="social-button-cell" style="text-align:right;">
+                        <a href="https://www.instagram.com/vicidayparty?igsh=MXB1aThreDVmc3o4Zg==" class="social-button" target="_blank" rel="noopener noreferrer">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:8px;">
+                                <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="18" cy="6" r="1" fill="currentColor"/>
+                            </svg>
+                            vicidayparty
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
