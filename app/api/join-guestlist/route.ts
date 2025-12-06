@@ -56,9 +56,9 @@ export async function POST(req: NextRequest) {
       // Map selected package to its includes so templates can show details
       const packageMap: Record<string, string[]> = {
         '10K': ['Veuve Rich x2', 'Agavita Reposado x1', 'Food Platter x1'],
-        '15K': ['Veuve Rich x3', 'Agavita Reposado x1', 'Food Platter x1', 'Juice Pitcher x1', 'Shisha x1'],
-        '20K': ['Veuve Rich x4', 'Casamigos x1', 'Food Platter x2', 'Juice Pitcher x1', 'Shisha x2'],
-        '30K': ['Ace Of Spades x1', '1942 Tequila x1', 'Veuve Rich x2', 'Food Platter x2', 'Juice Pitcher x2', 'Shisha x3'],
+        '15K': ['Veuve Rich x3', 'Agavita Reposado x1', 'Food Platter x1', 'Juice Pitcher x1'],
+        '20K': ['Veuve Rich x4', 'Casamigos x1', 'Food Platter x2', 'Juice Pitcher x1'],
+        '30K': ['Ace Of Spades x1', '1942 Tequila x1', 'Veuve Rich x2', 'Food Platter x2', 'Juice Pitcher x2'],
       };
 
       // Build a right-aligned block of lines (no bullets) so items align with the package amount

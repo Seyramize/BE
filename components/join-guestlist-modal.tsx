@@ -131,9 +131,9 @@ export function JoinGuestlistModal({
   const getPackageIncludes = (packageName: string): string[] => {
     const packages: Record<string, string[]> = {
       '10K': ['Veuve Rich x2', 'Agavita Reposado x1', 'Food Platter x1'],
-      '15K': ['Veuve Rich x3', 'Agavita Reposado x1', 'Food Platter x1', 'Juice Pitcher x1', 'Shisha x1'],
-      '20K': ['Veuve Rich x4', 'Casamigos x1', 'Food Platter x2', 'Juice Pitcher x1', 'Shisha x2'],
-      '30K': ['Ace Of Spades x1', '1942 Tequila x1', 'Veuve Rich x2', 'Food Platter x2', 'Juice Pitcher x2', 'Shisha x3']
+      '15K': ['Veuve Rich x3', 'Agavita Reposado x1', 'Food Platter x1', 'Juice Pitcher x1'],
+      '20K': ['Veuve Rich x4', 'Casamigos x1', 'Food Platter x2', 'Juice Pitcher x1'],
+      '30K': ['Ace Of Spades x1', '1942 Tequila x1', 'Veuve Rich x2', 'Food Platter x2', 'Juice Pitcher x2']
     };
     return packages[packageName] || [];
   };
@@ -329,7 +329,6 @@ export function JoinGuestlistModal({
                               <p className="text-xs">Agavita Reposado x1</p>
                               <p className="text-xs">Food Platter x1</p>
                               <p className="text-xs">Juice Pitcher x1</p>
-                              <p className="text-xs">Shisha x1</p>
                             </div>
                           </div>
                         </button>
@@ -368,7 +367,6 @@ export function JoinGuestlistModal({
                               <p className="text-xs">Casamigos x1</p>
                               <p className="text-xs">Food Platter x2</p>
                               <p className="text-xs">Juice Pitcher x1</p>
-                              <p className="text-xs">Shisha x2</p>
                             </div>
                           </div>
                         </button>
@@ -408,7 +406,6 @@ export function JoinGuestlistModal({
                               <p className="text-xs">Veuve Rich x2</p>
                               <p className="text-xs">Food Platter x2</p>
                               <p className="text-xs">Juice Pitcher x2</p>
-                              <p className="text-xs">Shisha x3</p>
                             </div>
                           </div>
                         </button>
