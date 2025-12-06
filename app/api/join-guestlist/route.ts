@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
           // Provide a pre-encoded version of the package for use in URLs
           selectedPackageEncoded: encodeURIComponent(selectedPackage || '(None)'),
           packageIncludes: packageIncludesHtml,
-          brandName: 'VIci Day Party',
+          brandName: 'Vici Day Party',
           paymentUrl: process.env.PAYMENT_URL || '#',
         },
       });
@@ -112,7 +112,7 @@ export async function POST(req: NextRequest) {
             packageIncludes: packageIncludesHtml,
             igHandle: instagramHandle || 'N/A',
             notes: specialRequests || '(Empty)',
-            brandName: 'VIci Day Party',
+            brandName: 'Vici Day Party',
             paymentUrl: process.env.PAYMENT_URL || '#',
           },
         });

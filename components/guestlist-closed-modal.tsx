@@ -30,7 +30,7 @@ export function GuestlistClosedModal({
               Guest List Closed
             </h2>
             <p className="text-slate-600 mb-4">
-              The guest list for VIci Day Party is now closed.
+              The guest list for Vici Day Party is now closed.
             </p>
             <p className="text-slate-600 mb-4">
               Thank you for the incredible response.

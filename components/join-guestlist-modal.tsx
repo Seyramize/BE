@@ -172,7 +172,7 @@ export function JoinGuestlistModal({
                 <div className="text-center flex flex-col items-center justify-center h-full">
                   <h2 className="text-3xl font-serif mb-4">You're in! 🥂</h2>
                   <p className="text-slate-600 mb-6 max-w-md">
-                    Thank you for joining the VIci Day Party guest list.
+                    Thank you for joining the Vici Day Party guest list.
                     <br />
                     <br />
                     We'll send your confirmation and event details shortly, get
@@ -192,7 +192,7 @@ export function JoinGuestlistModal({
                   </button>
                   <h2 className="text-2xl font-serif mb-4">Reserve a Table</h2>
                   <p className="text-slate-600 mb-6">
-                    Submit your details to reserve a table at VIci Day Party.
+                    Submit your details to reserve a table at Vici Day Party.
                   </p>
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
