@@ -848,13 +848,13 @@ export default function BookExperiencePage() {
                       "december-in-ghana-castles-to-coastlines" && (
                         <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-end gap-4 mb-4">
                           <a
-                            href="https://2zeldbyqxdkdtasm.public.blob.vercel-storage.com/Decemeber%20In%20Ghana%20-%20Group%20Itinerary%20"
+                            href="https://2zeldbyqxdkdtasm.public.blob.vercel-storage.com/December%20in%20Ghana%20-%20Group%20Itinerary.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="w-full sm:w-auto"
                             onClick={(e) => {
                               e.preventDefault();
-                              const url = `https://2zeldbyqxdkdtasm.public.blob.vercel-storage.com/Decemeber%20In%20Ghana%20-%20Group%20Itinerary%20`;
+                              const url = `https://2zeldbyqxdkdtasm.public.blob.vercel-storage.com/December%20in%20Ghana%20-%20Group%20Itinerary.pdf`;
                               console.log('Opening PDF in new tab:', url);
                               const a = document.createElement('a');
                               a.href = url;
