@@ -746,7 +746,7 @@ export default function BookExperiencePage() {
                 {bookingContent.whatsPriceless && (
                   <div className="mt-8">
                     <h2 className="text-sm sm:text-lg font-sans font-bold mb-2 md:mb-2 uppercase tracking-widest md:tracking-[0.2em] text-slate-800">
-                      What's Priceless
+                      The Experience
                     </h2>
                     <p className="text-slate-700 font-sans font-normal leading-relaxed text-base sm:text-xl">
                       {bookingContent.whatsPriceless}
