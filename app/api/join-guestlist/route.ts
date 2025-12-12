@@ -95,6 +95,8 @@ export async function POST(req: NextRequest) {
       const teamEmails = [
         'noah@beyondaccra.com',
         'carl@beyondaccra.com',
+        'rebecca@lifestyleexp.com',
+        'ashish@lifestyleexp.com',
         'concierge@experiencesbybeyond.com'
       ];
 
