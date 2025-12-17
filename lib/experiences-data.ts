@@ -61,8 +61,11 @@ export type Experience = {
     id: string
     title: string
     price: number
-    overview: string
-    highlights: string[]
+    highlights?: string[]
+    overview?: string
+    included?: string []
+    notIncluded?: string []
+    
   }
   
   export const experiences: Experience[] = [
@@ -708,18 +711,18 @@ export type Experience = {
       id: 11,
       slug: "fairafric-farm-to-chocolate-tour",
       defaultContent: {
-        title: "FairAfric Farm to Chocolate Tour",
+        title: "Fairafric Farm to Chocolate Tour",
         shortDescription: "Located in Suhum in Ghana's Eastern Region, Fairafric offers a unique bean-to-bar chocolate-making experience that blends education, sustainability, and delicious indulgence.",
         image: "/images/experiences/fair-afric/cover.jpg?height=400&width=300&text=Ashanti+Cultural+Tour",
         location: "Greater Accra, Ghana",
       },
       expandedContent: {
-        title: "FairAfric Farm to Chocolate Tour",
+        title: "Fairafric Farm to Chocolate Tour",
         fullDescription: "Craft your own artisanal chocolate with Ghana's finest cocoa, then relax into a massage at Resense Spa. A luxurious blend of indulgence and calm.",
         image: "/placeholder.svg?height=500&width=400&text=Ashanti+Palace+Golden",
       },
       bookingContent: {
-        title: "FairAfric Farm to Chocolate Tour",
+        title: "Fairafric Farm to Chocolate Tour",
         subtitle: "From bean to bar, discover the secrets of Ghanaian chocolate, then treat yourself to a world-class spa experience.",
         duration: "1 DAY",
         destinations: "2 DESTINATIONS",
@@ -733,7 +736,7 @@ export type Experience = {
           "/images/experiences/fair-afric/Gallery/5.jpg?height=400&width=300&text=Chocolate+Workshop",
           "/images/experiences/fair-afric/Gallery/6.jpg?height=400&width=300&text=Chocolate+Workshop",
         ],
-        overview: "Located in Suhum in Ghana's Eastern Region, Fairafric offers a unique bean-to-bar chocolate-making experience that blends education, sustainability, and delicious indulgence. Guests are guided through the factory where they see each step of the chocolate-making process from sorting and roasting cocoa beans to tempering and packaging bars. Participants get the chance to make their chocolate bars, selecting ingredients like nuts, dried fruits, or spices to customize their creations. Visitors also get to enjoy a tasting flight of different chocolate varieties from creamy milk chocolate to intense dark options. This experience also includes lunch.",
+        overview: "Located in Suhum in Ghana's Eastern Region, fairafric offers a unique bean-to-bar chocolate-making experience that blends education, sustainability, and delicious indulgence. Guests are guided through the factory where they see each step of the chocolate-making process from sorting and roasting cocoa beans to tempering and packaging bars. Participants get the chance to make their chocolate bars, selecting ingredients like nuts, dried fruits, or spices to customize their creations. Visitors also get to enjoy a tasting flight of different chocolate varieties from creamy milk chocolate to intense dark options. This experience also includes lunch.",
         highlights: [
           "Authentic, farm-to-factory experience",
           "Interactive and educational",
@@ -859,7 +862,70 @@ export type Experience = {
           "Dedicated chaperone and access to resident guides",
           "Complimentary bites and drinks",
           "Beyond Experiences Essentials™ Bag",
-        ]
+        ],
+        variants: [
+          {
+            id: "full-experience",
+            title: "Art After Dark: Full Experience",
+            price: 560,
+            overview: "Art After Dark (AAD), redefines how audiences engage with contemporary art. Instead of traditional gallery spaces, AAD unfolds in lounges, bars, and intimate venues, creating a relaxed yet vibrant atmosphere where art, performance, and community meet. Each edition is curated as either a group exhibition or a focused solo presentation, often interwoven with performance, music, food, and drink. The result is a cultural happening that encourages dialogue, discovery, and deeper connection between artists and audiences.",
+            highlights: [
+              "Immersive exhibitions reimagined in unconventional spaces",
+              "Occasional live performance elements, such as spoken word or movement art",
+              "A social, nightlife-inspired atmosphere that breaks the mold of traditional galleries",
+              "Curated soundscapes with DJs enhancing the visual and performative works",
+              "Culinary and beverage pairings that add to the sense of community and exchange",
+            ],
+            included: [
+              "Private transportation including fuel",
+              "Dedicated chaperone and access to resident guides",
+              "Complimentary bites and drinks",
+              "Beyond Experiences Essentials™ Bag",
+            ],
+          },
+          {
+            id: "art-after-dark-elevated",
+            title: "Art After Dark Elevated",
+            price: 185,
+            overview: "Art After Dark (AAD), redefines how audiences engage with contemporary art. Instead of traditional gallery spaces, AAD unfolds in lounges, bars, and intimate venues, creating a relaxed yet vibrant atmosphere where art, performance, and community meet. Each edition is curated as either a group exhibition or a focused solo presentation, often interwoven with performance, music, food, and drink. The result is a cultural happening that encourages dialogue, discovery, and deeper connection between artists and audiences.",
+            highlights: [
+              "Immersive exhibitions reimagined in unconventional spaces",
+              "Occasional live performance elements, such as spoken word or movement art",
+              "A social, nightlife-inspired atmosphere that breaks the mold of traditional galleries",
+              "Curated soundscapes with DJs enhancing the visual and performative works",
+              "Culinary and beverage pairings that add to the sense of community and exchange",
+            ],
+            included: [
+              "Access to resident guides",
+            ],
+            notIncluded: [
+              "Chaperone services (available on request)",
+              "Drinks, snacks, coffee and water",
+              "Transporatation services (available on request)"
+            ],
+          },
+          {
+            id: "art-after-dark-premium",
+            title: "Art After Dark Premium",
+            price: 225,
+            overview: "Art After Dark (AAD), redefines how audiences engage with contemporary art. Instead of traditional gallery spaces, AAD unfolds in lounges, bars, and intimate venues, creating a relaxed yet vibrant atmosphere where art, performance, and community meet. Each edition is curated as either a group exhibition or a focused solo presentation, often interwoven with performance, music, food, and drink. The result is a cultural happening that encourages dialogue, discovery, and deeper connection between artists and audiences.",
+            highlights: [
+              "Immersive exhibitions reimagined in unconventional spaces",
+              "Occasional live performance elements, such as spoken word or movement art",
+              "A social, nightlife-inspired atmosphere that breaks the mold of traditional galleries",
+              "Curated soundscapes with DJs enhancing the visual and performative works",
+              "Culinary and beverage pairings that add to the sense of community and exchange",
+            ],included: [
+              "Access to resident guides",
+            ],
+            notIncluded: [
+              "Chaperone services (available on request)",
+              "Drinks, snacks, coffee and water",
+              "Transporatation services (available on request)"
+            ],
+          },
+        ],
+        
       },
       tags: ["Priceless", "1 PAX"]
     },

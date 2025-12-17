@@ -781,7 +781,7 @@ export default function BookExperiencePage() {
                   Highlights
                 </h2>
                 <div className="space-y-4">
-                  {currentBookingContent.highlights.map((highlight, index) => (
+                  {currentBookingContent?.highlights?.map((highlight, index) => (
                     <div
                       key={index}
                       className="flex items-start gap-3 border-b border-black pb-3"
@@ -1018,7 +1018,7 @@ export default function BookExperiencePage() {
                             <SelectValue placeholder="1" />
                           </SelectTrigger>
                           <SelectContent>
-                            {[...Array(experience.slug === "a-date-with-fashion" || experience.slug === "afrofuture" ? 10 : 6)].map((_, i) => (
+                            {[...Array(experience.slug === "a-date-with-fashion" || experience.slug === "afrofuture" || experience.slug === "art-after-dark" ? 10 : 6)].map((_, i) => (
                               <SelectItem key={i + 1} value={`${i + 1}`}>
                                 {i + 1}
                               </SelectItem>
@@ -1070,7 +1070,38 @@ export default function BookExperiencePage() {
                           Enquire for Availability
                         </Button>
                       </>
-                    ) : experience.slug === "vici-summer-uncorked" ? (
+                  
+                ) : experience.slug === "art-after-dark" ? (
+                  <>
+                    {bookingContent.variants && (
+                      <Select
+                        onValueChange={handleVariantChange}
+                        defaultValue={bookingContent.variants[0]?.id}
+                      >
+                        <SelectTrigger className="w-full bg-champagne text-black border-gray-800 rounded-lg px-4 py-3 text-sm justify-between">
+                          <SelectValue placeholder="Select a package" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {bookingContent.variants.map((variant) => (
+                            <SelectItem
+                              key={variant.id}
+                              value={variant.id}
+                            >
+                              {variant.title}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                    <Button
+                      className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
+                      onClick={() => setIsBookingModalOpen(true)}
+                    >
+                      Book this experience
+                    </Button>
+                  </>
+                  
+                  ) : experience.slug === "vici-summer-uncorked" ? (
                       <Button
                         className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
                         onClick={() => setIsGuestlistModalOpen(true)}
@@ -1121,7 +1152,7 @@ export default function BookExperiencePage() {
                             <SelectValue placeholder="1" />
                           </SelectTrigger>
                           <SelectContent>
-                            {[...Array(experience.slug === "a-date-with-fashion" || experience.slug === "afrofuture" ? 10 : 6)].map((_, i) => (
+                            {[...Array(experience.slug === "a-date-with-fashion" || experience.slug === "afrofuture" || experience.slug === "art-after-dark" ? 10 : 6)].map((_, i) => (
                               <SelectItem key={i + 1} value={`${i + 1}`}>
                                 {i + 1}
                               </SelectItem>
@@ -1171,6 +1202,39 @@ export default function BookExperiencePage() {
                               Enquire for Availability
                             </Button>
                           </div>
+                          
+                        ) : experience.slug === "art-after-dark" ? (
+                          <div className="flex items-center gap-2">
+                            {bookingContent.variants && (
+                              <Select
+                                onValueChange={handleVariantChange}
+                                defaultValue={bookingContent.variants[0]?.id}
+                              >
+                                <SelectTrigger className="w-auto bg-[#EFE6DA] text-black border-gray-800 rounded-sm px-3 py-2 text-sm justify-between gap-x-5">
+                                  <SelectValue placeholder="Select a package" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {bookingContent.variants.map(
+                                    (variant) => (
+                                      <SelectItem
+                                        key={variant.id}
+                                        value={variant.id}
+                                      >
+                                        {variant.title}
+                                      </SelectItem>
+                                    )
+                                  )}
+                                </SelectContent>
+                              </Select>
+                            )}
+                            <Button
+                              className="w-full sm:w-auto bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
+                              onClick={() => setIsBookingModalOpen(true)}
+                            >
+                              Book this experience
+                            </Button>
+                          </div>
+                        
                         ) : experience.slug === "vici-summer-uncorked" ? (
                           <Button
                             className="w-full sm:w-auto bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
@@ -1216,7 +1280,7 @@ export default function BookExperiencePage() {
                     What's Included
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4">
-                    {bookingContent.included.map((item, index) => {
+                    {(selectedVariant?.included || bookingContent.included).map((item, index) => {
                       const Icon = includedIcons[item] || Check;
                       return (
                         <div
@@ -1236,6 +1300,32 @@ export default function BookExperiencePage() {
                     })}
                   </div>
                 </div>
+                )}
+
+                {/* What's Not Included - Art After Dark variants (except full experience) */}
+                {experience.slug === "art-after-dark" && selectedVariant?.notIncluded && selectedVariant.notIncluded.length > 0 && (
+                  <div>
+                    <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
+                      What's Not Included
+                    </h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4">
+                      {selectedVariant.notIncluded.map((item, index) => (
+                        <div
+                          key={index}
+                          className={`flex items-center gap-3 border-b border-black pb-3 ${index === 0 ? "border-t border-black pt-3" : ""
+                            } ${index === 1
+                              ? "sm:border-t sm:border-black sm:pt-3"
+                              : ""
+                            }`}
+                        >
+                          <span className="w-4 h-4 text-slate-600 flex-shrink-0 text-center">×</span>
+                          <span className="text-slate-700 font-sans text-sm sm:text-base">
+                            {item}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 )}
 
                 {/* Dress Code */}
@@ -1522,6 +1612,13 @@ export default function BookExperiencePage() {
               onClick={() => setIsEnquireModalOpen(true)}
             >
               Enquire for Availability
+            </Button>
+          ) : experience.slug === "art-after-dark" ? (
+            <Button
+              className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"
+              onClick={() => setIsBookingModalOpen(true)}
+            >
+              Book this experience
             </Button>
           ) : (
             <Button
