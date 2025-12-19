@@ -10,9 +10,14 @@ import { BookingFormModal } from "@/components/booking-form-modal";
 import { GalleryModal } from "@/components/gallery-modal";
 import { EnquireAvailabilityModal } from "@/components/enquire-availability-modal";
 import { BookingConfirmationGroup } from "@/components/booking-confirmation-group";
+import { JoinGuestlistReservationModal } from "@/components/join-guestlist-reservation-modal";
 import { JoinGuestlistModal } from "@/components/join-guestlist-modal";
 import { GuestlistClosedModal } from "@/components/guestlist-closed-modal"; // Import the new modal
-import { experiences, type Experience, type ExperienceVariant } from "@/lib/experiences-data";
+import {
+  experiences,
+  type Experience,
+  type ExperienceVariant,
+} from "@/lib/experiences-data";
 import {
   Check,
   Hotel,
@@ -59,7 +64,12 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { useMobile } from "@/hooks/use-mobile";
-import { TbAirBalloon, TbBinoculars, TbCertificate2, TbHelmet } from "react-icons/tb";
+import {
+  TbAirBalloon,
+  TbBinoculars,
+  TbCertificate2,
+  TbHelmet,
+} from "react-icons/tb";
 import { MastercardPaymentBounceModal } from "@/components/mastercard-payment-bounce-modal";
 // import { ActiveCounter, useActiveCounter } from "@/components/active-counter";
 import {
@@ -105,7 +115,7 @@ const includedIcons: Record<string, any> = {
   "Professional chocolatier": User,
   "Luxury Bus": Bus,
   "5-star accommodations": Hotel,
-  "All scheduled experiences and tours": CalendarCheck, 
+  "All scheduled experiences and tours": CalendarCheck,
   "Flight certificate": TbCertificate2,
   "Spa treatment": Gift,
   "Cultural performance": Drum,
@@ -124,7 +134,10 @@ const formatDateWithOrdinal = (dateString: string | undefined): string => {
   if (!dateString) return "";
   const date = new Date(dateString);
   const day = date.getUTCDate();
-  const month = date.toLocaleString("en-US", { month: "short", timeZone: "UTC" });
+  const month = date.toLocaleString("en-US", {
+    month: "short",
+    timeZone: "UTC",
+  });
   const year = date.getUTCFullYear();
 
   let suffix = "th";
@@ -419,6 +432,8 @@ export default function BookExperiencePage() {
   const [isEnquireModalOpen, setIsEnquireModalOpen] = useState(false);
   const [isGroupConfirmationOpen, setIsGroupConfirmationOpen] = useState(false);
   const [isGuestlistModalOpen, setIsGuestlistModalOpen] = useState(false);
+  const [isGuestlistReservationModalOpen, setIsGuestlistReservationModalOpen] =
+    useState(false);
   const [isGuestlistClosedModalOpen, setIsGuestlistClosedModalOpen] =
     useState(false);
   const buttonRef = useRef<HTMLDivElement>(null);
@@ -464,7 +479,14 @@ export default function BookExperiencePage() {
     };
   }, [isSticky]);
 
-  if (!experience || (experience.hidden && (!experience.accessCode || (Array.isArray(experience.accessCode) ? !experience.accessCode.includes(searchParams.get('code') || '') : experience.accessCode !== searchParams.get('code'))))) {
+  if (
+    !experience ||
+    (experience.hidden &&
+      (!experience.accessCode ||
+        (Array.isArray(experience.accessCode)
+          ? !experience.accessCode.includes(searchParams.get("code") || "")
+          : experience.accessCode !== searchParams.get("code"))))
+  ) {
     return (
       <div className="flex flex-col min-h-screen">
         <SiteHeader />
@@ -500,7 +522,8 @@ export default function BookExperiencePage() {
   // );
 
   // Dynamic per-installment price for group experiences based on current totalPrice and installments
-  const groupInstallments = bookingContent.groupPricing?.paymentPlanInstallments || 1;
+  const groupInstallments =
+    bookingContent.groupPricing?.paymentPlanInstallments || 1;
   const groupPerInstallment = isGroupExperience
     ? parseFloat(((totalPrice || 0) / groupInstallments).toFixed(2))
     : 0;
@@ -607,14 +630,8 @@ export default function BookExperiencePage() {
           {/* Vici Pill - Desktop */}
           {experience.slug === "vici-summer-uncorked" && (
             <div className="hidden sm:inline-flex uppercase items-center gap-2 bg-black/30 backdrop-blur-sm text-white px-4 py-2 rounded-full font-sans text-[10px] mb-4 border border-white/20">
-              <img
-                src="/images/vicilogo.png"
-                alt="Vici"
-                className="w-5 h-5"
-              />
-              <span className="tracking-widest">
-                Table reservations only
-              </span>
+              <img src="/images/vicilogo.png" alt="Vici" className="w-5 h-5" />
+              <span className="tracking-widest">Table reservations only</span>
             </div>
           )}
 
@@ -627,14 +644,8 @@ export default function BookExperiencePage() {
           {/* Vici Pill - Mobile */}
           {experience.slug === "vici-summer-uncorked" && (
             <div className="sm:hidden inline-flex uppercase items-center gap-2 bg-black/30 backdrop-blur-sm text-white px-4 py-2 rounded-full font-sans text-[10px] mt-2 mb-4 border border-white/20">
-              <img
-                src="/images/vicilogo.png"
-                alt="Vici"
-                className="w-5 h-5"
-              />
-              <span className="tracking-widest">
-                Table reservations only
-              </span>
+              <img src="/images/vicilogo.png" alt="Vici" className="w-5 h-5" />
+              <span className="tracking-widest">Table reservations only</span>
             </div>
           )}
 
@@ -652,7 +663,9 @@ export default function BookExperiencePage() {
                 <div className="inline-flex items-center justify-center gap-4 px-6 py-2 rounded-full bg-slate-900 shadow-sm text-xs uppercase tracking-widest font-sans text-white">
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
-                    <span>{formatDateWithOrdinal(bookingContent.startDate)}</span>
+                    <span>
+                      {formatDateWithOrdinal(bookingContent.startDate)}
+                    </span>
                   </div>
                   <span>|</span>
                   <div className="flex items-center gap-2">
@@ -668,7 +681,27 @@ export default function BookExperiencePage() {
                   {bookingContent.startDate && bookingContent.endDate && (
                     <>
                       <span>|</span>
-                      <span>{new Date(bookingContent.startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })} - {new Date(bookingContent.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</span>
+                      <span>
+                        {new Date(bookingContent.startDate).toLocaleDateString(
+                          "en-US",
+                          {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                            timeZone: "UTC",
+                          }
+                        )}{" "}
+                        -{" "}
+                        {new Date(bookingContent.endDate).toLocaleDateString(
+                          "en-US",
+                          {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                            timeZone: "UTC",
+                          }
+                        )}
+                      </span>
                     </>
                   )}
                   {/* <span>|</span> */}
@@ -690,7 +723,9 @@ export default function BookExperiencePage() {
                 alt="Mastercard"
                 className="w-5 h-5"
               />
-              <span className="tracking-widest">Mastercard cardholders only</span>
+              <span className="tracking-widest">
+                Mastercard cardholders only
+              </span>
             </div>
           )}
         </div>
@@ -781,17 +816,19 @@ export default function BookExperiencePage() {
                   Highlights
                 </h2>
                 <div className="space-y-4">
-                  {currentBookingContent?.highlights?.map((highlight, index) => (
-                    <div
-                      key={index}
-                      className="flex items-start gap-3 border-b border-black pb-3"
-                    >
-                      <Sparkle className="w-4 h-4 text-slate-600 mt-1 flex-shrink-0" />
-                      <p className="text-slate-700 font-sans leading-relaxed text-sm sm:text-base">
-                        {highlight}
-                      </p>
-                    </div>
-                  ))}
+                  {currentBookingContent?.highlights?.map(
+                    (highlight, index) => (
+                      <div
+                        key={index}
+                        className="flex items-start gap-3 border-b border-black pb-3"
+                      >
+                        <Sparkle className="w-4 h-4 text-slate-600 mt-1 flex-shrink-0" />
+                        <p className="text-slate-700 font-sans leading-relaxed text-sm sm:text-base">
+                          {highlight}
+                        </p>
+                      </div>
+                    )
+                  )}
                 </div>
               </div>
 
@@ -801,14 +838,24 @@ export default function BookExperiencePage() {
                   /* Group Experience Pricing */
                   <div className="space-y-4">
                     {/* Mobile Layout */}
-                    <div className="sm:hidden space-y-4" ref={experience.slug === "vici-summer-uncorked" ? buttonRef : undefined}>
+                    <div
+                      className="sm:hidden space-y-4"
+                      ref={
+                        experience.slug === "vici-summer-uncorked"
+                          ? buttonRef
+                          : undefined
+                      }
+                    >
                       {experience.slug !== "vici-summer-uncorked" && (
                         <div className="flex items-center justify-between">
                           <div>
                             <h3 className="text-[11px] uppercase tracking-widest font-sans text-black mb-1">
                               NO. OF PAX
                             </h3>
-                            <Select onValueChange={handleGuestsChange} defaultValue="1">
+                            <Select
+                              onValueChange={handleGuestsChange}
+                              defaultValue="1"
+                            >
                               <SelectTrigger className="w-20 h-8 rounded-full bg-gray-800 text-white border-gray-800 px-3 text-sm">
                                 <SelectValue placeholder="1" />
                               </SelectTrigger>
@@ -828,24 +875,41 @@ export default function BookExperiencePage() {
                             <div className="text-3xl font-sans font-normal text-black leading-none">
                               ${totalPrice}
                             </div>
-                            {experience.slug !== "december-in-ghana-castles-to-coastlines" && (
-                            <div className="text-sm font-sans text-black mt-1">
-                              or ${groupPerInstallment} in {bookingContent.groupPricing?.paymentPlanInstallments} payments
-                            </div>
+                            {experience.slug !==
+                              "december-in-ghana-castles-to-coastlines" && (
+                              <div className="text-sm font-sans text-black mt-1">
+                                or ${groupPerInstallment} in{" "}
+                                {
+                                  bookingContent.groupPricing
+                                    ?.paymentPlanInstallments
+                                }{" "}
+                                payments
+                              </div>
                             )}
                           </div>
                         </div>
                       )}
                       {experience.slug === "vici-summer-uncorked" && (
-                        <Button
-                          className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
-                          onClick={() => setIsGuestlistModalOpen(true)}
-                        >
-                          Reserve a Table
-                        </Button>
+                        <div className="flex flex-col gap-3">
+                          <Button
+                            className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
+                            onClick={() =>
+                              setIsGuestlistReservationModalOpen(true)
+                            }
+                          >
+                            Reserve a Table
+                          </Button>
+                          <Button
+                            variant="outline"
+                            className="w-full border-slate-900 text-slate-900 bg-white font-sans px-6 py-6 rounded-lg hover:bg-slate-50"
+                            onClick={() => setIsGuestlistModalOpen(true)}
+                          >
+                            Join the Guestlist
+                          </Button>
+                        </div>
                       )}
                       {experience.slug ===
-                      "december-in-ghana-castles-to-coastlines" && (
+                        "december-in-ghana-castles-to-coastlines" && (
                         <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-end gap-4 mb-4">
                           <a
                             href="https://2zeldbyqxdkdtasm.public.blob.vercel-storage.com/December%20in%20Ghana%20-%20Group%20Itinerary.pdf"
@@ -855,12 +919,12 @@ export default function BookExperiencePage() {
                             onClick={(e) => {
                               e.preventDefault();
                               const url = `https://2zeldbyqxdkdtasm.public.blob.vercel-storage.com/December%20in%20Ghana%20-%20Group%20Itinerary.pdf`;
-                              console.log('Opening PDF in new tab:', url);
-                              const a = document.createElement('a');
+                              console.log("Opening PDF in new tab:", url);
+                              const a = document.createElement("a");
                               a.href = url;
-                              a.target = '_blank';
-                              a.rel = 'noopener noreferrer';
-                              a.style.display = 'none';
+                              a.target = "_blank";
+                              a.rel = "noopener noreferrer";
+                              a.style.display = "none";
                               document.body.appendChild(a);
                               a.click();
                               document.body.removeChild(a);
@@ -887,10 +951,19 @@ export default function BookExperiencePage() {
                     {/* Desktop Layout */}
                     <div className="hidden sm:block">
                       {experience.slug === "vici-summer-uncorked" ? (
-                        <div className="flex justify-end">
+                        <div className="flex justify-end gap-4">
+                          <Button
+                            variant="outline"
+                            className="border-slate-900 text-slate-900 bg-white hover:bg-slate-50 w-56 py-3 rounded-lg text-sm font-sans"
+                            onClick={() => setIsGuestlistModalOpen(true)}
+                          >
+                            Join the Guestlist
+                          </Button>
                           <Button
                             className="bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
-                            onClick={() => setIsGuestlistModalOpen(true)}
+                            onClick={() =>
+                              setIsGuestlistReservationModalOpen(true)
+                            }
                           >
                             Reserve a Table
                           </Button>
@@ -902,7 +975,10 @@ export default function BookExperiencePage() {
                             <h3 className="text-[11px] uppercase tracking-widest font-sans text-slate-600 mb-1">
                               No. of Pax
                             </h3>
-                            <Select onValueChange={handleGuestsChange} defaultValue="1">
+                            <Select
+                              onValueChange={handleGuestsChange}
+                              defaultValue="1"
+                            >
                               <SelectTrigger className="w-20 h-8 rounded-full bg-slate-900 text-white border-slate-900 px-3 text-sm">
                                 <SelectValue placeholder="1" />
                               </SelectTrigger>
@@ -932,25 +1008,35 @@ export default function BookExperiencePage() {
                             </div>
 
                             {/* Payment Plan */}
-                            {experience.slug !== "vici-summer-uncorked" && experience.slug !== "december-in-ghana-castles-to-coastlines" && (
-                            <div className="flex flex-col justify-center items-start tracking-widest leading-none space-y-0 mt-1">
-                              <div className="text-base font-sans font-semibold text-slate-900">
-                                OR ${groupPerInstallment}
-                              </div>
-                              <div className="text-xs font-sans text-slate-600">
-                                IN {bookingContent.groupPricing?.paymentPlanInstallments} PAYMENTS
-                              </div>
-                            </div>
-                            )}
+                            {experience.slug !== "vici-summer-uncorked" &&
+                              experience.slug !==
+                                "december-in-ghana-castles-to-coastlines" && (
+                                <div className="flex flex-col justify-center items-start tracking-widest leading-none space-y-0 mt-1">
+                                  <div className="text-base font-sans font-semibold text-slate-900">
+                                    OR ${groupPerInstallment}
+                                  </div>
+                                  <div className="text-xs font-sans text-slate-600">
+                                    IN{" "}
+                                    {
+                                      bookingContent.groupPricing
+                                        ?.paymentPlanInstallments
+                                    }{" "}
+                                    PAYMENTS
+                                  </div>
+                                </div>
+                              )}
                             {/* Button */}
-                            {experience.slug === "december-in-ghana-castles-to-coastlines" ? (
+                            {experience.slug ===
+                            "december-in-ghana-castles-to-coastlines" ? (
                               <div className="flex gap-4 items-center w-full justify-end">
                                 <Button
                                   className="bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
-                                  onClick={() => setIsGroupConfirmationOpen(true)}
+                                  onClick={() =>
+                                    setIsGroupConfirmationOpen(true)
+                                  }
                                 >
                                   Book Experience
-                                 </Button>
+                                </Button>
                                 <a
                                   href="https://2zeldbyqxdkdtasm.public.blob.vercel-storage.com/Decemeber%20In%20Ghana%20-%20Group%20Itinerary%20"
                                   target="_blank"
@@ -959,19 +1045,22 @@ export default function BookExperiencePage() {
                                   onClick={(e) => {
                                     e.preventDefault();
                                     const url = `https://2zeldbyqxdkdtasm.public.blob.vercel-storage.com/Decemeber%20In%20Ghana%20-%20Group%20Itinerary%20`;
-                                    console.log('Opening PDF in new tab (desktop):', url);
-                                    const a = document.createElement('a');
+                                    console.log(
+                                      "Opening PDF in new tab (desktop):",
+                                      url
+                                    );
+                                    const a = document.createElement("a");
                                     a.href = url;
-                                    a.target = '_blank';
-                                    a.rel = 'noopener noreferrer';
-                                    a.style.display = 'none';
+                                    a.target = "_blank";
+                                    a.rel = "noopener noreferrer";
+                                    a.style.display = "none";
                                     document.body.appendChild(a);
                                     a.click();
                                     document.body.removeChild(a);
                                   }}
                                 >
                                   <Button
-                                      type="button"
+                                    type="button"
                                     variant="outline"
                                     className="w-auto bg-white border-slate-900 text-slate-900 font-sans px-6 py-4 text-sm flex items-center justify-center gap-2"
                                   >
@@ -982,7 +1071,9 @@ export default function BookExperiencePage() {
                             ) : experience.slug === "vici-summer-uncorked" ? (
                               <Button
                                 className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
-                                onClick={() => setIsGuestlistModalOpen(true)}
+                                onClick={() =>
+                                  setIsGuestlistReservationModalOpen(true)
+                                }
                               >
                                 Reserve a Table
                               </Button>
@@ -999,40 +1090,46 @@ export default function BookExperiencePage() {
                       )}
                     </div>
                   </div>
-
-
                 ) : (
                   /* Regular Experience Pricing */
                   experience.slug !== "vici-summer-uncorked" && (
-                  <div className="flex sm:hidden items-center justify-between gap-4">
-                    <div>
-                      <h3 className="text-xs uppercase tracking-widest font-sans text-black">
-                        No. of Pax
-                      </h3>
-                      <div className="flex items-center gap-2 mt-1">
-                        <Select
-                          onValueChange={handleGuestsChange}
-                          defaultValue="1"
-                        >
-                          <SelectTrigger className="w-20 h-8 rounded-lg bg-slate-900 text-white border-slate-900 px-2">
-                            <SelectValue placeholder="1" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {[...Array(experience.slug === "a-date-with-fashion" || experience.slug === "afrofuture" || experience.slug === "art-after-dark" ? 10 : 6)].map((_, i) => (
-                              <SelectItem key={i + 1} value={`${i + 1}`}>
-                                {i + 1}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
+                    <div className="flex sm:hidden items-center justify-between gap-4">
+                      <div>
+                        <h3 className="text-xs uppercase tracking-widest font-sans text-black">
+                          No. of Pax
+                        </h3>
+                        <div className="flex items-center gap-2 mt-1">
+                          <Select
+                            onValueChange={handleGuestsChange}
+                            defaultValue="1"
+                          >
+                            <SelectTrigger className="w-20 h-8 rounded-lg bg-slate-900 text-white border-slate-900 px-2">
+                              <SelectValue placeholder="1" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {[
+                                ...Array(
+                                  experience.slug === "a-date-with-fashion" ||
+                                    experience.slug === "afrofuture" ||
+                                    experience.slug === "art-after-dark"
+                                    ? 10
+                                    : 6
+                                ),
+                              ].map((_, i) => (
+                                <SelectItem key={i + 1} value={`${i + 1}`}>
+                                  {i + 1}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                      <div className="relative text-right">
+                        <span className="text-3xl font-sans font-normal text-black">
+                          ${totalPrice}
+                        </span>
                       </div>
                     </div>
-                    <div className="relative text-right">
-                      <span className="text-3xl font-sans font-normal text-black">
-                        ${totalPrice}
-                      </span>
-                    </div>
-                  </div>
                   )
                 )}
                 {/* Mobile buttons - only for non-group experiences */}
@@ -1053,10 +1150,7 @@ export default function BookExperiencePage() {
                             </SelectTrigger>
                             <SelectContent>
                               {bookingContent.variants.map((variant) => (
-                                <SelectItem
-                                  key={variant.id}
-                                  value={variant.id}
-                                >
+                                <SelectItem key={variant.id} value={variant.id}>
                                   {variant.title}
                                 </SelectItem>
                               ))}
@@ -1070,41 +1164,36 @@ export default function BookExperiencePage() {
                           Enquire for Availability
                         </Button>
                       </>
-                  
-                ) : experience.slug === "art-after-dark" ? (
-                  <>
-                    {bookingContent.variants && (
-                      <Select
-                        onValueChange={handleVariantChange}
-                        defaultValue={bookingContent.variants[0]?.id}
-                      >
-                        <SelectTrigger className="w-full bg-champagne text-black border-gray-800 rounded-lg px-4 py-3 text-sm justify-between">
-                          <SelectValue placeholder="Select a package" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {bookingContent.variants.map((variant) => (
-                            <SelectItem
-                              key={variant.id}
-                              value={variant.id}
-                            >
-                              {variant.title}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    )}
-                    <Button
-                      className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
-                      onClick={() => setIsBookingModalOpen(true)}
-                    >
-                      Book this experience
-                    </Button>
-                  </>
-                  
-                  ) : experience.slug === "vici-summer-uncorked" ? (
+                    ) : experience.slug === "art-after-dark" ? (
+                      <>
+                        {bookingContent.variants && (
+                          <Select
+                            onValueChange={handleVariantChange}
+                            defaultValue={bookingContent.variants[0]?.id}
+                          >
+                            <SelectTrigger className="w-full bg-champagne text-black border-gray-800 rounded-lg px-4 py-3 text-sm justify-between">
+                              <SelectValue placeholder="Select a package" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {bookingContent.variants.map((variant) => (
+                                <SelectItem key={variant.id} value={variant.id}>
+                                  {variant.title}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        )}
+                        <Button
+                          className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
+                          onClick={() => setIsBookingModalOpen(true)}
+                        >
+                          Book this experience
+                        </Button>
+                      </>
+                    ) : experience.slug === "vici-summer-uncorked" ? (
                       <Button
                         className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
-                        onClick={() => setIsGuestlistModalOpen(true)}
+                        onClick={() => setIsGuestlistReservationModalOpen(true)}
                       >
                         Reserve a Table
                       </Button>
@@ -1137,33 +1226,47 @@ export default function BookExperiencePage() {
                 )}
                 {/* Desktop buttons - only for non-group experiences */}
                 {!isGroupExperience && (
-                  <div className={`hidden sm:flex items-center ${experience.slug === 'vici-summer-uncorked' ? 'justify-end' : 'justify-between'} gap-6`}>
+                  <div
+                    className={`hidden sm:flex items-center ${
+                      experience.slug === "vici-summer-uncorked"
+                        ? "justify-end"
+                        : "justify-between"
+                    } gap-6`}
+                  >
                     {experience.slug !== "vici-summer-uncorked" && (
-                    <div>
-                      <h3 className="text-lg sm:text-xs font-sans uppercase tracking-widest text-slate-600">
-                        No. of Pax
-                      </h3>
-                      <div className="flex items-center gap-8 mt-0.5">
-                        <Select
-                          onValueChange={handleGuestsChange}
-                          defaultValue="1"
-                        >
-                          <SelectTrigger className="w-24 h-7 rounded-lg bg-slate-900 text-white border-slate-900">
-                            <SelectValue placeholder="1" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {[...Array(experience.slug === "a-date-with-fashion" || experience.slug === "afrofuture" || experience.slug === "art-after-dark" ? 10 : 6)].map((_, i) => (
-                              <SelectItem key={i + 1} value={`${i + 1}`}>
-                                {i + 1}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <span className="text-3xl sm:text-4xl font-sans font-normal text-slate-800">
-                          ${totalPrice}
-                        </span>
+                      <div>
+                        <h3 className="text-lg sm:text-xs font-sans uppercase tracking-widest text-slate-600">
+                          No. of Pax
+                        </h3>
+                        <div className="flex items-center gap-8 mt-0.5">
+                          <Select
+                            onValueChange={handleGuestsChange}
+                            defaultValue="1"
+                          >
+                            <SelectTrigger className="w-24 h-7 rounded-lg bg-slate-900 text-white border-slate-900">
+                              <SelectValue placeholder="1" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {[
+                                ...Array(
+                                  experience.slug === "a-date-with-fashion" ||
+                                    experience.slug === "afrofuture" ||
+                                    experience.slug === "art-after-dark"
+                                    ? 10
+                                    : 6
+                                ),
+                              ].map((_, i) => (
+                                <SelectItem key={i + 1} value={`${i + 1}`}>
+                                  {i + 1}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <span className="text-3xl sm:text-4xl font-sans font-normal text-slate-800">
+                            ${totalPrice}
+                          </span>
+                        </div>
                       </div>
-                    </div>
                     )}
 
                     {/* Price and Buttons */}
@@ -1174,24 +1277,20 @@ export default function BookExperiencePage() {
                             {bookingContent.variants && (
                               <Select
                                 onValueChange={handleVariantChange}
-                                defaultValue={
-                                  bookingContent.variants[0]?.id
-                                }
+                                defaultValue={bookingContent.variants[0]?.id}
                               >
                                 <SelectTrigger className="w-auto bg-[#EFE6DA] text-black border-gray-800 rounded-sm px-3 py-2 text-sm justify-between gap-x-5">
                                   <SelectValue placeholder="Select an option" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                  {bookingContent.variants.map(
-                                    (variant) => (
-                                      <SelectItem
-                                        key={variant.id}
-                                        value={variant.id}
-                                      >
-                                        {variant.title}
-                                      </SelectItem>
-                                    )
-                                  )}
+                                  {bookingContent.variants.map((variant) => (
+                                    <SelectItem
+                                      key={variant.id}
+                                      value={variant.id}
+                                    >
+                                      {variant.title}
+                                    </SelectItem>
+                                  ))}
                                 </SelectContent>
                               </Select>
                             )}
@@ -1202,7 +1301,6 @@ export default function BookExperiencePage() {
                               Enquire for Availability
                             </Button>
                           </div>
-                          
                         ) : experience.slug === "art-after-dark" ? (
                           <div className="flex items-center gap-2">
                             {bookingContent.variants && (
@@ -1214,16 +1312,14 @@ export default function BookExperiencePage() {
                                   <SelectValue placeholder="Select a package" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                  {bookingContent.variants.map(
-                                    (variant) => (
-                                      <SelectItem
-                                        key={variant.id}
-                                        value={variant.id}
-                                      >
-                                        {variant.title}
-                                      </SelectItem>
-                                    )
-                                  )}
+                                  {bookingContent.variants.map((variant) => (
+                                    <SelectItem
+                                      key={variant.id}
+                                      value={variant.id}
+                                    >
+                                      {variant.title}
+                                    </SelectItem>
+                                  ))}
                                 </SelectContent>
                               </Select>
                             )}
@@ -1234,14 +1330,24 @@ export default function BookExperiencePage() {
                               Book this experience
                             </Button>
                           </div>
-                        
                         ) : experience.slug === "vici-summer-uncorked" ? (
-                          <Button
-                            className="w-full sm:w-auto bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
-                            onClick={() => setIsGuestlistModalOpen(true)}
-                          >
-                            Reserve a Table
-                          </Button>
+                          <div className="flex gap-4">
+                            <Button
+                              variant="outline"
+                              className="border-slate-900 text-slate-900 bg-white hover:bg-slate-50 font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
+                              onClick={() => setIsGuestlistModalOpen(true)}
+                            >
+                              Join the Guestlist
+                            </Button>
+                            <Button
+                              className="bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
+                              onClick={() =>
+                                setIsGuestlistReservationModalOpen(true)
+                              }
+                            >
+                              Reserve a Table
+                            </Button>
+                          </div>
                         ) : (
                           <>
                             <Button
@@ -1274,51 +1380,62 @@ export default function BookExperiencePage() {
               </div>
 
               {/* What's Included */}
-              {bookingContent.included && bookingContent.included.length > 0 && (
-                <div>
-                  <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
-                    What's Included
-                  </h2>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4">
-                    {(selectedVariant?.included || bookingContent.included).map((item, index) => {
-                      const Icon = includedIcons[item] || Check;
-                      return (
-                        <div
-                          key={index}
-                          className={`flex items-center gap-3 border-b border-black pb-3 ${index === 0 ? "border-t border-black pt-3" : ""
-                            } ${index === 1
-                              ? "sm:border-t sm:border-black sm:pt-3"
-                              : ""
-                            }`}
-                        >
-                          <Icon className="w-4 h-4 text-slate-600 flex-shrink-0" />
-                          <span className="text-slate-700 font-sans text-sm sm:text-base">
-                            {item}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                )}
-
-                {/* What's Not Included - Art After Dark variants (except full experience) */}
-                {experience.slug === "art-after-dark" && selectedVariant?.notIncluded && selectedVariant.notIncluded.length > 0 && (
+              {bookingContent.included &&
+                bookingContent.included.length > 0 && (
                   <div>
                     <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
-                      What's Not Included
+                      What's Included
+                    </h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4">
+                      {(
+                        selectedVariant?.included || bookingContent.included
+                      ).map((item, index) => {
+                        const Icon = includedIcons[item] || Check;
+                        return (
+                          <div
+                            key={index}
+                            className={`flex items-center gap-3 border-b border-black pb-3 ${
+                              index === 0 ? "border-t border-black pt-3" : ""
+                            } ${
+                              index === 1
+                                ? "sm:border-t sm:border-black sm:pt-3"
+                                : ""
+                            }`}
+                          >
+                            <Icon className="w-4 h-4 text-slate-600 flex-shrink-0" />
+                            <span className="text-slate-700 font-sans text-sm sm:text-base">
+                              {item}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+              {/* What's Not Included - Art After Dark variants (except full experience) */}
+              {experience.slug === "art-after-dark" &&
+                selectedVariant?.notIncluded &&
+                selectedVariant.notIncluded.length > 0 && (
+                  <div>
+                    <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
+                      What's Not Included <span className="text-xs text-slate-500">(Available On Request)</span>
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4">
                       {selectedVariant.notIncluded.map((item, index) => (
                         <div
                           key={index}
-                          className={`flex items-center gap-3 border-b border-black pb-3 ${index === 0 ? "border-t border-black pt-3" : ""
-                            } ${index === 1
+                          className={`flex items-center gap-3 border-b border-black pb-3 ${
+                            index === 0 ? "border-t border-black pt-3" : ""
+                          } ${
+                            index === 1
                               ? "sm:border-t sm:border-black sm:pt-3"
                               : ""
-                            }`}
+                          }`}
                         >
-                          <span className="w-4 h-4 text-slate-600 flex-shrink-0 text-center">×</span>
+                          <span className="w-4 h-4 text-slate-600 flex-shrink-0 text-center">
+                            ×
+                          </span>
                           <span className="text-slate-700 font-sans text-sm sm:text-base">
                             {item}
                           </span>
@@ -1328,23 +1445,23 @@ export default function BookExperiencePage() {
                   </div>
                 )}
 
-                {/* Dress Code */}
-                {bookingContent.dressCode && (
-                  <div className="mt-8">
-                    <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
-                      Dress Code
-                    </h2>
-                    <div className="flex items-start gap-3 border-b border-t border-black py-3">
-                      <Shirt className="w-4 h-4 text-slate-600 mt-1 flex-shrink-0" />
-                      <p className="text-slate-700 font-sans leading-relaxed text-sm sm:text-base">
-                        {bookingContent.dressCode}
-                      </p>
-                    </div>
+              {/* Dress Code */}
+              {bookingContent.dressCode && (
+                <div className="mt-8">
+                  <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
+                    Dress Code
+                  </h2>
+                  <div className="flex items-start gap-3 border-b border-t border-black py-3">
+                    <Shirt className="w-4 h-4 text-slate-600 mt-1 flex-shrink-0" />
+                    <p className="text-slate-700 font-sans leading-relaxed text-sm sm:text-base">
+                      {bookingContent.dressCode}
+                    </p>
                   </div>
-                )}
+                </div>
+              )}
 
-                {/* Age Restriction */}
-                {/* {bookingContent.ageRestriction && (
+              {/* Age Restriction */}
+              {/* {bookingContent.ageRestriction && (
                   <div className="mt-8">
                     <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
                       Age Restriction
@@ -1358,66 +1475,68 @@ export default function BookExperiencePage() {
                   </div>
                 )} */}
 
-                {/* Notes */}
-                {bookingContent.notes && bookingContent.notes.length > 0 && (
-                  <div className="mt-8">
-                    <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
-                      What to Bring
-                    </h2>
-                    <div className="space-y-4">
-                      {bookingContent.notes.map((note, index) => {
-                        const Icon = notesIcons[note] || ShoppingBag;
-                        return (
-                          <div
-                            key={index}
-                            className={`flex items-start gap-3 border-b border-black pb-3 ${
-                              index === 0 ? "border-t border-black pt-3" : ""
-                            }`}
-                          >
-                            <Icon className="w-4 h-4 text-slate-600 mt-1 flex-shrink-0" />
-                            <p className="text-slate-700 font-sans leading-relaxed text-sm sm:text-base">
-                              {note}
-                            </p>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-
-                {/* What's Not Included - Group Experience Only */}
-                {isGroupExperience && bookingContent.notIncluded && (
-                  <div>
-                    <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
-                      What's Not Included
-                    </h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4">
-                      {bookingContent.notIncluded.map((item, index) => (
+              {/* Notes */}
+              {bookingContent.notes && bookingContent.notes.length > 0 && (
+                <div className="mt-8">
+                  <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
+                    What to Bring
+                  </h2>
+                  <div className="space-y-4">
+                    {bookingContent.notes.map((note, index) => {
+                      const Icon = notesIcons[note] || ShoppingBag;
+                      return (
                         <div
                           key={index}
-                          className="flex items-center gap-3 border-b border-black pb-3"
+                          className={`flex items-start gap-3 border-b border-black pb-3 ${
+                            index === 0 ? "border-t border-black pt-3" : ""
+                          }`}
                         >
-                          <span className="w-4 h-4 text-slate-600 flex-shrink-0 text-center">×</span>
-                          <span className="text-slate-700 font-sans text-sm sm:text-base">
-                            {item}
-                          </span>
+                          <Icon className="w-4 h-4 text-slate-600 mt-1 flex-shrink-0" />
+                          <p className="text-slate-700 font-sans leading-relaxed text-sm sm:text-base">
+                            {note}
+                          </p>
                         </div>
-                      ))}
-                    </div>
+                      );
+                    })}
                   </div>
-                )}
+                </div>
+              )}
 
-                {/* Important - Group Experience Only */}
-                {isGroupExperience && bookingContent.important && (
-                  <div>
-                    <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
-                      Important
-                    </h2>
-                    <p className="text-slate-700 font-sans font-normal leading-relaxed text-base sm:text-xl">
-                      {bookingContent.important}
-                    </p>
+              {/* What's Not Included - Group Experience Only */}
+              {isGroupExperience && bookingContent.notIncluded && (
+                <div>
+                  <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
+                    What's Not Included
+                  </h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4">
+                    {bookingContent.notIncluded.map((item, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center gap-3 border-b border-black pb-3"
+                      >
+                        <span className="w-4 h-4 text-slate-600 flex-shrink-0 text-center">
+                          ×
+                        </span>
+                        <span className="text-slate-700 font-sans text-sm sm:text-base">
+                          {item}
+                        </span>
+                      </div>
+                    ))}
                   </div>
-                )}
+                </div>
+              )}
+
+              {/* Important - Group Experience Only */}
+              {isGroupExperience && bookingContent.important && (
+                <div>
+                  <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
+                    Important
+                  </h2>
+                  <p className="text-slate-700 font-sans font-normal leading-relaxed text-base sm:text-xl">
+                    {bookingContent.important}
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Right Column - Gallery */}
@@ -1566,9 +1685,13 @@ export default function BookExperiencePage() {
         }}
         showConfirmation={showConfirmation}
         bookingDetails={bookingDetails}
-        onBookingConfirmed={isGroupExperience ? (guests: number) => {
-          // activeCounter.bookSpots(guests)
-        } : undefined}
+        onBookingConfirmed={
+          isGroupExperience
+            ? (guests: number) => {
+                // activeCounter.bookSpots(guests)
+              }
+            : undefined
+        }
       />
 
       {/* Gallery Modal */}
@@ -1579,6 +1702,14 @@ export default function BookExperiencePage() {
         initialImageIndex={0}
       />
 
+      <JoinGuestlistReservationModal
+        isOpen={isGuestlistReservationModalOpen}
+        onClose={() => setIsGuestlistReservationModalOpen(false)}
+        experienceSlug={experience.slug}
+        heroImage={bookingContent.heroImage}
+        title={bookingContent.title}
+      />
+
       <JoinGuestlistModal
         isOpen={isGuestlistModalOpen}
         onClose={() => setIsGuestlistModalOpen(false)}
@@ -1586,6 +1717,7 @@ export default function BookExperiencePage() {
         heroImage={bookingContent.heroImage}
         title={bookingContent.title}
       />
+
       <GuestlistClosedModal
         isOpen={isGuestlistClosedModalOpen}
         onClose={() => setIsGuestlistClosedModalOpen(false)}
@@ -1600,12 +1732,21 @@ export default function BookExperiencePage() {
       {isMobile && isSticky && (
         <div className="sm:hidden fixed bottom-4 left-0 right-0 px-4 z-20">
           {experience.slug === "vici-summer-uncorked" ? (
-            <Button
-              className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"
-              onClick={() => setIsGuestlistModalOpen(true)}
-            >
-              Reserve a Table
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                className="flex-1 border-slate-900 text-slate-900 bg-white font-sans px-4 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition hover:bg-slate-50"
+                onClick={() => setIsGuestlistModalOpen(true)}
+              >
+                Join Guestlist
+              </Button>
+              <Button
+                className="flex-1 bg-slate-900 hover:bg-slate-900 text-white font-sans px-4 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"
+                onClick={() => setIsGuestlistReservationModalOpen(true)}
+              >
+                Reserve Table
+              </Button>
+            </div>
           ) : experience.slug === "a-date-with-fashion" ? (
             <Button
               className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"

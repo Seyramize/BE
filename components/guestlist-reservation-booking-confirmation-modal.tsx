@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
-interface GuestlistBookingConfirmationModalProps {
+interface GuestlistReservationBookingConfirmationModalProps {
   isOpen: boolean;
   onClose: () => void;
   booking: {
@@ -15,11 +15,11 @@ interface GuestlistBookingConfirmationModalProps {
   } | null;
 }
 
-export function GuestlistBookingConfirmationModal({
+export function GuestlistReservationBookingConfirmationModal({
   isOpen,
   onClose,
   booking,
-}: GuestlistBookingConfirmationModalProps) {
+}: GuestlistReservationBookingConfirmationModalProps) {
   console.log('Modal isOpen:', isOpen);
   console.log('Modal booking:', booking);
   console.log('Modal booking type:', typeof booking);

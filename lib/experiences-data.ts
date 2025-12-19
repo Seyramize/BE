@@ -835,11 +835,6 @@ export type Experience = {
           "/images/experiences/art-after-dark/Gallery/3.jpg?height=400&width=300&text=Abseiling+Cliffs",
           "/images/experiences/art-after-dark/Gallery/4.jpg?height=400&width=300&text=Abseiling+Cliffs",
           "/images/experiences/art-after-dark/Gallery/5.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/art-after-dark/Gallery/6.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/art-after-dark/Gallery/7.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/art-after-dark/Gallery/8.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/art-after-dark/Gallery/9.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/art-after-dark/Gallery/10.jpg?height=400&width=300&text=Abseiling+Cliffs",
         ],
         overview: "Art After Dark (AAD), redefines how audiences engage with contemporary art. Instead of traditional gallery spaces, AAD unfolds in lounges, bars, and intimate venues, creating a relaxed yet vibrant atmosphere where art, performance, and community meet. Each edition is curated as either a group exhibition or a focused solo presentation, often interwoven with performance, music, food, and drink. The result is a cultural happening that encourages dialogue, discovery, and deeper connection between artists and audiences.",
         whatsPriceless: "Sharing spaces, stories, and moments with the artists themselves. An intimate connection to art you won't find anywhere else.",
@@ -865,25 +860,6 @@ export type Experience = {
         ],
         variants: [
           {
-            id: "full-experience",
-            title: "Art After Dark: Full Experience",
-            price: 560,
-            overview: "Art After Dark (AAD), redefines how audiences engage with contemporary art. Instead of traditional gallery spaces, AAD unfolds in lounges, bars, and intimate venues, creating a relaxed yet vibrant atmosphere where art, performance, and community meet. Each edition is curated as either a group exhibition or a focused solo presentation, often interwoven with performance, music, food, and drink. The result is a cultural happening that encourages dialogue, discovery, and deeper connection between artists and audiences.",
-            highlights: [
-              "Immersive exhibitions reimagined in unconventional spaces",
-              "Occasional live performance elements, such as spoken word or movement art",
-              "A social, nightlife-inspired atmosphere that breaks the mold of traditional galleries",
-              "Curated soundscapes with DJs enhancing the visual and performative works",
-              "Culinary and beverage pairings that add to the sense of community and exchange",
-            ],
-            included: [
-              "Private transportation including fuel",
-              "Dedicated chaperone and access to resident guides",
-              "Complimentary bites and drinks",
-              "Beyond Experiences Essentials™ Bag",
-            ],
-          },
-          {
             id: "art-after-dark-elevated",
             title: "Art After Dark Elevated",
             price: 185,
@@ -899,9 +875,9 @@ export type Experience = {
               "Access to resident guides",
             ],
             notIncluded: [
-              "Chaperone services (available on request)",
+              "Chaperone services",
               "Drinks, snacks, coffee and water",
-              "Transporatation services (available on request)"
+              "Transporatation services"
             ],
           },
           {
@@ -919,9 +895,9 @@ export type Experience = {
               "Access to resident guides",
             ],
             notIncluded: [
-              "Chaperone services (available on request)",
+              "Chaperone services",
               "Drinks, snacks, coffee and water",
-              "Transporatation services (available on request)"
+              "Transporatation services"
             ],
           },
         ],
