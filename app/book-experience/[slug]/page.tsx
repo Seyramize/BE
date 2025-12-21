@@ -891,18 +891,18 @@ export default function BookExperiencePage() {
                       )}
                       {experience.slug === "vici-summer-uncorked" && (
                         <div className="flex flex-col gap-3">
-                          <Button
+                          {/* <Button
                             className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
                             onClick={() =>
                               setIsGuestlistReservationModalOpen(true)
                             }
                           >
                             Reserve a Table
-                          </Button>
+                          </Button> */}
                           <Button
                             variant="outline"
                             className="w-full border-slate-900 text-slate-900 bg-white font-sans px-6 py-6 rounded-lg hover:bg-slate-50"
-                            onClick={() => setIsGuestlistModalOpen(true)}
+                            onClick={() => setIsGuestlistClosedModalOpen(true)}
                           >
                             Join the Guestlist
                           </Button>
@@ -955,18 +955,18 @@ export default function BookExperiencePage() {
                           <Button
                             variant="outline"
                             className="border-slate-900 text-slate-900 bg-white hover:bg-slate-50 w-56 py-3 rounded-lg text-sm font-sans"
-                            onClick={() => setIsGuestlistModalOpen(true)}
+                            onClick={() => setIsGuestlistClosedModalOpen(true)}
                           >
                             Join the Guestlist
                           </Button>
-                          <Button
+                          {/* <Button
                             className="bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
                             onClick={() =>
                               setIsGuestlistReservationModalOpen(true)
                             }
                           >
                             Reserve a Table
-                          </Button>
+                          </Button> */}
                         </div>
                       ) : (
                         <div className="flex items-center justify-between">
@@ -1335,18 +1335,18 @@ export default function BookExperiencePage() {
                             <Button
                               variant="outline"
                               className="border-slate-900 text-slate-900 bg-white hover:bg-slate-50 font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
-                              onClick={() => setIsGuestlistModalOpen(true)}
+                              onClick={() => setIsGuestlistClosedModalOpen(true)}
                             >
                               Join the Guestlist
                             </Button>
-                            <Button
+                            {/* <Button
                               className="bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
                               onClick={() =>
                                 setIsGuestlistReservationModalOpen(true)
                               }
                             >
                               Reserve a Table
-                            </Button>
+                            </Button> */}
                           </div>
                         ) : (
                           <>
@@ -1740,12 +1740,12 @@ export default function BookExperiencePage() {
               >
                 Join Guestlist
               </Button>
-              <Button
+              {/* <Button
                 className="flex-1 bg-slate-900 hover:bg-slate-900 text-white font-sans px-4 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"
                 onClick={() => setIsGuestlistReservationModalOpen(true)}
               >
                 Reserve Table
-              </Button>
+              </Button> */}
             </div>
           ) : experience.slug === "a-date-with-fashion" ? (
             <Button
