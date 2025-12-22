@@ -872,7 +872,7 @@ export type Experience = {
               "Culinary and beverage pairings that add to the sense of community and exchange",
             ],
             included: [
-              "Access to resident guides",
+              "Elevated Art After Dark",
             ],
             notIncluded: [
               "Chaperone services",
@@ -892,7 +892,7 @@ export type Experience = {
               "Curated soundscapes with DJs enhancing the visual and performative works",
               "Culinary and beverage pairings that add to the sense of community and exchange",
             ],included: [
-              "Access to resident guides",
+              "Premium Art After Dark",
             ],
             notIncluded: [
               "Chaperone services",
