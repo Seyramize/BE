@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import Stripe from "stripe"
+import { sendEmail } from "@/lib/mailtrap"
 
 export const dynamic = "force-dynamic"
 
@@ -212,6 +213,38 @@ async function createInstallmentCheckoutSession({
       },
     })
 
+    // Send team notification about new installment booking attempt
+    try {
+      const teamEmails = [
+        'ronnie@beyondaccra.com',
+				'priscilla@beyondaccra.com',
+        'concierge@experiencesbybeyond.com'
+      ];
+
+      for (const teamEmail of teamEmails) {
+        await sendEmail({
+          to: teamEmail,
+          templateUuid: "YOUR_INSTALLMENT_BOOKING_ATTEMPT_TEAM_TEMPLATE_UUID", // TODO: Replace with actual Mailtrap template UUID
+          templateVariables: {
+            experienceName: experienceName || "Unknown Experience",
+            fullName: fullName || "Not provided",
+            email: email || "Not provided",
+            phone: phone || "Not provided",
+            guests: guests?.toString() || "Not provided",
+            installmentTotal: installmentTotal?.toString() || "Not provided",
+            installmentCount: installmentCount?.toString() || "3",
+            installmentInterval: installmentInterval?.toString() || "30",
+            sessionId: session.id,
+            subscriptionId: subscription.id,
+            bookingType: "Installment Booking",
+          },
+        });
+      }
+    } catch (emailError) {
+      console.error('Error sending team notification for installment booking attempt:', emailError);
+      // Don't fail the request if email fails
+    }
+
     return NextResponse.json({ 
       url: session.url,
       sessionId: session.id,
@@ -284,6 +317,35 @@ async function createRegularCheckoutSession({
   }
 
   const session = await stripe.checkout.sessions.create(sessionOptions)
+
+  // Send team notification about new booking attempt
+  try {
+    const teamEmails = [
+      'ronnie@beyondaccra.com',
+      'priscilla@beyondaccra.com',
+      'concierge@experiencesbybeyond.com'
+    ];
+
+    for (const teamEmail of teamEmails) {
+      await sendEmail({
+        to: teamEmail,
+        templateUuid: "YOUR_BOOKING_ATTEMPT_TEAM_TEMPLATE_UUID", // TODO: Replace with actual Mailtrap template UUID
+        templateVariables: {
+          experienceName: experienceName || "Unknown Experience",
+          fullName: fullName || "Not provided",
+          email: email || "Not provided",
+          phone: phone || "Not provided",
+          guests: guests?.toString() || "Not provided",
+          amount: amount?.toString() || "Not provided",
+          sessionId: session.id,
+          bookingType: "Regular Booking",
+        },
+      });
+    }
+  } catch (emailError) {
+    console.error('Error sending team notification for booking attempt:', emailError);
+    // Don't fail the request if email fails
+  }
 
   return NextResponse.json({ 
     url: session.url,

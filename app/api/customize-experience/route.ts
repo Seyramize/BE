@@ -8,20 +8,28 @@ export async function POST(req: NextRequest) {
   const firstName = data.fullName?.split(" ")[0] || "";
 
   // Email to internal team using dynamic template
-  const sendInternalEmail = sendEmail({
-    to: "concierge@experiencesbybeyond.com",
-    templateUuid: "7af31867-7a0d-4fce-81f1-c8dfae80fb00",
-    templateVariables: {
-      experienceName: data.experienceName,
-      fullName: data.fullName,
-      email: data.email,
-      phone: data.phoneNumber,
-      preferredContactMethod: data.preferredContact,
-      preferredDate: data.travelDates,
-      guests: data.groupSize,
-      message: data.experienceVision,
-    },
-  });
+  const teamEmails = [
+    'ronnie@beyondaccra.com',
+    'priscilla@beyondaccra.com',
+    'concierge@experiencesbybeyond.com'
+  ];
+
+  const sendInternalEmails = teamEmails.map(teamEmail =>
+    sendEmail({
+      to: teamEmail,
+      templateUuid: "7af31867-7a0d-4fce-81f1-c8dfae80fb00",
+      templateVariables: {
+        experienceName: data.experienceName,
+        fullName: data.fullName,
+        email: data.email,
+        phone: data.phoneNumber,
+        preferredContactMethod: data.preferredContact,
+        preferredDate: data.travelDates,
+        guests: data.groupSize,
+        message: data.experienceVision,
+      },
+    })
+  );
 
   // Confirmation email to client using dynamic template
   const sendClientEmail = sendEmail({
@@ -34,7 +42,7 @@ export async function POST(req: NextRequest) {
   });
 
   try {
-    await Promise.all([sendInternalEmail, sendClientEmail]);
+    await Promise.all([...sendInternalEmails, sendClientEmail]);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error(error);

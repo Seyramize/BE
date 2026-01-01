@@ -46,18 +46,26 @@ export async function POST(req: Request) {
   const firstName = getFirstName(data.fullName);
 
   // Email to internal team using template
-  const sendInternalEmail = sendEmail({
-    to: "concierge@experiencesbybeyond.com",
-    templateUuid: "a5f33c2e-fbb0-4617-9c1a-a053fff15c4e",
-    templateVariables: {
-      fullName: data.fullName,
-      email: data.email,
-      phone: `${data.countryCode} ${data.phoneNumber}`,
-      date: formattedDate,
-      flexible: data.isFlexible ? "Yes" : "No",
-      message: data.helpMessage
-    }
-  });
+  const teamEmails = [
+    'ronnie@beyondaccra.com',
+    'priscilla@beyondaccra.com',
+    'concierge@experiencesbybeyond.com'
+  ];
+
+  const sendInternalEmails = teamEmails.map(teamEmail =>
+    sendEmail({
+      to: teamEmail,
+      templateUuid: "a5f33c2e-fbb0-4617-9c1a-a053fff15c4e",
+      templateVariables: {
+        fullName: data.fullName,
+        email: data.email,
+        phone: `${data.countryCode} ${data.phoneNumber}`,
+        date: formattedDate,
+        flexible: data.isFlexible ? "Yes" : "No",
+        message: data.helpMessage
+      }
+    })
+  );
 
   // Email to client using template
   const sendClientEmail = sendEmail({
@@ -72,7 +80,7 @@ export async function POST(req: Request) {
   });
 
   try {
-    await Promise.all([sendInternalEmail, sendClientEmail]);
+    await Promise.all([...sendInternalEmails, sendClientEmail]);
     return NextResponse.json({ success: true });
   } catch (error: unknown) {
     console.error('MailerSend error:', error);

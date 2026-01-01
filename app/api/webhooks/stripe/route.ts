@@ -127,6 +127,39 @@ async function setupInstallmentPayments(session: Stripe.Checkout.Session) {
 
 async function handleRegularPayment(session: Stripe.Checkout.Session) {
   console.log("Handling regular payment for session:", session.id)
+  
+  // Send team notification about completed booking
+  try {
+    const metadata = session.metadata || {}
+    const teamEmails = [
+      'ronnie@beyondaccra.com',
+			'priscilla@beyondaccra.com',
+			'concierge@experiencesbybeyond.com'
+    ];
+
+    for (const teamEmail of teamEmails) {
+      await sendEmail({
+        to: teamEmail,
+        templateUuid: "YOUR_BOOKING_COMPLETED_TEAM_TEMPLATE_UUID", // TODO: Replace with actual Mailtrap template UUID
+        templateVariables: {
+          experienceName: metadata.experienceName || "Unknown Experience",
+          fullName: metadata.fullName || "Not provided",
+          email: metadata.email || session.customer_email || "Not provided",
+          phone: metadata.phone || "Not provided",
+          guests: metadata.guests || "Not provided",
+          preferredDate: metadata.preferredDate || "Not provided",
+          alternateDate: metadata.alternateDate || "Not provided",
+          amount: metadata.amount || "Not provided",
+          sessionId: session.id,
+          bookingType: "Regular Booking - Payment Completed",
+          paymentStatus: "Completed",
+        },
+      });
+    }
+  } catch (emailError) {
+    console.error('Error sending team notification for completed booking:', emailError);
+    // Don't fail the webhook if email fails
+  }
 }
 
 /*
@@ -192,22 +225,30 @@ async function sendInstallmentPaymentNotification(
       });
       
       // Send internal notification
-      const sendInternalEmail = sendEmail({
-        to: "concierge@experiencesbybeyond.com",
-        templateUuid: INTERNAL_INSTALLMENT_TEMPLATE_ID,
-        templateVariables: {
-          customerName: installmentPayment.customerName,
-          customerEmail: installmentPayment.customerEmail,
-          installmentNumber: installmentPayment.installmentNumber,
-          amount: installmentPayment.amount,
-          experienceName: installmentPayment.experienceName,
-          bookingId: installmentPayment.bookingId,
-        },
-      });
+      const teamEmails = [
+        'ronnie@beyondaccra.com',
+        'priscilla@beyondaccra.com',
+        'concierge@experiencesbybeyond.com'
+      ];
+
+      const sendInternalEmails = teamEmails.map(teamEmail =>
+        sendEmail({
+          to: teamEmail,
+          templateUuid: INTERNAL_INSTALLMENT_TEMPLATE_ID,
+          templateVariables: {
+            customerName: installmentPayment.customerName,
+            customerEmail: installmentPayment.customerEmail,
+            installmentNumber: installmentPayment.installmentNumber,
+            amount: installmentPayment.amount,
+            experienceName: installmentPayment.experienceName,
+            bookingId: installmentPayment.bookingId,
+          },
+        })
+      );
       
       await Promise.all([
         sendCustomerEmail,
-        sendInternalEmail
+        ...sendInternalEmails
       ]);
     } else {
       // Send failure notification
@@ -248,28 +289,36 @@ async function checkInstallmentCompletion(bookingId: string) {
       });
       
       // Send internal team completion notification
-      const sendInternalCompletionEmail = sendEmail({
-        to: "concierge@experiencesbybeyond.com",
-        templateUuid: "YOUR_INTERNAL_COMPLETION_TEMPLATE_UUID",
-        templateVariables: {
-          customerName: status.installmentPayments[0]?.customerName,
-          customerEmail: status.installmentPayments[0]?.customerEmail,
-          experienceName: status.installmentPayments[0]?.experienceName,
-          bookingId: bookingId,
-          totalAmount: status.installmentPayments.reduce((sum, ip) => sum + ip.amount, 0),
-          completionDate: new Date().toLocaleDateString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          }),
-        },
-      });
+      const teamEmails = [
+        'ronnie@beyondaccra.com',
+        'priscilla@beyondaccra.com',
+        'concierge@experiencesbybeyond.com'
+      ];
+
+      const sendInternalCompletionEmails = teamEmails.map(teamEmail =>
+        sendEmail({
+          to: teamEmail,
+          templateUuid: "YOUR_INTERNAL_COMPLETION_TEMPLATE_UUID",
+          templateVariables: {
+            customerName: status.installmentPayments[0]?.customerName,
+            customerEmail: status.installmentPayments[0]?.customerEmail,
+            experienceName: status.installmentPayments[0]?.experienceName,
+            bookingId: bookingId,
+            totalAmount: status.installmentPayments.reduce((sum, ip) => sum + ip.amount, 0),
+            completionDate: new Date().toLocaleDateString('en-US', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            }),
+          },
+        })
+      );
       
       // Send both emails
       await Promise.all([
         sendCompletionEmail,
-        sendInternalCompletionEmail
+        ...sendInternalCompletionEmails
       ]);
       
       console.log(`All installments completed for booking ${bookingId} - emails sent to client and team`)
@@ -349,28 +398,36 @@ async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
           });
           
           // Send internal team completion notification
-          const sendInternalCompletionEmail = sendEmail({
-            to: "concierge@experiencesbybeyond.com",
-            templateUuid: "YOUR_INTERNAL_COMPLETION_TEMPLATE_UUID",
-            templateVariables: {
-              customerName: metadata.fullName || "Valued Customer",
-              customerEmail: invoice.customer_email,
-              experienceName: metadata.experienceName || "Experience",
-              bookingId: subscription.id,
-              totalAmount: metadata.installmentTotal || "0",
-              completionDate: new Date().toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              }),
-            },
-          });
+          const teamEmails = [
+            'ronnie@beyondaccra.com',
+            'priscilla@beyondaccra.com',
+            'concierge@experiencesbybeyond.com'
+          ];
+
+          const sendInternalCompletionEmails = teamEmails.map(teamEmail =>
+            sendEmail({
+              to: teamEmail,
+              templateUuid: "YOUR_INTERNAL_COMPLETION_TEMPLATE_UUID",
+              templateVariables: {
+                customerName: metadata.fullName || "Valued Customer",
+                customerEmail: invoice.customer_email,
+                experienceName: metadata.experienceName || "Experience",
+                bookingId: subscription.id,
+                totalAmount: metadata.installmentTotal || "0",
+                completionDate: new Date().toLocaleDateString('en-US', {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                }),
+              },
+            })
+          );
           
           // Send both emails
           await Promise.all([
             sendCompletionEmail,
-            sendInternalCompletionEmail
+            ...sendInternalCompletionEmails
           ]);
           
           console.log(`Completion emails sent for final installment of ${metadata.experienceName}`)
@@ -556,22 +613,30 @@ async function sendGroupBookingInstallmentEmail(schedule: any) {
     console.log("Sending group booking installment emails for:", schedule.bookingId)
 
     // Internal notification
-    const sendInternalEmail = sendEmail({
-      to: "concierge@experiencesbybeyond.com",
-      templateUuid: INTERNAL_INSTALLMENT_TEMPLATE_ID,
-      templateVariables: {
-        customerName: schedule.customerName,
-        customerEmail: schedule.customerEmail,
-        experienceName: schedule.experienceName,
-        bookingId: schedule.bookingId,
-        installmentNumber: 1, // First installment
-        installmentCount: schedule.installmentCount,
-        installmentTotal: schedule.installmentTotal,
-        amount: schedule.installmentTotal / schedule.installmentCount,
-        installmentInterval: schedule.installmentInterval,
-        remainingInstallments: schedule.installmentCount - 1,
-      },
-    });
+    const teamEmails = [
+      'ronnie@beyondaccra.com',
+      'priscilla@beyondaccra.com',
+      'concierge@experiencesbybeyond.com'
+    ];
+
+    const sendInternalEmails = teamEmails.map(teamEmail =>
+      sendEmail({
+        to: teamEmail,
+        templateUuid: INTERNAL_INSTALLMENT_TEMPLATE_ID,
+        templateVariables: {
+          customerName: schedule.customerName,
+          customerEmail: schedule.customerEmail,
+          experienceName: schedule.experienceName,
+          bookingId: schedule.bookingId,
+          installmentNumber: 1, // First installment
+          installmentCount: schedule.installmentCount,
+          installmentTotal: schedule.installmentTotal,
+          amount: schedule.installmentTotal / schedule.installmentCount,
+          installmentInterval: schedule.installmentInterval,
+          remainingInstallments: schedule.installmentCount - 1,
+        },
+      })
+    );
 
     // Customer confirmation
     const nextPaymentDate = new Date()
@@ -600,7 +665,7 @@ async function sendGroupBookingInstallmentEmail(schedule: any) {
 
     // Send both emails
     await Promise.all([
-      sendInternalEmail,
+      ...sendInternalEmails,
       sendCustomerEmail
     ]);
 

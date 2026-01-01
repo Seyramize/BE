@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic"
 import { NextRequest, NextResponse } from "next/server"
 import Stripe from "stripe"
 import { experiences } from "@/lib/experiences-data"
+import { sendEmail } from "@/lib/mailtrap"
 
 export async function POST(req: NextRequest) {
 	const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
@@ -69,6 +70,37 @@ export async function POST(req: NextRequest) {
 		}
 
 		const session = await stripe.checkout.sessions.create(sessionOptions)
+
+		// Send team notification about new booking attempt
+		try {
+			const teamEmails = [
+				'ronnie@beyondaccra.com',
+				'priscilla@beyondaccra.com',
+				'concierge@experiencesbybeyond.com'
+			];
+
+			for (const teamEmail of teamEmails) {
+				await sendEmail({
+					to: teamEmail,
+					templateUuid: "YOUR_BOOKING_ATTEMPT_TEAM_TEMPLATE_UUID", // TODO: Replace with actual Mailtrap template UUID
+					templateVariables: {
+						experienceName: experienceName || "Unknown Experience",
+						fullName: fullName || "Not provided",
+						email: email || "Not provided",
+						phone: phone || "Not provided",
+						guests: guests?.toString() || "Not provided",
+						preferredDate: preferredDate || "Not provided",
+						alternateDate: alternateDate || "Not provided",
+						amount: amount?.toString() || "Not provided",
+						sessionId: session.id,
+						bookingType: "Regular Booking",
+					},
+				});
+			}
+		} catch (emailError) {
+			console.error('Error sending team notification for booking attempt:', emailError);
+			// Don't fail the request if email fails
+		}
 
 		return NextResponse.json({ url: session.url })
 	} catch (err) {

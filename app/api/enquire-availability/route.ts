@@ -23,20 +23,28 @@ export async function POST(req: NextRequest) {
   const firstName = data.fullName?.split(" ")[0] || "";
 
   // Email to internal team using dynamic template
-  const sendInternalEmail = sendEmail({
-    to: "concierge@experiencesbybeyond.com",
-    templateUuid: INTERNAL_TEAM_TEMPLATE_ID,
-    templateVariables: {
-      experienceName: data.experienceName,
-      fullName: data.fullName,
-      email: data.email,
-      phone: data.phoneNumber,
-      preferredContactMethod: data.preferredContactMethod,
-      preferredDate: preferredDate,
-      guests: data.numberOfGuests,
-      message: data.message,
-    },
-  });
+  const teamEmails = [
+    'ronnie@beyondaccra.com',
+    'priscilla@beyondaccra.com',
+    'concierge@experiencesbybeyond.com'
+  ];
+
+  const sendInternalEmails = teamEmails.map(teamEmail =>
+    sendEmail({
+      to: teamEmail,
+      templateUuid: INTERNAL_TEAM_TEMPLATE_ID,
+      templateVariables: {
+        experienceName: data.experienceName,
+        fullName: data.fullName,
+        email: data.email,
+        phone: data.phoneNumber,
+        preferredContactMethod: data.preferredContactMethod,
+        preferredDate: preferredDate,
+        guests: data.numberOfGuests,
+        message: data.message,
+      },
+    })
+  );
 
   // Confirmation email to client using dynamic template
   const sendClientEmail = sendEmail({
@@ -50,7 +58,7 @@ export async function POST(req: NextRequest) {
   });
 
   try {
-    await Promise.all([sendInternalEmail, sendClientEmail]);
+    await Promise.all([...sendInternalEmails, sendClientEmail]);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error sending availability enquiry emails:', error);

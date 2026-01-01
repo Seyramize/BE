@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
+import { sendEmail } from "@/lib/mailtrap"
 
 export async function POST(req: NextRequest) {
 	const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
@@ -43,6 +44,38 @@ export async function POST(req: NextRequest) {
         template_id: "d-6dcfd45d1bf04186a5e16756547c8c96",
       }),
     });
+
+    // Send team notification about new newsletter subscription
+    try {
+      const teamEmails = [
+        'ronnie@beyondaccra.com',
+				'priscilla@beyondaccra.com',
+        'concierge@experiencesbybeyond.com'
+      ];
+
+      for (const teamEmail of teamEmails) {
+        await sendEmail({
+          to: teamEmail,
+          templateUuid: "YOUR_NEWSLETTER_SUBSCRIPTION_TEAM_TEMPLATE_UUID", // TODO: Replace with actual Mailtrap template UUID
+          templateVariables: {
+            email: email,
+            subscriptionDate: new Date().toLocaleDateString('en-US', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            }),
+            subscriptionTime: new Date().toLocaleTimeString('en-US', {
+              hour: '2-digit',
+              minute: '2-digit'
+            }),
+          },
+        });
+      }
+    } catch (emailError) {
+      console.error('Error sending team notification for newsletter subscription:', emailError);
+      // Don't fail the request if email fails
+    }
 
     return NextResponse.json({ success: true });
   } else {

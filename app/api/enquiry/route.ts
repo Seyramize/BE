@@ -7,16 +7,24 @@ export async function POST(req: NextRequest) {
     const fullName = `${firstName} ${lastName}`;
 
     // Email to internal team
-    const sendInternalEmail = sendEmail({
-      to: "concierge@experiencesbybeyond.com",
-      templateUuid: "fd85b484-1f44-42d5-bbef-f980ea42188f", // TODO: Replace with Mailtrap template UUID
-      templateVariables: {
-        fullName,
-        email,
-        phone,
-        message,
-      },
-    });
+    const teamEmails = [
+      'ronnie@beyondaccra.com',
+      'priscilla@beyondaccra.com',
+      'concierge@experiencesbybeyond.com'
+    ];
+
+    const sendInternalEmails = teamEmails.map(teamEmail =>
+      sendEmail({
+        to: teamEmail,
+        templateUuid: "fd85b484-1f44-42d5-bbef-f980ea42188f", // TODO: Replace with Mailtrap template UUID
+        templateVariables: {
+          fullName,
+          email,
+          phone,
+          message,
+        },
+      })
+    );
 
     // Confirmation email to user
     const sendUserEmail = sendEmail({
@@ -28,8 +36,7 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    await sendInternalEmail;
-    await sendUserEmail;
+    await Promise.all([...sendInternalEmails, sendUserEmail]);
 
     return NextResponse.json({ success: true });
   } catch (error) {
