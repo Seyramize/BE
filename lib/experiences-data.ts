@@ -471,8 +471,12 @@ export type Experience = {
           "/images/experiences/wojutei/Gallery/7.jpg?height=400&width=300&text=Kente+Weaving",
           "/images/experiences/wojutei/Gallery/8.jpg?height=400&width=300&text=Kente+Weaving",
           "/images/experiences/wojutei/Gallery/9.jpg?height=400&width=300&text=Kente+Weaving",
+          "/images/experiences/wojutei/Gallery/10.jpg?height=400&width=300&text=Kente+Weaving",
+          "/images/experiences/wojutei/Gallery/11.jpg?height=400&width=300&text=Kente+Weaving",
+          "/images/experiences/wojutei/Gallery/12.jpg?height=400&width=300&text=Kente+Weaving",
+          "/images/experiences/wojutei/Gallery/13.jpg?height=400&width=300&text=Kente+Weaving",
         ],
-        overview: "Begin your journey at the lush Aburi Botanical Gardens, where a guided walk introduces you to native spices and plants steeped in tradition. From there, ascend to a stunning mountaintop home with sweeping views, where Chef Fiifi welcomes you into an intimate, storied dining experience. Drawing inspiration from the spices discovered in the gardens, Chef Fiifi weaves his personal journey and heritage into a curated multi-course meal that is as much storytelling as it is fine dining. The evening concludes with an interactive dessert session, where you're invited to join him in the kitchen for a hands-on finale. This is not just dining - it's discovery, connection, and memory, all set against the backdrop of Aburi's serene landscape.",
+        overview: "Hosted by Chef Fiifi, Wojutei moves through a considered, multi-course journey shaped by personal memory, local influence, and creative instinct. Each dish arrives with care. Nothing is rushed. The rhythm of the meal allows conversation to deepen and the moment to stretch. The setting is Treehouse. A private, wood-framed home nestled within the Aburi Mountains. Cool mountain air drifts through open spaces. The trees feel present, close, grounding. Designed to exist gently within its natural surroundings, the house carries a sense of ease that shapes the night. As the evening draws in, guests are welcomed into the kitchen for an interactive dessert moment. Hands gather. The room softens. A closing chapter marked by warmth and connection. More than a dinner, this is an evening shaped by care, intention, and shared presence. A gathering meant to be felt, remembered, and returned to in conversation long after the table clears.",
         whatsPriceless: "Exclusive access to Chef Fiifi's culinary journey, blending nature, storytelling, and gastronomy into an intimate dining experience few will ever encounter.",
         highlights: [
           "Guided spice walk through Aburi Botanical Gardens",
