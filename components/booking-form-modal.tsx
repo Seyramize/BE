@@ -11,7 +11,7 @@ import { LocationSelector } from "@/components/location-selector"
 import { BookingPaymentFlow } from "@/components/booking-payment-flow"
 import { TravelPlannerModal } from "@/components/travel-planner-modal-clean"
 import { BookingConfirmation } from "@/components/booking-confirmation"
-import { getBookingDateLimits, isDateWithinCurrentYearAndNotPast } from "@/lib/date-limits"
+import { getBookingDateLimits, isDateWithinBookingRange } from "@/lib/date-limits"
 
 interface ExperienceData {
   title: string
@@ -172,13 +172,13 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
     if (!formData.location.trim()) newErrors.location = "Location is required"
     if (!formData.preferredDate) {
       newErrors.preferredDate = "Preferred date is required"
-    } else if (!isDateWithinCurrentYearAndNotPast(formData.preferredDate)) {
+    } else if (!isDateWithinBookingRange(formData.preferredDate)) {
       newErrors.preferredDate = `Preferred date must be between ${minDate} and ${maxDate}`
     }
 
     if (!formData.alternateDate) {
       newErrors.alternateDate = "Alternate date is required"
-    } else if (!isDateWithinCurrentYearAndNotPast(formData.alternateDate)) {
+    } else if (!isDateWithinBookingRange(formData.alternateDate)) {
       newErrors.alternateDate = `Alternate date must be between ${minDate} and ${maxDate}`
     }
     if (formData.guests.length === 0 && formData.customGuestCount === 0) {

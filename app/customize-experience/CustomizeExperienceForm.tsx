@@ -15,7 +15,7 @@ import { toast } from "@/hooks/use-toast"
 import { CheckCircle } from "lucide-react"
 import { useSearchParams } from "next/navigation"
 import { Suspense } from "react"
-import { getBookingDateLimits, isDateWithinCurrentYearAndNotPast } from "@/lib/date-limits"
+import { getBookingDateLimits, isDateWithinBookingRange } from "@/lib/date-limits"
 
 interface FormData {
   fullName: string
@@ -117,7 +117,7 @@ export default function CustomizeExperienceForm() {
     if (!formData.groupSize.trim()) newErrors.groupSize = "Group size is required";
     if (!formData.travelDates.trim()) {
       newErrors.travelDates = "Preferred travel dates are required";
-    } else if (!isDateWithinCurrentYearAndNotPast(formData.travelDates)) {
+    } else if (!isDateWithinBookingRange(formData.travelDates)) {
       newErrors.travelDates = `Preferred travel dates must be between ${minDate} and ${maxDate}`;
     }
 

@@ -11,7 +11,7 @@ import { CountrySelector } from "@/components/country-selector"
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 import { parsePhoneNumberFromString, CountryCode } from "libphonenumber-js";
-import { getBookingDateLimits, isDateWithinCurrentYearAndNotPast } from "@/lib/date-limits"
+import { getBookingDateLimits, isDateWithinBookingRange } from "@/lib/date-limits"
 
 interface TravelPlannerModalProps {
   children: React.ReactNode
@@ -49,7 +49,7 @@ function validateForm(data: FormData) {
     return "Please select a date or mark as flexible.";
   }
 
-  if (data.date.trim() && !isDateWithinCurrentYearAndNotPast(data.date)) {
+  if (data.date.trim() && !isDateWithinBookingRange(data.date)) {
     return `Date must be between ${minDate} and ${maxDate}.`;
   }
 
