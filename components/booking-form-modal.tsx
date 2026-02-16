@@ -11,6 +11,7 @@ import { LocationSelector } from "@/components/location-selector"
 import { BookingPaymentFlow } from "@/components/booking-payment-flow"
 import { TravelPlannerModal } from "@/components/travel-planner-modal-clean"
 import { BookingConfirmation } from "@/components/booking-confirmation"
+import { getBookingDateLimits, isDateWithinCurrentYearAndNotPast } from "@/lib/date-limits"
 
 interface ExperienceData {
   title: string
@@ -53,6 +54,7 @@ interface FormData {
 export function BookingFormModal({ isOpen, onClose, experience, showConfirmation = false, bookingDetails, onBookingConfirmed }: BookingFormModalProps) {
   const [showPaymentFlow, setShowPaymentFlow] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const { minDate, maxDate } = getBookingDateLimits()
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     email: "",
@@ -168,8 +170,17 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
     if (!formData.email.trim()) newErrors.email = "Email address is required"
     if (!formData.phoneNumber.trim()) newErrors.phoneNumber = "Phone number is required"
     if (!formData.location.trim()) newErrors.location = "Location is required"
-    if (!formData.preferredDate) newErrors.preferredDate = "Preferred date is required"
-    if (!formData.alternateDate) newErrors.alternateDate = "Alternate date is required"
+    if (!formData.preferredDate) {
+      newErrors.preferredDate = "Preferred date is required"
+    } else if (!isDateWithinCurrentYearAndNotPast(formData.preferredDate)) {
+      newErrors.preferredDate = `Preferred date must be between ${minDate} and ${maxDate}`
+    }
+
+    if (!formData.alternateDate) {
+      newErrors.alternateDate = "Alternate date is required"
+    } else if (!isDateWithinCurrentYearAndNotPast(formData.alternateDate)) {
+      newErrors.alternateDate = `Alternate date must be between ${minDate} and ${maxDate}`
+    }
     if (formData.guests.length === 0 && formData.customGuestCount === 0) {
       newErrors.guests = "Please select number of guests"
     }
@@ -468,6 +479,8 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
                             type="date"
                             value={formData.preferredDate}
                             onChange={(e) => handleInputChange("preferredDate", e.target.value)}
+                            min={minDate}
+                            max={maxDate}
                             className={`w-50 bg-white border-slate-200 text-slate-800 h-11 ${
                               errors.preferredDate ? "border-red-500" : ""
                             }`}
@@ -487,7 +500,11 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
                             type="date"
                             value={formData.alternateDate}
                             onChange={(e) => handleInputChange("alternateDate", e.target.value)}
-                            className={`w-50 bg-white border-slate-200 text-slate-800 h-11${errors.alternateDate ? " border-red-500" : ""}`}
+                            min={minDate}
+                            max={maxDate}
+                            className={`w-50 bg-white border-slate-200 text-slate-800 h-11${
+                              errors.alternateDate ? " border-red-500" : ""
+                            }`}
                           />
                           {errors.alternateDate && <p className="text-red-500 text-xs mt-1">{errors.alternateDate}</p>}
                         </div>

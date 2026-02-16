@@ -15,6 +15,7 @@ import { toast } from "@/hooks/use-toast"
 import { CheckCircle } from "lucide-react"
 import { useSearchParams } from "next/navigation"
 import { Suspense } from "react"
+import { getBookingDateLimits, isDateWithinCurrentYearAndNotPast } from "@/lib/date-limits"
 
 interface FormData {
   fullName: string
@@ -54,6 +55,7 @@ export default function CustomizeExperienceForm() {
   const [hasHistory, setHasHistory] = useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
+  const { minDate, maxDate } = getBookingDateLimits()
 
   // Check if there's browser history available
   useEffect(() => {
@@ -113,7 +115,11 @@ export default function CustomizeExperienceForm() {
     if (!formData.preferredContact.trim()) newErrors.preferredContact = "Preferred contact method is required";
     if (!formData.experienceVision.trim()) newErrors.experienceVision = "Experience vision is required";
     if (!formData.groupSize.trim()) newErrors.groupSize = "Group size is required";
-    if (!formData.travelDates.trim()) newErrors.travelDates = "Preferred travel dates are required";
+    if (!formData.travelDates.trim()) {
+      newErrors.travelDates = "Preferred travel dates are required";
+    } else if (!isDateWithinCurrentYearAndNotPast(formData.travelDates)) {
+      newErrors.travelDates = `Preferred travel dates must be between ${minDate} and ${maxDate}`;
+    }
 
     setErrors(newErrors);
 
@@ -404,6 +410,8 @@ export default function CustomizeExperienceForm() {
                     type="date"
                     value={formData.travelDates}
                     onChange={(e) => handleInputChange("travelDates", e.target.value)}
+                    min={minDate}
+                    max={maxDate}
                     className={`w-75 bg-white border-slate-200 text-slate-800 h-12 ${
                       errors.travelDates ? "border-red-500" : ""
                     }`}

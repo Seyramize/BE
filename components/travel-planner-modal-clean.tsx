@@ -11,6 +11,7 @@ import { CountrySelector } from "@/components/country-selector"
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 import { parsePhoneNumberFromString, CountryCode } from "libphonenumber-js";
+import { getBookingDateLimits, isDateWithinCurrentYearAndNotPast } from "@/lib/date-limits"
 
 interface TravelPlannerModalProps {
   children: React.ReactNode
@@ -28,6 +29,8 @@ interface FormData {
 
 // Place this function inside or above your component
 function validateForm(data: FormData) {
+  const { minDate, maxDate } = getBookingDateLimits();
+
   if (!data.fullName.trim()) return "Full name is required.";
   if (!data.email.trim()) return "Email is required.";
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return "Invalid email address.";
@@ -42,7 +45,14 @@ function validateForm(data: FormData) {
     return "Please enter a valid phone number for the selected country.";
   }
 
-  if (!data.date.trim() && !data.isFlexible) return "Please select a date or mark as flexible.";
+  if (!data.date.trim() && !data.isFlexible) {
+    return "Please select a date or mark as flexible.";
+  }
+
+  if (data.date.trim() && !isDateWithinCurrentYearAndNotPast(data.date)) {
+    return `Date must be between ${minDate} and ${maxDate}.`;
+  }
+
   return null;
 }
 
@@ -52,6 +62,7 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
   const [mounted, setMounted] = useState(false)
   const modalRef = useRef<HTMLDivElement>(null)
   const { toast } = useToast();
+  const { minDate, maxDate } = getBookingDateLimits();
 
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
@@ -261,6 +272,8 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
                           type="date"
                           value={formData.date}
                           onChange={(e) => handleInputChange("date", e.target.value)}
+                          min={minDate}
+                          max={maxDate}
                           className="w-50 bg-white border-slate-200 text-slate-800 h-12 rounded-md"
                         />
                       </div>
