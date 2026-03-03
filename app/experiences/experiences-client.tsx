@@ -32,8 +32,7 @@ export default function ExperiencesClientPage() {
 				(activeFilter === "Priceless" && experience.tags.includes("Priceless")) ||
 				(activeFilter === "Ghana" && experience.defaultContent.location.includes("Ghana")) ||
 				(activeFilter === "Namibia" && experience.defaultContent.location.includes("Namibia")) ||
-				(activeFilter === "São Tomé" && experience.defaultContent.location.includes("São Tomé"))) &&
-			!experience.tags.includes("Priceless")
+				(activeFilter === "São Tomé" && experience.defaultContent.location.includes("São Tomé")))
 
 		const matchesSearch =
 			!searchQuery ||

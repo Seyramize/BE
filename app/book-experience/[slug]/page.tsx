@@ -1502,17 +1502,19 @@ export default function BookExperiencePage() {
                 </div>
               )}
 
-              {/* What's Not Included - Group Experience Only */}
-              {isGroupExperience && bookingContent.notIncluded && (
+              {/* What's Not Included */}
+              {bookingContent.notIncluded && bookingContent.notIncluded.length > 0 && (
                 <div>
                   <h2 className="text-xs sm:text-lg font-sans font-bold mb-1 md:mb-2 uppercase md:tracking-[0.2em] tracking-widest text-slate-800">
                     What's Not Included
                   </h2>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4">
+                  <div className={`${isGroupExperience ? 'grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4' : 'space-y-0'}`}>
                     {bookingContent.notIncluded.map((item, index) => (
                       <div
                         key={index}
-                        className="flex items-center gap-3 border-b border-black pb-3"
+                        className={`flex items-center gap-3 border-b border-black pb-3 ${
+                          !isGroupExperience && index === 0 ? 'border-t border-black pt-3' : ''
+                        }`}
                       >
                         <span className="w-4 h-4 text-slate-600 flex-shrink-0 text-center">
                           ×
