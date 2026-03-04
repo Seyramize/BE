@@ -255,7 +255,7 @@ export type Experience = {
           "Complimentary bites and drinks",
         ]
       },
-      tags: ["Priceless", "1 PAX"]
+      tags: ["1 PAX"]
     },
     {
       id: 4,
@@ -390,6 +390,7 @@ export type Experience = {
     {
       id: 6,
       slug: "kente-and-rhythm",
+      hidden: true,
       defaultContent: {
         title: "Kente and Rhythm",
         shortDescription: "Dive into Ghana's cultural heartbeat at the Accra Arts Centre.",
@@ -500,7 +501,7 @@ export type Experience = {
           "Private transportation including fuel"
         ]
       },
-      tags: ["Priceless", "2 PAX"]
+      tags: ["2 PAX"]
     },
     {
       id: 8,
@@ -592,7 +593,7 @@ export type Experience = {
           },
         ],
       },
-      tags: ["Priceless", "2 PAX"],
+      tags: ["2 PAX"],
     },
     {
       id: 9,
@@ -641,7 +642,7 @@ export type Experience = {
           "Complimentary bites and drinks",
         ]
       },
-      tags: ["Priceless", "2 PAX"]
+      tags: ["2 PAX"]
     },
     {
       id: 10,
@@ -814,103 +815,104 @@ export type Experience = {
       },
       tags: ["Travel Planner's Choice", "1 PAX"]
     },
-    {
-      id: 13,
-      slug: "art-after-dark",
-      defaultContent: {
-        title: "Art After Dark",
-        shortDescription: "Art After Dark (AAD), redefines how audiences engage with contemporary art",
-        image: "/images/experiences/art-after-dark/cover.jpg?height=400&width=300&text=Akosombo+Lake+Adventure",
-        location: "Greater Accra, Ghana",
-      },
-      expandedContent: {
-        title: "Art After Dark",
-        fullDescription: "Adventure and calm meet on Volta Lake. Abseil from rocky cliffs, kayak through quiet waters, and end the day with a golden-hour boat cruise under the open sky.",
-        image: "/placeholder.svg?height=500&width=400&text=Lake+Volta+Dam+Sunset",
-      },
-      bookingContent: {
-        title: "Art After Dark",
-        subtitle: "From abseiling to kayaking and a sunset cruise, experience the best of Volta Lake in one action-packed day.",
-        duration: "1 DAY",
-        destinations: "3 DESTINATIONS",
-        maxGuests: "12 GUESTS (MAX)",
-        heroImage: "/images/experiences/art-after-dark/cover.jpg?height=800&width=1200&text=Volta+Lake+Adventure",
-        galleryImages: [
-          "/images/experiences/art-after-dark/Gallery/1.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/art-after-dark/Gallery/2.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/art-after-dark/Gallery/3.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/art-after-dark/Gallery/4.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/art-after-dark/Gallery/5.jpg?height=400&width=300&text=Abseiling+Cliffs",
-        ],
-        overview: "Art After Dark (AAD), redefines how audiences engage with contemporary art. Instead of traditional gallery spaces, AAD unfolds in lounges, bars, and intimate venues, creating a relaxed yet vibrant atmosphere where art, performance, and community meet. Each edition is curated as either a group exhibition or a focused solo presentation, often interwoven with performance, music, food, and drink. The result is a cultural happening that encourages dialogue, discovery, and deeper connection between artists and audiences.",
-        whatsPriceless: "Sharing spaces, stories, and moments with the artists themselves. An intimate connection to art you won't find anywhere else.",
-        highlights: [
-          "Immersive exhibitions reimagined in unconventional spaces",
-          "Occasional live performance elements, such as spoken word or movement art",
-          "A social, nightlife-inspired atmosphere that breaks the mold of traditional galleries",
-          "Curated soundscapes with DJs enhancing the visual and performative works",
-          "Culinary and beverage pairings that add to the sense of community and exchange",
-        ],
-        startingPrice: 560,
-        pricing: {
-          oneGuest: 560,
-          twoGuests: 350,
-          threeOrMoreGuests: 290,
-        },
-        minimumGuests: 1,
-        included: [
-          "Private transportation including fuel",
-          "Dedicated chaperone and access to resident guides",
-          "Complimentary bites and drinks",
-          "Beyond Experiences Essentials™ Bag",
-        ],
-        variants: [
-          {
-            id: "art-after-dark-elevated",
-            title: "Art After Dark Elevated",
-            price: 185,
-            overview: "Art After Dark (AAD), redefines how audiences engage with contemporary art. Instead of traditional gallery spaces, AAD unfolds in lounges, bars, and intimate venues, creating a relaxed yet vibrant atmosphere where art, performance, and community meet. Each edition is curated as either a group exhibition or a focused solo presentation, often interwoven with performance, music, food, and drink. The result is a cultural happening that encourages dialogue, discovery, and deeper connection between artists and audiences.",
-            highlights: [
-              "Immersive exhibitions reimagined in unconventional spaces",
-              "Occasional live performance elements, such as spoken word or movement art",
-              "A social, nightlife-inspired atmosphere that breaks the mold of traditional galleries",
-              "Curated soundscapes with DJs enhancing the visual and performative works",
-              "Culinary and beverage pairings that add to the sense of community and exchange",
-            ],
-            included: [
-              "Elevated Art After Dark",
-            ],
-            notIncluded: [
-              "Chaperone services",
-              "Drinks, snacks, coffee and water",
-              "Transporatation services"
-            ],
-          },
-          {
-            id: "art-after-dark-premium",
-            title: "Art After Dark Premium",
-            price: 225,
-            overview: "Art After Dark (AAD), redefines how audiences engage with contemporary art. Instead of traditional gallery spaces, AAD unfolds in lounges, bars, and intimate venues, creating a relaxed yet vibrant atmosphere where art, performance, and community meet. Each edition is curated as either a group exhibition or a focused solo presentation, often interwoven with performance, music, food, and drink. The result is a cultural happening that encourages dialogue, discovery, and deeper connection between artists and audiences.",
-            highlights: [
-              "Immersive exhibitions reimagined in unconventional spaces",
-              "Occasional live performance elements, such as spoken word or movement art",
-              "A social, nightlife-inspired atmosphere that breaks the mold of traditional galleries",
-              "Curated soundscapes with DJs enhancing the visual and performative works",
-              "Culinary and beverage pairings that add to the sense of community and exchange",
-            ],included: [
-              "Premium Art After Dark",
-            ],
-            notIncluded: [
-              "Chaperone services",
-              "Drinks, snacks, coffee and water",
-              "Transporatation services"
-            ],
-          },
-        ],
+    // {
+    //   id: 13,
+    //   slug: "art-after-dark",
+    //   defaultContent: {
+    //     title: "Art After Dark",
+    //     shortDescription: "Art After Dark (AAD), redefines how audiences engage with contemporary art",
+    //     image: "/images/experiences/art-after-dark/cover.jpg?height=400&width=300&text=Akosombo+Lake+Adventure",
+    //     location: "Greater Accra, Ghana",
+    //   },
+    //   expandedContent: {
+    //     title: "Art After Dark",
+    //     fullDescription: "Adventure and calm meet on Volta Lake. Abseil from rocky cliffs, kayak through quiet waters, and end the day with a golden-hour boat cruise under the open sky.",
+    //     image: "/placeholder.svg?height=500&width=400&text=Lake+Volta+Dam+Sunset",
+    //   },
+    //   bookingContent: {
+    //     title: "Art After Dark",
+    //     subtitle: "From abseiling to kayaking and a sunset cruise, experience the best of Volta Lake in one action-packed day.",
+    //     duration: "1 DAY",
+    //     destinations: "3 DESTINATIONS",
+    //     maxGuests: "12 GUESTS (MAX)",
+    //     heroImage: "/images/experiences/art-after-dark/cover.jpg?height=800&width=1200&text=Volta+Lake+Adventure",
+    //     galleryImages: [
+    //       "/images/experiences/art-after-dark/Gallery/1.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/art-after-dark/Gallery/2.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/art-after-dark/Gallery/3.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/art-after-dark/Gallery/4.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/art-after-dark/Gallery/5.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //     ],
+    //     overview: "Art After Dark (AAD), redefines how audiences engage with contemporary art. Instead of traditional gallery spaces, AAD unfolds in lounges, bars, and intimate venues, creating a relaxed yet vibrant atmosphere where art, performance, and community meet. Each edition is curated as either a group exhibition or a focused solo presentation, often interwoven with performance, music, food, and drink. The result is a cultural happening that encourages dialogue, discovery, and deeper connection between artists and audiences.",
+    //     whatsPriceless: "Sharing spaces, stories, and moments with the artists themselves. An intimate connection to art you won't find anywhere else.",
+    //     highlights: [
+    //       "Immersive exhibitions reimagined in unconventional spaces",
+    //       "Occasional live performance elements, such as spoken word or movement art",
+    //       "A social, nightlife-inspired atmosphere that breaks the mold of traditional galleries",
+    //       "Curated soundscapes with DJs enhancing the visual and performative works",
+    //       "Culinary and beverage pairings that add to the sense of community and exchange",
+    //     ],
+    //     startingPrice: 560,
+    //     pricing: {
+    //       oneGuest: 560,
+    //       twoGuests: 350,
+    //       threeOrMoreGuests: 290,
+    //     },
+    //     minimumGuests: 1,
+    //     included: [
+    //       "Private transportation including fuel",
+    //       "Dedicated chaperone and access to resident guides",
+    //       "Complimentary bites and drinks",
+    //       "Beyond Experiences Essentials™ Bag",
+    //     ],
+    //     variants: [
+    //       {
+    //         id: "art-after-dark-elevated",
+    //         title: "Art After Dark Elevated",
+    //         price: 185,
+    //         overview: "Art After Dark (AAD), redefines how audiences engage with contemporary art. Instead of traditional gallery spaces, AAD unfolds in lounges, bars, and intimate venues, creating a relaxed yet vibrant atmosphere where art, performance, and community meet. Each edition is curated as either a group exhibition or a focused solo presentation, often interwoven with performance, music, food, and drink. The result is a cultural happening that encourages dialogue, discovery, and deeper connection between artists and audiences.",
+    //         highlights: [
+    //           "Immersive exhibitions reimagined in unconventional spaces",
+    //           "Occasional live performance elements, such as spoken word or movement art",
+    //           "A social, nightlife-inspired atmosphere that breaks the mold of traditional galleries",
+    //           "Curated soundscapes with DJs enhancing the visual and performative works",
+    //           "Culinary and beverage pairings that add to the sense of community and exchange",
+    //         ],
+    //         included: [
+    //           "Elevated Art After Dark",
+    //         ],
+    //         notIncluded: [
+    //           "Chaperone services",
+    //           "Drinks, snacks, coffee and water",
+    //           "Transporatation services"
+    //         ],
+    //       },
+    //       {
+    //         id: "art-after-dark-premium",
+    //         title: "Art After Dark Premium",
+    //         price: 225,
+    //         overview: "Art After Dark (AAD), redefines how audiences engage with contemporary art. Instead of traditional gallery spaces, AAD unfolds in lounges, bars, and intimate venues, creating a relaxed yet vibrant atmosphere where art, performance, and community meet. Each edition is curated as either a group exhibition or a focused solo presentation, often interwoven with performance, music, food, and drink. The result is a cultural happening that encourages dialogue, discovery, and deeper connection between artists and audiences.",
+    //         highlights: [
+    //           "Immersive exhibitions reimagined in unconventional spaces",
+    //           "Occasional live performance elements, such as spoken word or movement art",
+    //           "A social, nightlife-inspired atmosphere that breaks the mold of traditional galleries",
+    //           "Curated soundscapes with DJs enhancing the visual and performative works",
+    //           "Culinary and beverage pairings that add to the sense of community and exchange",
+    //         ],
+    //         included: [
+    //           "Premium Art After Dark",
+    //         ],
+    //         notIncluded: [
+    //           "Chaperone services",
+    //           "Drinks, snacks, coffee and water",
+    //           "Transporatation services"
+    //         ],
+    //       },
+    //     ],
         
-      },
-      tags: ["Priceless", "1 PAX"]
-    },
+    //   },
+    //   tags: ["1 PAX"]
+    // },
     {
       id: 14,
       slug: "sandwich-harbour-exploration",
@@ -1233,6 +1235,7 @@ export type Experience = {
     {
       id: 20,
       slug: "canvas-and-soul",
+      hidden: true,
       defaultContent: {
         title: "Canvas & Soul",
         shortDescription: "Canvas and Soul is an intimate art and storytelling journey where every guest becomes a creator.",
@@ -1285,7 +1288,7 @@ export type Experience = {
     {
       id: 21,
       slug: "december-in-ghana-castles-to-coastlines",
-      hidden: false,
+      hidden: true,
       accessCode: ["travelsocial", "bxnoah"],
       defaultContent: {
         title: "December in Ghana: Castles to Coastlines",
@@ -1362,67 +1365,68 @@ export type Experience = {
       },
       tags: ["Travel Planner's Choice", "2 PAX"]
     },
-    {
-      id: 22,
-      slug: "a-date-with-chocolate",
-      defaultContent: {
-        title: "A Date with Chocolate",
-        shortDescription:
-          "Step into the world of Chocolate, a pioneering Ghanaian designer whose work has been worn by global icons.",
-        image:
-          "/images/experiences/a-date-with-fashion/cover.jpg?height=400&width=300&text=Kente+Weaving+Workshop",
-        location: "Greater Accra, Ghana",
-      },
-      expandedContent: {
-        title: "A Date with Chocolate",
-        fullDescription:
-          "Spend the day with pioneering designer Chocolate, whose work has graced the likes of Beyoncé and Cardi B. Tour the studio, learn about the creative process, and collaborate to design a one-of-a-kind piece to take home.",
-        image:
-          "/placeholder.svg?height=500&width=400&text=Western+Ghana+Canopy+Beach",
-      },
-      bookingContent: {
-        title: "A Date with Chocolate",
-        subtitle:
-          "Immerse yourself in Ghana's living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
-        duration: "1 DAY",
-        destinations: "1 DESTINATION",
-        maxGuests: "10 GUESTS (MAX)",
-        heroImage:
-          "/images/experiences/a-date-with-fashion/cover.jpg?height=800&width=1200&text=Kente+Workshop",
-        galleryImages: [
-          "/images/experiences/a-date-with-fashion/Gallery/2.jpg?height=400&width=300&text=Kente+Weaving",
-          "/images/experiences/a-date-with-fashion/Gallery/5.jpg?height=400&width=300&text=Kente+Weaving",
-          "/images/experiences/a-date-with-fashion/Gallery/6.jpg?height=400&width=300&text=Kente+Weaving",
-        ],
-        overview:
-          "Spend a day with pioneering designer Chocolate, whose work has graced the likes of Beyoncé and Cardi B. Tour the studio, learn about the creative process, and collaborate to design a one-of-a-kind piece to take home.",
-        whatsPriceless:
-          "Personal interaction with one of Ghana's leading designers and the opportunity to co-create a custom piece.",
-        highlights: [
-          "Guided showroom tour with a top designer",
-          "Hands-on design session for a custom piece",
-          "Access to unisex fashion suitable for all",
-        ],
-        startingPrice: 350,
-        pricing: {
-          oneGuest: 350,
-          twoGuests: 350,
-          threeOrMoreGuests: 350,
-        },
-        minimumGuests: 2,
-        included: [
-          "Private transportation including fuel",
-          "Dedicated chaperone and access to resident guides",
-          "Complimentary bites and drinks",
-        ],
-      },
-      tags: ["Priceless", "2 PAX"],
-    },
+    // {
+    //   id: 22,
+    //   slug: "a-date-with-chocolate",
+    //   defaultContent: {
+    //     title: "A Date with Chocolate",
+    //     shortDescription:
+    //       "Step into the world of Chocolate, a pioneering Ghanaian designer whose work has been worn by global icons.",
+    //     image:
+    //       "/images/experiences/a-date-with-fashion/cover.jpg?height=400&width=300&text=Kente+Weaving+Workshop",
+    //     location: "Greater Accra, Ghana",
+    //   },
+    //   expandedContent: {
+    //     title: "A Date with Chocolate",
+    //     fullDescription:
+    //       "Spend the day with pioneering designer Chocolate, whose work has graced the likes of Beyoncé and Cardi B. Tour the studio, learn about the creative process, and collaborate to design a one-of-a-kind piece to take home.",
+    //     image:
+    //       "/placeholder.svg?height=500&width=400&text=Western+Ghana+Canopy+Beach",
+    //   },
+    //   bookingContent: {
+    //     title: "A Date with Chocolate",
+    //     subtitle:
+    //       "Immerse yourself in Ghana's living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
+    //     duration: "1 DAY",
+    //     destinations: "1 DESTINATION",
+    //     maxGuests: "10 GUESTS (MAX)",
+    //     heroImage:
+    //       "/images/experiences/a-date-with-fashion/cover.jpg?height=800&width=1200&text=Kente+Workshop",
+    //     galleryImages: [
+    //       "/images/experiences/a-date-with-fashion/Gallery/2.jpg?height=400&width=300&text=Kente+Weaving",
+    //       "/images/experiences/a-date-with-fashion/Gallery/5.jpg?height=400&width=300&text=Kente+Weaving",
+    //       "/images/experiences/a-date-with-fashion/Gallery/6.jpg?height=400&width=300&text=Kente+Weaving",
+    //     ],
+    //     overview:
+    //       "Spend a day with pioneering designer Chocolate, whose work has graced the likes of Beyoncé and Cardi B. Tour the studio, learn about the creative process, and collaborate to design a one-of-a-kind piece to take home.",
+    //     whatsPriceless:
+    //       "Personal interaction with one of Ghana's leading designers and the opportunity to co-create a custom piece.",
+    //     highlights: [
+    //       "Guided showroom tour with a top designer",
+    //       "Hands-on design session for a custom piece",
+    //       "Access to unisex fashion suitable for all",
+    //     ],
+    //     startingPrice: 350,
+    //     pricing: {
+    //       oneGuest: 350,
+    //       twoGuests: 350,
+    //       threeOrMoreGuests: 350,
+    //     },
+    //     minimumGuests: 2,
+    //     included: [
+    //       "Private transportation including fuel",
+    //       "Dedicated chaperone and access to resident guides",
+    //       "Complimentary bites and drinks",
+    //     ],
+    //   },
+    //   tags: ["2 PAX"],
+    // },
     {
       id: 23,
-      slug: "a-date-with-phil-and-joe",
+      slug: "test",
+      hidden: true,
       defaultContent: {
-        title: "A Date with Phil & Joe",
+        title: "test",
         shortDescription:
           "Meet Phil & Joe, pioneering Ghanaian designers whose work has been worn by global icons.",
         image:
@@ -1472,7 +1476,7 @@ export type Experience = {
           "Complimentary bites and drinks",
         ],
       },
-      tags: ["Priceless", "2 PAX"],
+      tags: ["2 PAX"],
     },
   ]
 

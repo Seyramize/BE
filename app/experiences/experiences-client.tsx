@@ -94,7 +94,7 @@ export default function ExperiencesClientPage() {
 										tag === "Priceless"
 											? "bg-white/10"
 											: "bg-black/40"
-									} ${tag === "2 PAX" ? "ml-auto" : ""}`}
+									} ${tag === "1 PAX" || tag === "2 PAX" || tag === "3 PAX" ? "ml-auto" : ""}`}
 								>
 									{tag === "2 PAX" || tag === "1 PAX" || tag === "3 PAX" ? (
 										<div className="flex items-center gap-1">
