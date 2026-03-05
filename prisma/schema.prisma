@@ -77,7 +77,7 @@ model Booking {
   numberOfGuests   Int
   totalPrice       Float
   status           String   @default("PENDING") // PENDING, CONFIRMED, CANCELLED
-  stripeCheckoutId String   @unique // The session ID from Stripe
+  paystackReference String   @unique // The reference from Paystack
   
   // Installment payment fields
   isInstallmentPayment Boolean @default(false)
@@ -109,10 +109,9 @@ model InstallmentPayment {
   status            String   @default("PENDING") // PENDING, PAID, FAILED, CANCELLED
   installmentNumber Int      // Which installment this is (1, 2, 3, etc.)
   
-  // Stripe payment details
-  stripePaymentIntentId String? // Stripe Payment Intent ID
-  stripeSessionId        String? // Stripe Checkout Session ID for this installment
-  paymentMethodId        String? // Saved payment method ID
+  // Paystack payment details
+  paystackReference String? // Paystack transaction reference
+  paymentMethodId   String? // Saved payment method ID
   
   // Payment attempt tracking
   lastAttemptedAt   DateTime?

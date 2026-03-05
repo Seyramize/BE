@@ -543,7 +543,7 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
                           <div className="flex flex-col gap-1 text-xs text-slate-600 mb-4">
                             <div className="text-right">
                               <div className="text-slate-800 font-sans text-sm">Total Cost</div>
-                              <div className="text-2xl sm:text-3xl font-sans text-slate-800">${totalCost}</div>
+                              <div className="text-2xl sm:text-3xl font-sans text-slate-800">₵{totalCost}</div>
                             </div>
                           </div>
                         </div>

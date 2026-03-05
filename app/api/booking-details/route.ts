@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { experiences } from '@/lib/experiences-data';
 import { sendEmail } from '@/lib/mailtrap';
+import { verifyPaystackTransaction } from '@/lib/paystack-server';
 
 // In-memory set to track which session IDs have had emails sent (demo only)
 const sentEmailSessions = new Set<string>();
@@ -13,7 +14,6 @@ const USER_CONFIRMATION_TEMPLATE_ID = "27ffbc93-4c12-4664-9ddc-494bbc77e155";
 const INTERNAL_TEAM_TEMPLATE_ID = "40519514-3eb4-402f-acfa-a438de284abc";
 
 export async function GET(req: NextRequest) {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
   const { searchParams } = new URL(req.url);
   const sessionId = searchParams.get('session_id');
   if (!sessionId) {
@@ -21,6 +21,87 @@ export async function GET(req: NextRequest) {
   }
 
   try {
+    // Try Paystack first (reference is passed as session_id)
+    if (sessionId && !sessionId.startsWith('cs_')) {
+      try {
+        const verification = await verifyPaystackTransaction(sessionId);
+        
+        if (verification.status && verification.data?.status === 'success') {
+          const meta = verification.data?.metadata || {};
+          const experienceId = meta.experienceId ? parseInt(meta.experienceId) : undefined;
+          let experience = undefined;
+          if (experienceId) {
+            experience = experiences.find(exp => exp.id === experienceId);
+          }
+          const guests = meta.guests ? parseInt(meta.guests) : 1;
+          const fullName = meta.fullName || '';
+          const firstName = fullName.split(' ')[0] || fullName;
+          // Amount from Paystack verification is in subunit (cents for USD, kobo for NGN)
+          const paystackAmount = verification.data?.amount ? verification.data.amount / 100 : 0;
+          const paymentChannel = verification.data?.authorization?.channel || 'card';
+          const currency = 'GHS';
+          const currencySymbol = '₵';
+          
+          const bookingDetails = {
+            experienceName: experience?.bookingContent.title || meta.experienceName || '',
+            preferredDate: meta.preferredDate || '',
+            alternateDate: meta.alternateDate || '',
+            guests,
+            email: meta.email || '',
+            fullName,
+            firstName,
+            phone: meta.phone || '',
+            amount: `${currencySymbol}${paystackAmount.toFixed(2)}`,
+            transactionId: verification.data?.reference || sessionId,
+            bookingId: `BK${Date.now()}`,
+            isPaid: true,
+            includedItems: experience?.bookingContent.included || [],
+            supportEmail: "concierge@experiencesbybeyond.com",
+            supportPhone: "+233504513123",
+            paymentMethod: paymentChannel,
+          };
+          
+          // Send confirmation emails
+          if (bookingDetails.email && !sentEmailSessions.has(sessionId)) {
+            // Email to internal team
+            const sendInternalEmail = sendEmail({
+              to: "concierge@experiencesbybeyond.com",
+              templateUuid: INTERNAL_TEAM_TEMPLATE_ID,
+              templateVariables: {
+                ...bookingDetails,
+              },
+            });
+
+            // Confirmation email to client
+            const sendUserEmail = sendEmail({
+              to: bookingDetails.email,
+              templateUuid: USER_CONFIRMATION_TEMPLATE_ID,
+              templateVariables: {
+                ...bookingDetails,
+              },
+            });
+
+            try {
+              await Promise.all([
+                sendInternalEmail,
+                sendUserEmail
+              ]);
+              sentEmailSessions.add(sessionId); // Mark as sent
+            } catch (emailErr) {
+              console.error('Error sending booking confirmation emails:', emailErr);
+              // Don't fail the booking details fetch if email fails
+            }
+          }
+          
+          return NextResponse.json(bookingDetails);
+        }
+      } catch (error) {
+        console.log('Not a Paystack transaction, trying Stripe...');
+      }
+    }
+
+    // Fallback to Stripe
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
     const session = await stripe.checkout.sessions.retrieve(sessionId, { expand: ['line_items', 'payment_intent'] });
     const lineItem = session.line_items?.data[0];
     const productName = lineItem?.description || lineItem?.price?.product || 'Experience';

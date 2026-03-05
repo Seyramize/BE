@@ -116,11 +116,11 @@ export type Experience = {
           "Interactive Wildlife and Heritage Museum tour",
           "Quad biking through forest trails.",
         ],
-        startingPrice: 450,
+        startingPrice: 5400,
         pricing: {
-          oneGuest: 450,
-          twoGuests: 330,
-          threeOrMoreGuests: 250,
+          oneGuest: 5400,
+          twoGuests: 3960,
+          threeOrMoreGuests: 3000,
         },
         minimumGuests: 2,
         included: [
@@ -187,11 +187,11 @@ export type Experience = {
           "Experience the rainforest from above on Kakum's canopy walkway.",
           "Enjoy breathtaking coastal landscapes and countryside views.",
         ],
-        startingPrice: 380,
+        startingPrice: 4560,
         pricing: {
-          oneGuest: 400,
-          twoGuests: 325,
-          threeOrMoreGuests: 220,
+          oneGuest: 4800,
+          twoGuests: 3900,
+          threeOrMoreGuests: 2640,
         },
         minimumGuests: 1,
         included: [
@@ -243,11 +243,11 @@ export type Experience = {
           "A rare nighttime perspective of the castle",
           "Private guide with intimate storytelling",
         ],
-        startingPrice: 100,
+        startingPrice: 1200,
         pricing: {
-          oneGuest: 100,
-          twoGuests: 100,
-          threeOrMoreGuests: 100,
+          oneGuest: 1200,
+          twoGuests: 1200,
+          threeOrMoreGuests: 1200,
         },
         minimumGuests: 1,
         included: [
@@ -303,11 +303,11 @@ export type Experience = {
           "Engage with artisans at the Arts Centre",
           "Capture stunning photos at Independence Square",
         ],
-        startingPrice: 350,
+        startingPrice: 4200,
         pricing: {
-          oneGuest: 350,
-          twoGuests: 332.5,
-          threeOrMoreGuests: 332.5,
+          oneGuest: 4200,
+          twoGuests: 3990,
+          threeOrMoreGuests: 3990,
         },
         minimumGuests: 1,
         included: [
@@ -380,8 +380,8 @@ export type Experience = {
         endDate: "2025-12-20",
         eventLocation: "Vine Restaurant, Labone",
         groupPricing: {
-          fullPrice: 350,
-          paymentPlanPrice: 400,
+          fullPrice: 4200,
+          paymentPlanPrice: 4800,
           paymentPlanInstallments: 2,
         },
       },
@@ -426,11 +426,11 @@ export type Experience = {
           "High-energy traditional dance lesson with local instructors",
           
         ],
-        startingPrice: 250,
+        startingPrice: 3000,
         pricing: {
-          oneGuest: 250,
-          twoGuests: 200,
-          threeOrMoreGuests: 180,
+          oneGuest: 3000,
+          twoGuests: 2400,
+          threeOrMoreGuests: 2160,
         },
         minimumGuests: 1,
         included: [
@@ -485,11 +485,11 @@ export type Experience = {
           "An intimate, mulit-course dining experience hosted by Chef Fiifi in a private setting.",
           "An interactive dessert moment in the kitchen to close the evening together.",
         ],
-        startingPrice: 250,
+        startingPrice: 3000,
         pricing: {
-          oneGuest: 250,
-          twoGuests: 250,
-          threeOrMoreGuests: 250,
+          oneGuest: 3000,
+          twoGuests: 3000,
+          threeOrMoreGuests: 3000,
         },
         minimumGuests: 2,
         included: [
@@ -547,7 +547,7 @@ export type Experience = {
           "Hands-on design session for a custom piece",
           "Access to unisex fashion suitable for all",
         ],
-        startingPrice: 350,
+        startingPrice: 4200,
         minimumGuests: 2,
         included: [
           "Private transportation including fuel",
@@ -629,11 +629,11 @@ export type Experience = {
           "Backstage experiences and introductions",
           "Attend as part of the founders' entourage",
         ],
-        startingPrice: 1500,
+        startingPrice: 18000,
         pricing: {
-          oneGuest: 1500,
-          twoGuests: 1500,
-          threeOrMoreGuests: 1500,
+          oneGuest: 18000,
+          twoGuests: 18000,
+          threeOrMoreGuests: 18000,
         },
         minimumGuests: 2,
         included: [
@@ -698,11 +698,11 @@ export type Experience = {
           "Quad biking adventure on Aburi Hills",
           "Relax at Oboadaka Waterfall",
         ],
-        startingPrice: 465,
+        startingPrice: 5580,
         pricing: {
-          oneGuest: 465,
-          twoGuests: 310,
-          threeOrMoreGuests: 250,
+          oneGuest: 5580,
+          twoGuests: 3720,
+          threeOrMoreGuests: 3000,
         },
         minimumGuests: 1,
         included: [
@@ -749,11 +749,11 @@ export type Experience = {
           "Interactive and educational",
           "Supports a sustainable and ethical chocolate movement in Africa",
         ],
-        startingPrice: 450,
+        startingPrice: 5400,
         pricing: {
-          oneGuest: 450,
-          twoGuests: 300,
-          threeOrMoreGuests: 220,
+          oneGuest: 5400,
+          twoGuests: 3600,
+          threeOrMoreGuests: 2640,
         },
         minimumGuests: 1,
         included: [
@@ -799,11 +799,11 @@ export type Experience = {
           "Unwind with a peaceful cruise under golden skies.",
           "A perfect blend of adrenaline, relaxation, and stunning photo moments.",
         ],
-        startingPrice: 560,
+        startingPrice: 6720,
         pricing: {
-          oneGuest: 560,
-          twoGuests: 350,
-          threeOrMoreGuests: 290,
+          oneGuest: 6720,
+          twoGuests: 4200,
+          threeOrMoreGuests: 3480,
         },
         minimumGuests: 1,
         included: [
@@ -953,11 +953,11 @@ export type Experience = {
           "Sandwich Harbour Lagoon (Weather permitting)",
           "Snacks overlooking the Atlantic Ocean or majestic dunes",
         ],
-        startingPrice: 200,
+        startingPrice: 2400,
         pricing: {
-          oneGuest: 200,
-          twoGuests: 200,
-          threeOrMoreGuests: 200,
+          oneGuest: 2400,
+          twoGuests: 2400,
+          threeOrMoreGuests: 2400,
         },
         minimumGuests: 3,
         included: [
@@ -1005,11 +1005,11 @@ export type Experience = {
           "Exhilarating climbs and turns",
           "Panoramic desert views",
         ],
-        startingPrice: 50,
+        startingPrice: 600,
         pricing: {
-          oneGuest: 50,
-          twoGuests: 50,
-          threeOrMoreGuests: 50,
+          oneGuest: 600,
+          twoGuests: 600,
+          threeOrMoreGuests: 600,
         },
         minimumGuests: 1,
         included: [
@@ -1053,11 +1053,11 @@ export type Experience = {
           "Stunning aerial views of dunes and wildlife",
           "Champagne breakfast in the desert",
         ],
-        startingPrice: 740,
+        startingPrice: 8880,
         pricing: {
-          oneGuest: 740,
-          twoGuests: 740,
-          threeOrMoreGuests: 740,
+          oneGuest: 8880,
+          twoGuests: 8880,
+          threeOrMoreGuests: 8880,
         },
         minimumGuests: 1,
         included: [
@@ -1104,11 +1104,11 @@ export type Experience = {
           "Scuba diving among reefs and tropical marine life",
           "Chance to spot other migratory species in season",
         ],
-        startingPrice: 80,
+        startingPrice: 960,
         pricing: {
-          oneGuest: 80,
-          twoGuests: 80,
-          threeOrMoreGuests: 80,
+          oneGuest: 960,
+          twoGuests: 960,
+          threeOrMoreGuests: 960,
         },
         minimumGuests: 3,
         included: [
@@ -1157,11 +1157,11 @@ export type Experience = {
           "Refreshing stop at Blue Lagoon",
           "Coffee and chocolate tasting at Diogo Vaz",
         ],
-        startingPrice: 180,
+        startingPrice: 2160,
         pricing: {
-          oneGuest: 180,
-          twoGuests: 180,
-          threeOrMoreGuests: 180,
+          oneGuest: 2160,
+          twoGuests: 2160,
+          threeOrMoreGuests: 2160,
         },
         minimumGuests: 2,
         included: [
@@ -1215,11 +1215,11 @@ export type Experience = {
           "Discover the island's past at the National Museum",
           "Taste local cuisine and Santomean ice cream",
         ],
-        startingPrice: 120,
+        startingPrice: 1440,
         pricing: {
-          oneGuest: 120,
-          twoGuests: 120,
-          threeOrMoreGuests: 120,
+          oneGuest: 1440,
+          twoGuests: 1440,
+          threeOrMoreGuests: 1440,
         },
         minimumGuests: 2,
         included: [
@@ -1269,11 +1269,11 @@ export type Experience = {
           "Wine and art-filled atmosphere in an intimate setting",
           "Guided painting experience with your own blank canvas",
         ],
-        startingPrice: 120,
+        startingPrice: 1440,
         pricing: {
-          oneGuest: 120,
-          twoGuests: 120,
-          threeOrMoreGuests: 120,
+          oneGuest: 1440,
+          twoGuests: 1440,
+          threeOrMoreGuests: 1440,
         },
         minimumGuests: 2,
         included: [
@@ -1331,11 +1331,11 @@ export type Experience = {
           "Culture & Heritage - AfroFuture Festival, Cape Coast Castle, and Accra city tour (Jamestown & Black Star landmarks).",
           "Luxury & Lifestyle - Long-table welcome dinner, private beach club escape, and curated New Year's Eve celebration."
         ],
-        startingPrice: 650,
+        startingPrice: 7800,
         pricing: {
-          oneGuest: 650,
-          twoGuests: 650,
-          threeOrMoreGuests: 650,
+          oneGuest: 7800,
+          twoGuests: 7800,
+          threeOrMoreGuests: 7800,
         },
         minimumGuests: 1,
         included: [
@@ -1358,8 +1358,8 @@ export type Experience = {
         startDate: "2025-12-26",
         endDate: "2026-01-02",
         groupPricing: {
-          fullPrice: 650,
-          paymentPlanPrice: 1000,
+          fullPrice: 7800,
+          paymentPlanPrice: 12000,
           paymentPlanInstallments: 3
         }
       },
@@ -1428,7 +1428,7 @@ export type Experience = {
       defaultContent: {
         title: "test",
         shortDescription:
-          "Meet Phil & Joe, pioneering Ghanaian designers whose work has been worn by global icons.",
+          "Test Experience Phil & Joe, pioneering Ghanaian designers whose work has been worn by global icons.",
         image:
           "/images/experiences/a-date-with-fashion/cover.jpg?height=400&width=300&text=Kente+Weaving+Workshop",
         location: "Greater Accra, Ghana",
@@ -1441,7 +1441,7 @@ export type Experience = {
           "/placeholder.svg?height=500&width=400&text=Western+Ghana+Canopy+Beach",
       },
       bookingContent: {
-        title: "A Date with Phil & Joe",
+        title: "Test",
         subtitle:
           "Immerse yourself in Ghana's living heritage—learn the sacred art of kente weaving and experience the energy of traditional drumming and dance.",
         duration: "1 DAY",
@@ -1463,11 +1463,11 @@ export type Experience = {
           "Hands-on design session for a custom piece",
           "Access to unisex fashion suitable for all",
         ],
-        startingPrice: 350,
+        startingPrice: 4200,
         pricing: {
-          oneGuest: 350,
-          twoGuests: 350,
-          threeOrMoreGuests: 350,
+          oneGuest: 4200,
+          twoGuests: 4200,
+          threeOrMoreGuests: 4200,
         },
         minimumGuests: 2,
         included: [

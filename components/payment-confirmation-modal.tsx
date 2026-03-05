@@ -8,7 +8,6 @@ import { ArrowLeft, X, CreditCard, Lock, Shield, UserRound, BookUser, ShieldPlus
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { loadStripe } from "@stripe/stripe-js"
 
 interface PaymentConfirmationModalProps {
   isOpen: boolean
@@ -149,7 +148,7 @@ export function PaymentConfirmationModal({
           ? formData.mobileMoneyPhone
           : fullPhone;
 
-      // Stripe Checkout for both card and mobile money
+      // Initialize Paystack checkout
       const res = await fetch("/api/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -157,7 +156,7 @@ export function PaymentConfirmationModal({
           amount: bookingDetails.totalAmount,
           email: bookingDetails.email,
           experienceName: bookingDetails.experienceName,
-          phone: phoneToSend, // <-- always send the correct phone
+          phone: phoneToSend,
           mobileMoneyProvider: formData.mobileMoneyProvider,
           guests: bookingDetails.guests,
           preferredDate: bookingDetails.preferredDate,
@@ -291,13 +290,13 @@ export function PaymentConfirmationModal({
                     <div className="border-t border-stone-200 pt-2 mt-3">
                       <div className="flex flex-col sm:flex-row sm:justify-between font-serif text-base sm:text-lg">
                         <span className="text-slate-800">Total:</span>
-                        <span className="text-slate-800 font-semibold font-sans text-2xl">${bookingDetails.totalAmount}</span>
+                        <span className="text-slate-800 font-semibold font-sans text-2xl">₵{bookingDetails.totalAmount}</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Stripe Checkout Button */}
+                {/* Paystack Checkout Button */}
                 <Button
                   onClick={async () => {
                     setIsProcessing(true)
@@ -343,7 +342,7 @@ export function PaymentConfirmationModal({
                   ) : (
                     <div className="flex items-center gap-2">
                       <Lock className="w-4 h-4" />
-                      Proceed to Checkout - ${bookingDetails.totalAmount}
+                      Proceed to Checkout - ₵{bookingDetails.totalAmount}
                     </div>
                   )}
                 </Button>

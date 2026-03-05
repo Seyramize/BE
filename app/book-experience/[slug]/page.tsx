@@ -677,7 +677,7 @@ export default function BookExperiencePage() {
                 <div className="inline-flex items-center justify-center gap-3 px-6 py-2 rounded-full bg-slate-900 shadow-sm text-xs uppercase tracking-widest font-sans text-white">
                   <span>{bookingContent.duration}</span>
                   <span>|</span>
-                  <span>${bookingContent.groupPricing?.fullPrice}</span>
+                  <span>₵{bookingContent.groupPricing?.fullPrice}</span>
                   {bookingContent.startDate && bookingContent.endDate && (
                     <>
                       <span>|</span>
@@ -750,7 +750,7 @@ export default function BookExperiencePage() {
             <div className="flex items-center justify-center gap-2 text-white font-sans text-[10px] uppercase tracking-widest whitespace-nowrap">
               <span>{bookingContent.duration}</span>
               <span>|</span>
-              <span>${bookingContent.groupPricing?.fullPrice}</span>
+              <span>₵{bookingContent.groupPricing?.fullPrice}</span>
               {/* <span>|</span> */}
               {/* <ActiveCounter
                 experienceId={experience.id.toString()}
@@ -873,12 +873,12 @@ export default function BookExperiencePage() {
                               STARTING AT
                             </h3>
                             <div className="text-3xl font-sans font-normal text-black leading-none">
-                              ${totalPrice}
+                              ₵{totalPrice}
                             </div>
                             {experience.slug !==
                               "december-in-ghana-castles-to-coastlines" && (
                               <div className="text-sm font-sans text-black mt-1">
-                                or ${groupPerInstallment} in{" "}
+                                or ₵{groupPerInstallment} in{" "}
                                 {
                                   bookingContent.groupPricing
                                     ?.paymentPlanInstallments
@@ -1003,7 +1003,7 @@ export default function BookExperiencePage() {
                                 Starting
                               </h3>
                               <div className="text-3xl font-sans font-normal text-black leading-none">
-                                ${totalPrice}
+                                ₵{totalPrice}
                               </div>
                             </div>
 
@@ -1013,7 +1013,7 @@ export default function BookExperiencePage() {
                                 "december-in-ghana-castles-to-coastlines" && (
                                 <div className="flex flex-col justify-center items-start tracking-widest leading-none space-y-0 mt-1">
                                   <div className="text-base font-sans font-semibold text-slate-900">
-                                    OR ${groupPerInstallment}
+                                    OR ₵{groupPerInstallment}
                                   </div>
                                   <div className="text-xs font-sans text-slate-600">
                                     IN{" "}
@@ -1126,7 +1126,7 @@ export default function BookExperiencePage() {
                       </div>
                       <div className="relative text-right">
                         <span className="text-3xl font-sans font-normal text-black">
-                          ${totalPrice}
+                          ₵{totalPrice}
                         </span>
                       </div>
                     </div>
@@ -1263,7 +1263,7 @@ export default function BookExperiencePage() {
                             </SelectContent>
                           </Select>
                           <span className="text-3xl sm:text-4xl font-sans font-normal text-slate-800">
-                            ${totalPrice}
+                            ₵{totalPrice}
                           </span>
                         </div>
                       </div>

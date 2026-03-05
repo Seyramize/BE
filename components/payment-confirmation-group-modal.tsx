@@ -104,7 +104,7 @@ export function PaymentConfirmationGroupModal({
       const isInstallmentPayment = bookingDetails.paymentStyle === "Installment Payment"
       const installmentTotal = isInstallmentPayment ? bookingDetails.installmentTotal || 0 : 0
 
-      // Create Stripe checkout session
+      // Initialize Paystack checkout session
       const res = await fetch("/api/create-installment-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -270,11 +270,11 @@ export function PaymentConfirmationGroupModal({
                         <span className="text-slate-800">
                           {bookingDetails.paymentStyle === "Installment Payment" ? "First Payment:" : "Total:"}
                         </span>
-                        <span className="text-slate-800 font-semibold font-sans text-2xl">${bookingDetails.totalAmount}</span>
+                        <span className="text-slate-800 font-semibold font-sans text-2xl">₵{bookingDetails.totalAmount}</span>
                       </div>
                       {bookingDetails.paymentStyle === "Installment Payment" && (
                         <div className="text-xs text-slate-500 mt-1 text-right">
-                          Remaining: ${((bookingDetails.installmentTotal || 0) - bookingDetails.totalAmount).toFixed(2)}
+                          Remaining: ₵{((bookingDetails.installmentTotal || 0) - bookingDetails.totalAmount).toFixed(2)}
                         </div>
                       )}
                     </div>
@@ -288,7 +288,7 @@ export function PaymentConfirmationGroupModal({
                   </div>
                 )}
 
-                {/* Stripe Checkout Button */}
+                {/* Paystack Checkout Button */}
                 <Button
                   onClick={handleSubmit}
                   disabled={isProcessing}
@@ -302,7 +302,7 @@ export function PaymentConfirmationGroupModal({
                   ) : (
                     <div className="flex items-center gap-2">
                       <Lock className="w-4 h-4" />
-                      Proceed to Checkout - ${bookingDetails.totalAmount}
+                      Proceed to Checkout - ₵{bookingDetails.totalAmount}
                     </div>
                   )}
                 </Button>
