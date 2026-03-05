@@ -1,5 +1,3 @@
-import Stripe from "stripe"
-
 // In-memory storage for installment payments (replace with database later)
 interface InstallmentPayment {
   id: string

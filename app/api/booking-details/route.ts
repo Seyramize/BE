@@ -1,7 +1,6 @@
 export const dynamic = "force-dynamic";
 
 import { NextRequest, NextResponse } from 'next/server';
-import Stripe from 'stripe';
 import { experiences } from '@/lib/experiences-data';
 import { sendEmail } from '@/lib/mailtrap';
 import { verifyPaystackTransaction } from '@/lib/paystack-server';
