@@ -240,10 +240,18 @@ export default function CustomizeExperienceForm() {
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="mb-12">
-            <h2 className="text-4xl md:text-5xl font-sans font-normal text-slate-800 mb-4">Crafted just for you</h2>
-            <p className="text-slate-600 font-sans text-lg">
+            <h2 className="text-4xl md:text-5xl font-sans font-normal text-slate-800 mb-4">
+              Crafted just for you
+            </h2>
+            <p className="text-slate-600 font-sans text-lg mb-4">
               Share your vision. We'll transform it into an unforgettable journey.
             </p>
+            {formData.experienceName && (
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-sans text-slate-700">
+                <span className="font-semibold">Experience:</span>
+                <span>{formData.experienceName}</span>
+              </div>
+            )}
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-12">

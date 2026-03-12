@@ -103,12 +103,12 @@ export default function Home() {
         <div className="relative container mx-auto px-8 md:px-16 lg:px-32 xl:px-40 h-full flex flex-col justify-center">
           <div className="max-w-2xl mx-auto pt-0 pb-0 text-center">
             <h1 className="text-5xl md:text-5xl lg:text-6xl font-argent font-normal text-white leading-none md:leading-tight mb-5">
-              Go beyond
+              Go Beyond
               <br />
-              the ordinary
+              the Ordinary
             </h1>
             <div className="text-sm text-white/90 mb-5 max-w-lg font-sans leading-none md:leading-relaxed">
-              <p className="md:inline">Experiences that redefine the way you travel. </p>
+              <p className="md:inline">Curated cultural, adventure, and luxury experiences across Africa.</p>
               
             </div>
             <div className="flex flex-col items-center md:flex-row gap-4 mb-0 justify-center">
@@ -192,7 +192,7 @@ export default function Home() {
           {isMobile ? (
             <>
               {/* Mobile: Country carousels */}
-              {["Ghana", "Namibia", "São Tomé"].map((country) => {
+              {["Ghana", "Namibia"].map((country) => {
                 // Filter experiences by country and exclude Priceless experiences
                 const countryExperiences = visibleExperiences.filter(experience => {
                   const location = experience.defaultContent.location.toLowerCase();
@@ -309,13 +309,11 @@ export default function Home() {
               </div>
 
               {/* Country sections with 4 cards each */}
-              {["Ghana", "Namibia", "São Tomé"].map((country) => {
+              {["Ghana", "Namibia"].map((country) => {
                 // Filter experiences by country and exclude Priceless experiences
                 const countryExperiences = visibleExperiences.filter(experience => {
                   const location = experience.defaultContent.location.toLowerCase();
-                  const isCountryMatch = country === "São Tomé" 
-                    ? location.includes("são tomé") || location.includes("sao tome")
-                    : location.includes(country.toLowerCase());
+                  const isCountryMatch = location.includes(country.toLowerCase());
                   
                   return isCountryMatch && !experience.tags.includes("Priceless");
                 });
@@ -353,11 +351,11 @@ export default function Home() {
                       {/* 4th card - Explore more with solid blue-black background */}
                       <div className="relative rounded-lg overflow-hidden group">
                         <div className="relative h-[320px] bg-slate-900">
-                          <Link href={`/experiences?filter=${encodeURIComponent(country === "São Tomé" ? "São Tomé" : country)}`}>
+                          <Link href={`/experiences?filter=${encodeURIComponent(country)}`}>
                             <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6">
                               <TbBinoculars className="text-white mb-4" size={48} />
                               <h4 className="text-3xl font-serif font-normal text-white mt-2 mb-3">
-                                Explore more {country === "São Tomé" ? "São Toméan" : country === "Namibia" ? "Namib" : country === "Ghana" ? "Ghanaian" : "Ghanaian"} experiences
+                                Explore more {country === "Namibia" ? "Namib" : "Ghanaian"} experiences
                               </h4>
                             </div>
                           </Link>

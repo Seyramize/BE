@@ -127,27 +127,26 @@ export type Experience = {
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
           "Complimentary bites and drinks",
-          "Beyond Experiences Essentials™ Bag",
         ]
       },
       tags: ["Travel Planner's Choice", "2 PAX"]
     },
     {
       id: 2,
-      slug: "cape-coast-tour",
+      slug: "the-gold-coast",
       defaultContent: {
-        title: "Cape Coast Tour",
+        title: "The Gold Coast",
         shortDescription: "Trace Ghana's history and natural beauty in one journey.",
         image: "/images/experiences/cape-coast-castle/cover.jpg?height=400&width=300&text=Cape+Coast+Discovery",
         location: "Central Region, Ghana"
       },
       expandedContent: {
-        title: "Cape Coast Tour",
+        title: "The Gold Coast",
         fullDescription: "A powerful journey through Ghana's past — from Assin Manso and the castles of Cape Coast and Elmina, to the rainforest canopy walk at Kakum. History, reflection, and breathtaking views.",
         image: "/placeholder.svg?height=500&width=400&text=Cape+Coast+Castle+Historical",
       },
       bookingContent: {
-        title: "Cape Coast Tour",
+        title: "The Gold Coast",
         subtitle: "Embark on a profound journey through Ghana's rich history, from the sacred grounds of Assin Manso to the imposing castles of Cape Coast and Elmina. Experience the breathtaking canopy walk at Kakum National Park, where history and nature intertwine in a truly unforgettable way.",
         duration: "1 DAY",
         destinations: "3 DESTINATIONS",
@@ -179,13 +178,14 @@ export type Experience = {
           "/images/experiences/cape-coast-castle/Gallery/23.jpg?height=400&width=300&text=Cape+Coast+Castle+2",
           "/images/experiences/cape-coast-castle/Gallery/24.jpg?height=400&width=300&text=Cape+Coast+Castle+2",
         ],
-        overview: "Trace Ghana's history and natural beauty in one journey. Begin at Assin Manso Slave River, where enslaved people took their last bath. Continue to Cape Coast Castle and Elmina Castle, two of West Africa's most significant historical sites. End at Kakum National Park, where the canopy walkway offers a breathtaking view above the forest.",
+        overview: "Cape Coast holds some of Ghana’s most powerful historical landmarks and breathtaking natural landscapes. Along this historic coastline, centuries of history meet lush rainforests and sweeping ocean views. Our Cape Coast experiences offer a deeper connection to the region through journeys that explore both remembrance and discovery. Walk through the historic castles that shaped global history, reflect on stories of resilience and heritage, and venture into the surrounding rainforest for unforgettable views from above the canopy. These experiences bring together history, nature, and reflection for a journey that is both meaningful and memorable.",
         highlights: [
-          "Learn about Ghana's role in the transatlantic slave trade at Cape Coast and Elmina Castles.",
-          "Stand at the Door of No Return, where enslaved Africans were shipped away.",
-          "Visit Assin Manso and reflect on the journey of the enslaved.",
-          "Experience the rainforest from above on Kakum's canopy walkway.",
-          "Enjoy breathtaking coastal landscapes and countryside views.",
+          "Visit historic castles that played a central role in the transatlantic slave trade.",
+          "Reflect at important heritage sites connected to Ghana’s history and memory.",
+          "Explore the lush rainforest landscapes of Kakum National Park.",
+          "Walk high above the forest floor on the famous Kakum Canopy Walkway.",
+          "Discover the rich biodiversity and natural beauty of Ghana’s coastal forests.",
+          "Experience a powerful blend of history, nature, and cultural storytelling.",
         ],
         startingPrice: 4560,
         pricing: {
@@ -198,8 +198,32 @@ export type Experience = {
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
           "Complimentary bites and drinks",
-          "Beyond Experiences Essentials™ Bag",
-        ]
+        ],
+        variants: [
+          {
+            id: "final-passage",
+            title: "The Final Passage",
+            price: 4534.7,
+            overview:
+              "Trace one of Ghana’s most powerful historical journeys through sites connected to the transatlantic slave trade. The experience begins at Assin Manso Slave River, where enslaved Africans took their final bath before being transported to the coast. Guests then visit the historic Cape Coast Castle, where guided storytelling reveals the realities of the slave trade and the stories of resilience, remembrance, and resistance. This journey offers a profound and reflective look into one of the most significant chapters of Ghana’s history.",
+            highlights: [
+              "Stand at the historic river where enslaved Africans took their final bath before the journey to the coast.",
+              "Walk through the powerful chambers and dungeons of the castle while guides share the history of the transatlantic slave trade.",
+            ],
+          },
+          {
+            id: "castles-and-canopies",
+            title: "Castles & Canopies",
+            price: 4547.17,
+            overview:
+              "Experience the perfect blend of history and nature on this unforgettable journey to Cape Coast. The experience begins with a <b>guided visit to Cape Coast Castle</b>, offering powerful insights into the history of the transatlantic slave trade. The adventure continues at <b> Kakum National Park </b>, where guests learn about Ghana’s rainforest ecosystem before embarking on the famous Kakum Canopy Walkway, suspended high above the forest floor with breathtaking views.",
+            highlights: [
+              "Explore the UNESCO-listed fortress where centuries of history reveal the stories of trade, resilience, and remembrance.",
+              "Step into Ghana’s tropical rainforest and discover the diverse wildlife and ecosystems of this protected reserve.",
+              "Cross suspended bridges high above the forest floor for breathtaking views across the rainforest canopy.",
+            ],
+          },
+        ],
       },
       tags: ["Travel Planner's Choice", "1 PAX"]
     },
@@ -255,13 +279,13 @@ export type Experience = {
           "Complimentary bites and drinks",
         ]
       },
-      tags: ["1 PAX"]
+      tags: ["Priceless", "1 PAX"]
     },
     {
       id: 4,
-      slug: "accra-city-tour",
+      slug: "accra-uncovered",
       defaultContent: {
-        title: "Accra City Tour",
+        title: "Accra Uncovered",
         shortDescription: "Accra is a city alive with history, rhythm, and everyday energy.",
         image: "/images/experiences/accra-city-tour/hero.jpg?height=400&width=300&text=Accra+City+Tour",
         location: "Greater Accra, Ghana",
@@ -272,7 +296,7 @@ export type Experience = {
         image: "/placeholder.svg?height=500&width=400&text=Accra+Skyline+Modern",
       },
       bookingContent: {
-        title: "Accra City Tour",
+        title: "Accra Uncovered",
         subtitle: "Dive into the heart of Ghana's bustling capital, exploring its vibrant markets, rich museums, and iconic cultural sites—all in one unforgettable day.",
         duration: "1 DAY",
         destinations: "5 DESTINATIONS",
@@ -296,12 +320,13 @@ export type Experience = {
           "/images/experiences/accra-city-tour/Gallery/15.jpg?height=400&width=300&text=Accra+City+Tour",
           "/images/experiences/accra-city-tour/Gallery/16.jpg?height=400&width=300&text=Accra+City+Tour",
         ],
-        overview: "Accra is a city alive with history, rhythm, and everyday energy. Begin at the Kwame Nkrumah Mausoleum, dedicated to Ghana's first president, then step into the Ghana National Museum to explore centuries of heritage. At Independence Square, feel the spirit of Ghana's freedom, before diving into the color and chaos of Makola Market. Finish with handmade crafts and art at the Arts Centre, where you meet artisans shaping Ghana's creative future.",
+        overview: "Accra is a city where history, creativity, and culture meet in everyday life. From historic landmarks that shaped Ghana’s independence to vibrant markets filled with color and craftsmanship, the city offers a rich introduction to the spirit of the country. Our curated Accra experiences invite you to explore the capital through its stories, rhythms, and people. Walk through historic neighborhoods, discover traditional art forms, learn the cultural significance behind everyday practices, and connect with the energy that makes Accra one of Africa’s most dynamic cities. Each journey offers a different perspective on the capital — whether through history, craft, culture, or everyday life.",
         highlights: [
-          "Learn about Ghana's independence and heritage",
-          "Experience Makola's vibrant, sensory overload",
-          "Engage with artisans at the Arts Centre",
-          "Capture stunning photos at Independence Square",
+          "Explore some of Accra’s most iconic national landmarks and monuments.",
+          "Walk through historic districts where colonial architecture and local culture meet.",
+          "Experience traditional drumming and dance guided by local performers.",
+          "Browse vibrant markets filled with handmade fabrics, jewelry, and cultural artifacts.",
+          "Learn the stories behind Ghana’s struggle for independence and cultural heritage.",
         ],
         startingPrice: 4200,
         pricing: {
@@ -314,8 +339,45 @@ export type Experience = {
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
           "Complimentary bites and drinks",
-          "Beyond Experiences Essentials™ Bag",
-        ]
+        ],
+        variants: [
+          {
+            id: "soul-of-accra",
+            title: "The Soul of Accra",
+            price: 3513.3,
+            overview:
+              "Discover the cultural foundations of Ghana through a curated introduction to Accra’s heritage. This experience offers an engaging look into the traditions, symbols, and artistic expressions that shape everyday life in the city. The journey begins at the Ghana National Museum, where guests explore the country’s history through artifacts, art, and cultural storytelling. From there, the tour continues to Black Star Square, the iconic symbol of Ghana’s independence and national pride. The experience concludes with Traditional Drum and Dance Lessons, offering a lively and interactive introduction to Ghanaian rhythm and movement.",
+            highlights: [
+              "Walk through centuries of Ghanaian history as artifacts, art, and cultural stories reveal the foundations of the nation.",
+              "Stand beneath the Black Star Gate at the heart of Ghana’s independence monument and one of Accra’s most iconic landmarks.",
+              "Feel the rhythm of Ghana as local performers guide you through traditional drumming patterns and energetic dance movements.",
+            ],
+          },
+          {
+            id: "accra-through-time",
+            title: "Accra Through Time",
+            price: 3288.9,
+            overview:
+              "Step into Accra’s past with a journey through some of the city’s most historically significant landmarks. The experience begins with a guided walking tour through Jamestown, one of Accra’s oldest neighborhoods known for its colonial architecture, fishing culture, and historic lighthouse. Guests then visit the Kwame Nkrumah Memorial Park, where the story of Ghana’s independence and the legacy of its first president come to life. The experience concludes at Black Star Square, a powerful national symbol celebrating Ghana’s freedom and unity.",
+            highlights: [
+              "Explore the historic fishing district with its colonial architecture, vibrant street life, and towering lighthouse overlooking the Atlantic.",
+              "Discover the story of Ghana’s first president while walking through the beautifully designed park and museum honoring his legacy.",
+              "Visit the grand ceremonial grounds where Ghana celebrates independence, national pride, and historic state events.",
+            ],
+          },
+          {
+            id: "artisanal-accra",
+            title: "Artisanal Accra",
+            price: 4597.02,
+            overview:
+              "Explore Accra through its creativity, craftsmanship, and vibrant marketplaces. The experience begins with a visit to the Shea Butter Museum, where guests learn about the cultural significance and traditional production of shea butter. From there, guests explore either the Accra Arts Centre or the bustling Makola Market, discovering authentic handmade fabrics, jewellery, and local crafts. The experience concludes with a hands-on Batik Workshop, where participants create their own patterned fabric and take home a unique piece of Ghanaian artistry.",
+            highlights: [
+              "Learn how shea butter is traditionally produced and discover its deep cultural and economic importance across Ghana.",
+              "Wander through bustling market stalls filled with handcrafted fabrics, jewelry, and colorful Ghanaian textiles.",
+              "Create your own patterned fabric using traditional wax-resist dye techniques and take home a piece of Ghanaian craftsmanship.",
+            ],
+          },
+        ],
       },
       tags: ["Travel Planner's Choice", "1 PAX"]
     },
@@ -437,7 +499,6 @@ export type Experience = {
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
           "Complimentary bites and drinks",
-          "Beyond Experiences Essentials™ Bag",
         ]
       },
       tags: ["Travel Planner's Choice", "1 PAX"]
@@ -501,7 +562,7 @@ export type Experience = {
           "Private transportation including fuel"
         ]
       },
-      tags: ["2 PAX"]
+      tags: ["Priceless", "2 PAX"]
     },
     {
       id: 8,
@@ -593,7 +654,7 @@ export type Experience = {
           },
         ],
       },
-      tags: ["2 PAX"],
+      tags: ["Priceless", "2 PAX"],
     },
     {
       id: 9,
@@ -642,7 +703,7 @@ export type Experience = {
           "Complimentary bites and drinks",
         ]
       },
-      tags: ["2 PAX"]
+      tags: ["Priceless", "2 PAX"]
     },
     {
       id: 10,
@@ -709,7 +770,6 @@ export type Experience = {
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
           "Complimentary bites and drinks",
-          "Beyond Experiences Essentials™ Bag",
         ]
       },
       tags: ["Travel Planner's Choice", "1 PAX"]
@@ -760,7 +820,6 @@ export type Experience = {
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
           "Complimentary bites and drinks",
-          "Beyond Experiences Essentials™ Bag",
         ]
       },
       tags: ["Travel Planner's Choice", "1 PAX"]
@@ -810,7 +869,6 @@ export type Experience = {
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
           "Complimentary bites and drinks",
-          "Beyond Experiences Essentials™ Bag",
         ]
       },
       tags: ["Travel Planner's Choice", "1 PAX"]
@@ -863,7 +921,6 @@ export type Experience = {
     //       "Private transportation including fuel",
     //       "Dedicated chaperone and access to resident guides",
     //       "Complimentary bites and drinks",
-    //       "Beyond Experiences Essentials™ Bag",
     //     ],
     //     variants: [
     //       {
@@ -964,7 +1021,6 @@ export type Experience = {
           "Private transportation including fuel",
           "Dedicated chaperone and access to resident guides",
           "Complimentary bites and drinks",
-          "Beyond Experiences Essentials™ Bag",
         ]
       },
       tags: ["Travel Planner's Choice", "3 PAX"]
@@ -1068,170 +1124,170 @@ export type Experience = {
       },
       tags: ["Travel Planner's Choice", "1 PAX"]
     },
-    {
-      id: 17,
-      slug: "dolphin-watching-and-snorkeling",
-      defaultContent: {
-        title: "Dolphin Watching and Snorkeling",
-        shortDescription: "The waters off São Tomé are alive with life.",
-        image: "/images/experiences/dws/cover.jpeg?height=400&width=300&text=Akosombo+Lake+Adventure",
-        location: "São Tomé",
-      },
-      expandedContent: {
-        title: "Dolphin Watching and Snorkeling",
-        fullDescription: "Adventure and calm meet on Volta Lake. Abseil from rocky cliffs, kayak through quiet waters, and end the day with a golden-hour boat cruise under the open sky.",
-        image: "/placeholder.svg?height=500&width=400&text=Lake+Volta+Dam+Sunset",
-      },
-      bookingContent: {
-        title: "Dolphin Watching and Snorkeling",
-        subtitle: "From abseiling to kayaking and a sunset cruise, experience the best of Volta Lake in one action-packed day.",
-        duration: "1 DAY",
-        destinations: "3 DESTINATIONS",
-        maxGuests: "12 GUESTS (MAX)",
-        heroImage: "/images/experiences/dws/cover.jpeg?height=800&width=1200&text=Volta+Lake+Adventure",
-        galleryImages: [
-          "/images/experiences/dws/Gallery/1.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/dws/Gallery/2.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/dws/Gallery/3.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/dws/Gallery/4.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/dws/Gallery/5.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/dws/Gallery/6.jpg?height=400&width=300&text=Abseiling+Cliffs",
-        ],
-        overview: "The waters off São Tomé are alive with life. At dawn, pods of bottlenose and spotted dolphins skim close to shore — playful, curious, and in their hundreds. Slip into the sea with snorkeling gear, listen to their underwater calls, and swim alongside them in their element. After, dive deeper into São Tomé's waters, discovering reefs, marine life, and the island's vibrant undersea world.",
-        highlights: [
-          "Early-morning dolphin encounter with bottlenose and spotted dolphins",
-          "Snorkeling with dolphins in their natural habitat",
-          "Scuba diving among reefs and tropical marine life",
-          "Chance to spot other migratory species in season",
-        ],
-        startingPrice: 960,
-        pricing: {
-          oneGuest: 960,
-          twoGuests: 960,
-          threeOrMoreGuests: 960,
-        },
-        minimumGuests: 3,
-        included: [
-          "Life jackets",
-          "Full Snorkel Gear",
-          "Water and Fruit",
-        ]
-      },
-      tags: ["Travel Planner's Choice", "3 PAX"]
-    },
-    {
-      id: 18,
-      slug: "cacao-and-coffee-farm-tour",
-      defaultContent: {
-        title: "Cocoa and Coffee Farm Tour",
-        shortDescription: "This is São Tomé's story — told through its farms, flavors, and landscapes.",
-        image: "/images/experiences/cocoa-tour/cover.jpg?height=400&width=300&text=Akosombo+Lake+Adventure",
-        location: "São Tomé",
-      },
-      expandedContent: {
-        title: "Cocoa and Coffee Farm Tour",
-        fullDescription: "Adventure and calm meet on Volta Lake. Abseil from rocky cliffs, kayak through quiet waters, and end the day with a golden-hour boat cruise under the open sky.",
-        image: "/placeholder.svg?height=500&width=400&text=Lake+Volta+Dam+Sunset",
-      },
-      bookingContent: {
-        title: "Cocoa and Coffee Farm Tour",
-        subtitle: "From abseiling to kayaking and a sunset cruise, experience the best of Volta Lake in one action-packed day.",
-        duration: "1 DAY",
-        destinations: "3 DESTINATIONS",
-        maxGuests: "12 GUESTS (MAX)",
-        heroImage: "/images/experiences/cocoa-tour/cover.jpg?height=800&width=1200&text=Volta+Lake+Adventure",
-        galleryImages: [
-          "/images/experiences/cocoa-tour/Gallery/1.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/cocoa-tour/Gallery/2.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/cocoa-tour/Gallery/3.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/cocoa-tour/Gallery/4.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/cocoa-tour/Gallery/5.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/cocoa-tour/Gallery/6.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/cocoa-tour/Gallery/7.jpg?height=400&width=300&text=Abseiling+Cliffs",
-        ],
-        overview: "This is São Tomé's story — told through its farms, flavors, and landscapes. Walk through historic plantations like Agostinho Neto and Bela Vista, exploring the journey of cocoa from nursery to fermentation to drying. Pause for a traditional lunch with sweeping sea views, cool off at Blue Lagoon, and end with tastings at Diogo Vaz — rich chocolates and fresh coffee made on the island itself.",
-        highlights: [
-          "Guided tours of historic cocoa and coffee plantations",
-          "Hands-on look at the cocoa-making process from bean to bar",
-          "Traditional Santomean lunch with sea views",
-          "Refreshing stop at Blue Lagoon",
-          "Coffee and chocolate tasting at Diogo Vaz",
-        ],
-        startingPrice: 2160,
-        pricing: {
-          oneGuest: 2160,
-          twoGuests: 2160,
-          threeOrMoreGuests: 2160,
-        },
-        minimumGuests: 2,
-        included: [
-          "Local experienced guide",
-          "4x4 Transport and fuel",
-          "All visit and fee expenses",
-          "Water and complimentary snacks",
-          "All visit and fee expenses",
-          "Lunch at Roca Monte Forte",
-          "Coffee or tea at Diogo Vaz",
-        ]
-      },
-      tags: ["Travel Planner's Choice", "2 PAX"]
-    },
-    {
-      id: 19,
-      slug: "sao-tome-city-tour",
-      defaultContent: {
-        title: "São Tomé City Tour",
-        shortDescription: "São Tomé's capital is small but full of life. Begin in Bobo Forro's lively markets — fruit, fish, color, and noise.",
-        image: "/images/experiences/sao-tome-tour/cover.jpg?height=400&width=300&text=Akosombo+Lake+Adventure",
-        location: "São Tomé",
-      },
-      expandedContent: {
-        title: "São Tomé City Tour",
-        fullDescription: "Adventure and calm meet on Volta Lake. Abseil from rocky cliffs, kayak through quiet waters, and end the day with a golden-hour boat cruise under the open sky.",
-        image: "/placeholder.svg?height=500&width=400&text=Lake+Volta+Dam+Sunset",
-      },
-      bookingContent: {
-        title: "São Tomé City Tour",
-        subtitle: "From abseiling to kayaking and a sunset cruise, experience the best of Volta Lake in one action-packed day.",
-        duration: "1 DAY",
-        destinations: "3 DESTINATIONS",
-        maxGuests: "12 GUESTS (MAX)",
-        heroImage: "/images/experiences/sao-tome-tour/cover.jpg?height=800&width=1200&text=Volta+Lake+Adventure",
-        galleryImages: [
-          "/images/experiences/sao-tome-tour/Gallery/1.webp?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/sao-tome-tour/Gallery/2.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/sao-tome-tour/Gallery/3.webp?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/sao-tome-tour/Gallery/4.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/sao-tome-tour/Gallery/5.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/sao-tome-tour/Gallery/6.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/sao-tome-tour/Gallery/7.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/sao-tome-tour/Gallery/8.jpg?height=400&width=300&text=Abseiling+Cliffs",
-          "/images/experiences/sao-tome-tour/Gallery/9.jpg?height=400&width=300&text=Abseiling+Cliffs",
-        ],
-        overview: "São Tomé's capital is small but full of life. Begin in Bobo Forro's lively markets — fruit, fish, color, and noise. Wander through colonial streets, past the azulejo-covered Cathedral, the Presidential Palace, and Independence Square. Visit the National Museum to uncover the island's layered history, then end with flavors: grilled fish, tropical fruits, or Santomean ice cream in exotic island varieties.",
-        highlights: [
-          "Explore São Tomé's bustling markets and colonial architecture",
-          "Visit Independence Square, Cathedral, and Presidential Palace",
-          "Discover the island's past at the National Museum",
-          "Taste local cuisine and Santomean ice cream",
-        ],
-        startingPrice: 1440,
-        pricing: {
-          oneGuest: 1440,
-          twoGuests: 1440,
-          threeOrMoreGuests: 1440,
-        },
-        minimumGuests: 2,
-        included: [
-          "Local experienced guide",
-          "4x4 Transport and fuel",
-          "Water and complimentary snacks",
-          "All visit and fee expenses",
-          "Exotic Ice Cream (or pastry)",
-        ]
-      },
-      tags: ["Travel Planner's Choice", "2 PAX"]
-    },
+    // {
+    //   id: 17,
+    //   slug: "dolphin-watching-and-snorkeling",
+    //   defaultContent: {
+    //     title: "Dolphin Watching and Snorkeling",
+    //     shortDescription: "The waters off São Tomé are alive with life.",
+    //     image: "/images/experiences/dws/cover.jpeg?height=400&width=300&text=Akosombo+Lake+Adventure",
+    //     location: "São Tomé",
+    //   },
+    //   expandedContent: {
+    //     title: "Dolphin Watching and Snorkeling",
+    //     fullDescription: "Adventure and calm meet on Volta Lake. Abseil from rocky cliffs, kayak through quiet waters, and end the day with a golden-hour boat cruise under the open sky.",
+    //     image: "/placeholder.svg?height=500&width=400&text=Lake+Volta+Dam+Sunset",
+    //   },
+    //   bookingContent: {
+    //     title: "Dolphin Watching and Snorkeling",
+    //     subtitle: "From abseiling to kayaking and a sunset cruise, experience the best of Volta Lake in one action-packed day.",
+    //     duration: "1 DAY",
+    //     destinations: "3 DESTINATIONS",
+    //     maxGuests: "12 GUESTS (MAX)",
+    //     heroImage: "/images/experiences/dws/cover.jpeg?height=800&width=1200&text=Volta+Lake+Adventure",
+    //     galleryImages: [
+    //       "/images/experiences/dws/Gallery/1.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/dws/Gallery/2.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/dws/Gallery/3.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/dws/Gallery/4.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/dws/Gallery/5.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/dws/Gallery/6.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //     ],
+    //     overview: "The waters off São Tomé are alive with life. At dawn, pods of bottlenose and spotted dolphins skim close to shore — playful, curious, and in their hundreds. Slip into the sea with snorkeling gear, listen to their underwater calls, and swim alongside them in their element. After, dive deeper into São Tomé's waters, discovering reefs, marine life, and the island's vibrant undersea world.",
+    //     highlights: [
+    //       "Early-morning dolphin encounter with bottlenose and spotted dolphins",
+    //       "Snorkeling with dolphins in their natural habitat",
+    //       "Scuba diving among reefs and tropical marine life",
+    //       "Chance to spot other migratory species in season",
+    //     ],
+    //     startingPrice: 960,
+    //     pricing: {
+    //       oneGuest: 960,
+    //       twoGuests: 960,
+    //       threeOrMoreGuests: 960,
+    //     },
+    //     minimumGuests: 3,
+    //     included: [
+    //       "Life jackets",
+    //       "Full Snorkel Gear",
+    //       "Water and Fruit",
+    //     ]
+    //   },
+    //   tags: ["Travel Planner's Choice", "3 PAX"]
+    // },
+    // {
+    //   id: 18,
+    //   slug: "cacao-and-coffee-farm-tour",
+    //   defaultContent: {
+    //     title: "Cocoa and Coffee Farm Tour",
+    //     shortDescription: "This is São Tomé's story — told through its farms, flavors, and landscapes.",
+    //     image: "/images/experiences/cocoa-tour/cover.jpg?height=400&width=300&text=Akosombo+Lake+Adventure",
+    //     location: "São Tomé",
+    //   },
+    //   expandedContent: {
+    //     title: "Cocoa and Coffee Farm Tour",
+    //     fullDescription: "Adventure and calm meet on Volta Lake. Abseil from rocky cliffs, kayak through quiet waters, and end the day with a golden-hour boat cruise under the open sky.",
+    //     image: "/placeholder.svg?height=500&width=400&text=Lake+Volta+Dam+Sunset",
+    //   },
+    //   bookingContent: {
+    //     title: "Cocoa and Coffee Farm Tour",
+    //     subtitle: "From abseiling to kayaking and a sunset cruise, experience the best of Volta Lake in one action-packed day.",
+    //     duration: "1 DAY",
+    //     destinations: "3 DESTINATIONS",
+    //     maxGuests: "12 GUESTS (MAX)",
+    //     heroImage: "/images/experiences/cocoa-tour/cover.jpg?height=800&width=1200&text=Volta+Lake+Adventure",
+    //     galleryImages: [
+    //       "/images/experiences/cocoa-tour/Gallery/1.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/cocoa-tour/Gallery/2.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/cocoa-tour/Gallery/3.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/cocoa-tour/Gallery/4.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/cocoa-tour/Gallery/5.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/cocoa-tour/Gallery/6.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/cocoa-tour/Gallery/7.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //     ],
+    //     overview: "This is São Tomé's story — told through its farms, flavors, and landscapes. Walk through historic plantations like Agostinho Neto and Bela Vista, exploring the journey of cocoa from nursery to fermentation to drying. Pause for a traditional lunch with sweeping sea views, cool off at Blue Lagoon, and end with tastings at Diogo Vaz — rich chocolates and fresh coffee made on the island itself.",
+    //     highlights: [
+    //       "Guided tours of historic cocoa and coffee plantations",
+    //       "Hands-on look at the cocoa-making process from bean to bar",
+    //       "Traditional Santomean lunch with sea views",
+    //       "Refreshing stop at Blue Lagoon",
+    //       "Coffee and chocolate tasting at Diogo Vaz",
+    //     ],
+    //     startingPrice: 2160,
+    //     pricing: {
+    //       oneGuest: 2160,
+    //       twoGuests: 2160,
+    //       threeOrMoreGuests: 2160,
+    //     },
+    //     minimumGuests: 2,
+    //     included: [
+    //       "Local experienced guide",
+    //       "4x4 Transport and fuel",
+    //       "All visit and fee expenses",
+    //       "Water and complimentary snacks",
+    //       "All visit and fee expenses",
+    //       "Lunch at Roca Monte Forte",
+    //       "Coffee or tea at Diogo Vaz",
+    //     ]
+    //   },
+    //   tags: ["Travel Planner's Choice", "2 PAX"]
+    // },
+    // {
+    //   id: 19,
+    //   slug: "sao-tome-city-tour",
+    //   defaultContent: {
+    //     title: "São Tomé City Tour",
+    //     shortDescription: "São Tomé's capital is small but full of life. Begin in Bobo Forro's lively markets — fruit, fish, color, and noise.",
+    //     image: "/images/experiences/sao-tome-tour/cover.jpg?height=400&width=300&text=Akosombo+Lake+Adventure",
+    //     location: "São Tomé",
+    //   },
+    //   expandedContent: {
+    //     title: "São Tomé City Tour",
+    //     fullDescription: "Adventure and calm meet on Volta Lake. Abseil from rocky cliffs, kayak through quiet waters, and end the day with a golden-hour boat cruise under the open sky.",
+    //     image: "/placeholder.svg?height=500&width=400&text=Lake+Volta+Dam+Sunset",
+    //   },
+    //   bookingContent: {
+    //     title: "São Tomé City Tour",
+    //     subtitle: "From abseiling to kayaking and a sunset cruise, experience the best of Volta Lake in one action-packed day.",
+    //     duration: "1 DAY",
+    //     destinations: "3 DESTINATIONS",
+    //     maxGuests: "12 GUESTS (MAX)",
+    //     heroImage: "/images/experiences/sao-tome-tour/cover.jpg?height=800&width=1200&text=Volta+Lake+Adventure",
+    //     galleryImages: [
+    //       "/images/experiences/sao-tome-tour/Gallery/1.webp?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/sao-tome-tour/Gallery/2.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/sao-tome-tour/Gallery/3.webp?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/sao-tome-tour/Gallery/4.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/sao-tome-tour/Gallery/5.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/sao-tome-tour/Gallery/6.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/sao-tome-tour/Gallery/7.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/sao-tome-tour/Gallery/8.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //       "/images/experiences/sao-tome-tour/Gallery/9.jpg?height=400&width=300&text=Abseiling+Cliffs",
+    //     ],
+    //     overview: "São Tomé's capital is small but full of life. Begin in Bobo Forro's lively markets — fruit, fish, color, and noise. Wander through colonial streets, past the azulejo-covered Cathedral, the Presidential Palace, and Independence Square. Visit the National Museum to uncover the island's layered history, then end with flavors: grilled fish, tropical fruits, or Santomean ice cream in exotic island varieties.",
+    //     highlights: [
+    //       "Explore São Tomé's bustling markets and colonial architecture",
+    //       "Visit Independence Square, Cathedral, and Presidential Palace",
+    //       "Discover the island's past at the National Museum",
+    //       "Taste local cuisine and Santomean ice cream",
+    //     ],
+    //     startingPrice: 1440,
+    //     pricing: {
+    //       oneGuest: 1440,
+    //       twoGuests: 1440,
+    //       threeOrMoreGuests: 1440,
+    //     },
+    //     minimumGuests: 2,
+    //     included: [
+    //       "Local experienced guide",
+    //       "4x4 Transport and fuel",
+    //       "Water and complimentary snacks",
+    //       "All visit and fee expenses",
+    //       "Exotic Ice Cream (or pastry)",
+    //     ]
+    //   },
+    //   tags: ["Travel Planner's Choice", "2 PAX"]
+    // },
     {
       id: 20,
       slug: "canvas-and-soul",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -57,7 +57,6 @@ import {
   Zap,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
-import { useSearchParams } from "next/navigation";
 import {
   Carousel,
   CarouselContent,
@@ -404,6 +403,7 @@ function getRelatedExperiences(
 export default function BookExperiencePage() {
   const { slug } = useParams();
   const searchParams = useSearchParams();
+  const router = useRouter();
   const isMobile = useMobile();
   const sessionId = searchParams.get("session_id");
   console.log("URL slug:", slug);
@@ -421,7 +421,7 @@ export default function BookExperiencePage() {
 
   const [selectedVariant, setSelectedVariant] = useState<
     ExperienceVariant | undefined
-  >(experience?.bookingContent.variants?.[0]);
+  >(undefined);
 
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
@@ -503,15 +503,25 @@ export default function BookExperiencePage() {
   }
   const { bookingContent } = experience;
 
+  const isUmbrellaExperience =
+    experience.slug === "the-gold-coast" ||
+    experience.slug === "accra-uncovered";
+
+  const hasVariants =
+    !!bookingContent.variants && bookingContent.variants.length > 0;
+
   const currentBookingContent = selectedVariant || bookingContent;
 
   const [numberOfGuests, setNumberOfGuests] = useState(1);
 
-  const [totalPrice, setTotalPrice] = useState(
-    "price" in currentBookingContent
+  const [totalPrice, setTotalPrice] = useState(() => {
+    if (isUmbrellaExperience && !selectedVariant) {
+      return 0;
+    }
+    return "price" in currentBookingContent
       ? currentBookingContent.price
-      : bookingContent.pricing?.oneGuest || 0
-  );
+      : bookingContent.pricing?.oneGuest || 0;
+  });
 
   // Active counter for group experiences
   const isGroupExperience = bookingContent.isGroupExperience;
@@ -534,6 +544,9 @@ export default function BookExperiencePage() {
 
     if (selectedVariant) {
       newTotalPrice = selectedVariant.price * guests;
+    } else if (isUmbrellaExperience) {
+      // For Gold Coast & Accra Uncovered, price stays 0 until a variant is selected
+      newTotalPrice = 0;
     } else if (isGroupExperience) {
       // For group experiences, use the fixed group pricing
       const pricePerGuest = bookingContent.groupPricing?.fullPrice || 0;
@@ -563,6 +576,9 @@ export default function BookExperiencePage() {
 
     if (selectedVariant) {
       newTotalPrice = selectedVariant.price * guests;
+    } else if (isUmbrellaExperience) {
+      // For Gold Coast & Accra Uncovered, price stays 0 until a variant is selected
+      newTotalPrice = 0;
     } else if (isGroupExperience) {
       const pricePerGuest = bookingContent.groupPricing?.fullPrice || 0;
       newTotalPrice = pricePerGuest * guests;
@@ -585,6 +601,21 @@ export default function BookExperiencePage() {
   const handleVariantChange = (variantId: string) => {
     const variant = bookingContent.variants?.find((v) => v.id === variantId);
     setSelectedVariant(variant);
+  };
+
+  const handleCustomizeClick = () => {
+    const experienceName = selectedVariant
+      ? selectedVariant.title
+      : bookingContent.title;
+
+    const params = new URLSearchParams();
+    params.set("experience", experienceName);
+    params.set("experienceSlug", experience.slug);
+    if (selectedVariant?.id) {
+      params.set("variantId", selectedVariant.id);
+    }
+
+    router.push(`/customize-experience?${params.toString()}`);
   };
 
   const relatedExperiences = getRelatedExperiences(experience, experiences);
@@ -1141,10 +1172,7 @@ export default function BookExperiencePage() {
                     {experience.slug === "a-date-with-fashion" ? (
                       <>
                         {bookingContent.variants && (
-                          <Select
-                            onValueChange={handleVariantChange}
-                            defaultValue={bookingContent.variants[0]?.id}
-                          >
+                          <Select onValueChange={handleVariantChange}>
                             <SelectTrigger className="w-full bg-champagne text-black border-gray-800 rounded-lg px-4 py-3 text-sm justify-between">
                               <SelectValue placeholder="Select an option" />
                             </SelectTrigger>
@@ -1167,10 +1195,7 @@ export default function BookExperiencePage() {
                     ) : experience.slug === "art-after-dark" ? (
                       <>
                         {bookingContent.variants && (
-                          <Select
-                            onValueChange={handleVariantChange}
-                            defaultValue={bookingContent.variants[0]?.id}
-                          >
+                          <Select onValueChange={handleVariantChange}>
                             <SelectTrigger className="w-full bg-champagne text-black border-gray-800 rounded-lg px-4 py-3 text-sm justify-between">
                               <SelectValue placeholder="Select a package" />
                             </SelectTrigger>
@@ -1183,6 +1208,27 @@ export default function BookExperiencePage() {
                             </SelectContent>
                           </Select>
                         )}
+                        <Button
+                          className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
+                          onClick={() => setIsBookingModalOpen(true)}
+                        >
+                          Book this experience
+                        </Button>
+                      </>
+                    ) : hasVariants ? (
+                      <>
+                        <Select onValueChange={handleVariantChange}>
+                          <SelectTrigger className="w-full bg-champagne text-black border-gray-800 rounded-lg px-4 py-3 text-sm justify-between">
+                            <SelectValue placeholder="Select an option" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {bookingContent.variants?.map((variant) => (
+                              <SelectItem key={variant.id} value={variant.id}>
+                                {variant.title}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                         <Button
                           className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
                           onClick={() => setIsBookingModalOpen(true)}
@@ -1205,21 +1251,13 @@ export default function BookExperiencePage() {
                         >
                           Book this experience
                         </Button>
-                        <Link
-                          href={`/customize-experience?experience=${encodeURIComponent(
-                            selectedVariant
-                              ? selectedVariant.title
-                              : bookingContent.title
-                          )}`}
-                          className="w-full"
+                        <Button
+                          variant="outline"
+                          className="w-full border-slate-900 text-slate-900 bg-white font-sans px-6 py-4 rounded-lg"
+                          onClick={handleCustomizeClick}
                         >
-                          <Button
-                            variant="outline"
-                            className="w-full border-slate-900 text-slate-900 bg-white font-sans px-6 py-4 rounded-lg"
-                          >
-                            More than 6 guests?
-                          </Button>
-                        </Link>
+                          More than 6 guests?
+                        </Button>
                       </>
                     )}
                   </div>
@@ -1275,10 +1313,7 @@ export default function BookExperiencePage() {
                         {experience.slug === "a-date-with-fashion" ? (
                           <div className="flex items-center gap-2">
                             {bookingContent.variants && (
-                              <Select
-                                onValueChange={handleVariantChange}
-                                defaultValue={bookingContent.variants[0]?.id}
-                              >
+                              <Select onValueChange={handleVariantChange}>
                                 <SelectTrigger className="w-auto bg-[#EFE6DA] text-black border-gray-800 rounded-sm px-3 py-2 text-sm justify-between gap-x-5">
                                   <SelectValue placeholder="Select an option" />
                                 </SelectTrigger>
@@ -1304,10 +1339,7 @@ export default function BookExperiencePage() {
                         ) : experience.slug === "art-after-dark" ? (
                           <div className="flex items-center gap-2">
                             {bookingContent.variants && (
-                              <Select
-                                onValueChange={handleVariantChange}
-                                defaultValue={bookingContent.variants[0]?.id}
-                              >
+                              <Select onValueChange={handleVariantChange}>
                                 <SelectTrigger className="w-auto bg-[#EFE6DA] text-black border-gray-800 rounded-sm px-3 py-2 text-sm justify-between gap-x-5">
                                   <SelectValue placeholder="Select a package" />
                                 </SelectTrigger>
@@ -1323,6 +1355,30 @@ export default function BookExperiencePage() {
                                 </SelectContent>
                               </Select>
                             )}
+                            <Button
+                              className="w-full sm:w-auto bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
+                              onClick={() => setIsBookingModalOpen(true)}
+                            >
+                              Book this experience
+                            </Button>
+                          </div>
+                        ) : hasVariants ? (
+                          <div className="flex items-center gap-2">
+                            <Select onValueChange={handleVariantChange}>
+                              <SelectTrigger className="w-auto bg-[#EFE6DA] text-black border-gray-800 rounded-sm px-3 py-2 text-sm justify-between gap-x-5">
+                                <SelectValue placeholder="Select an option" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {bookingContent.variants?.map((variant) => (
+                                  <SelectItem
+                                    key={variant.id}
+                                    value={variant.id}
+                                  >
+                                    {variant.title}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
                             <Button
                               className="w-full sm:w-auto bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
                               onClick={() => setIsBookingModalOpen(true)}
@@ -1356,21 +1412,13 @@ export default function BookExperiencePage() {
                             >
                               Book this experience
                             </Button>
-                            <Link
-                              href={`/customize-experience?experience=${encodeURIComponent(
-                                selectedVariant
-                                  ? selectedVariant.title
-                                  : bookingContent.title
-                              )}`}
-                              className="w-full sm:w-auto"
+                            <Button
+                              variant="outline"
+                              className="w-full border-slate-900 text-slate-900 bg-white font-sans px-6 sm:px-8 py-5 sm:py-3 rounded-sm"
+                              onClick={handleCustomizeClick}
                             >
-                              <Button
-                                variant="outline"
-                                className="w-full border-slate-900 text-slate-900 bg-white font-sans px-6 sm:px-8 py-5 sm:py-3 rounded-sm"
-                              >
-                                More than 6 guests?
-                              </Button>
-                            </Link>
+                              More than 6 guests?
+                            </Button>
                           </>
                         )}
                       </div>

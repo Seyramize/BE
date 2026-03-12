@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X, Users, MapPin, Phone, Mail, User, Settings, Banknote } from "lucide-react";
@@ -65,6 +66,7 @@ export function BookingConfirmationGroup({
   onBookingConfirmed,
   activeCounter,
 }: BookingConfirmationGroupProps) {
+  const router = useRouter();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [totalPrice, setTotalPrice] = useState(experience.totalPrice);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -186,6 +188,20 @@ export function BookingConfirmationGroup({
     });
     setTotalPrice(experience.totalPrice);
     setErrors({});
+  };
+
+  const handleMoreThanSixGuests = () => {
+    const params = new URLSearchParams();
+    params.set("experience", experience.title);
+    params.set("experienceSlug", experience.slug);
+
+    const guestCount = parseInt(formData.guests) || numberOfGuests || 0;
+    if (!isNaN(guestCount) && guestCount > 0) {
+      params.set("guestCount", guestCount.toString());
+    }
+
+    onClose();
+    router.push(`/customize-experience?${params.toString()}`);
   };
 
   if (!isOpen) return null;
@@ -478,9 +494,7 @@ export function BookingConfirmationGroup({
                       <button
                         type="button"
                         className="underline hover:text-slate-800 text-slate-600 text-sm self-start text-left"
-                        onClick={() => {
-                          console.log("More than six guests clicked")
-                        }}
+                        onClick={handleMoreThanSixGuests}
                       >
                         More than six guests?
                       </button>

@@ -12,7 +12,7 @@ import { experiences, Experience } from "@/lib/experiences-data"
 import { TravelPlannerModal } from "@/components/travel-planner-modal-clean"
 import { useSearchParams } from "next/navigation"
 
-const filterOptions = ["Ghana", "Namibia", "São Tomé"]
+const filterOptions = ["Ghana", "Namibia"]
 
 const visibleExperiences = experiences.filter(e => !e.hidden);
 
@@ -31,8 +31,9 @@ export default function ExperiencesClientPage() {
 			(!activeFilter ||
 				(activeFilter === "Priceless" && experience.tags.includes("Priceless")) ||
 				(activeFilter === "Ghana" && experience.defaultContent.location.includes("Ghana")) ||
-				(activeFilter === "Namibia" && experience.defaultContent.location.includes("Namibia")) ||
-				(activeFilter === "São Tomé" && experience.defaultContent.location.includes("São Tomé")))
+				(activeFilter === "Namibia" && experience.defaultContent.location.includes("Namibia")))
+				// (activeFilter === "São Tomé" && experience.defaultContent.location.includes("São Tomé"))
+			
 
 		const matchesSearch =
 			!searchQuery ||

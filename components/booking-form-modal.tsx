@@ -3,6 +3,7 @@
 import type React from "react"
 import { useState, useEffect } from "react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { X, Calendar, Users, MapPin, Phone, Mail, User, Settings, UserRound } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -51,7 +52,15 @@ interface FormData {
   customGuestCount: number
 }
 
-export function BookingFormModal({ isOpen, onClose, experience, showConfirmation = false, bookingDetails, onBookingConfirmed }: BookingFormModalProps) {
+export function BookingFormModal({
+  isOpen,
+  onClose,
+  experience,
+  showConfirmation = false,
+  bookingDetails,
+  onBookingConfirmed,
+}: BookingFormModalProps) {
+  const router = useRouter()
   const [showPaymentFlow, setShowPaymentFlow] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const { minDate, maxDate } = getBookingDateLimits()
@@ -222,6 +231,23 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
     if (onBookingConfirmed) {
       onBookingConfirmed(guests)
     }
+  }
+
+  const handleMoreThanSixGuests = () => {
+    const params = new URLSearchParams()
+    params.set("experience", experience.title)
+    params.set("experienceSlug", experience.slug)
+
+    const guestCount =
+      formData.guests.length > 0
+        ? getGuestCount(formData.guests[0])
+        : formData.customGuestCount
+    if (guestCount > 0) {
+      params.set("guestCount", guestCount.toString())
+    }
+
+    onClose()
+    router.push(`/customize-experience?${params.toString()}`)
   }
 
   if (!isOpen) return null
@@ -560,9 +586,7 @@ export function BookingFormModal({ isOpen, onClose, experience, showConfirmation
                         <button
                           type="button"
                           className="underline hover:text-slate-800 text-slate-600 text-sm self-start text-left"
-                          onClick={() => {
-                            console.log("More than six guests clicked")
-                          }}
+                          onClick={handleMoreThanSixGuests}
                         >
                           More than six guests?
                         </button>
