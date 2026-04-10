@@ -13,13 +13,13 @@ export type ViciTablePackage = {
 };
 
 export const VICI_TABLE_PACKAGES: ViciTablePackage[] = [
-  {
-    id: "1",
-    title: "Noah's Package",
-    priceLabel: "₵ 1",
-    amountGhs: 1,
-    includes: ["Joy Daddy Bitters x1", "Plantain Chips x1"],
-  },
+  // {
+  //   id: "1",
+  //   title: "Noah's Package",
+  //   priceLabel: "₵ 1",
+  //   amountGhs: 1,
+  //   includes: ["Joy Daddy Bitters x1", "Plantain Chips x1"],
+  // },
   {
     id: "5K",
     title: "Entry table",
