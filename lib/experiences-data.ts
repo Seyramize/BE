@@ -523,7 +523,7 @@ export type Experience = {
     // },
     {
       id: 5,
-      slug: "vici-summer-uncorked",
+      slug: "vici-garden-party-chic",
       defaultContent: {
         title: "Vici Day Party",
         shortDescription: "Vici Day Party is Accra's signature premium day party, a vibrant celebration of rhythm, taste, and connection.",
