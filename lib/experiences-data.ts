@@ -569,7 +569,7 @@ export type Experience = {
           "Lush lounge setups and shaded social spaces",
           "Games, social activations, and curated photo moments",
         ],
-        dressCode: "Summer Glam, Light, Stylish And Confident",
+        dressCode: "Summer Chic, Light, Stylish And Confident",
         ageRestriction: "18+",
         notes: [
           "A fully charged phone & power bank",
