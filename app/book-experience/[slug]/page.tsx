@@ -652,7 +652,7 @@ export default function BookExperiencePage() {
         </div>
         <div className="relative w-full max-w-5xl mx-auto px-6 text-center z-10">
           {/* Group Experience Text - Above Title (Mobile Only) */}
-          {isGroupExperience && experience.slug !== "vici-summer-uncorked" && (
+          {isGroupExperience && experience.slug !== "vici-garden-party-chic" && (
             <div className="mb-2 sm:hidden">
               <span className="text-white font-sans text-xs uppercase tracking-widest">
                 GROUP EXPERIENCE
@@ -661,7 +661,7 @@ export default function BookExperiencePage() {
           )}
 
           {/* Vici Pill - Desktop */}
-          {experience.slug === "vici-summer-uncorked" && (
+          {experience.slug === "vici-garden-party-chic" && (
             <div className="hidden sm:inline-flex uppercase items-center gap-2 bg-black/30 backdrop-blur-sm text-white px-4 py-2 rounded-full font-sans text-[10px] mb-4 border border-white/20">
               <img src="/images/vicilogo.png" alt="Vici" className="w-5 h-5" />
               <span className="tracking-widest">Table reservations only</span>
@@ -675,7 +675,7 @@ export default function BookExperiencePage() {
           </h1>
 
           {/* Vici Pill - Mobile */}
-          {experience.slug === "vici-summer-uncorked" && (
+          {experience.slug === "vici-garden-party-chic" && (
             <div className="sm:hidden inline-flex uppercase items-center gap-2 bg-black/30 backdrop-blur-sm text-white px-4 py-2 rounded-full font-sans text-[10px] mt-2 mb-4 border border-white/20">
               <img src="/images/vicilogo.png" alt="Vici" className="w-5 h-5" />
               <span className="tracking-widest">Table reservations only</span>
@@ -683,7 +683,7 @@ export default function BookExperiencePage() {
           )}
 
           {/* Group Experience Subtitle - Below Title (Mobile Only) */}
-          {isGroupExperience && experience.slug !== "vici-summer-uncorked" && (
+          {isGroupExperience && experience.slug !== "vici-garden-party-chic" && (
             <p className="text-white font-sans text-xs uppercase tracking-widest mb-6 sm:hidden">
               {bookingContent.subtitle}
             </p>
@@ -692,7 +692,7 @@ export default function BookExperiencePage() {
           {/* Group Experience Details - Below Title (Desktop Only) */}
           {isGroupExperience && (
             <div className="hidden sm:block mt-4">
-              {experience.slug === "vici-summer-uncorked" ? (
+              {experience.slug === "vici-garden-party-chic" ? (
                 <div className="inline-flex items-center justify-center gap-4 px-6 py-2 rounded-full bg-slate-900 shadow-sm text-xs uppercase tracking-widest font-sans text-white">
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
@@ -767,7 +767,7 @@ export default function BookExperiencePage() {
       {/* Key Stats Bar - Mobile Only for Group Experiences */}
       {isGroupExperience && (
         <div className="sm:hidden bg-gray-800 py-4 px-6">
-          {experience.slug === "vici-summer-uncorked" ? (
+          {experience.slug === "vici-garden-party-chic" ? (
             <div className="flex items-center justify-center gap-2 text-white font-sans text-[10px] uppercase tracking-widest whitespace-nowrap">
               <div className="flex items-center gap-1.5">
                 <Calendar className="w-3 h-3" />
@@ -874,12 +874,12 @@ export default function BookExperiencePage() {
                     <div
                       className="sm:hidden space-y-4"
                       ref={
-                        experience.slug === "vici-summer-uncorked"
+                        experience.slug === "vici-garden-party-chic"
                           ? buttonRef
                           : undefined
                       }
                     >
-                      {experience.slug !== "vici-summer-uncorked" && (
+                      {experience.slug !== "vici-garden-party-chic" && (
                         <div className="flex items-center justify-between">
                           <div>
                             <h3 className="text-[11px] uppercase tracking-widest font-sans text-black mb-1">
@@ -922,7 +922,7 @@ export default function BookExperiencePage() {
                           </div>
                         </div>
                       )}
-                      {experience.slug === "vici-summer-uncorked" && (
+                      {experience.slug === "vici-garden-party-chic" && (
                         <div className="flex flex-col gap-3">
                           <Button
                             className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
@@ -976,7 +976,7 @@ export default function BookExperiencePage() {
 
                     {/* Desktop Layout */}
                     <div className="hidden sm:block">
-                      {experience.slug === "vici-summer-uncorked" ? (
+                      {experience.slug === "vici-garden-party-chic" ? (
                         <div className="flex justify-end">
                           <Button
                             className="bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
@@ -1027,7 +1027,7 @@ export default function BookExperiencePage() {
                             </div>
 
                             {/* Payment Plan */}
-                            {experience.slug !== "vici-summer-uncorked" &&
+                            {experience.slug !== "vici-garden-party-chic" &&
                               experience.slug !==
                                 "december-in-ghana-castles-to-coastlines" && (
                                 <div className="flex flex-col justify-center items-start tracking-widest leading-none space-y-0 mt-1">
@@ -1087,7 +1087,7 @@ export default function BookExperiencePage() {
                                   </Button>
                                 </a>
                               </div>
-                            ) : experience.slug === "vici-summer-uncorked" ? (
+                            ) : experience.slug === "vici-garden-party-chic" ? (
                               <Button
                                 className="ml-auto bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
                                 onClick={() =>
@@ -1111,7 +1111,7 @@ export default function BookExperiencePage() {
                   </div>
                 ) : (
                   /* Regular Experience Pricing */
-                  experience.slug !== "vici-summer-uncorked" && (
+                  experience.slug !== "vici-garden-party-chic" && (
                     <div className="flex sm:hidden items-center justify-between gap-4">
                       <div>
                         <h3 className="text-xs uppercase tracking-widest font-sans text-black">
@@ -1224,7 +1224,7 @@ export default function BookExperiencePage() {
                           Book this experience
                         </Button>
                       </>
-                    ) : experience.slug === "vici-summer-uncorked" ? (
+                    ) : experience.slug === "vici-garden-party-chic" ? (
                       <Button
                         className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
                         onClick={() => setIsGuestlistReservationModalOpen(true)}
@@ -1254,12 +1254,12 @@ export default function BookExperiencePage() {
                 {!isGroupExperience && (
                   <div
                     className={`hidden sm:flex items-center ${
-                      experience.slug === "vici-summer-uncorked"
+                      experience.slug === "vici-garden-party-chic"
                         ? "justify-end"
                         : "justify-between"
                     } gap-6`}
                   >
-                    {experience.slug !== "vici-summer-uncorked" && (
+                    {experience.slug !== "vici-garden-party-chic" && (
                       <div>
                         <h3 className="text-lg sm:text-xs font-sans uppercase tracking-widest text-slate-600">
                           No. of Pax
@@ -1374,7 +1374,7 @@ export default function BookExperiencePage() {
                               Book this experience
                             </Button>
                           </div>
-                        ) : experience.slug === "vici-summer-uncorked" ? (
+                        ) : experience.slug === "vici-garden-party-chic" ? (
                           <Button
                             className="bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
                             onClick={() =>
@@ -1765,7 +1765,7 @@ export default function BookExperiencePage() {
       {/* Sticky CTA on mobile */}
       {isMobile && isSticky && (
         <div className="sm:hidden fixed bottom-4 left-0 right-0 px-4 z-20">
-          {experience.slug === "vici-summer-uncorked" ? (
+          {experience.slug === "vici-garden-party-chic" ? (
             <Button
               className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"
               onClick={() => setIsGuestlistReservationModalOpen(true)}

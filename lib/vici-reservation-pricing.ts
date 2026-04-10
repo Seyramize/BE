@@ -81,4 +81,4 @@ export function getIncludesForPackageId(packageId: string): string[] {
   return getViciPackageById(packageId)?.includes ?? [];
 }
 
-export const VICI_EXPERIENCE_SLUG = "vici-summer-uncorked";
+export const VICI_EXPERIENCE_SLUG = "vici-garden-party-chic";
