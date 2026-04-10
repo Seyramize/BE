@@ -16,7 +16,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { X } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { GuestlistReservationBookingConfirmationModal } from "@/components/guestlist-reservation-booking-confirmation-modal";
+import {
+  VICI_TABLE_PACKAGES,
+  getViciPackageById,
+} from "@/lib/vici-reservation-pricing";
 
 interface JoinGuestlistReservationModalProps {
   isOpen: boolean;
@@ -44,17 +47,9 @@ export function JoinGuestlistReservationModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [confirmationOpen, setConfirmationOpen] = useState(false);
-  const [confirmationData, setConfirmationData] = useState<{
-    name?: string;
-    guests?: number;
-    packageName?: string;
-    email?: string;
-  } | null>(null);
 
   useEffect(() => {
     if (isOpen) {
-      // Reset form state when modal opens
       setFullName("");
       setEmail("");
       setPhone("");
@@ -74,7 +69,7 @@ export function JoinGuestlistReservationModal({
     setIsSubmitting(true);
 
     if (!isConfirmed) {
-      toast.error("Please confirm you are 18+ to continue.");
+      toast.error("Please confirm you are 18+ and agree to complete payment via Paystack.");
       setIsSubmitting(false);
       return;
     }
@@ -85,66 +80,52 @@ export function JoinGuestlistReservationModal({
       return;
     }
 
-    if (!selectedPackage) {
+    if (!selectedPackage || !getViciPackageById(selectedPackage)) {
       toast.error("Please select a table package.");
       setIsSubmitting(false);
       return;
     }
 
     try {
-      const response = await fetch("/api/join-guestlist-reservation", {
+      // Directly redirect to Paystack for payment
+      const res = await fetch("/api/create-vici-table-checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fullName,
           email,
+          fullName,
           phone,
           guests: parseInt(guests),
-          instagramHandle,
-          howHeard,
-          specialRequests,
-          selectedPackage: selectedPackage,
-          experienceSlug,
+          selectedPackage,
         }),
       });
-
-      if (response.ok) {
-        const data = await response.json().catch(() => null);
-        setConfirmationData({
-          name: fullName,
-          guests: parseInt(guests),
-          packageName: selectedPackage,
-          email,
-        });
-        setConfirmationOpen(true);
-      } else {
-        const data = await response.json();
-        toast.error(data.error || "Something went wrong. Please try again.");
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        toast.error(
+          typeof data.error === "string"
+            ? data.error
+            : "Could not start payment. Please try again."
+        );
+        return;
       }
-    } catch (error) {
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        toast.error("No payment link returned. Please try again.");
+      }
+    } catch {
       toast.error("An unexpected error occurred. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const getPackageIncludes = (packageName: string): string[] => {
-    const packages: Record<string, string[]> = {
-      '10K': ['Veuve Rich x2', 'Agavita Reposado x1', 'Food Platter x1'],
-      '15K': ['Veuve Rich x3', 'Agavita Reposado x1', 'Food Platter x1', 'Juice Pitcher x1'],
-      '20K': ['Veuve Rich x4', 'Casamigos x1', 'Food Platter x2', 'Juice Pitcher x1'],
-      '30K': ['Ace Of Spades x1', '1942 Tequila x1', 'Veuve Rich x2', 'Food Platter x2', 'Juice Pitcher x2']
-    };
-    return packages[packageName] || [];
-  };
-  
   if (!isOpen) return null;
 
   return (
     <>
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-2 sm:p-4">
         <div className="relative w-full max-w-6xl h-full max-h-[95vh] bg-white rounded-lg overflow-hidden shadow-2xl flex flex-col lg:flex-row">
-          {/* Left Side - Image */}
           <div className="relative w-full lg:w-2/5 h-48 lg:h-full flex-shrink-0">
             <Image
               src={heroImage || "/placeholder.svg"}
@@ -156,7 +137,7 @@ export function JoinGuestlistReservationModal({
             <div className="absolute inset-0 flex items-end justify-start lg:p-8 p-6 pb-8 lg:items-center lg:justify-center">
               <div className="text-left text-white">
                 <p className="text-sm font-sans uppercase tracking-wider mb-2 opacity-90">
-                  You're reserving a table for
+                  Book your table for
                 </p>
                 <h2 className="text-3xl lg:text-5xl font-serif font-normal leading-tight">
                   {title}
@@ -165,18 +146,18 @@ export function JoinGuestlistReservationModal({
             </div>
           </div>
 
-          {/* Right Side - Form */}
           <div className="flex-1 bg-stone-100 relative flex flex-col min-h-0">
             <div className="flex-1 overflow-y-auto min-h-0 p-6 lg:p-8">
               {showSuccess ? (
                 <div className="text-center flex flex-col items-center justify-center h-full">
-                  <h2 className="text-3xl font-serif mb-4">You're in! 🥂</h2>
+                  <h2 className="text-3xl font-serif mb-4">You&apos;re in! 🥂</h2>
                   <p className="text-slate-600 mb-6 max-w-md">
-                    Thank you for joining the Vici Day Party guest list.
+                    Thank you—your table reservation for Vici Day Party has been
+                    received.
                     <br />
                     <br />
-                    We'll send your confirmation and event details shortly, get
-                    ready for sunshine, music, and champagne.
+                    Complete payment on the next screen or via Paystack from
+                    your confirmation email.
                   </p>
                   <Button onClick={onClose} className="w-1/2">
                     Close
@@ -187,12 +168,14 @@ export function JoinGuestlistReservationModal({
                   <button
                     onClick={onClose}
                     className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 z-10"
+                    type="button"
                   >
                     <X className="w-6 h-6" />
                   </button>
-                  <h2 className="text-2xl font-serif mb-4">Reserve a Table</h2>
+                  <h2 className="text-2xl font-serif mb-4">Book this experience</h2>
                   <p className="text-slate-600 mb-6">
-                    Submit your details to reserve a table at Vici Day Party.
+                    Choose your table package and pay securely with Paystack after
+                    you submit your details.
                   </p>
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -229,7 +212,7 @@ export function JoinGuestlistReservationModal({
                       </div>
                       <div>
                         <Label htmlFor="guests">Number of Guests</Label>
-                        <Select onValueChange={setGuests} defaultValue={guests}>
+                        <Select onValueChange={setGuests} value={guests}>
                           <SelectTrigger id="guests">
                             <SelectValue placeholder="Select number of guests" />
                           </SelectTrigger>
@@ -246,169 +229,79 @@ export function JoinGuestlistReservationModal({
                     <div>
                       <Label htmlFor="instagram">
                         Instagram Handle (optional)
-                      </Label> 
+                      </Label>
                       <Input
                         id="instagram"
                         value={instagramHandle}
                         onChange={(e) => setInstagramHandle(e.target.value)}
                       />
                     </div>
-                    
-                    {/* Table Package Selection */}
+
                     <div>
-                      <Label className="mb-3 block">Select Your Table Package</Label>
+                      <Label className="mb-3 block">Select your table package</Label>
                       <div className="grid grid-cols-1 gap-3">
-                        {/* Table for Six */}
-                        <button
-                          type="button"
-                          onClick={() => setSelectedPackage("10K")}
-                          className={`relative rounded-lg p-4 text-left transition-all ${
-                            selectedPackage === "10K"
-                              ? "bg-[#071428] border-transparent text-white"
-                              : "border-2 border-stone-300 bg-white hover:border-stone-400 text-slate-800"
-                          }`}
-                        >
-                          <div className="flex items-start gap-4">
-                            <div className="w-28 h-28 rounded-md overflow-hidden flex-shrink-0 bg-gray-100">
-                              <Image
-                                src={heroImage || "/placeholder.svg"}
-                                alt="Table for Six"
-                                width={112}
-                                height={112}
-                                className="object-cover"
-                              />
-                            </div>
+                        {VICI_TABLE_PACKAGES.map((pkg) => (
+                          <button
+                            key={pkg.id}
+                            type="button"
+                            onClick={() => setSelectedPackage(pkg.id)}
+                            className={`relative rounded-lg p-4 text-left transition-all ${
+                              selectedPackage === pkg.id
+                                ? "bg-[#071428] border-transparent text-white"
+                                : "border-2 border-stone-300 bg-white hover:border-stone-400 text-slate-800"
+                            }`}
+                          >
+                            <div className="flex items-start gap-4">
+                              <div className="w-28 h-28 rounded-md overflow-hidden flex-shrink-0 bg-gray-100">
+                                <Image
+                                  src={heroImage || "/placeholder.svg"}
+                                  alt={pkg.title}
+                                  width={112}
+                                  height={112}
+                                  className="object-cover"
+                                />
+                              </div>
 
-                            <div className="flex-1">
-                                <p className={`${selectedPackage === "10K" ? "text-sm uppercase tracking-wider text-white/90 mb-1" : "text-xs uppercase tracking-wider text-slate-600 mb-1"}`}>
-                                Table for Six
-                              </p>
-                              <p className={`${selectedPackage === "10K" ? "text-2xl font-semibold text-white" : "text-2xl font-semibold text-slate-800"}`}>₵ 10K</p>
-                            </div>
+                              <div className="flex-1">
+                                <p
+                                  className={
+                                    selectedPackage === pkg.id
+                                      ? "text-sm uppercase tracking-wider text-white/90 mb-1"
+                                      : "text-xs uppercase tracking-wider text-slate-600 mb-1"
+                                  }
+                                >
+                                  {pkg.title}
+                                </p>
+                                <p
+                                  className={
+                                    selectedPackage === pkg.id
+                                      ? "text-2xl font-semibold text-white"
+                                      : "text-2xl font-semibold text-slate-800"
+                                  }
+                                >
+                                  {pkg.priceLabel}
+                                </p>
+                              </div>
 
-                            <div className={`text-right ${selectedPackage === "10K" ? "text-white/90" : "text-slate-600"}`}>
-                              <p className="text-xs uppercase tracking-wider mb-1">Includes</p>
-                              <p className="text-xs">Veuve Rich x2</p>
-                              <p className="text-xs">Agavita Reposado x1</p>
-                              <p className="text-xs">Food Platter x1</p>
+                              <div
+                                className={`text-right max-w-[42%] sm:max-w-none ${
+                                  selectedPackage === pkg.id
+                                    ? "text-white/90"
+                                    : "text-slate-600"
+                                }`}
+                              >
+                                <p className="text-xs uppercase tracking-wider mb-1">
+                                  Includes
+                                </p>
+                                {pkg.includes.map((line, i) => (
+                                  <p key={i} className="text-xs">
+                                    {line}
+                                  </p>
+                                ))}
+                              </div>
                             </div>
-                          </div>
-                        </button>
-                        
-                        {/* Table for Eight */}
-                        <button
-                          type="button"
-                          onClick={() => setSelectedPackage("15K")}
-                          className={`relative rounded-lg p-4 text-left transition-all ${
-                            selectedPackage === "15K"
-                              ? "bg-[#071428] border-transparent text-white"
-                              : "border-2 border-stone-300 bg-white hover:border-stone-400 text-slate-800"
-                          }`}
-                        >
-                          <div className="flex items-start gap-4">
-                            <div className="w-28 h-28 rounded-md overflow-hidden flex-shrink-0 bg-gray-100">
-                              <Image
-                                src={heroImage || "/placeholder.svg"}
-                                alt="Table for Eight"
-                                width={112}
-                                height={112}
-                                className="object-cover"
-                              />
-                            </div>
-
-                            <div className="flex-1">
-                              <p className={`${selectedPackage === "15K" ? "text-sm uppercase tracking-wider text-white/90 mb-1" : "text-xs uppercase tracking-wider text-slate-600 mb-1"}`}>
-                                Table for Eight
-                              </p>
-                              <p className={`${selectedPackage === "15K" ? "text-2xl font-semibold text-white" : "text-2xl font-semibold text-slate-800"}`}>₵ 15K</p>
-                            </div>
-
-                            <div className={`text-right ${selectedPackage === "15K" ? "text-white/90" : "text-slate-600"}`}>
-                              <p className="text-xs uppercase tracking-wider mb-1">Includes</p>
-                              <p className="text-xs">Veuve Rich x3</p>
-                              <p className="text-xs">Agavita Reposado x1</p>
-                              <p className="text-xs">Food Platter x1</p>
-                              <p className="text-xs">Juice Pitcher x1</p>
-                            </div>
-                          </div>
-                        </button>
-
-                        {/* Table for Ten */}
-                        <button
-                          type="button"
-                          onClick={() => setSelectedPackage("20K")}
-                          className={`relative rounded-lg p-4 text-left transition-all ${
-                            selectedPackage === "20K"
-                              ? "bg-[#071428] border-transparent text-white"
-                              : "border-2 border-stone-300 bg-white hover:border-stone-400 text-slate-800"
-                          }`}
-                        >
-                          <div className="flex items-start gap-4">
-                            <div className="w-28 h-28 rounded-md overflow-hidden flex-shrink-0 bg-gray-100">
-                              <Image
-                                src={heroImage || "/placeholder.svg"}
-                                alt="Table for Ten"
-                                width={112}
-                                height={112}
-                                className="object-cover"
-                              />
-                            </div>
-
-                            <div className="flex-1">
-                              <p className={`${selectedPackage === "20K" ? "text-sm uppercase tracking-wider text-white/90 mb-1" : "text-xs uppercase tracking-wider text-slate-600 mb-1"}`}>
-                                Table for Ten
-                              </p>
-                              <p className={`${selectedPackage === "20K" ? "text-2xl font-semibold text-white" : "text-2xl font-semibold text-slate-800"}`}>₵ 20K</p>
-                            </div>
-
-                            <div className={`text-right ${selectedPackage === "20K" ? "text-white/90" : "text-slate-600"}`}>
-                              <p className="text-xs uppercase tracking-wider mb-1">Includes</p>
-                              <p className="text-xs">Veuve Rich x4</p>
-                              <p className="text-xs">Casamigos x1</p>
-                              <p className="text-xs">Food Platter x2</p>
-                              <p className="text-xs">Juice Pitcher x1</p>
-                            </div>
-                          </div>
-                        </button>
-
-                        {/* Table for Ten */}
-                        <button
-                          type="button"
-                          onClick={() => setSelectedPackage("30K")}
-                          className={`relative rounded-lg p-4 text-left transition-all ${
-                            selectedPackage === "30K"
-                              ? "bg-[#071428] border-transparent text-white"
-                              : "border-2 border-stone-300 bg-white hover:border-stone-400 text-slate-800"
-                          }`}
-                        >
-                          <div className="flex items-start gap-4">
-                            <div className="w-28 h-28 rounded-md overflow-hidden flex-shrink-0 bg-gray-100">
-                              <Image
-                                src={heroImage || "/placeholder.svg"}
-                                alt="Table for Ten"
-                                width={112}
-                                height={112}
-                                className="object-cover"
-                              />
-                            </div>
-
-                            <div className="flex-1">
-                              <p className={`${selectedPackage === "30K" ? "text-sm uppercase tracking-wider text-white/90 mb-1" : "text-xs uppercase tracking-wider text-slate-600 mb-1"}`}>
-                                Table for Ten
-                              </p>
-                              <p className={`${selectedPackage === "30K" ? "text-2xl font-semibold text-white" : "text-2xl font-semibold text-slate-800"}`}>₵ 30K</p>
-                            </div>
-
-                            <div className={`text-right ${selectedPackage === "30K" ? "text-white/90" : "text-slate-600"}`}>
-                              <p className="text-xs uppercase tracking-wider mb-1">Includes</p>
-                              <p className="text-xs">Ace Of Spades x1</p>
-                              <p className="text-xs">1942 Tequila x1</p>
-                              <p className="text-xs">Veuve Rich x2</p>
-                              <p className="text-xs">Food Platter x2</p>
-                              <p className="text-xs">Juice Pitcher x2</p>
-                            </div>
-                          </div>
-                        </button>
+                          </button>
+                        ))}
                       </div>
                     </div>
 
@@ -435,7 +328,9 @@ export function JoinGuestlistReservationModal({
                         htmlFor="terms"
                         className="text-sm font-normal text-slate-600 leading-tight"
                       >
-                        I understand this is a reservation request and Vici will contact me to finalize the booking.
+                        I confirm I am 18+ and agree to complete payment via
+                        Paystack to secure my table. I understand Vici may contact
+                        me to finalize details.
                       </Label>
                     </div>
                     <Button
@@ -443,7 +338,7 @@ export function JoinGuestlistReservationModal({
                       className="w-full pt-4"
                       disabled={isSubmitting || !isConfirmed || !selectedPackage}
                     >
-                      {isSubmitting ? "Submitting..." : "Reserve a Table"}
+                      {isSubmitting ? "Submitting…" : "Continue To Payment"}
                     </Button>
                   </form>
                 </>
@@ -452,22 +347,6 @@ export function JoinGuestlistReservationModal({
           </div>
         </div>
       </div>
-      
-      <GuestlistReservationBookingConfirmationModal
-        isOpen={confirmationOpen}
-        onClose={() => {
-          setConfirmationOpen(false);
-          setConfirmationData(null);
-          onClose();
-        }}
-        booking={confirmationData ? {
-          name: confirmationData.name || '',
-          email: confirmationData.email || '',
-          guests: confirmationData.guests || 1,
-          selectedPackage: confirmationData.packageName || '',
-          packageIncludes: getPackageIncludes(confirmationData.packageName || '')
-        } : null}
-      />
     </>
   );
 }

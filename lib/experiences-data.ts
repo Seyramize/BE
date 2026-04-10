@@ -537,7 +537,7 @@ export type Experience = {
       },
       bookingContent: {
         title: "Vici Day Party",
-        subtitle: "20TH DEC, 2025",
+        subtitle: "18TH APR, 2026",
         duration: "1 DAY",
         destinations: "1 DESTINATION",
         maxGuests: "100 GUESTS (MAX)",
@@ -578,8 +578,8 @@ export type Experience = {
         isGroupExperience: true,
         totalSlots: 100,
         availableSlots: 100,
-        startDate: "2025-12-20",
-        endDate: "2025-12-20",
+        startDate: "2026-04-18",
+        endDate: "2026-04-18",
         eventLocation: "Vine Restaurant, Labone",
         groupPricing: {
           fullPrice: 4200,

@@ -11,8 +11,7 @@ import { GalleryModal } from "@/components/gallery-modal";
 import { EnquireAvailabilityModal } from "@/components/enquire-availability-modal";
 import { BookingConfirmationGroup } from "@/components/booking-confirmation-group";
 import { JoinGuestlistReservationModal } from "@/components/join-guestlist-reservation-modal";
-import { JoinGuestlistModal } from "@/components/join-guestlist-modal";
-import { GuestlistClosedModal } from "@/components/guestlist-closed-modal"; // Import the new modal
+import { GuestlistReservationBookingConfirmationModal } from "@/components/guestlist-reservation-booking-confirmation-modal";
 import {
   experiences,
   type Experience,
@@ -431,11 +430,9 @@ export default function BookExperiencePage() {
   const [isMastercardModalOpen, setIsMastercardModalOpen] = useState(false);
   const [isEnquireModalOpen, setIsEnquireModalOpen] = useState(false);
   const [isGroupConfirmationOpen, setIsGroupConfirmationOpen] = useState(false);
-  const [isGuestlistModalOpen, setIsGuestlistModalOpen] = useState(false);
   const [isGuestlistReservationModalOpen, setIsGuestlistReservationModalOpen] =
     useState(false);
-  const [isGuestlistClosedModalOpen, setIsGuestlistClosedModalOpen] =
-    useState(false);
+  const [isGuestlistConfirmationModalOpen, setIsGuestlistConfirmationModalOpen] = useState(false);
   const buttonRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -445,8 +442,13 @@ export default function BookExperiencePage() {
         .then((res) => res.json())
         .then((data) => {
           setBookingDetails(data);
-          setIsBookingModalOpen(true);
-          setShowConfirmation(true);
+          // Check if it's a guestlist reservation
+          if (data.bookingType === 'vici_table') {
+            setIsGuestlistConfirmationModalOpen(true);
+          } else {
+            setIsBookingModalOpen(true);
+            setShowConfirmation(true);
+          }
         })
         .catch(() => {
           setIsBookingModalOpen(true);
@@ -922,20 +924,13 @@ export default function BookExperiencePage() {
                       )}
                       {experience.slug === "vici-summer-uncorked" && (
                         <div className="flex flex-col gap-3">
-                          {/* <Button
+                          <Button
                             className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
                             onClick={() =>
                               setIsGuestlistReservationModalOpen(true)
                             }
                           >
-                            Reserve a Table
-                          </Button> */}
-                          <Button
-                            variant="outline"
-                            className="w-full border-slate-900 text-slate-900 bg-white font-sans px-6 py-6 rounded-lg hover:bg-slate-50"
-                            onClick={() => setIsGuestlistClosedModalOpen(true)}
-                          >
-                            Join the Guestlist
+                            Book this experience
                           </Button>
                         </div>
                       )}
@@ -982,22 +977,15 @@ export default function BookExperiencePage() {
                     {/* Desktop Layout */}
                     <div className="hidden sm:block">
                       {experience.slug === "vici-summer-uncorked" ? (
-                        <div className="flex justify-end gap-4">
+                        <div className="flex justify-end">
                           <Button
-                            variant="outline"
-                            className="border-slate-900 text-slate-900 bg-white hover:bg-slate-50 w-56 py-3 rounded-lg text-sm font-sans"
-                            onClick={() => setIsGuestlistClosedModalOpen(true)}
-                          >
-                            Join the Guestlist
-                          </Button>
-                          {/* <Button
                             className="bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
                             onClick={() =>
                               setIsGuestlistReservationModalOpen(true)
                             }
                           >
-                            Reserve a Table
-                          </Button> */}
+                            Book this experience
+                          </Button>
                         </div>
                       ) : (
                         <div className="flex items-center justify-between">
@@ -1106,7 +1094,7 @@ export default function BookExperiencePage() {
                                   setIsGuestlistReservationModalOpen(true)
                                 }
                               >
-                                Reserve a Table
+                                Book this experience
                               </Button>
                             ) : (
                               <Button
@@ -1241,7 +1229,7 @@ export default function BookExperiencePage() {
                         className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg"
                         onClick={() => setIsGuestlistReservationModalOpen(true)}
                       >
-                        Reserve a Table
+                        Book this experience
                       </Button>
                     ) : (
                       <>
@@ -1387,23 +1375,14 @@ export default function BookExperiencePage() {
                             </Button>
                           </div>
                         ) : experience.slug === "vici-summer-uncorked" ? (
-                          <div className="flex gap-4">
-                            <Button
-                              variant="outline"
-                              className="border-slate-900 text-slate-900 bg-white hover:bg-slate-50 font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
-                              onClick={() => setIsGuestlistClosedModalOpen(true)}
-                            >
-                              Join the Guestlist
-                            </Button>
-                            {/* <Button
-                              className="bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
-                              onClick={() =>
-                                setIsGuestlistReservationModalOpen(true)
-                              }
-                            >
-                              Reserve a Table
-                            </Button> */}
-                          </div>
+                          <Button
+                            className="bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 sm:px-8 py-6 sm:py-3 rounded-sm"
+                            onClick={() =>
+                              setIsGuestlistReservationModalOpen(true)
+                            }
+                          >
+                            Book this experience
+                          </Button>
                         ) : (
                           <>
                             <Button
@@ -1760,17 +1739,22 @@ export default function BookExperiencePage() {
         title={bookingContent.title}
       />
 
-      <JoinGuestlistModal
-        isOpen={isGuestlistModalOpen}
-        onClose={() => setIsGuestlistModalOpen(false)}
-        experienceSlug={experience.slug}
-        heroImage={bookingContent.heroImage}
-        title={bookingContent.title}
-      />
-
-      <GuestlistClosedModal
-        isOpen={isGuestlistClosedModalOpen}
-        onClose={() => setIsGuestlistClosedModalOpen(false)}
+      <GuestlistReservationBookingConfirmationModal
+        isOpen={isGuestlistConfirmationModalOpen}
+        onClose={() => setIsGuestlistConfirmationModalOpen(false)}
+        booking={
+          bookingDetails && bookingDetails.bookingType === 'vici_table'
+            ? {
+                name: bookingDetails.fullName,
+                email: bookingDetails.email,
+                phone: bookingDetails.phone,
+                guests: bookingDetails.guests,
+                selectedPackage: bookingDetails.selectedPackage,
+                priceLabel: bookingDetails.priceLabel,
+                packageIncludes: bookingDetails.packageIncludes || [],
+              }
+            : null
+        }
       />
 
       <MastercardPaymentBounceModal
@@ -1782,21 +1766,12 @@ export default function BookExperiencePage() {
       {isMobile && isSticky && (
         <div className="sm:hidden fixed bottom-4 left-0 right-0 px-4 z-20">
           {experience.slug === "vici-summer-uncorked" ? (
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                className="flex-1 border-slate-900 text-slate-900 bg-white font-sans px-4 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition hover:bg-slate-50"
-                onClick={() => setIsGuestlistModalOpen(true)}
-              >
-                Join Guestlist
-              </Button>
-              {/* <Button
-                className="flex-1 bg-slate-900 hover:bg-slate-900 text-white font-sans px-4 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"
-                onClick={() => setIsGuestlistReservationModalOpen(true)}
-              >
-                Reserve Table
-              </Button> */}
-            </div>
+            <Button
+              className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"
+              onClick={() => setIsGuestlistReservationModalOpen(true)}
+            >
+              Book this experience
+            </Button>
           ) : experience.slug === "a-date-with-fashion" ? (
             <Button
               className="w-full bg-slate-900 hover:bg-slate-900 text-white font-sans px-6 py-6 rounded-lg shadow-xl shadow-black/20 ring-1 ring-black/5 transition"

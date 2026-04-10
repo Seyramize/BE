@@ -160,7 +160,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
             </button>
 
             {/* Content */}
-            <div className="flex-1 min-h-0 overflow-y-auto px-6 py-3 sm:p-6 lg:p-8 pt-2 sm:pt-14 lg:pt-16">
+            <div className="flex-1 min-h-0 overflow-y-auto px-6 py-4 sm:p-6 lg:p-8 pt-4 sm:pt-14 lg:pt-16">
               <div className="max-w-full sm:max-w-lg md:max-w-xl mx-auto">
                
 
@@ -173,26 +173,23 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
 
                 {/* Booking Details */}
                 <div className="space-y-3 sm:space-y-6 mb-4 sm:mb-8">
-                  {/* Experience + Guests (two columns on mobile to match design) */}
-                  <div className="grid grid-cols-2 gap-3 sm:block">
-                    {/* Experience */}
-                    <div>
-                      <div className="flex items-center gap-2 mb-1 sm:mb-2">
-                        <MapPin className="w-4 h-4 text-slate-600" />
-                        <span className="text-xs sm:text-sm font-medium text-slate-600 uppercase tracking-wider">EXPERIENCE</span>
-                      </div>
-                      <p className="text-base sm:text-lg font-sans text-slate-800">{bookingDetails.experienceName}</p>
+                  {/* Experience */}
+                  <div>
+                    <div className="flex items-center gap-2 mb-1 sm:mb-2">
+                      <MapPin className="w-4 h-4 text-slate-600" />
+                      <span className="text-xs sm:text-sm font-medium text-slate-600 uppercase tracking-wider">EXPERIENCE</span>
                     </div>
-                    {/* Guests */}
-                    <div>
-                      <div className="flex items-center gap-2 mb-1 sm:mb-2">
-                        <Users className="w-4 h-4 text-slate-600" />
-                        <span className="text-xs sm:text-sm font-medium text-slate-600 uppercase tracking-wider">GUESTS</span>
-                      </div>
-                      <p className="text-base sm:text-lg font-sans text-slate-800">
-                        {bookingDetails.guests} Person{bookingDetails.guests !== 1 ? "s" : ""}
-                      </p>
+                    <p className="text-base sm:text-lg font-sans text-slate-800">{bookingDetails.experienceName}</p>
+                  </div>
+                  {/* Guests */}
+                  <div>
+                    <div className="flex items-center gap-2 mb-1 sm:mb-2">
+                      <Users className="w-4 h-4 text-slate-600" />
+                      <span className="text-xs sm:text-sm font-medium text-slate-600 uppercase tracking-wider">GUESTS</span>
                     </div>
+                    <p className="text-base sm:text-lg font-sans text-slate-800">
+                      {bookingDetails.guests} Person{bookingDetails.guests !== 1 ? "s" : ""}
+                    </p>
                   </div>
 
                   {/* Preferred Date */}
@@ -252,7 +249,7 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                 </div>
 
                 {/* Divider */}
-                <div className="border-t-2 sm:border-t border-slate-700 sm:border-slate-700 my-4 sm:my-8" />
+                <div className="border-t border-slate-700 my-4 sm:my-8" />
 
                 {/* Email Confirmation */}
                 <div className="mb-4 sm:mb-8">
@@ -262,8 +259,8 @@ export function BookingConfirmation({ isOpen, onClose, bookingDetails }: Booking
                     <br />
                     Please check your inbox (and your spam folder just in case).
                   </p>
-                  {/* Mobile inline row: text left, button right */}
-                  <div className="sm:hidden flex items-center justify-between gap-3">
+                  {/* Mobile stacked layout for resend */}
+                  <div className="sm:hidden flex flex-col gap-2">
                     <span className="text-xs text-slate-600">Didn't receive the email?</span>
                     <Button
                       onClick={handleResendEmail}

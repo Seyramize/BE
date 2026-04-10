@@ -3,16 +3,20 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
+export interface GuestlistReservationBookingConfirmation {
+  name: string;
+  email: string;
+  phone: string;
+  guests: number;
+  selectedPackage: string;
+  priceLabel: string;
+  packageIncludes: string[];
+}
+
 interface GuestlistReservationBookingConfirmationModalProps {
   isOpen: boolean;
   onClose: () => void;
-  booking: {
-    name: string;
-    email: string;
-    guests: number;
-    selectedPackage: string;
-    packageIncludes: string[];
-  } | null;
+  booking: GuestlistReservationBookingConfirmation | null;
 }
 
 export function GuestlistReservationBookingConfirmationModal({
@@ -20,22 +24,20 @@ export function GuestlistReservationBookingConfirmationModal({
   onClose,
   booking,
 }: GuestlistReservationBookingConfirmationModalProps) {
-  console.log('Modal isOpen:', isOpen);
-  console.log('Modal booking:', booking);
-  console.log('Modal booking type:', typeof booking);
-  
   if (!isOpen || !booking) return null;
 
-  const name = booking.name;
-  const email = booking.email;
-  const guests = booking.guests;
-  const selectedPackage = booking.selectedPackage;
-  const packageIncludes = booking.packageIncludes;
-  
-  console.log('Extracted values:', { name, email, guests, selectedPackage, packageIncludes });
+  const {
+    name,
+    email,
+    phone,
+    guests,
+    selectedPackage,
+    priceLabel,
+    packageIncludes,
+  } = booking;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-3 backdrop-blur-sm">
+    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-3 backdrop-blur-sm">
       <div className="w-full max-w-md bg-[#efe6d3] rounded-xl overflow-hidden shadow-2xl">
 
         {/* Header */}
@@ -47,7 +49,6 @@ export function GuestlistReservationBookingConfirmationModal({
             className="object-cover"
           />
           
-          {/* Background overlay for blur effect */}
           <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
 
           <div className="absolute top-5 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-white shadow flex items-center justify-center z-10">
@@ -61,9 +62,9 @@ export function GuestlistReservationBookingConfirmationModal({
           </div>
 
           <div className="absolute bottom-2 w-full text-center text-white px-4 z-10">
-            <h3 className="text-xl font-serif mb-1">Reservation<br />Complete!</h3>
+            <h3 className="text-xl font-serif mb-1">Reservation<br />Completed</h3>
             <p className="text-xs max-w-xs mx-auto leading-relaxed">
-              Your reservation request has been received, and our host team will contact you shortly to finalize the details.
+              🎉 Your table is confirmed! A confirmation and payment receipt have been sent to your email.
             </p>
           </div>
         </div>
@@ -73,7 +74,6 @@ export function GuestlistReservationBookingConfirmationModal({
           <h4 className="text-xl font-semibold mb-4 text-[#071428]">Summary</h4>
 
           <div className="space-y-4 mb-6">
-            {/* Name */}
             <div>
               <p className="text-[10px] uppercase text-slate-600 tracking-wide">Name</p>
               <div className="flex justify-between items-center py-1 border-b border-neutral-400">
@@ -81,7 +81,6 @@ export function GuestlistReservationBookingConfirmationModal({
               </div>
             </div>
 
-            {/* Guests */}
             <div>
               <p className="text-[10px] uppercase text-slate-600 tracking-wide">Guests</p>
               <div className="flex justify-between items-center py-1 border-b border-neutral-400">
@@ -89,18 +88,23 @@ export function GuestlistReservationBookingConfirmationModal({
               </div>
             </div>
 
-            {/* Package */}
             <div>
-              <p className="text-[10px] uppercase text-slate-600 tracking-wide">Table Package</p>
+              <p className="text-[10px] uppercase text-slate-600 tracking-wide">Table package</p>
               <div className="flex justify-between items-center py-1 border-b border-neutral-400">
                 <span className="text-sm font-medium">{selectedPackage}</span>
               </div>
             </div>
+
+            <div>
+              <p className="text-[10px] uppercase text-slate-600 tracking-wide">Amount</p>
+              <div className="flex justify-between items-center py-1 border-b border-neutral-400">
+                <span className="text-sm font-medium">{priceLabel}</span>
+              </div>
+            </div>
           </div>
 
-          {/* Package Items */}
           <div className="mb-6">
-            <p className="text-[10px] uppercase text-slate-600 tracking-wide mb-2">Package Includes</p>
+            <p className="text-[10px] uppercase text-slate-600 tracking-wide mb-2">Package includes</p>
             <ul className="text-sm space-y-1">
               {packageIncludes && packageIncludes.length > 0 ? (
                 packageIncludes.map((item, index) => (
@@ -112,27 +116,24 @@ export function GuestlistReservationBookingConfirmationModal({
             </ul>
           </div>
 
-          {/* Email Notice */}
-          <div className="flex gap-4 mb-6">
+          <div className="flex gap-3 mb-4">
             <div className="flex-1 text-xs text-[#071428] leading-relaxed">
-              <p>A detailed confirmation with payment instructions has been sent to</p>
+              <p>Confirmation sent to</p>
               <p className="font-semibold">{email}</p>
             </div>
 
             <Button
               variant="default"
-              className="rounded-lg px-4"
-              onClick={() => 
-                window.location.href = `mailto:concierge@experiencesbybeyond.com?subject=Reservation%20for%20the%20Vici%20Day%20Party&body=I%20need%20help%20with%20my%20booking.`
-}
-
+              className="rounded-lg px-4 shrink-0"
+              onClick={() =>
+                (window.location.href = `mailto:concierge@experiencesbybeyond.com?subject=Reservation%20for%20the%20Vici%20Day%20Party&body=I%20need%20help%20with%20my%20booking.`)
+              }
             >
               Need help?
             </Button>
           </div>
 
-          {/* Footer */}
-          <div className="flex justify-between items-center text-xs text-slate-700">
+          <div className="flex justify-between items-center text-xs text-slate-700 mb-4">
             <Button
               variant="outline"
               className="flex items-center gap-2 border px-3 py-1 rounded-md text-xs"
@@ -147,7 +148,9 @@ export function GuestlistReservationBookingConfirmationModal({
             </Button>
           </div>
 
-          <Button onClick={onClose} className="w-full mt-6">Done</Button>
+          <Button onClick={onClose} variant="outline" className="w-full">
+            Done
+          </Button>
         </div>
 
       </div>

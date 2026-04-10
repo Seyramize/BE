@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 import { sendEmail } from '@/lib/mailtrap';
+import {
+  getViciPackageById,
+  getViciPackageIncludesRecord,
+  VICI_EXPERIENCE_SLUG,
+} from '@/lib/vici-reservation-pricing';
+import { buildSheetAppendRange } from '@/lib/google-sheet-range';
 
 
 export async function POST(req: NextRequest) {
@@ -19,49 +25,52 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields: fullName, email, phone, guests and selectedPackage are required' }, { status: 400 });
     }
 
-    const auth = new google.auth.GoogleAuth({
-      credentials: {
-        client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-      },
-      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-    });
+    if (!getViciPackageById(selectedPackage)) {
+      return NextResponse.json({ error: 'Invalid table package selected.' }, { status: 400 });
+    }
 
-    const sheets = google.sheets({ version: 'v4', auth });
-
-    const spreadsheetId = process.env.GOOGLE_SHEET_ID;
-    const range = 'Sheet1!A:H'; // Adjust sheet name and range as needed
-
-    const newRow = [
-      new Date().toISOString(),
-      fullName,
-      email,
-      phone,
-      guests,
-      instagramHandle || '',
-      selectedPackage,
-      specialRequests || '',
-    ];
-
-    await sheets.spreadsheets.values.append({
-      spreadsheetId,
-      range,
-      valueInputOption: 'USER_ENTERED',
-      requestBody: {
-        values: [newRow],
-      },
-    });
+    // Google Sheets integration temporarily disabled as per request
+    // const auth = new google.auth.GoogleAuth({
+    //   credentials: {
+    //     client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+    //     private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+    //   },
+    //   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    // });
+    //
+    // const sheets = google.sheets({ version: 'v4', auth });
+    //
+    // const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+    // if (!spreadsheetId) {
+    //   console.error('join-guestlist-reservation: GOOGLE_SHEET_ID is not set');
+    //   return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+    // }
+    //
+    // const range = buildSheetAppendRange('A:H');
+    //
+    // const newRow = [
+    //   new Date().toISOString(),
+    //   fullName,
+    //   email,
+    //   phone,
+    //   guests,
+    //   instagramHandle || '',
+    //   selectedPackage,
+    //   specialRequests || '',
+    // ];
+    //
+    // await sheets.spreadsheets.values.append({
+    //   spreadsheetId,
+    //   range,
+    //   valueInputOption: 'USER_ENTERED',
+    //   insertDataOption: 'INSERT_ROWS',
+    //   requestBody: {
+    //     values: [newRow],
+    //   },
+    // });
 
     try {
-      // Map selected package to its includes so templates can show details
-      const packageMap: Record<string, string[]> = {
-        '10K': ['Veuve Rich x2', 'Agavita Reposado x1', 'Food Platter x1'],
-        '15K': ['Veuve Rich x3', 'Agavita Reposado x1', 'Food Platter x1', 'Juice Pitcher x1'],
-        '20K': ['Veuve Rich x4', 'Casamigos x1', 'Food Platter x2', 'Juice Pitcher x1'],
-        '30K': ['Ace Of Spades x1', '1942 Tequila x1', 'Veuve Rich x2', 'Food Platter x2', 'Juice Pitcher x2'],
-      };
-
-      // Build a right-aligned block of lines (no bullets) so items align with the package amount
+      const packageMap = getViciPackageIncludesRecord();
       const packageItems = (packageMap[selectedPackage] || []);
       let packageIncludesHtml = '';
       if (packageItems.length > 0) {
@@ -73,6 +82,9 @@ export async function POST(req: NextRequest) {
         packageIncludesHtml = '<div style="color:#666;">Not specified</div>';
       }
 
+      const bookPageUrl = `${process.env.NEXT_PUBLIC_BASE_URL || ''}/book-experience/${VICI_EXPERIENCE_SLUG}`;
+      const paymentUrl = process.env.PAYMENT_URL || bookPageUrl;
+
       // Send confirmation email to the client
       await sendEmail({
         to: email,
@@ -80,14 +92,14 @@ export async function POST(req: NextRequest) {
         templateVariables: {
           name: fullName || '(No name)',
           guests: guests || '(0)',
-          date: 'Saturday, 20th December',
+          date: 'Saturday, 18th April',
           venue: 'Vine Accra',
           selectedPackage: selectedPackage || '(None)',
           // Provide a pre-encoded version of the package for use in URLs
           selectedPackageEncoded: encodeURIComponent(selectedPackage || '(None)'),
           packageIncludes: packageIncludesHtml,
           brandName: 'Vici Day Party',
-          paymentUrl: process.env.PAYMENT_URL || '#',
+          paymentUrl,
         },
       });
 
@@ -115,7 +127,7 @@ export async function POST(req: NextRequest) {
             igHandle: instagramHandle || 'N/A',
             notes: specialRequests || '(Empty)',
             brandName: 'Vici Day Party',
-            paymentUrl: process.env.PAYMENT_URL || '#',
+            paymentUrl,
           },
         });
       }
@@ -126,9 +138,9 @@ export async function POST(req: NextRequest) {
       // For now, we'll just log it and assume the main operation was successful
     }
 
-    return NextResponse.json({ message: 'Successfully joined the guestlist!' });
+    return NextResponse.json({ message: 'Reservation request submitted successfully.' });
   } catch (error) {
-    console.error('Error adding to guestlist:', error);
-    return NextResponse.json({ error: 'Failed to join the guestlist' }, { status: 500 });
+    console.error('Error submitting reservation:', error);
+    return NextResponse.json({ error: 'Failed to submit reservation' }, { status: 500 });
   }
 }
