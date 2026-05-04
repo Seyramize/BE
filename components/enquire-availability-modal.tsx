@@ -106,7 +106,7 @@ export function EnquireAvailabilityModal({ isOpen, onClose, experience }: Enquir
     if (!formData.email.trim()) newErrors.email = "Email is required"
     if (!formData.phoneNumber.trim()) newErrors.phoneNumber = "Phone number is required"
     if (!formData.location.trim()) newErrors.location = "Location is required"
-    if (experience.slug !== "december-in-ghana-castles-to-coastlines" && !formData.preferredDate) {
+    if (experience.slug !== "december-in-accra" && !formData.preferredDate) {
       newErrors.preferredDate = "Preferred date is required";
     }
 
@@ -316,7 +316,7 @@ export function EnquireAvailabilityModal({ isOpen, onClose, experience }: Enquir
               </div>
 
               {/* Preferred Date */}
-              {experience.slug !== "december-in-ghana-castles-to-coastlines" && (
+              {experience.slug !== "december-in-accra" && (
               <div>
                 <div className="flex items-center gap-2 mb-4">
                   <h4 className="text-lg font-sans font-normal text-slate-800">Preferred Date</h4>

@@ -179,16 +179,18 @@ export function BookingFormModal({
     if (!formData.email.trim()) newErrors.email = "Email address is required"
     if (!formData.phoneNumber.trim()) newErrors.phoneNumber = "Phone number is required"
     if (!formData.location.trim()) newErrors.location = "Location is required"
-    if (!formData.preferredDate) {
-      newErrors.preferredDate = "Preferred date is required"
-    } else if (!isDateWithinBookingRange(formData.preferredDate)) {
-      newErrors.preferredDate = `Preferred date must be between ${minDate} and ${maxDate}`
-    }
+    if (experience.slug !== "eden-wellness-retreat") {
+      if (!formData.preferredDate) {
+        newErrors.preferredDate = "Preferred date is required"
+      } else if (!isDateWithinBookingRange(formData.preferredDate)) {
+        newErrors.preferredDate = `Preferred date must be between ${minDate} and ${maxDate}`
+      }
 
-    if (!formData.alternateDate) {
-      newErrors.alternateDate = "Alternate date is required"
-    } else if (!isDateWithinBookingRange(formData.alternateDate)) {
-      newErrors.alternateDate = `Alternate date must be between ${minDate} and ${maxDate}`
+      if (!formData.alternateDate) {
+        newErrors.alternateDate = "Alternate date is required"
+      } else if (!isDateWithinBookingRange(formData.alternateDate)) {
+        newErrors.alternateDate = `Alternate date must be between ${minDate} and ${maxDate}`
+      }
     }
     if (formData.guests.length === 0 && formData.customGuestCount === 0) {
       newErrors.guests = "Please select number of guests"
@@ -278,6 +280,8 @@ export function BookingFormModal({
           experienceSlug: experience.slug,
           countryDialCode: formData.countryDialCode, // <-- use dial code
           phoneNumber: formData.phoneNumber,
+          experienceStartDate: experience.slug === "eden-wellness-retreat" ? "2026-12-14" : undefined,
+          experienceEndDate: experience.slug === "eden-wellness-retreat" ? "2026-12-21" : undefined,
         }}
       />
     )
@@ -491,50 +495,64 @@ export function BookingFormModal({
                     <p className="text-slate-600 font-sans text-sm mb-4 lg:mb-6">Tailor the finer details</p>
 
                     <div className="space-y-4 lg:space-y-6">
-                      {/* Date Selection */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        <div>
-                          <label
-                            htmlFor="preferredDate"
-                            className="block text-slate-800 font-sans text-sm font-medium mb-2"
-                          >
-                            Preferred date
-                          </label>
-                          <Input
-                            id="preferredDate"
-                            type="date"
-                            value={formData.preferredDate}
-                            onChange={(e) => handleInputChange("preferredDate", e.target.value)}
-                            min={minDate}
-                            max={maxDate}
-                            className={`w-50 bg-white border-slate-200 text-slate-800 h-11 ${
-                              errors.preferredDate ? "border-red-500" : ""
-                            }`}
-                          />
-                          {errors.preferredDate && <p className="text-red-500 text-xs mt-1">{errors.preferredDate}</p>}
-                        </div>
+                      {/* Date Selection — hidden for fixed-date experiences */}
+                      {experience.slug !== "eden-wellness-retreat" && (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          <div>
+                            <label
+                              htmlFor="preferredDate"
+                              className="block text-slate-800 font-sans text-sm font-medium mb-2"
+                            >
+                              Preferred date
+                            </label>
+                            <Input
+                              id="preferredDate"
+                              type="date"
+                              value={formData.preferredDate}
+                              onChange={(e) => handleInputChange("preferredDate", e.target.value)}
+                              min={minDate}
+                              max={maxDate}
+                              className={`w-50 bg-white border-slate-200 text-slate-800 h-11 ${
+                                errors.preferredDate ? "border-red-500" : ""
+                              }`}
+                            />
+                            {errors.preferredDate && <p className="text-red-500 text-xs mt-1">{errors.preferredDate}</p>}
+                          </div>
 
-                        <div>
-                          <label
-                            htmlFor="alternateDate"
-                            className="block text-slate-800 font-sans text-sm font-medium mb-2"
-                          >
-                            Alternate Date
-                          </label>
-                          <Input
-                            id="alternateDate"
-                            type="date"
-                            value={formData.alternateDate}
-                            onChange={(e) => handleInputChange("alternateDate", e.target.value)}
-                            min={minDate}
-                            max={maxDate}
-                            className={`w-50 bg-white border-slate-200 text-slate-800 h-11${
-                              errors.alternateDate ? " border-red-500" : ""
-                            }`}
-                          />
-                          {errors.alternateDate && <p className="text-red-500 text-xs mt-1">{errors.alternateDate}</p>}
+                          <div>
+                            <label
+                              htmlFor="alternateDate"
+                              className="block text-slate-800 font-sans text-sm font-medium mb-2"
+                            >
+                              Alternate Date
+                            </label>
+                            <Input
+                              id="alternateDate"
+                              type="date"
+                              value={formData.alternateDate}
+                              onChange={(e) => handleInputChange("alternateDate", e.target.value)}
+                              min={minDate}
+                              max={maxDate}
+                              className={`w-50 bg-white border-slate-200 text-slate-800 h-11${
+                                errors.alternateDate ? " border-red-500" : ""
+                              }`}
+                            />
+                            {errors.alternateDate && <p className="text-red-500 text-xs mt-1">{errors.alternateDate}</p>}
+                          </div>
                         </div>
-                      </div>
+                      )}
+
+                      {/* Fixed experience dates for Eden Wellness Retreat */}
+                      {/* {experience.slug === "eden-wellness-retreat" && (
+                        <div>
+                          <label className="block text-slate-800 font-sans text-sm font-medium mb-2">
+                            Experience Dates
+                          </label>
+                          <p className="text-slate-800 font-sans text-sm h-11 flex items-center">
+                            14th Dec, 2026 – 21st Dec, 2026
+                          </p>
+                        </div>
+                      )} */}
 
                       {/* Number of Guests */}
                       <div>

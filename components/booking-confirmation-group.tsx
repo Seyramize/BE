@@ -443,7 +443,7 @@ export function BookingConfirmationGroup({
                           </div>
 
                           {/* Payment Style */}
-                          {experience.slug !== "december-in-ghana-castles-to-coastlines" && (
+                          {experience.slug !== "december-in-accra" && (
                             <div>
                               <div className="flex items-center gap-2 mb-2">
                                 <Banknote className="w-5 h-5 text-slate-600" />
@@ -473,8 +473,8 @@ export function BookingConfirmationGroup({
                                 <div className="text-slate-800 font-sans text-sm">
                                   Total Cost
                                 </div>
-                                <div className="text-2xl sm:text-3xl font-sans text-slate-800">₵{formData.paymentStyle === "Installment Payment" && experience.slug !== "december-in-ghana-castles-to-coastlines" ? totalPrice : (parseInt(formData.guests) * (experience.groupPricing?.fullPrice || 0)).toFixed(2)}</div>
-                                {formData.paymentStyle === "Installment Payment" && experience.slug !== "december-in-ghana-castles-to-coastlines" && (
+                                <div className="text-2xl sm:text-3xl font-sans text-slate-800">₵{formData.paymentStyle === "Installment Payment" && experience.slug !== "december-in-accra" ? totalPrice : (parseInt(formData.guests) * (experience.groupPricing?.fullPrice || 0)).toFixed(2)}</div>
+                                {formData.paymentStyle === "Installment Payment" && experience.slug !== "december-in-accra" && (
                                   <div className="text-xs text-slate-500 mt-1">
                                     of ₵{(totalPrice * 3).toFixed(2)} total
                                   </div>

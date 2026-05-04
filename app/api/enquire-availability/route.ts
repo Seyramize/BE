@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   const data = await req.json();
 
   let preferredDate = data.preferredDate;
-  if (data.experienceName === 'December in Ghana: Castles to Coastlines') {
+  if (data.experienceName === 'December in Accra') {
     const experience = experiences.find(
       (exp) => exp.defaultContent.title === data.experienceName
     );

@@ -27,6 +27,8 @@ interface PaymentConfirmationModalProps {
     experienceSlug: string // Added experienceSlug to the interface
     countryDialCode: string // <-- use dial code
     phoneNumber: string
+    experienceStartDate?: string
+    experienceEndDate?: string
   }
 }
 
@@ -39,6 +41,25 @@ interface PaymentFormData {
   mobileMoneyPhone?: string
   mobileMoneyProvider?: string
 }
+
+const formatDateRange = (start?: string, end?: string): string => {
+  if (!start || !end) return "Dates to be confirmed";
+  const startDate = new Date(start);
+  const endDate = new Date(end);
+  const startDay = startDate.getUTCDate();
+  const endDay = endDate.getUTCDate();
+  const startMonth = startDate.toLocaleString("default", { month: "short", timeZone: "UTC" });
+  const endMonth = endDate.toLocaleString("default", { month: "short", timeZone: "UTC" });
+  const startYear = startDate.getUTCFullYear();
+  const endYear = endDate.getUTCFullYear();
+  const nth = (d: number) => {
+    if (d > 3 && d < 21) return "th";
+    switch (d % 10) { case 1: return "st"; case 2: return "nd"; case 3: return "rd"; default: return "th"; }
+  };
+  if (startYear !== endYear) return `${startDay}${nth(startDay)} ${startMonth} ${startYear} – ${endDay}${nth(endDay)} ${endMonth} ${endYear}`;
+  if (startMonth !== endMonth) return `${startDay}${nth(startDay)} ${startMonth} – ${endDay}${nth(endDay)} ${endMonth} ${endYear}`;
+  return `${startDay}${nth(startDay)} – ${endDay}${nth(endDay)} ${endMonth} ${endYear}`;
+};
 
 export function PaymentConfirmationModal({
   isOpen,
@@ -279,14 +300,25 @@ export function PaymentConfirmationModal({
                         {bookingDetails.guests} person{bookingDetails.guests !== 1 ? "s" : ""}
                       </span>
                     </div>
-                    <div className="flex flex-col sm:flex-row sm:justify-between">
-                      <span className="text-slate-600">Preferred Date:</span>
-                      <span className="text-slate-800">{new Date(bookingDetails.preferredDate).toLocaleDateString()}</span>
-                    </div>
-                    <div className="flex flex-col sm:flex-row sm:justify-between">
-                      <span className="text-slate-600">Alternate Date:</span>
-                      <span className="text-slate-800">{new Date(bookingDetails.alternateDate).toLocaleDateString()}</span>
-                    </div>
+                    {bookingDetails.experienceStartDate && bookingDetails.experienceEndDate ? (
+                      <div className="flex flex-col sm:flex-row sm:justify-between">
+                        <span className="text-slate-600">Experience Dates:</span>
+                        <span className="text-slate-800">
+                          {formatDateRange(bookingDetails.experienceStartDate, bookingDetails.experienceEndDate)}
+                        </span>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="flex flex-col sm:flex-row sm:justify-between">
+                          <span className="text-slate-600">Preferred Date:</span>
+                          <span className="text-slate-800">{new Date(bookingDetails.preferredDate).toLocaleDateString()}</span>
+                        </div>
+                        <div className="flex flex-col sm:flex-row sm:justify-between">
+                          <span className="text-slate-600">Alternate Date:</span>
+                          <span className="text-slate-800">{new Date(bookingDetails.alternateDate).toLocaleDateString()}</span>
+                        </div>
+                      </>
+                    )}
                     <div className="border-t border-stone-200 pt-2 mt-3">
                       <div className="flex flex-col sm:flex-row sm:justify-between font-serif text-base sm:text-lg">
                         <span className="text-slate-800">Total:</span>

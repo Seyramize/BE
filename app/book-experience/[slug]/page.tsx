@@ -57,6 +57,9 @@ import {
   Calendar,
   Zap,
   ChefHat,
+  Ship,
+  HandPlatter,
+  FerrisWheel,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import {
@@ -83,6 +86,11 @@ import {
 
 const includedIcons: Record<string, any> = {
   "Private transportation including fuel": Car,
+  "Creative workshops & cultural experiences": Palette,
+  "Guided city tour": MapPin,
+  "Akosombo excursion (ATV + Boat cruise)": Ship,
+  "A Seat at the Table dinner": HandPlatter,
+  "Daily curated experiences & activities": FerrisWheel,
   "Airport transfers": PlaneLanding,
   "Accommodation": Hotel,
   "Daily wellness programming": Users,
@@ -684,6 +692,13 @@ export default function BookExperiencePage() {
             </div>
           </h1>
 
+          {/* Eden Wellness Retreat — Birthed by Afrika subtitle */}
+          {experience.slug === "eden-wellness-retreat" && (
+            <p className="text-white font-sans text-lg uppercase tracking-widest mt-2">
+              BIRTHED BY AFRIKA
+            </p>
+          )}
+
           {/* Vici Pill - Mobile */}
           {experience.slug === "vici-garden-party-chic" && (
             <div className="sm:hidden inline-flex uppercase items-center gap-2 bg-black/30 backdrop-blur-sm text-white px-4 py-2 rounded-full font-sans text-[10px] mt-2 mb-4 border border-white/20">
@@ -759,6 +774,20 @@ export default function BookExperiencePage() {
             </div>
           )}
 
+          {/* Eden Wellness Retreat — fixed date range pill (Desktop) */}
+          {experience.slug === "eden-wellness-retreat" && (
+            <div className="hidden sm:block mt-4">
+              <div className="inline-flex items-center justify-center gap-4 px-6 py-2 rounded-full bg-slate-900 shadow-sm text-xs uppercase tracking-widest font-sans text-white">
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4" />
+                  <span>
+                    {formatDateWithOrdinal((bookingContent as any).startDate)} – {formatDateWithOrdinal((bookingContent as any).endDate)}
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
+
           {experience.tags.includes("Priceless") && !isGroupExperience && (
             <div className="inline-flex uppercase items-center gap-2 bg-black/30 backdrop-blur-sm text-white px-4 py-2 rounded-full font-sans text-xs mt-1 border border-white/20">
               <img
@@ -804,6 +833,20 @@ export default function BookExperiencePage() {
               /> */}
             </div>
           )}
+        </div>
+      )}
+
+      {/* Eden Wellness Retreat — fixed date range pill (Mobile) */}
+      {experience.slug === "eden-wellness-retreat" && (
+        <div className="sm:hidden bg-gray-800 py-4 px-6">
+          <div className="flex items-center justify-center gap-2 text-white font-sans text-[10px] uppercase tracking-widest whitespace-nowrap">
+            <div className="flex items-center gap-1.5">
+              <Calendar className="w-3 h-3" />
+              <span>
+                {formatDateWithOrdinal((bookingContent as any).startDate)} – {formatDateWithOrdinal((bookingContent as any).endDate)}
+              </span>
+            </div>
+          </div>
         </div>
       )}
 
@@ -919,7 +962,7 @@ export default function BookExperiencePage() {
                               ₵{totalPrice}
                             </div>
                             {experience.slug !==
-                              "december-in-ghana-castles-to-coastlines" && (
+                              "december-in-accra" && (
                               <div className="text-sm font-sans text-black mt-1">
                                 or ₵{groupPerInstallment} in{" "}
                                 {
@@ -945,35 +988,8 @@ export default function BookExperiencePage() {
                         </div>
                       )}
                       {experience.slug ===
-                        "december-in-ghana-castles-to-coastlines" && (
+                        "december-in-accra" && (
                         <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-end gap-4 mb-4">
-                          <a
-                            href="https://2zeldbyqxdkdtasm.public.blob.vercel-storage.com/December%20in%20Ghana%20-%20Group%20Itinerary.pdf"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-full sm:w-auto"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              const url = `https://2zeldbyqxdkdtasm.public.blob.vercel-storage.com/December%20in%20Ghana%20-%20Group%20Itinerary.pdf`;
-                              console.log("Opening PDF in new tab:", url);
-                              const a = document.createElement("a");
-                              a.href = url;
-                              a.target = "_blank";
-                              a.rel = "noopener noreferrer";
-                              a.style.display = "none";
-                              document.body.appendChild(a);
-                              a.click();
-                              document.body.removeChild(a);
-                            }}
-                          >
-                            <Button
-                              type="button"
-                              variant="outline"
-                              className="w-full sm:w-auto bg-white border-slate-900 text-slate-900 font-sans px-6 py-4 text-sm flex items-center justify-center gap-2"
-                            >
-                              View Itinerary
-                            </Button>
-                          </a>
                           <Button
                             className="w-full sm:w-56 bg-gray-800 hover:bg-gray-700 text-white py-6 rounded-lg text-sm font-sans"
                             onClick={() => setIsGroupConfirmationOpen(true)}
@@ -1039,7 +1055,7 @@ export default function BookExperiencePage() {
                             {/* Payment Plan */}
                             {experience.slug !== "vici-garden-party-chic" &&
                               experience.slug !==
-                                "december-in-ghana-castles-to-coastlines" && (
+                                "december-in-accra" && (
                                 <div className="flex flex-col justify-center items-start tracking-widest leading-none space-y-0 mt-1">
                                   <div className="text-base font-sans font-semibold text-slate-900">
                                     OR ₵{groupPerInstallment}
@@ -1056,7 +1072,7 @@ export default function BookExperiencePage() {
                               )}
                             {/* Button */}
                             {experience.slug ===
-                            "december-in-ghana-castles-to-coastlines" ? (
+                            "december-in-accra" ? (
                               <div className="flex gap-4 items-center w-full justify-end">
                                 <Button
                                   className="bg-slate-900 hover:bg-slate-900 text-white w-56 py-3 rounded-lg text-sm font-sans"
@@ -1066,36 +1082,6 @@ export default function BookExperiencePage() {
                                 >
                                   Book Experience
                                 </Button>
-                                <a
-                                  href="https://2zeldbyqxdkdtasm.public.blob.vercel-storage.com/Decemeber%20In%20Ghana%20-%20Group%20Itinerary%20"
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="w-auto"
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    const url = `https://2zeldbyqxdkdtasm.public.blob.vercel-storage.com/Decemeber%20In%20Ghana%20-%20Group%20Itinerary%20`;
-                                    console.log(
-                                      "Opening PDF in new tab (desktop):",
-                                      url
-                                    );
-                                    const a = document.createElement("a");
-                                    a.href = url;
-                                    a.target = "_blank";
-                                    a.rel = "noopener noreferrer";
-                                    a.style.display = "none";
-                                    document.body.appendChild(a);
-                                    a.click();
-                                    document.body.removeChild(a);
-                                  }}
-                                >
-                                  <Button
-                                    type="button"
-                                    variant="outline"
-                                    className="w-auto bg-white border-slate-900 text-slate-900 font-sans px-6 py-4 text-sm flex items-center justify-center gap-2"
-                                  >
-                                    View Itinerary
-                                  </Button>
-                                </a>
                               </div>
                             ) : experience.slug === "vici-garden-party-chic" ? (
                               <Button

@@ -22,6 +22,8 @@ interface BookingPaymentFlowProps {
     experienceSlug: string
     countryDialCode: string // <-- use dial code
     phoneNumber: string
+    experienceStartDate?: string
+    experienceEndDate?: string
   }
 }
 
@@ -76,6 +78,8 @@ export function BookingPaymentFlow({ isOpen, onClose, onBookingConfirmed, bookin
             experienceSlug: bookingDetails.experienceSlug,
             countryDialCode: bookingDetails.countryDialCode, // <-- use dial code
             phoneNumber: bookingDetails.phoneNumber,
+            experienceStartDate: bookingDetails.experienceStartDate,
+            experienceEndDate: bookingDetails.experienceEndDate,
           }}
         />
       )}
