@@ -21,6 +21,7 @@ import {
   Check,
   Hotel,
   CalendarCheck,
+  PlaneLanding,
   Eye,
   Sparkle,
   Hammer,
@@ -28,6 +29,7 @@ import {
   User,
   BedDouble,
   Car,
+  Gem,
   Salad,
   Users,
   Drum,
@@ -54,6 +56,7 @@ import {
   MapPin,
   Calendar,
   Zap,
+  ChefHat,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import {
@@ -80,7 +83,14 @@ import {
 
 const includedIcons: Record<string, any> = {
   "Private transportation including fuel": Car,
-  "Private transportation, including fuel.": Car,
+  "Airport transfers": PlaneLanding,
+  "Accommodation": Hotel,
+  "Daily wellness programming": Users,
+  "Massage therapy": Gem,
+  "Tea blending workshop": Coffee,
+  "Cooking class": ChefHat,
+  "Accra city tour": MapPin,
+  "Transportation throughout": Car,
   "Dedicated chaperone and access to resident guides": Users,
   "Local experienced guide": Users,
   "4x4 Transport and fuel": Car,

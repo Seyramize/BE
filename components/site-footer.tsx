@@ -121,7 +121,7 @@ export function SiteFooter() {
               </div>
             </div>
             <div className="text-left text-gray-400 text-xs pt-1.5 space-y-2 w-full max-w-sm">
-              <p>© 2020-2025 Beyond Accra Concierge Company LLC. All rights reserved.</p>
+              <p>© 2020-2026 Beyond Accra Concierge Company LLC. All rights reserved.</p>
               <p>CST#2007274-20</p>
             </div>
           </div>
@@ -197,7 +197,7 @@ export function SiteFooter() {
             </div>
           </div>
           <div className="md:col-span-12 text-center text-gray-400 text-xs pt-6 mt-6 border-t border-gray-700">
-            <p>© 2020-2025 Beyond Accra Concierge Company LLC. All rights reserved. CST#2007274-20</p>
+            <p>© 2020-2026 Beyond Accra Concierge Company LLC. All rights reserved. CST#2007274-20</p>
           </div>
         </div>
       </div>

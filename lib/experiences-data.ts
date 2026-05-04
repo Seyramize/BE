@@ -1674,6 +1674,71 @@ export type Experience = {
       },
       tags: ["2 PAX"],
     },
+    {
+      id: 24,
+      slug: "eden-wellness-retreat",
+      defaultContent: {
+        title: "Eden Wellness Retreat",
+        shortDescription: "An immersive wellness escape designed to restore balance, nurture vitality, and reconnect you with intentional living.",
+        image: "/images/experiences/eden-retreat/cover.jpg?height=400&width=300&text=Eden+Wellness+Retreat",
+        location: "Eastern Region, Ghana"
+      },
+      expandedContent: {
+        title: "Eden Wellness Retreat",
+        fullDescription: "Experience a luxury eco-friendly retreat where you can experience luxury in a serene natural setting, interacting with free-roaming wildlife, and enjoy activities like biking, horseback riding, and nature walks. Every moment is curated just for you by the professional team. A rare invitation to slow down and simply be.",
+        image: "/placeholder.svg?height=500&width=400&text=Shai+Hills+Detailed+Safari"
+      },
+      bookingContent: {
+        title: "Eden Wellness Retreat",
+        subtitle: "Experience a luxury eco-friendly retreat where you can experience luxury in a serene natural setting, interacting with free-roaming wildlife, and enjoy activities like biking, horseback riding, and nature walks. Every moment is curated just for you by the professional team. A rare invitation to slow down and simply be.",
+        duration: "1 DAY",
+        destinations: "2 DESTINATIONS",
+        maxGuests: "15 GUESTS (MAX)",
+        heroImage: "/images/experiences/eden-retreat/cover.jpg?height=800&width=1200&text=Zebras+in+Golden+Grassland",
+        galleryImages: [
+          "/images/experiences/eden-retreat/Gallery/1.jpg?height=400&width=300&text=Wildlife+Safari",
+          "/images/experiences/eden-retreat/Gallery/2.jpg?height=400&width=300&text=Wildlife+Safari",
+          "/images/experiences/eden-retreat/Gallery/3.webp?height=400&width=300&text=Wildlife+Safari",
+          "/images/experiences/eden-retreat/Gallery/4.webp?height=400&width=300&text=Wildlife+Safari",
+          "/images/experiences/eden-retreat/Gallery/5.jpg?height=400&width=300&text=Wildlife+Safari",
+          "/images/experiences/eden-retreat/Gallery/6.jpg?height=400&width=300&text=Wildlife+Safari",
+          "/images/experiences/eden-retreat/Gallery/7.jpg?height=400&width=300&text=Wildlife+Safari",
+          "/images/experiences/eden-retreat/Gallery/8.jpg?height=400&width=300&text=Wildlife+Safari",
+          "/images/experiences/eden-retreat/Gallery/9.jpg?height=400&width=300&text=Wildlife+Safari",
+          "/images/experiences/eden-retreat/Gallery/10.jpg?height=400&width=300&text=Wildlife+Safari",
+        ],
+        overview: "An immersive wellness escape designed to restore balance, nurture vitality, and reconnect you with intentional living. Set against the serene backdrop of Accra, this curated multi-day retreat blends guided wellness sessions, nourishing cuisine, cultural exploration, and restorative therapies. Move mindfully, breathe deeply, and engage in meaningful experiences — from hands-on tea blending and cooking workshops to therapeutic massage and a thoughtfully paced city tour. This is not just a retreat — it’s a reset.",
+        highlights: [
+          "Guided breathwork & body movement sessions",
+          "Tea blending workshop (create your own herbal infusion)",
+          "Daily nourishment with vitality-focused meals",
+          "Restorative massage therapy sessions",
+          "Hands-on cooking class",
+          "Curated Accra city tour",
+          "Seamless private transportation throughout",
+          "Full retreat accommodation",
+        ],
+        startingPrice: 14043,
+        pricing: {
+          oneGuest: 14043,
+          twoGuests: 14043, 
+          threeOrMoreGuests: 14043,
+        },
+        minimumGuests: 1,
+        included: [
+          "Airport transfers",
+          "Accommodation",
+          "Daily wellness programming",
+          "Massage therapy",
+          "Tea blending workshop",
+          "Cooking class",
+          "Accra city tour",
+          "Transportation throughout",
+        ]
+      },
+      tags: ["Travel Planner's Choice", "1 PAX"]
+    },
+    
   ]
 
 // Initialize slots for group experiences
