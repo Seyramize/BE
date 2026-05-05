@@ -55,6 +55,7 @@ import {
   Sun,
   MapPin,
   Calendar,
+  Clock,
   Zap,
   ChefHat,
   Ship,
@@ -673,7 +674,7 @@ export default function BookExperiencePage() {
           {isGroupExperience && experience.slug !== "vici-garden-party-chic" && (
             <div className="mb-2 sm:hidden">
               <span className="text-white font-sans text-xs uppercase tracking-widest">
-                GROUP EXPERIENCE
+                
               </span>
             </div>
           )}
@@ -707,13 +708,6 @@ export default function BookExperiencePage() {
             </div>
           )}
 
-          {/* Group Experience Subtitle - Below Title (Mobile Only) */}
-          {isGroupExperience && experience.slug !== "vici-garden-party-chic" && (
-            <p className="text-white font-sans text-xs uppercase tracking-widest mb-6 sm:hidden">
-              {bookingContent.subtitle}
-            </p>
-          )}
-
           {/* Group Experience Details - Below Title (Desktop Only) */}
           {isGroupExperience && (
             <div className="hidden sm:block mt-4">
@@ -733,42 +727,48 @@ export default function BookExperiencePage() {
                 </div>
               ) : (
                 <div className="inline-flex items-center justify-center gap-3 px-6 py-2 rounded-full bg-slate-900 shadow-sm text-xs uppercase tracking-widest font-sans text-white">
-                  <span>{bookingContent.duration}</span>
-                  <span>|</span>
-                  <span>₵{bookingContent.groupPricing?.fullPrice}</span>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4" />
+                    <span>{bookingContent.duration}</span>
+                  </div>
                   {bookingContent.startDate && bookingContent.endDate && (
                     <>
                       <span>|</span>
-                      <span>
-                        {new Date(bookingContent.startDate).toLocaleDateString(
-                          "en-US",
-                          {
-                            month: "short",
-                            day: "numeric",
-                            year: "numeric",
-                            timeZone: "UTC",
-                          }
-                        )}{" "}
-                        -{" "}
-                        {new Date(bookingContent.endDate).toLocaleDateString(
-                          "en-US",
-                          {
-                            month: "short",
-                            day: "numeric",
-                            year: "numeric",
-                            timeZone: "UTC",
-                          }
-                        )}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4" />
+                        <span>
+                          {new Date(bookingContent.startDate).toLocaleDateString(
+                            "en-US",
+                            {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                              timeZone: "UTC",
+                            }
+                          )}{" "}
+                          -{" "}
+                          {new Date(bookingContent.endDate).toLocaleDateString(
+                            "en-US",
+                            {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                              timeZone: "UTC",
+                            }
+                          )}
+                        </span>
+                      </div>
                     </>
                   )}
-                  {/* <span>|</span> */}
-                  {/* <ActiveCounter
-                    experienceId={experience.id.toString()}
-                    totalSlots={activeCounter.totalSlots}
-                    availableSlots={activeCounter.availableSlots}
-                    className="text-white"
-                  /> */}
+                  {bookingContent.eventLocation && (
+                    <>
+                      <span>|</span>
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-4 h-4" />
+                        <span>{bookingContent.eventLocation}</span>
+                      </div>
+                    </>
+                  )}
                 </div>
               )}
             </div>
@@ -777,12 +777,22 @@ export default function BookExperiencePage() {
           {/* Eden Wellness Retreat — fixed date range pill (Desktop) */}
           {experience.slug === "eden-wellness-retreat" && (
             <div className="hidden sm:block mt-4">
-              <div className="inline-flex items-center justify-center gap-4 px-6 py-2 rounded-full bg-slate-900 shadow-sm text-xs uppercase tracking-widest font-sans text-white">
+              <div className="inline-flex items-center justify-center gap-3 px-6 py-2 rounded-full bg-slate-900 shadow-sm text-xs uppercase tracking-widest font-sans text-white">
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4" />
+                  <span>{(bookingContent as any).duration}</span>
+                </div>
+                <span>|</span>
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
                   <span>
                     {formatDateWithOrdinal((bookingContent as any).startDate)} – {formatDateWithOrdinal((bookingContent as any).endDate)}
                   </span>
+                </div>
+                <span>|</span>
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4" />
+                  <span>{(bookingContent as any).eventLocation}</span>
                 </div>
               </div>
             </div>
@@ -820,17 +830,38 @@ export default function BookExperiencePage() {
             </div>
           ) : (
             <div className="flex items-center justify-center gap-2 text-white font-sans text-[10px] uppercase tracking-widest whitespace-nowrap">
-              <span>{bookingContent.duration}</span>
-              <span>|</span>
-              <span>₵{bookingContent.groupPricing?.fullPrice}</span>
-              {/* <span>|</span> */}
-              {/* <ActiveCounter
-                experienceId={experience.id.toString()}
-                totalSlots={activeCounter.totalSlots}
-                availableSlots={activeCounter.availableSlots}
-                className="text-white"
-                textSize="text-[10px]"
-              /> */}
+              <div className="flex items-center gap-1.5">
+                <Clock className="w-3 h-3" />
+                <span>{bookingContent.duration}</span>
+              </div>
+              {bookingContent.startDate && bookingContent.endDate && (
+                <>
+                  <span>|</span>
+                  <div className="flex items-center gap-1.5">
+                    <Calendar className="w-3 h-3" />
+                    <span>
+                      {new Date(bookingContent.startDate).toLocaleDateString(
+                        "en-US",
+                        { month: "short", day: "numeric", timeZone: "UTC" }
+                      )}{" "}
+                      -{" "}
+                      {new Date(bookingContent.endDate).toLocaleDateString(
+                        "en-US",
+                        { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }
+                      )}
+                    </span>
+                  </div>
+                </>
+              )}
+              {bookingContent.eventLocation && (
+                <>
+                  <span>|</span>
+                  <div className="flex items-center gap-1.5">
+                    <MapPin className="w-3 h-3" />
+                    <span>{bookingContent.eventLocation}</span>
+                  </div>
+                </>
+              )}
             </div>
           )}
         </div>
@@ -841,10 +872,20 @@ export default function BookExperiencePage() {
         <div className="sm:hidden bg-gray-800 py-4 px-6">
           <div className="flex items-center justify-center gap-2 text-white font-sans text-[10px] uppercase tracking-widest whitespace-nowrap">
             <div className="flex items-center gap-1.5">
+              <Clock className="w-3 h-3" />
+              <span>{(bookingContent as any).duration}</span>
+            </div>
+            <span>|</span>
+            <div className="flex items-center gap-1.5">
               <Calendar className="w-3 h-3" />
               <span>
                 {formatDateWithOrdinal((bookingContent as any).startDate)} – {formatDateWithOrdinal((bookingContent as any).endDate)}
               </span>
+            </div>
+            <span>|</span>
+            <div className="flex items-center gap-1.5">
+              <MapPin className="w-3 h-3" />
+              <span>{(bookingContent as any).eventLocation}</span>
             </div>
           </div>
         </div>

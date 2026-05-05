@@ -1501,9 +1501,10 @@ export type Experience = {
         title: "December in Accra",
         subtitle: "26TH DEC 2026 - 2ND JAN 2027",
         duration: "7 DAYS",
+        eventLocation: "Accra & Akosombo",
         destinations: "MULTIPLE DESTINATIONS",
         maxGuests: "20 GUESTS (20 SPOTS OPEN)",
-        heroImage: "/images/experiences/dec-in-accra/cover.jpg?height=800&width=1200&text=Luxury+Pool+Beach+Resort",
+        heroImage: "/images/experiences/dec-in-accra/Gallery/3.jpg?height=800&width=1200&text=Luxury+Pool+Beach+Resort",
         galleryImages: [
           "/images/experiences/dec-in-accra/Gallery/1.jpg?height=400&width=300&text=Accra+City+Tour",
           "/images/experiences/dec-in-accra/Gallery/2.jpg?height=400&width=300&text=Accra+City+Tour",
@@ -1697,7 +1698,8 @@ export type Experience = {
       bookingContent: {
         title: "Eden Wellness Retreat",
         subtitle: "Experience a luxury eco-friendly retreat where you can experience luxury in a serene natural setting, interacting with free-roaming wildlife, and enjoy activities like biking, horseback riding, and nature walks. Every moment is curated just for you by the professional team. A rare invitation to slow down and simply be.",
-        duration: "1 DAY",
+        duration: "7 DAYS",
+        eventLocation: "Accra",
         destinations: "2 DESTINATIONS",
         maxGuests: "15 GUESTS (MAX)",
         heroImage: "/images/experiences/eden-retreat/cover.jpg?height=800&width=1200&text=Zebras+in+Golden+Grassland",
