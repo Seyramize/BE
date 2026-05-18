@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/select"
 import { CountrySelector } from "@/components/country-selector"
 import { LocationSelector } from "@/components/location-selector"
+import { TurnstileWidget } from "@/components/turnstile-widget"
+import { HoneypotField } from "@/components/honeypot-field"
 
 interface ExperienceData {
   title: string
@@ -44,6 +46,8 @@ export function EnquireAvailabilityModal({ isOpen, onClose, experience }: Enquir
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [website, setWebsite] = useState("")
+  const [turnstileToken, setTurnstileToken] = useState("")
   
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
@@ -130,11 +134,17 @@ export function EnquireAvailabilityModal({ isOpen, onClose, experience }: Enquir
     setErrors({})
     setSubmitSuccess(false)
     setIsSubmitting(false)
+    setWebsite("")
+    setTurnstileToken("")
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!validateForm()) return
+    if (!turnstileToken) {
+      setErrors({ submit: "Please complete the security check." })
+      return
+    }
 
     setIsSubmitting(true)
     
@@ -148,6 +158,8 @@ export function EnquireAvailabilityModal({ isOpen, onClose, experience }: Enquir
           ...formData,
           experienceName: experience.title,
           experienceSlug: experience.slug,
+          website,
+          turnstileToken,
         }),
       })
 
@@ -214,7 +226,8 @@ export function EnquireAvailabilityModal({ isOpen, onClose, experience }: Enquir
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="relative space-y-6">
+              <HoneypotField value={website} onChange={setWebsite} />
               {/* Your Details Section */}
               <div>
                 <div className="flex items-center gap-2 mb-4">
@@ -352,11 +365,13 @@ export function EnquireAvailabilityModal({ isOpen, onClose, experience }: Enquir
                 />
               </div>
 
+              <TurnstileWidget onVerify={setTurnstileToken} onExpire={() => setTurnstileToken("")} />
+
               {/* Submit Button */}
               <div className="pt-4">
                 <Button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !turnstileToken}
                   className="w-full bg-slate-900 hover:bg-slate-800 text-white font-sans py-3 h-12 text-sm sm:text-base disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? "Submitting..." : "Enquire for Availability"}

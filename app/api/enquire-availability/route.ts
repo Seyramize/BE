@@ -1,13 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendEmail } from '@/lib/mailtrap';
 import { experiences } from '@/lib/experiences-data';
+import { guardFormSubmission, isValidSubmissionEmail } from '@/lib/form-guard';
 
-// Mailtrap template UUIDs
-const USER_CONFIRMATION_TEMPLATE_ID = "586ff26b-1d0c-436f-8a3e-e215af2c88a5"; // Reuse existing template
-const INTERNAL_TEAM_TEMPLATE_ID = "1b35b7c1-3fdf-4eae-b2f0-ef0514fe4aba"; // Reuse existing template
+const USER_CONFIRMATION_TEMPLATE_ID = "586ff26b-1d0c-436f-8a3e-e215af2c88a5";
+const INTERNAL_TEAM_TEMPLATE_ID = "1b35b7c1-3fdf-4eae-b2f0-ef0514fe4aba";
 
 export async function POST(req: NextRequest) {
-  const data = await req.json();
+  const body = await req.json();
+
+  const guard = await guardFormSubmission(body);
+  if (!guard.ok) {
+    return NextResponse.json({ success: false, error: guard.error }, { status: guard.status });
+  }
+
+  const data = body;
+  if (!isValidSubmissionEmail(data.email)) {
+    return NextResponse.json({ success: false, error: "Invalid email address." }, { status: 400 });
+  }
 
   let preferredDate = data.preferredDate;
   if (data.experienceName === 'December in Accra') {
@@ -19,10 +29,8 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // Extract first name from full name
   const firstName = data.fullName?.split(" ")[0] || "";
 
-  // Email to internal team using dynamic template
   const teamEmails = [
     'ronnie@beyondaccra.com',
     'priscilla@beyondaccra.com',
@@ -46,7 +54,6 @@ export async function POST(req: NextRequest) {
     })
   );
 
-  // Confirmation email to client using dynamic template
   const sendClientEmail = sendEmail({
     to: data.email,
     templateUuid: USER_CONFIRMATION_TEMPLATE_ID,

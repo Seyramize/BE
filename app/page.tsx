@@ -15,6 +15,8 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { useMobile } from "@/hooks/use-mobile";
 import { FaRegMap } from "react-icons/fa";
 import { TbBinoculars } from "react-icons/tb";
+import { TurnstileWidget } from "@/components/turnstile-widget";
+import { HoneypotField } from "@/components/honeypot-field";
 
 const visibleExperiences = experiences.filter(e => !e.hidden);
 
@@ -29,6 +31,8 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [website, setWebsite] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -50,17 +54,23 @@ export default function Home() {
       return;
     }
 
+    if (!turnstileToken) {
+      setError("Please complete the security check.");
+      return;
+    }
+
     setLoading(true);
     setSuccess(false);
     const res = await fetch("/api/enquiry", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify({ ...form, website, turnstileToken }),
     });
     setLoading(false);
     if (res.ok) {
       setSuccess(true);
       setForm({ firstName: "", lastName: "", email: "", phone: "", message: "" });
+      setTurnstileToken("");
       setTimeout(() => setSuccess(false), 5000); // Hide after 5 seconds
     }
   };
@@ -459,7 +469,8 @@ export default function Home() {
             {/* Form section */}
             <div className="order-2 md:order-2 px-6 md:px-0">
               <div className="md:pt-[165px]">
-                <form className="space-y-2 md:space-y-4" onSubmit={handleSubmit}>
+                <form className="relative space-y-2 md:space-y-4" onSubmit={handleSubmit}>
+                  <HoneypotField value={website} onChange={setWebsite} />
                   <div>
                     <Input name="firstName" value={form.firstName} onChange={handleChange} type="text" placeholder="First Name" className="bg-white border-gray-200 font-sans w-full py-6 md:py-2 placeholder:text-xs" />
                   </div>
@@ -476,7 +487,8 @@ export default function Home() {
                     <Textarea name="message" value={form.message} onChange={handleChange} placeholder="How can we help?" className="bg-white border-gray-200 min-h-[120px] font-sans w-full py-6 md:py-2 placeholder:text-xs" />
                   </div>
                   {error && <div className="text-red-600 mt-2">{error}</div>}
-                  <Button type="submit" className="w-full bg-gray-900 hover:bg-gray-800 text-white font-body rounded-xl md:rounded-xl py-8 md:py-3" disabled={loading}>
+                  <TurnstileWidget onVerify={setTurnstileToken} onExpire={() => setTurnstileToken("")} />
+                  <Button type="submit" className="w-full bg-gray-900 hover:bg-gray-800 text-white font-body rounded-xl md:rounded-xl py-8 md:py-3" disabled={loading || !turnstileToken}>
                     {loading ? "Sending..." : "Enquire"}
                   </Button>
                   {success && <div className="text-green-600 mt-2">Thank you! Your enquiry has been sent.</div>}

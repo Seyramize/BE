@@ -16,6 +16,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { X } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { TurnstileWidget } from "@/components/turnstile-widget";
+import { HoneypotField } from "@/components/honeypot-field";
 
 interface JoinGuestlistModalProps {
   isOpen: boolean;
@@ -42,6 +44,8 @@ export function JoinGuestlistModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [website, setWebsite] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   useEffect(() => {
     if (isOpen) {
@@ -56,6 +60,8 @@ export function JoinGuestlistModal({
       setIsConfirmed(false);
       setShowSuccess(false);
       setIsSubmitting(false);
+      setWebsite("");
+      setTurnstileToken("");
     }
   }, [isOpen]);
 
@@ -75,6 +81,12 @@ export function JoinGuestlistModal({
       return;
     }
 
+    if (!turnstileToken) {
+      toast.error("Please complete the security check.");
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       const response = await fetch("/api/join-guestlist", {
         method: "POST",
@@ -88,6 +100,8 @@ export function JoinGuestlistModal({
           howHeard,
           specialRequests,
           experienceSlug,
+          website,
+          turnstileToken,
         }),
       });
 
@@ -159,7 +173,8 @@ export function JoinGuestlistModal({
                 <p className="text-slate-600 mb-6">
                   Submit your details to join the guestlist at Vici Day Party.
                 </p>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="relative space-y-4">
+                  <HoneypotField value={website} onChange={setWebsite} />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="fullName">Full Name</Label>
@@ -262,10 +277,11 @@ export function JoinGuestlistModal({
                       subject to confirmation and event capacity.
                     </Label>
                   </div>
+                  <TurnstileWidget onVerify={setTurnstileToken} onExpire={() => setTurnstileToken("")} />
                   <Button
                     type="submit"
                     className="w-full pt-4"
-                    disabled={isSubmitting || !isConfirmed}
+                    disabled={isSubmitting || !isConfirmed || !turnstileToken}
                   >
                     {isSubmitting ? "Submitting..." : "Join Guestlist"}
                   </Button>

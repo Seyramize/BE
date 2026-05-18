@@ -12,6 +12,8 @@ import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 import { parsePhoneNumberFromString, CountryCode } from "libphonenumber-js";
 import { getBookingDateLimits, isDateWithinBookingRange } from "@/lib/date-limits"
+import { TurnstileWidget } from "@/components/turnstile-widget"
+import { HoneypotField } from "@/components/honeypot-field"
 
 interface TravelPlannerModalProps {
   children: React.ReactNode
@@ -73,6 +75,8 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
     isFlexible: false,
     helpMessage: "",
   })
+  const [website, setWebsite] = useState("")
+  const [turnstileToken, setTurnstileToken] = useState("")
 
   // Component mounting
   useEffect(() => {
@@ -120,11 +124,20 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
       return;
     }
 
+    if (!turnstileToken) {
+      toast({
+        title: "Security check required",
+        description: "Please complete the captcha before submitting.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     try {
       const res = await fetch("/api/travel-planner", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, website, turnstileToken }),
       });
       if (res.ok) {
         setIsSubmitted(true);
@@ -168,6 +181,8 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
       isFlexible: false,
       helpMessage: "",
     })
+    setWebsite("")
+    setTurnstileToken("")
   }
 
   if (!mounted) {
@@ -217,7 +232,8 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
 
             {/* Form Section */}
             <div className="bg-[#fdf6e9] p-4 sm:p-6 md:p-8">
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+              <form onSubmit={handleSubmit} className="relative space-y-4 sm:space-y-6">
+                <HoneypotField value={website} onChange={setWebsite} />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label className="block text-slate-800 font-sans text-sm font-medium mb-2">Full name</label>
@@ -308,10 +324,12 @@ export function TravelPlannerModal({ children }: TravelPlannerModalProps) {
                   />
                 </div>
 
+                <TurnstileWidget onVerify={setTurnstileToken} onExpire={() => setTurnstileToken("")} />
                 <div>
                   <Button
                     type="submit"
-                    className="w-full bg-[#0f1923] hover:bg-[#1a2836] text-white font-sans py-4 text-base h-14 rounded-md transition-colors"
+                    disabled={!turnstileToken}
+                    className="w-full bg-[#0f1923] hover:bg-[#1a2836] text-white font-sans py-4 text-base h-14 rounded-md transition-colors disabled:opacity-50"
                   >
                     Schedule my call
                   </Button>

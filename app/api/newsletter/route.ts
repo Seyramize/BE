@@ -1,16 +1,23 @@
 import { NextRequest, NextResponse } from "next/server"
 import { sendEmail } from "@/lib/mailtrap"
+import { guardFormSubmission, isValidSubmissionEmail } from "@/lib/form-guard"
 
 export async function POST(req: NextRequest) {
 	const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
 	const SENDGRID_LIST_ID = process.env.SENDGRID_LIST_ID
-	const { email } = await req.json()
+	const body = await req.json()
 
-	if (!email || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+	const guard = await guardFormSubmission(body)
+	if (!guard.ok) {
+		return NextResponse.json({ error: guard.error }, { status: guard.status })
+	}
+
+	const { email } = body
+
+	if (!isValidSubmissionEmail(email)) {
 		return NextResponse.json({ error: "Invalid email address." }, { status: 400 })
 	}
 
-  // Add contact to SendGrid Marketing List
   const res = await fetch("https://api.sendgrid.com/v3/marketing/contacts", {
     method: "PUT",
     headers: {
@@ -24,7 +31,6 @@ export async function POST(req: NextRequest) {
   })
 
   if (res.ok) {
-    // Send thank-you email
     await fetch("https://api.sendgrid.com/v3/mail/send", {
       method: "POST",
       headers: {
@@ -35,9 +41,7 @@ export async function POST(req: NextRequest) {
         personalizations: [
           {
             to: [{ email }],
-            dynamic_template_data: {
-              // Add any variables you want to use in your template
-            },
+            dynamic_template_data: {},
           },
         ],
         from: { email: "concierge@experiencesbybeyond.com", name: "Experiences by Beyond" },
@@ -45,7 +49,6 @@ export async function POST(req: NextRequest) {
       }),
     });
 
-    // Send team notification about new newsletter subscription
     try {
       const teamEmails = [
         'ronnie@beyondaccra.com',
@@ -56,7 +59,7 @@ export async function POST(req: NextRequest) {
       for (const teamEmail of teamEmails) {
         await sendEmail({
           to: teamEmail,
-          templateUuid: "YOUR_NEWSLETTER_SUBSCRIPTION_TEAM_TEMPLATE_UUID", // TODO: Replace with actual Mailtrap template UUID
+          templateUuid: "YOUR_NEWSLETTER_SUBSCRIPTION_TEAM_TEMPLATE_UUID",
           templateVariables: {
             email: email,
             subscriptionDate: new Date().toLocaleDateString('en-US', {
@@ -74,7 +77,6 @@ export async function POST(req: NextRequest) {
       }
     } catch (emailError) {
       console.error('Error sending team notification for newsletter subscription:', emailError);
-      // Don't fail the request if email fails
     }
 
     return NextResponse.json({ success: true });

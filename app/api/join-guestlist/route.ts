@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 import { sendEmail } from '@/lib/mailtrap';
-
-
+import { guardFormSubmission, isValidSubmissionEmail } from '@/lib/form-guard';
 
 export async function POST(req: NextRequest) {
   try {
+    const body = await req.json();
+
+    const guard = await guardFormSubmission(body);
+    if (!guard.ok) {
+      return NextResponse.json({ error: guard.error }, { status: guard.status });
+    }
+
     const {
       fullName,
       email,
@@ -14,10 +20,14 @@ export async function POST(req: NextRequest) {
       instagramHandle,
       howHeard,
       specialRequests,
-    } = await req.json();
+    } = body;
 
     if (!fullName || !email || !phone || !guests) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+
+    if (!isValidSubmissionEmail(email)) {
+      return NextResponse.json({ error: 'Invalid email address.' }, { status: 400 });
     }
 
     const auth = new google.auth.GoogleAuth({
@@ -31,7 +41,7 @@ export async function POST(req: NextRequest) {
     const sheets = google.sheets({ version: 'v4', auth });
 
     const spreadsheetId = "1Sa6LvCgkuKQDSgKu8EoHqSLttGedc8dDjemh1mF4qmQ";
-    const range = 'Sheet1!A:H'; // Adjust sheet name and range as needed
+    const range = 'Sheet1!A:H';
 
     const newRow = [
       new Date().toISOString(),
@@ -54,12 +64,7 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    console.log('Google Sheets response:', {
-     
-    });
-
     try {
-      // Send confirmation email to the client
       await sendEmail({
         to: email,
         templateUuid: '0d047401-7366-4c56-b7e6-aaa7e38803f1',
@@ -71,7 +76,6 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      // Send notification email to the team
       const teamEmails = [
         'noah@beyondaccra.com',
         'carl@beyondaccra.com',
@@ -98,8 +102,6 @@ export async function POST(req: NextRequest) {
 
     } catch (emailError) {
       console.error('Error sending email:', emailError);
-      // Decide if you want to return an error to the user if email fails
-      // For now, we'll just log it and assume the main operation was successful
     }
 
     return NextResponse.json({ message: 'Successfully joined the guestlist!' });

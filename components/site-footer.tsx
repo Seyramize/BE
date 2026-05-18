@@ -8,23 +8,32 @@ import { SiFacebook, SiX, SiThreads } from "react-icons/si"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { Mail as MailIcon, Phone as PhoneIcon } from "lucide-react"
+import { TurnstileWidget } from "./turnstile-widget"
+import { HoneypotField } from "./honeypot-field"
 
 export function SiteFooter() {
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
+  const [website, setWebsite] = useState("")
+  const [turnstileToken, setTurnstileToken] = useState("")
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
   const [message, setMessage] = useState("")
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!turnstileToken) {
+      setStatus("error")
+      setMessage("Please complete the security check.")
+      return
+    }
     setStatus("loading")
     setMessage("")
     try {
       const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ firstName, lastName, email }),
+        body: JSON.stringify({ firstName, lastName, email, website, turnstileToken }),
       })
       if (res.ok) {
         setStatus("success")
@@ -32,6 +41,7 @@ export function SiteFooter() {
         setFirstName("")
         setLastName("")
         setEmail("")
+        setTurnstileToken("")
       } else {
         const data = await res.json()
         setStatus("error")
@@ -57,11 +67,13 @@ export function SiteFooter() {
               <p className="text-sm text-gray-400 mb-6 font-sans">
                 Get curated travel inspiration, special offers, and behind-the-scenes access.
               </p>
-              <form className="space-y-3" onSubmit={handleSubmit}>
+              <form className="relative space-y-3" onSubmit={handleSubmit}>
+                <HoneypotField value={website} onChange={setWebsite} />
                 <Input type="text" placeholder="First Name" className="bg-gray-100 border-0 text-slate-800 font-sans placeholder:text-gray-500 rounded-lg py-5 placeholder:text-xs" value={firstName} onChange={e => setFirstName(e.target.value)} required />
                 <Input type="text" placeholder="Last Name" className="bg-gray-100 border-0 text-slate-800 font-sans placeholder:text-gray-500 rounded-lg py-5 placeholder:text-xs" value={lastName} onChange={e => setLastName(e.target.value)} required />
                 <Input type="email" placeholder="E-mail Address" className="bg-gray-100 border-0 text-slate-800 font-sans placeholder:text-gray-500 rounded-lg py-5 placeholder:text-xs" value={email} onChange={e => setEmail(e.target.value)} required />
-                <Button className="w-full bg-[#F3EADF] text-slate-800 hover:bg-amber-200 font-sans font-medium py-6 rounded-lg tracking-widest" type="submit" disabled={status === "loading"}>
+                <TurnstileWidget onVerify={setTurnstileToken} onExpire={() => setTurnstileToken("")} />
+                <Button className="w-full bg-[#F3EADF] text-slate-800 hover:bg-amber-200 font-sans font-medium py-6 rounded-lg tracking-widest" type="submit" disabled={status === "loading" || !turnstileToken}>
                   {status === "loading" ? "Subscribing..." : "STAY IN THE LOOP"}
                 </Button>
               </form>
@@ -177,11 +189,13 @@ export function SiteFooter() {
           <div className="md:col-span-4">
             <h3 className="text-2xl font-normal font-sans mb-4">Stay in the Loop</h3>
             <p className="text-sm text-gray-300 mb-6 font-sans leading-relaxed">Get curated travel inspiration, special offers, and behind-the-scenes access.</p>
-            <form className="space-y-4" onSubmit={handleSubmit}>
+            <form className="relative space-y-4" onSubmit={handleSubmit}>
+              <HoneypotField value={website} onChange={setWebsite} />
               <Input type="text" placeholder="First Name" className="bg-white border-0 text-slate-800 font-sans placeholder:text-gray-500" value={firstName} onChange={e => setFirstName(e.target.value)} required />
               <Input type="text" placeholder="Last Name" className="bg-white border-0 text-slate-800 font-sans placeholder:text-gray-500" value={lastName} onChange={e => setLastName(e.target.value)} required />
               <Input type="email" placeholder="Email address" className="bg-white border-0 text-slate-800 font-sans placeholder:text-gray-500" value={email} onChange={e => setEmail(e.target.value)} required />
-              <Button className="w-full bg-amber-100 text-slate-800 hover:bg-amber-200 font-sans font-medium py-3 rounded-md" type="submit" disabled={status === "loading"}>
+              <TurnstileWidget onVerify={setTurnstileToken} onExpire={() => setTurnstileToken("")} />
+              <Button className="w-full bg-amber-100 text-slate-800 hover:bg-amber-200 font-sans font-medium py-3 rounded-md" type="submit" disabled={status === "loading" || !turnstileToken}>
                 {status === "loading" ? "Subscribing..." : "STAY IN THE LOOP"}
               </Button>
             </form>

@@ -16,6 +16,8 @@ import { CheckCircle } from "lucide-react"
 import { useSearchParams } from "next/navigation"
 import { Suspense } from "react"
 import { getBookingDateLimits, isDateWithinBookingRange } from "@/lib/date-limits"
+import { TurnstileWidget } from "@/components/turnstile-widget"
+import { HoneypotField } from "@/components/honeypot-field"
 
 interface FormData {
   fullName: string
@@ -55,6 +57,8 @@ export default function CustomizeExperienceForm() {
   const [hasHistory, setHasHistory] = useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
+  const [website, setWebsite] = useState("")
+  const [turnstileToken, setTurnstileToken] = useState("")
   const { minDate, maxDate } = getBookingDateLimits()
 
   // Check if there's browser history available
@@ -124,7 +128,15 @@ export default function CustomizeExperienceForm() {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length > 0) {
-      // There are errors, do not submit
+      return;
+    }
+
+    if (!turnstileToken) {
+      toast({
+        title: "Security check required",
+        description: "Please complete the captcha before submitting.",
+        className: "bg-white dark:bg-slate-900 border-red-200 dark:border-red-700 shadow-xl",
+      });
       return;
     }
 
@@ -132,7 +144,7 @@ export default function CustomizeExperienceForm() {
       const response = await fetch("/api/customize-experience", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, website, turnstileToken }),
       });
 
       if (response.ok) {
@@ -254,7 +266,8 @@ export default function CustomizeExperienceForm() {
             )}
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-12">
+          <form onSubmit={handleSubmit} className="relative space-y-12">
+            <HoneypotField value={website} onChange={setWebsite} />
             {/* Contact Details */}
             <div>
               <h3 className="text-2xl font-sans font-normal text-slate-800 mb-2">Contact Details</h3>
@@ -432,11 +445,14 @@ export default function CustomizeExperienceForm() {
             <hr className="border-black my-8" />
 
 
+            <TurnstileWidget onVerify={setTurnstileToken} onExpire={() => setTurnstileToken("")} />
+
             {/* Submit Button */}
             <div className="pt-8">
               <Button
                 type="submit"
-                className="w-full bg-slate-900 hover:bg-slate-800 text-white font-sans py-4 text-base h-14"
+                disabled={!turnstileToken}
+                className="w-full bg-slate-900 hover:bg-slate-800 text-white font-sans py-4 text-base h-14 disabled:opacity-50"
               >
                 Tailor your experience
               </Button>

@@ -1,13 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendEmail } from "@/lib/mailtrap";
+import { guardFormSubmission, isValidSubmissionEmail } from "@/lib/form-guard";
 
 export async function POST(req: NextRequest) {
-  const data = await req.json();
+  const body = await req.json();
 
-  // Extract first name from full name
+  const guard = await guardFormSubmission(body);
+  if (!guard.ok) {
+    return NextResponse.json({ success: false, error: guard.error }, { status: guard.status });
+  }
+
+  const data = body;
+  if (!isValidSubmissionEmail(data.email)) {
+    return NextResponse.json({ success: false, error: "Invalid email address." }, { status: 400 });
+  }
+
   const firstName = data.fullName?.split(" ")[0] || "";
 
-  // Email to internal team using dynamic template
   const teamEmails = [
     'ronnie@beyondaccra.com',
     'priscilla@beyondaccra.com',
@@ -31,7 +40,6 @@ export async function POST(req: NextRequest) {
     })
   );
 
-  // Confirmation email to client using dynamic template
   const sendClientEmail = sendEmail({
     to: data.email,
     templateUuid: "915d7c4d-3220-4507-a8c4-c422f2ea287d",
@@ -48,4 +56,4 @@ export async function POST(req: NextRequest) {
     console.error(error);
     return NextResponse.json({ success: false, error: "Failed to send email" }, { status: 500 });
   }
-} 
+}

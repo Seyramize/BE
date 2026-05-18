@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { sendEmail } from "@/lib/mailtrap";
+import { guardFormSubmission, isValidSubmissionEmail } from "@/lib/form-guard";
 
-// Add this type definition if not already present
 type FormData = {
   fullName: string;
   email: string;
@@ -12,11 +12,10 @@ type FormData = {
   helpMessage: string;
 };
 
-// Place this function at the top or above your POST handler
 function validateForm(data: FormData) {
   if (!data.fullName.trim()) return "Full name is required.";
   if (!data.email.trim()) return "Email is required.";
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return "Invalid email address.";
+  if (!isValidSubmissionEmail(data.email)) return "Invalid email address.";
   if (!data.phoneNumber.trim()) return "Phone number is required.";
   if (!data.date.trim() && !data.isFlexible) return "Please select a date or mark as flexible.";
   return null;
@@ -27,15 +26,20 @@ function getFirstName(fullName: string) {
 }
 
 export async function POST(req: Request) {
-  const data = await req.json();
+  const body = await req.json();
 
-  // Validate before sending emails
+  const guard = await guardFormSubmission(body);
+  if (!guard.ok) {
+    return NextResponse.json({ success: false, error: guard.error }, { status: guard.status });
+  }
+
+  const data = body as FormData;
+
   const errorMsg = validateForm(data);
   if (errorMsg) {
     return NextResponse.json({ success: false, error: errorMsg }, { status: 400 });
   }
 
-  // Format date for better readability
   const formattedDate = data.isFlexible ? "Flexible" : new Date(data.date).toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',
@@ -45,7 +49,6 @@ export async function POST(req: Request) {
 
   const firstName = getFirstName(data.fullName);
 
-  // Email to internal team using template
   const teamEmails = [
     'ronnie@beyondaccra.com',
     'priscilla@beyondaccra.com',
@@ -67,7 +70,6 @@ export async function POST(req: Request) {
     })
   );
 
-  // Email to client using template
   const sendClientEmail = sendEmail({
     to: data.email,
     templateUuid: "6b3626ee-91a7-432b-8f64-362d71053dff",
